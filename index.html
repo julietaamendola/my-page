@@ -464,6 +464,7 @@ footer{border-top:1px solid var(--mid);padding:1.75rem 4rem;display:flex;justify
 <div class="modal-overlay" id="modal" onclick="closePost(event)">
   <div class="modal">
     <button class="modal-close" onclick="closePostBtn()">&#x2715; <span data-es="Cerrar" data-en="Close">Cerrar</span></button>
+    <button id="share-btn" onclick="sharePost()" style="position:absolute;top:1.5rem;right:6rem;background:none;border:1px solid var(--mid);font-family:var(--sans);font-size:.7rem;color:var(--muted);cursor:pointer;letter-spacing:.08em;padding:.3rem .75rem;border-radius:100px;transition:all .2s">⤤ Copiar link</button>
     <div class="modal-label" id="modal-label">Blog personal · Marzo 2026</div>
     <h2 class="modal-title" id="modal-title"></h2>
     <div class="modal-sub" id="modal-sub"></div>

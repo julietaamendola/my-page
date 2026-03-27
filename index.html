@@ -17,12 +17,20 @@
 }
 html{scroll-behavior:smooth}
 body{background:var(--white);color:var(--text);font-family:var(--body);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+
+/* FONDO TORNASOL */
 .iridescent{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.9;
   background:linear-gradient(135deg,rgba(220,210,255,.55) 0%,rgba(255,220,240,.35) 20%,rgba(210,235,255,.4) 40%,rgba(225,215,255,.5) 60%,rgba(255,215,235,.35) 80%,rgba(205,230,255,.45) 100%);
   background-size:400% 400%;animation:shift 12s ease-in-out infinite alternate}
 @keyframes shift{0%{background-position:0% 50%}100%{background-position:100% 50%}}
 .iridescent::after{content:'';position:absolute;inset:0;
-  background:radial-gradient(ellipse at 30% 40%,rgba(200,185,255,.3) 0%,transparent 60%),radial-gradient(ellipse at 75% 60%,rgba(255,200,230,.25) 0%,transparent 55%)}
+  background:radial-gradient(ellipse at 30% 40%,rgba(200,185,255,.3) 0%,transparent 60%),
+             radial-gradient(ellipse at 75% 60%,rgba(255,200,230,.25) 0%,transparent 55%)}
+
+/* Z-INDEX — contenido encima de estrellas y tornasol */
+section,footer,nav{position:relative;z-index:1}
+
+/* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.2rem 3rem;display:flex;align-items:center;justify-content:space-between;background:rgba(250,248,252,.92);backdrop-filter:blur(12px);border-bottom:1px solid transparent;transition:border-color .3s}
 nav.scrolled{border-color:var(--mid)}
 .nav-name{font-family:var(--display);font-size:1.05rem;font-weight:400;font-style:italic;color:var(--text)}
@@ -33,6 +41,8 @@ nav.scrolled{border-color:var(--mid)}
 .lang-btn{padding:.3rem .75rem;background:transparent;border:none;color:var(--muted);cursor:pointer;letter-spacing:.07em;transition:all .2s;font-family:var(--sans);font-size:.65rem}
 .lang-btn.active{background:var(--accent);color:#fff}
 .lang-btn:not(.active):hover{background:var(--light);color:var(--text)}
+
+/* HERO */
 #hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:0 4rem;gap:5rem;max-width:1280px;margin:0 auto;padding-top:5rem}
 .hero-eyebrow{font-family:var(--sans);font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:2rem}
 .hero-name{font-family:var(--display);font-size:clamp(3.2rem,6.5vw,5.8rem);font-weight:400;line-height:1.02;margin-bottom:1.25rem;color:var(--text)}
@@ -47,22 +57,28 @@ nav.scrolled{border-color:var(--mid)}
 .photo-wrap img{width:100%;height:100%;object-fit:cover;display:block}
 .photo-placeholder-text{font-family:var(--sans);font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;opacity:.6}
 .photo-cap{margin-top:.85rem;font-family:var(--body);font-size:.82rem;font-style:italic;color:var(--muted)}
+
+/* DIVISORES */
 .hr{border:none;border-top:1px solid var(--mid);margin:0 4rem}
 .quote-wrap{padding:5rem 4rem;max-width:860px;margin:0 auto;text-align:center}
 .quote-wrap blockquote{font-family:var(--display);font-size:clamp(1.4rem,2.8vw,2rem);font-weight:400;font-style:italic;line-height:1.5;color:var(--text)}
 .quote-wrap cite{display:block;margin-top:1.25rem;font-family:var(--sans);font-size:.65rem;letter-spacing:.13em;text-transform:uppercase;color:var(--subtle);font-style:normal}
-#sobre-mi{padding:8rem 4rem;max-width:1100px;margin:0 auto;display:grid;grid-template-columns:220px 1fr;gap:6rem;align-items:start}
-.side-label{font-family:var(--sans);font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--subtle);margin-bottom:.75rem}
-.side-num{font-family:var(--display);font-size:5rem;font-weight:400;color:var(--mid);line-height:1;font-style:italic}
+
+/* SOBRE MÍ */
+#sobre-mi{padding:8rem 4rem;max-width:1100px;margin:0 auto}
 .about-h{font-family:var(--display);font-size:clamp(1.8rem,3vw,2.6rem);font-weight:400;line-height:1.25;margin-bottom:1.75rem}
 .about-h em{font-style:italic;color:var(--accent)}
 .about-p{font-family:var(--body);font-size:1.05rem;line-height:1.85;color:var(--muted);margin-bottom:1.25rem}
 .about-p strong{color:var(--text);font-weight:500}
+.about-subsection{margin-top:1.75rem;padding-top:1.5rem;border-top:1px solid var(--mid)}
+.about-subsection-title{font-family:var(--sans);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:.75rem}
 .hobbies{margin-top:2.5rem;padding-top:2rem;border-top:1px solid var(--mid)}
 .hobbies-label{font-family:var(--sans);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:.9rem}
 .hobbies-row{display:flex;flex-wrap:wrap;gap:.45rem}
 .htag{padding:.35rem .85rem;border:1px solid var(--mid);font-family:var(--sans);font-size:.7rem;color:var(--muted);letter-spacing:.04em;transition:all .2s;cursor:default;border-radius:100px}
 .htag:hover{border-color:var(--accent);color:var(--accent)}
+
+/* CV */
 #cv{background:var(--off);padding:8rem 4rem}
 .cv-in{max-width:1100px;margin:0 auto}
 .section-head{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:4rem;padding-bottom:2rem;border-bottom:1px solid var(--mid)}
@@ -90,6 +106,8 @@ nav.scrolled{border-color:var(--mid)}
 .acad-links{display:flex;flex-direction:column;gap:.65rem;margin-top:.25rem}
 .acad-links a{font-family:var(--sans);font-size:.75rem;color:var(--muted);text-decoration:none;transition:color .2s}
 .acad-links a:hover{color:var(--accent)}
+
+/* BLOG */
 #blog{padding:8rem 4rem;max-width:1100px;margin:0 auto}
 .blog-top{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:3.5rem}
 .blog-top h2{font-family:var(--display);font-size:clamp(2rem,4vw,3rem);font-weight:400;color:var(--text)}
@@ -107,6 +125,8 @@ nav.scrolled{border-color:var(--mid)}
 .btag{font-family:var(--sans);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;padding:.22rem .65rem;border:1px solid var(--mid);color:var(--muted);text-align:center;border-radius:100px}
 .btag.personal{border-color:var(--accent2);color:var(--accent2)}
 .btag.stem{border-color:#5b8a7a;color:#5b8a7a}
+
+/* MODAL */
 .modal-overlay{display:none;position:fixed;inset:0;background:rgba(30,26,46,.6);z-index:200;align-items:flex-start;justify-content:center;overflow-y:auto;padding:4rem 1rem;backdrop-filter:blur(4px)}
 .modal-overlay.open{display:flex}
 .modal{background:var(--white);max-width:720px;width:100%;padding:4rem;position:relative;margin:auto;border-top:3px solid var(--accent)}
@@ -118,6 +138,8 @@ nav.scrolled{border-color:var(--mid)}
 .modal-body{font-family:var(--body);font-size:1.05rem;line-height:1.9;color:var(--muted)}
 .modal-body p{margin-bottom:1.25rem}
 .modal-body p:last-child{margin:0}
+
+/* PROYECTOS */
 #proyectos{background:var(--off);padding:8rem 4rem}
 .proy-in{max-width:1100px;margin:0 auto}
 .proy-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.75rem}
@@ -128,7 +150,9 @@ nav.scrolled{border-color:var(--mid)}
 .pdesc{font-family:var(--body);font-size:.88rem;color:var(--muted);line-height:1.75;margin-bottom:1.25rem}
 .pfoot{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--light);padding-top:.9rem}
 .ptechs{font-family:var(--sans);font-size:.65rem;color:var(--subtle)}
-.parrow{font-size:.85rem;color:var(--accent)}
+.parrow{font-size:.85rem;color:var(--accent);text-decoration:none}
+
+/* CONTACTO */
 #contacto{padding:8rem 4rem;max-width:860px;margin:0 auto;text-align:center}
 #contacto h2{font-family:var(--display);font-size:clamp(2.5rem,5vw,4rem);font-weight:400;font-style:italic;line-height:1.1;margin-bottom:1.4rem;color:var(--text)}
 .csub{font-family:var(--body);font-size:1.05rem;color:var(--muted);line-height:1.8;max-width:540px;margin:0 auto 2.75rem}
@@ -144,26 +168,33 @@ nav.scrolled{border-color:var(--mid)}
 .ctextarea{min-height:120px;resize:vertical;font-style:italic}
 .csend{background:var(--accent);color:#fff;border:none;padding:.75rem 2.25rem;font-family:var(--sans);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:background .2s;align-self:flex-start;border-radius:2px}
 .csend:hover{background:var(--text)}
+
 footer{border-top:1px solid var(--mid);padding:1.75rem 4rem;display:flex;justify-content:space-between;align-items:center}
 .fname{font-family:var(--display);font-size:1rem;font-weight:400;font-style:italic;color:var(--muted)}
 .fcopy{font-family:var(--sans);font-size:.65rem;letter-spacing:.08em;color:var(--subtle)}
+
 .reveal{opacity:0;transform:translateY(18px);transition:opacity .65s ease,transform .65s ease}
 .reveal.in{opacity:1;transform:none}
+
 @media(max-width:900px){
   nav{padding:1rem 1.25rem;gap:.5rem;flex-wrap:wrap}.nav-links{gap:1rem}
   #hero{grid-template-columns:1fr;padding:7rem 1.5rem 4rem;gap:2.5rem}.hero-photo{max-width:260px}
-  #sobre-mi{grid-template-columns:1fr;padding:5rem 1.5rem;gap:1.5rem}
+  #sobre-mi{padding:5rem 1.5rem}
   .section-head{flex-direction:column;align-items:flex-start;gap:1rem}
-  .cv-cols{grid-template-columns:1fr}.blog-top{flex-direction:column;align-items:flex-start;gap:1.25rem}
-  .proy-grid{grid-template-columns:1fr}.crow{grid-template-columns:1fr}
+  .cv-cols{grid-template-columns:1fr}
+  .blog-top{flex-direction:column;align-items:flex-start;gap:1.25rem}
+  .proy-grid{grid-template-columns:1fr}
+  .crow{grid-template-columns:1fr}
   #blog,#cv,#proyectos,#contacto{padding:5rem 1.5rem}
   .bitem{grid-template-columns:1fr;gap:.3rem}.bdate{display:none}
   footer{flex-direction:column;gap:.4rem;text-align:center;padding:1.5rem}
-  .hr,.quote-wrap{padding-left:1.5rem;padding-right:1.5rem}.modal{padding:2rem}
+  .hr,.quote-wrap{padding-left:1.5rem;padding-right:1.5rem}
+  .modal{padding:2rem}
 }
 </style>
 </head>
 <body>
+
 <div class="iridescent"></div>
 
 <nav id="nav">
@@ -181,6 +212,7 @@ footer{border-top:1px solid var(--mid);padding:1.75rem 4rem;display:flex;justify
   </div>
 </nav>
 
+<!-- HERO -->
 <section id="hero">
   <div class="hero-text">
     <p class="hero-eyebrow" data-es="Matemática · UNCPBA · Tandil, Argentina" data-en="Mathematician · UNCPBA · Tandil, Argentina">Matemática · UNCPBA · Tandil, Argentina</p>
@@ -192,9 +224,8 @@ footer{border-top:1px solid var(--mid);padding:1.75rem 4rem;display:flex;justify
     </div>
   </div>
   <div class="hero-photo">
-    <img src="juli.jpg" alt="Julieta Améndola" style="aspect-ratio:3/4;object-fit:cover;width:100%">
+    <img src="julipg.jpg" alt="Julieta Améndola" style="aspect-ratio:3/4;object-fit:cover;width:100%">
     </div>
-    <p class="photo-cap">Julieta Améndola · UNCPBA, Tandil</p>
   </div>
 </section>
 
@@ -205,16 +236,56 @@ footer{border-top:1px solid var(--mid);padding:1.75rem 4rem;display:flex;justify
 </div>
 <hr class="hr">
 
+<!-- SOBRE MÍ -->
 <section id="sobre-mi">
-  <div>
-    <div class="side-label" data-es="Sobre mí" data-en="About me">Sobre mí</div>
-    <div class="side-num">01</div>
-  </div>
   <div class="reveal">
-    <h2 class="about-h">Matemática, docente,<br>y <em>curiosa incorregible.</em></h2>
-    <p class="about-p" data-es="Soy Julieta, estudiante de la Licenciatura en Ciencias Matemáticas en la UNCPBA, Tandil. Mi tesis trabaja sobre el <strong>problema inverso en tomografía óptica difusa usando redes neuronales artificiales</strong> — que es una forma elegante de decir que entreno modelos para ver a través de tejido vivo con luz." data-en="I'm Julieta, a Mathematical Sciences student at UNCPBA, Tandil. My thesis focuses on the <strong>inverse problem in diffuse optical tomography using artificial neural networks</strong> — a fancy way of saying I train models to see through living tissue with light.">Soy Julieta, estudiante de la Licenciatura en Ciencias Matemáticas en la UNCPBA, Tandil. Mi tesis trabaja sobre el <strong>problema inverso en tomografía óptica difusa usando redes neuronales artificiales</strong> — que es una forma elegante de decir que entreno modelos para ver a través de tejido vivo con luz.</p>
-    <p class="about-p" data-es="Me apasiona la matemática aplicada porque me permite usar las herramientas que más disfruto para resolver problemas reales, de la medicina a la física. También creo que la ciencia es demasiado fascinante para quedarse entre especialistas, así que enseño, divulgo y escribo siempre que puedo." data-en="I'm passionate about applied mathematics because it lets me use my favourite tools to solve real problems, from medicine to physics. I also believe science is too fascinating to stay among specialists — so I teach, communicate, and write whenever I can.">Me apasiona la matemática aplicada porque me permite usar las herramientas que más disfruto para resolver problemas reales, de la medicina a la física. También creo que la ciencia es demasiado fascinante para quedarse entre especialistas, así que enseño, divulgo y escribo siempre que puedo.</p>
-    <p class="about-p" data-es="Fundé el club <strong>Women in STEM</strong> en la UNCPBA, soy ayudante en varias materias, y en 2023 fui becada por la Embajada de EE.UU. para estudiar en Indiana University. Cuando no estoy con ecuaciones, probablemente esté en las sierras, jugando algo en mesa, o pintando cerámica." data-en="I founded the <strong>Women in STEM</strong> club at UNCPBA, I'm a teaching assistant in several courses, and in 2023 I received a scholarship from the U.S. Embassy to study at Indiana University. When I'm not doing math, I'm probably hiking in the hills, playing board games, or painting ceramics.">Fundé el club <strong>Women in STEM</strong> en la UNCPBA, soy ayudante en varias materias, y en 2023 fui becada por la Embajada de EE.UU. para estudiar en Indiana University. Cuando no estoy con ecuaciones, probablemente esté en las sierras, jugando algo en mesa, o pintando cerámica.</p>
+    <h2 class="about-h" data-es="Matemática <br>para <em>entender el mundo.</em>" data-en="Mathematics <br>to <em>understand the world.</em>">Matemática <br>para <em>entender el mundo.</em></h2>
+
+    <p class="about-p"
+      data-es="Soy Julieta, matemática en formación y apasionada de las ciencias desde que tengo memoria. Estoy terminando mi Licenciatura en Ciencias Matemáticas en la Universidad Nacional del Centro de la Provincia de Buenos Aires, donde actualmente desarrollo mi tesis de grado en la intersección entre matemática, física y computación: trabajo sobre el problema inverso en tomografía óptica difusa, un campo que combina todo lo que más me entusiasma."
+      data-en="I'm Julieta, a mathematician in training and passionate about science for as long as I can remember. I'm finishing my degree in Mathematical Sciences at the Universidad Nacional del Centro de la Provincia de Buenos Aires, where I'm currently working on my undergraduate thesis at the intersection of mathematics, physics and computation: the inverse problem in diffuse optical tomography — a field that combines everything I love most.">
+      Soy Julieta, matemática en formación y apasionada de las ciencias desde que tengo memoria. Estoy terminando mi Licenciatura en Ciencias Matemáticas en la Universidad Nacional del Centro de la Provincia de Buenos Aires, donde actualmente desarrollo mi tesis de grado en la intersección entre matemática, física y computación: trabajo sobre el problema inverso en tomografía óptica difusa, un campo que combina todo lo que más me entusiasma.
+    </p>
+
+    <p class="about-p"
+      data-es="Antes de matemática, estudié física durante dos años, y esa base me dejó algo que no tiene vuelta atrás: la convicción de que las herramientas matemáticas son una lente poderosa para entender el mundo real."
+      data-en="Before mathematics, I studied physics for two years, and that foundation left me with something irreversible: the conviction that mathematical tools are a powerful lens for understanding the real world.">
+      Antes de matemática, estudié física durante dos años, y esa base me dejó algo que no tiene vuelta atrás: la convicción de que las herramientas matemáticas son una lente poderosa para entender el mundo real.
+    </p>
+
+    <div class="about-subsection">
+      <div class="about-subsection-title" data-es="Lo que me mueve" data-en="What drives me">Lo que me mueve</div>
+      <p class="about-p"
+        data-es="Me apasiona usar la matemática para resolver problemas desafiantes, en cualquier ámbito. No me interesa la matemática encerrada en sí misma, sino la que dialoga con la física, la computación, la biología, la ingeniería. Esa curiosidad me llevó a participar en proyectos de deep learning con Neuromatch Academy junto a personas de todo el mundo, a trabajar en un proyecto sobre geometría arterial y aterosclerosis en el Instituto PLADEMA, y a obtener una beca Friends of Fulbright que me permitió estudiar en Indiana University Indianapolis en 2023, una experiencia que marcó un antes y un después en mi formación."
+        data-en="I'm passionate about using mathematics to solve challenging problems in any field. I'm not interested in mathematics closed in on itself, but mathematics that talks to physics, computation, biology, engineering. That curiosity led me to deep learning projects with Neuromatch Academy alongside people from around the world, to work on arterial geometry and atherosclerosis at PLADEMA Institute, and to receive a Friends of Fulbright scholarship that allowed me to study at Indiana University Indianapolis in 2023 — an experience that changed my path.">
+        Me apasiona usar la matemática para resolver problemas desafiantes, en cualquier ámbito. No me interesa la matemática encerrada en sí misma, sino la que dialoga con la física, la computación, la biología, la ingeniería. Esa curiosidad me llevó a participar en proyectos de deep learning con Neuromatch Academy junto a personas de todo el mundo, a trabajar en un proyecto sobre geometría arterial y aterosclerosis en el Instituto PLADEMA, y a obtener una beca Friends of Fulbright que me permitió estudiar en Indiana University Indianapolis en 2023, una experiencia que marcó un antes y un después en mi formación.
+      </p>
+    </div>
+
+    <div class="about-subsection">
+      <div class="about-subsection-title" data-es="Docencia y comunicación" data-en="Teaching &amp; communication">Docencia y comunicación</div>
+      <p class="about-p"
+        data-es="Llevo más de cinco años como docente universitaria en materias de Análisis Matemático, Cálculo y Matemática Computacional. Lo que más disfruto de enseñar es lograr que algo complejo se vuelva claro. Trabajo con herramientas visuales, busco la intuición detrás de cada concepto y le doy mucha importancia al trato cercano con mis alumnos. Hoy, mientras avanzo con mi tesis, también me desempeño como tutora privada y consultora de matemática a nivel universitario en modalidad virtual."
+        data-en="I've been a university teaching assistant for over five years in Mathematical Analysis, Calculus and Computational Mathematics. What I enjoy most about teaching is making something complex become clear. I use visual tools, look for the intuition behind each concept, and place great importance on close contact with my students. Today, while advancing my thesis, I also work as a private tutor and university-level mathematics consultant in virtual modality.">
+        Llevo más de cinco años como docente universitaria en materias de Análisis Matemático, Cálculo y Matemática Computacional. Lo que más disfruto de enseñar es lograr que algo complejo se vuelva claro. Trabajo con herramientas visuales, busco la intuición detrás de cada concepto y le doy mucha importancia al trato cercano con mis alumnos. Hoy, mientras avanzo con mi tesis, también me desempeño como tutora privada y consultora de matemática a nivel universitario en modalidad virtual.
+      </p>
+    </div>
+
+    <div class="about-subsection">
+      <div class="about-subsection-title" data-es="Trayectoria en competencias" data-en="Competition background">Trayectoria en competencias</div>
+      <p class="about-p"
+        data-es="Las olimpiadas científicas fueron mi primer contacto serio con la matemática como desafío: participé desde chica en la Olimpiada Matemática Ñandú, la Olimpiada Matemática Argentina y la Olimpiada Argentina de Biología. En 2023 recibí una Mención de Honor en la Competencia Interuniversitaria de Matemática Argentina, un reconocimiento que valoro especialmente porque vino del mundo que habito a diario."
+        data-en="Science olympiads were my first serious encounter with mathematics as a challenge: from a young age I participated in the Ñandú Mathematics Olympiad, the Argentine Mathematics Olympiad and the Argentine Biology Olympiad. In 2023 I received an Honorable Mention at the Argentine Interuniversity Mathematics Competition — a recognition I value especially because it came from the world I inhabit every day.">
+        Las olimpiadas científicas fueron mi primer contacto serio con la matemática como desafío: participé desde chica en la Olimpiada Matemática Ñandú, la Olimpiada Matemática Argentina y la Olimpiada Argentina de Biología. En 2023 recibí una Mención de Honor en la Competencia Interuniversitaria de Matemática Argentina, un reconocimiento que valoro especialmente porque vino del mundo que habito a diario.
+      </p>
+    </div>
+
+    <p class="about-p" style="margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid var(--mid)"
+      data-es="Me interesan los campos de física teórica y matemática, astronomía, física nuclear, energía, aeroespacial, genética, deep learning y problemas inversos, entre otros. Si algo tiene un desafío científico detrás, probablemente ya estoy pensando en cómo abordarlo."
+      data-en="My interests include theoretical and mathematical physics, astronomy, nuclear physics, energy, aerospace, genetics, deep learning and inverse problems, among others. If something has a scientific challenge behind it, I'm probably already thinking about how to tackle it.">
+      Me interesan los campos de física teórica y matemática, astronomía, física nuclear, energía, aeroespacial, genética, deep learning y problemas inversos, entre otros. Si algo tiene un desafío científico detrás, probablemente ya estoy pensando en cómo abordarlo.
+    </p>
+
     <div class="hobbies">
       <div class="hobbies-label" data-es="Intereses &amp; hobbies" data-en="Interests &amp; hobbies">Intereses &amp; hobbies</div>
       <div class="hobbies-row">
@@ -235,6 +306,7 @@ footer{border-top:1px solid var(--mid);padding:1.75rem 4rem;display:flex;justify
 
 <hr class="hr">
 
+<!-- CV -->
 <section id="cv">
   <div class="cv-in">
     <div class="section-head reveal">
@@ -319,9 +391,9 @@ footer{border-top:1px solid var(--mid);padding:1.75rem 4rem;display:flex;justify
         <div class="cv-group reveal">
           <div class="cv-glabel" data-es="Perfiles" data-en="Profiles">Perfiles</div>
           <div class="acad-links">
-            <a href="https://github.com/universoandante" target="_blank">GitHub → universoandante</a>
-            <a href="https://www.linkedin.com/in/julieta-am%C3%A9ndola-b95bab208/" target="_blank">LinkedIn → Julieta Améndola</a>
-            <a href="https://instagram.com/unamatematica" target="_blank">Instagram → @unamatematica</a>
+            <a href="https://github.com/universoandante" target="_blank">GitHub &#8594; universoandante</a>
+            <a href="https://www.linkedin.com/in/julieta-am%C3%A9ndola-b95bab208/" target="_blank">LinkedIn &#8594; Julieta Améndola</a>
+            <a href="https://instagram.com/unamatematica" target="_blank">Instagram &#8594; @unamatematica</a>
           </div>
         </div>
       </div>
@@ -329,6 +401,7 @@ footer{border-top:1px solid var(--mid);padding:1.75rem 4rem;display:flex;justify
   </div>
 </section>
 
+<!-- BLOG -->
 <section id="blog">
   <div class="blog-top reveal">
     <h2><em data-es="El" data-en="The">El</em> <span data-es="blog" data-en="blog">blog</span></h2>
@@ -338,103 +411,41 @@ footer{border-top:1px solid var(--mid);padding:1.75rem 4rem;display:flex;justify
       <button class="btab" onclick="filterBlog('stem',this)" data-es="STEM" data-en="STEM">STEM</button>
     </div>
   </div>
-  <div class="blog-list reveal">
-    <div class="bitem" data-cat="personal" onclick="openPost()">
-      <span class="bdate">Mar 2026</span>
-      <span class="bitem-title" data-es="Algo más que la felicidad — sobre El hombre en busca de sentido" data-en="More than happiness — on Man's Search for Meaning">Algo más que la felicidad — sobre El hombre en busca de sentido</span>
-      <span class="btag personal">Personal</span>
-    </div>
-    <div class="bitem coming" data-cat="stem">
-      <span class="bdate" data-es="Próximamente" data-en="Coming soon">Próximamente</span>
-      <span class="bitem-title" data-es="Qué es la tomografía óptica difusa y por qué me importa" data-en="What is diffuse optical tomography and why it matters">Qué es la tomografía óptica difusa y por qué me importa</span>
-      <span class="btag stem">STEM</span>
-    </div>
-    <div class="bitem coming" data-cat="personal">
-      <span class="bdate" data-es="Próximamente" data-en="Coming soon">Próximamente</span>
-      <span class="bitem-title" data-es="Por qué fundé Women in STEM (y qué aprendí en el camino)" data-en="Why I founded Women in STEM (and what I learned)">Por qué fundé Women in STEM (y qué aprendí en el camino)</span>
-      <span class="btag personal">Personal</span>
-    </div>
-    <div class="bitem coming" data-cat="stem">
-      <span class="bdate" data-es="Próximamente" data-en="Coming soon">Próximamente</span>
-      <span class="bitem-title" data-es="Redes neuronales explicadas sin fórmulas (bueno, casi)" data-en="Neural networks explained without formulas (well, almost)">Redes neuronales explicadas sin fórmulas (bueno, casi)</span>
-      <span class="btag stem">STEM</span>
-    </div>
-  </div>
+  <!-- Los posts se renderizan automáticamente desde data.js -->
+  <div class="blog-list reveal" id="blog-list"></div>
 </section>
 
+<!-- MODAL BLOG POST -->
 <div class="modal-overlay" id="modal" onclick="closePost(event)">
   <div class="modal">
     <button class="modal-close" onclick="closePostBtn()">&#x2715; <span data-es="Cerrar" data-en="Close">Cerrar</span></button>
-    <div class="modal-label" data-es="Blog personal · Club de lectura · Marzo 2026" data-en="Personal blog · Book club · March 2026">Blog personal · Club de lectura · Marzo 2026</div>
-    <h2 class="modal-title" data-es="Algo más que la felicidad" data-en="More than happiness">Algo más que la felicidad</h2>
-    <div class="modal-sub">Sobre <em>El hombre en busca de sentido</em> de Viktor Frankl</div>
-    <div class="modal-body" id="modal-body-content">
-      <p>Hay una escena cerca del final del libro que no me abandona. Los prisioneros acaban de ser liberados. Después de años de campos, de frío, de hambre, de ver morir a los que estaban al lado — de repente, campo abierto. Frankl describe cómo algunos empiezan a caminar entre las plantas y las flores, y simplemente las pisan. Sin malicia, sin conciencia. Como si la libertad recién recuperada no supiera todavía qué hacer consigo misma. Él se detiene en eso y dice algo que me pareció muy razonable: la libertad sin sentido puede volverse tan destructiva como la opresión.</p>
-      <p>Llegué a esa escena por un reel de Instagram, que tampoco es el origen más literario del mundo. Pero algo en esa imagen — creo que fue que había una pregunta enorme escondida en un gesto pequeño — me hizo sentir que ese libro tenía algo que yo andaba buscando sin saber bien cómo nombrarlo. Últimamente me doy vueltas con la pregunta del sentido. No solo como ejercicio filosófico sino como algo más personal. Frankl me mostró que no estoy sola en esa inquietud.</p>
-      <p>Lo que más me sorprendió no fue el testimonio de los campos, aunque eso también sacude y remueve. Fue descubrir que Frankl no trata la pregunta por el sentido como una de esas preguntas que se lanzan al aire para que suenen profundas. La trabaja. La exprime desde adentro, desde la experiencia más extrema que pueda existir, hasta que extrae algo concreto y útil.</p>
-      <p>La logoterapia parte de una idea simple y a la vez bastante radical: la motivación más profunda del ser humano no es el placer ni el poder, sino la búsqueda de sentido. Y el sentido, dice Frankl, no se inventa — se responde. La vida nos hace preguntas a través de las circunstancias, y nuestra tarea es contestarlas con acciones, con elecciones, con presencia.</p>
-      <p>Frankl propone tres caminos al sentido: crear o hacer algo, amar profundamente a alguien o algo, y — el más difícil — encontrar sentido incluso en el sufrimiento inevitable, eligiendo cómo pararse frente a lo que no se puede cambiar.</p>
-      <p>Quizás lo que más me quedó es la idea de que entre lo que nos pasa y lo que hacemos con eso siempre hay un espacio. Esa libertad interior, dice Frankl, es la última dignidad que nadie puede quitarle a nadie.</p>
-      <p>Me pregunto si en los libros que leyeron ustedes apareció algo parecido: no necesariamente la pregunta por el sentido, pero sí alguna idea que los haya obligado a mirarse. Eso es lo que más me interesa — no tanto de qué tratan los libros, sino qué les hicieron.</p>
-    </div>
+    <div class="modal-label" id="modal-label">Blog personal · Marzo 2026</div>
+    <h2 class="modal-title" id="modal-title"></h2>
+    <div class="modal-sub" id="modal-sub"></div>
+    <div class="modal-body" id="modal-body-content"></div>
   </div>
 </div>
 
+<!-- PROYECTOS -->
 <section id="proyectos">
   <div class="proy-in">
     <div class="section-head reveal">
       <h2><em data-es="Proyectos" data-en="Projects">Proyectos</em> &amp; <span data-es="investigación" data-en="research">investigación</span></h2>
     </div>
-    <div class="proy-grid">
-      <div class="pcard reveal">
-        <div class="pnum">01</div>
-        <div class="ptitle" data-es="Problema inverso en tomografía óptica difusa" data-en="Inverse problem in diffuse optical tomography">Problema inverso en tomografía óptica difusa</div>
-        <div class="pdesc" data-es="Tesis de grado. Reconstrucción de propiedades ópticas de tejido vivo mediante diferentes arquitecturas de redes neuronales artificiales." data-en="Undergraduate thesis. Reconstruction of optical properties of living tissue using different artificial neural network architectures.">Tesis de grado. Reconstrucción de propiedades ópticas de tejido vivo mediante diferentes arquitecturas de redes neuronales artificiales.</div>
-        <div class="pfoot"><span class="ptechs">Python · PyTorch · NumPy</span><span class="parrow">&#8594;</span></div>
-      </div>
-      <div class="pcard reveal">
-        <div class="pnum">02</div>
-        <div class="ptitle" data-es="Predicción de riesgo cardiovascular con IA" data-en="Cardiovascular risk prediction with AI">Predicción de riesgo cardiovascular con IA</div>
-        <div class="pdesc" data-es="Investigación en el Instituto PLADEMA. Modelos matemáticos e IA para predecir enfermedad coronaria a partir de geometría arterial." data-en="Research at PLADEMA Institute. Mathematical and AI models to predict coronary artery disease from arterial geometry.">Investigación en el Instituto PLADEMA. Modelos matemáticos e IA para predecir enfermedad coronaria a partir de geometría arterial.</div>
-        <div class="pfoot"><span class="ptechs">Python · scikit-learn · SciPy</span><span class="parrow">&#8594;</span></div>
-      </div>
-      <div class="pcard reveal">
-        <div class="pnum">03</div>
-        <div class="ptitle">Women in STEM UNCPBA</div>
-        <div class="pdesc" data-es="Fundadora del club para promover la participación femenina en STEM. Organización del Ada Lovelace Day 2024, con talleres para niñas de 10–12 años." data-en="Founder of the club to promote female participation in STEM. Organised Ada Lovelace Day 2024 with workshops for girls aged 10–12.">Fundadora del club para promover la participación femenina en STEM. Organización del Ada Lovelace Day 2024, con talleres para niñas de 10–12 años.</div>
-        <div class="pfoot"><span class="ptechs" data-es="Divulgación · Comunidad" data-en="Outreach · Community">Divulgación · Comunidad</span><span class="parrow">&#8594;</span></div>
-      </div>
-    </div>
+    <!-- Los proyectos se renderizan automáticamente desde data.js -->
+    <div class="proy-grid" id="proy-grid"></div>
   </div>
 </section>
 
+<!-- CONTACTO -->
 <section id="contacto">
   <h2 data-es="Hablemos." data-en="Let's talk.">Hablemos.</h2>
-  <p class="csub" data-es="¿Tenés una pregunta sobre mi investigación, querés colaborar, o simplemente charlar sobre matemática, libros o cerámica? Escribime." data-en="Do you have a question about my research, want to collaborate, or just chat about math, books or ceramics? Write to me.">¿Tenés una pregunta sobre mi investigación, querés colaborar, o simplemente charlar sobre matemática, libros o cerámica? Escribime.</p>
+  <p class="csub" data-es="¿Tenés una pregunta sobre mi investigación, querés colaborar, o simplemente charlar sobre matemática, ciencia o cómo pintar tus piezas de cerámica? Escribime." data-en="Do you have a question about my research, want to collaborate, or just chat about math, science or how to paint your ceramics pieces? Write to me.">¿Tenés una pregunta sobre mi investigación, querés colaborar, o simplemente charlar sobre matemática, ciencia o cómo pintar tus piezas de cerámica? Escribime.</p>
   <div class="csocs">
-    <a href="https://github.com/universoandante" target="_blank" class="csoc">GitHub &#8599;</a>
+    <a href="https://github.com/julietaamendola" target="_blank" class="csoc">GitHub &#8599;</a>
     <a href="https://www.linkedin.com/in/julieta-am%C3%A9ndola-b95bab208/" target="_blank" class="csoc">LinkedIn &#8599;</a>
     <a href="https://instagram.com/unamatematica" target="_blank" class="csoc">@unamatematica &#8599;</a>
-    <a href="https://instagram.com/universoandante" target="_blank" class="csoc">@universoandante &#8599;</a>
-    <!-- REEMPLAZÁ con tu email real -->
-    <a href="mailto:tu@email.com" class="csoc">Email &#8599;</a>
-  </div>
-  <div class="cform reveal">
-    <div class="crow">
-      <div class="cg">
-        <label class="clabel" data-es="Nombre" data-en="Name">Nombre</label>
-        <input type="text" class="cinput" data-placeholder-es="Tu nombre" data-placeholder-en="Your name" placeholder="Tu nombre">
-      </div>
-      <div class="cg">
-        <label class="clabel">Email</label>
-        <input type="email" class="cinput" placeholder="tu@email.com">
-      </div>
-    </div>
-    <div class="cg">
-      <label class="clabel" data-es="Mensaje" data-en="Message">Mensaje</label>
-      <textarea class="ctextarea" data-placeholder-es="Hola Julieta..." data-placeholder-en="Hi Julieta..." placeholder="Hola Julieta..."></textarea>
-    </div>
-    <button class="csend" data-es="Enviar →" data-en="Send →">Enviar &#8594;</button>
+    <a href="https://instagram.com/universoandante" target="_blank" class="csoc">@universoandante &#8599;</a>    
   </div>
 </section>
 
@@ -443,6 +454,7 @@ footer{border-top:1px solid var(--mid);padding:1.75rem 4rem;display:flex;justify
   <div class="fcopy">&#169; 2026 · Tandil, Argentina</div>
 </footer>
 
+<script src="data.js"></script>
 <script src="script.js"></script>
 </body>
 </html>

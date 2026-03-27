@@ -95,8 +95,8 @@ var PROYECTOS = [
   },
   {
     num: '02',
-    titulo_es: 'Predicción de riesgo cardiovascular con IA',
-    titulo_en: 'Cardiovascular risk prediction with AI',
+    titulo_es: 'Predicción de riesgo cardiovascular con ML',
+    titulo_en: 'Cardiovascular risk prediction with ML',
     desc_es: 'Investigación en el Instituto PLADEMA. Modelos matemáticos e IA para predecir enfermedad coronaria a partir de geometría arterial.',
     desc_en: 'Research at PLADEMA Institute. Mathematical and AI models to predict coronary artery disease from arterial geometry.',
     techs: 'Python · scikit-learn · SciPy',

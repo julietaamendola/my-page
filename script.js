@@ -1,50 +1,242 @@
+// ============================================================
+// ESTRELLAS — canvas de fondo completo, encima del tornasol
+// ============================================================
+(function() {
+  var canvas = document.createElement('canvas');
+  canvas.style.cssText = 'position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;';
+  document.body.appendChild(canvas);
+  var ctx = canvas.getContext('2d');
+  var W, H, stars = [];
+
+  function initStars() {
+    stars = [];
+    for (var i = 0; i < 90; i++) {
+      stars.push({
+        x: Math.random() * W,
+        y: Math.random() * H,
+        r: Math.random() * 1.6 + 0.3,
+        speed: Math.random() * 0.25 + 0.04,
+        phase: Math.random() * Math.PI * 2,
+        driftAmp: Math.random() * 12 + 4,
+        driftFreq: Math.random() * 0.0004 + 0.0002
+      });
+    }
+  }
+
+  function resize() {
+    W = window.innerWidth;
+    H = window.innerHeight;
+    canvas.width = W;
+    canvas.height = H;
+    initStars();
+  }
+
+  var scrollProgress = 0;
+  window.addEventListener('scroll', function() {
+    var max = document.documentElement.scrollHeight - window.innerHeight;
+    scrollProgress = max > 0 ? window.scrollY / max : 0;
+  }, { passive: true });
+
+  window.addEventListener('resize', resize);
+  resize();
+
+  function draw(t) {
+    ctx.clearRect(0, 0, W, H);
+    stars.forEach(function(s) {
+      var yOff = scrollProgress * s.speed * H * 0.6;
+      var y = ((s.y - yOff) % H + H) % H;
+      var x = s.x + Math.sin(t * s.driftFreq + s.phase) * s.driftAmp;
+      var tw = 0.35 + 0.3 * Math.sin(t * 0.0012 + s.phase);
+      var g = ctx.createRadialGradient(x, y, 0, x, y, s.r * 4);
+      g.addColorStop(0, 'rgba(180,142,200,' + tw + ')');
+      g.addColorStop(0.5, 'rgba(124,92,191,' + (tw * 0.35) + ')');
+      g.addColorStop(1, 'rgba(124,92,191,0)');
+      ctx.beginPath(); ctx.arc(x, y, s.r * 4, 0, Math.PI * 2);
+      ctx.fillStyle = g; ctx.fill();
+      ctx.beginPath(); ctx.arc(x, y, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(230,210,255,' + (tw * 0.95) + ')';
+      ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  requestAnimationFrame(draw);
+})();
+
+
+// ============================================================
 // NAV SCROLL
+// ============================================================
 window.addEventListener('scroll', function() {
   document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 40);
 });
 
-// BLOG FILTER
-function filterBlog(cat, btn) {
-  document.querySelectorAll('.btab').forEach(function(b) { b.classList.remove('on'); });
-  btn.classList.add('on');
-  document.querySelectorAll('.bitem').forEach(function(i) {
-    i.style.display = (cat === 'all' || i.dataset.cat === cat) ? 'grid' : 'none';
+
+// ============================================================
+// RENDER BLOG desde data.js
+// ============================================================
+var currentPostIndex = -1;
+var POSTS_PER_PAGE = 4;
+
+function renderBlog(lang, cat) {
+  var lista = document.getElementById('blog-list');
+  if (!lista) return;
+  lista.innerHTML = '';
+
+  var filtered = (cat && cat !== 'all')
+    ? POSTS.filter(function(p) { return p.categoria === cat; })
+    : POSTS;
+
+  var shown = filtered.slice(0, POSTS_PER_PAGE);
+  var hasMore = filtered.length > POSTS_PER_PAGE;
+
+  shown.forEach(function(p, i) {
+    var realIndex = POSTS.indexOf(p);
+    var div = document.createElement('div');
+    div.className = 'bitem' + (p.activo ? '' : ' coming');
+    div.dataset.cat = p.categoria;
+    if (p.activo) {
+      div.onclick = (function(idx) {
+        return function() { openPost(idx); };
+      })(realIndex);
+    }
+    var titulo = lang === 'en' ? p.titulo_en : p.titulo_es;
+    var fecha = lang === 'en' ? p.fecha_en : p.fecha_es;
+    div.innerHTML =
+      '<span class="bdate">' + fecha + '</span>' +
+      '<span class="bitem-title">' + titulo + '</span>' +
+      '<span class="btag ' + p.categoria + '">' + p.tag + '</span>';
+    lista.appendChild(div);
   });
+
+  var verMasId = 'ver-mas-btn';
+  var existing = document.getElementById(verMasId);
+  if (existing) existing.remove();
+
+  if (hasMore) {
+    var btn = document.createElement('button');
+    btn.id = verMasId;
+    btn.className = 'btab';
+    btn.style.marginTop = '1.5rem';
+    btn.textContent = lang === 'en' ? 'See all posts →' : 'Ver todos →';
+    btn.onclick = function() {
+      renderBlogAll(lang, cat);
+    };
+    lista.parentElement.appendChild(btn);
+  }
 }
 
+function renderBlogAll(lang, cat) {
+  var lista = document.getElementById('blog-list');
+  if (!lista) return;
+  lista.innerHTML = '';
+
+  var filtered = (cat && cat !== 'all')
+    ? POSTS.filter(function(p) { return p.categoria === cat; })
+    : POSTS;
+
+  filtered.forEach(function(p) {
+    var realIndex = POSTS.indexOf(p);
+    var div = document.createElement('div');
+    div.className = 'bitem' + (p.activo ? '' : ' coming');
+    div.dataset.cat = p.categoria;
+    if (p.activo) {
+      div.onclick = (function(idx) {
+        return function() { openPost(idx); };
+      })(realIndex);
+    }
+    var titulo = lang === 'en' ? p.titulo_en : p.titulo_es;
+    var fecha = lang === 'en' ? p.fecha_en : p.fecha_es;
+    div.innerHTML =
+      '<span class="bdate">' + fecha + '</span>' +
+      '<span class="bitem-title">' + titulo + '</span>' +
+      '<span class="btag ' + p.categoria + '">' + p.tag + '</span>';
+    lista.appendChild(div);
+  });
+
+  var btn = document.getElementById('ver-mas-btn');
+  if (btn) btn.remove();
+}
+
+
+// ============================================================
+// RENDER PROYECTOS desde data.js
+// ============================================================
+function renderProyectos(lang) {
+  var grid = document.getElementById('proy-grid');
+  if (!grid) return;
+  grid.innerHTML = '';
+
+  PROYECTOS.forEach(function(p) {
+    var titulo = lang === 'en' ? p.titulo_en : p.titulo_es;
+    var desc = lang === 'en' ? p.desc_en : p.desc_es;
+    var techs = (lang === 'en' && p.techs_en) ? p.techs_en : (p.techs_es || p.techs);
+    var card = document.createElement('div');
+    card.className = 'pcard reveal';
+    card.innerHTML =
+      '<div class="pnum">' + p.num + '</div>' +
+      '<div class="ptitle">' + titulo + '</div>' +
+      '<div class="pdesc">' + desc + '</div>' +
+      '<div class="pfoot">' +
+        '<span class="ptechs">' + techs + '</span>' +
+        '<a href="' + p.link + '" class="parrow">&#8594;</a>' +
+      '</div>';
+    grid.appendChild(card);
+  });
+
+  reobserve();
+}
+
+
+// ============================================================
+// BLOG FILTER
+// ============================================================
+var currentCat = 'all';
+
+function filterBlog(cat, btn) {
+  currentCat = cat;
+  document.querySelectorAll('.btab').forEach(function(b) { b.classList.remove('on'); });
+  btn.classList.add('on');
+  renderBlog(currentLang, cat);
+}
+
+
+// ============================================================
 // MODAL
-function openPost() {
+// ============================================================
+function openPost(i) {
+  var p = POSTS[i];
+  if (!p || !p.activo) return;
+  currentPostIndex = i;
+  var lang = currentLang;
+  document.getElementById('modal-label').textContent =
+    lang === 'en' ? 'Personal blog · March 2026' : 'Blog personal · Marzo 2026';
+  document.getElementById('modal-title').textContent =
+    lang === 'en' ? p.titulo_en : p.titulo_es;
+  document.getElementById('modal-sub').innerHTML =
+    lang === 'en' ? (p.subtitulo_en || '') : (p.subtitulo_es || '');
+  document.getElementById('modal-body-content').innerHTML =
+    lang === 'en' ? p.contenido_en : p.contenido_es;
   document.getElementById('modal').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
+
 function closePostBtn() {
   document.getElementById('modal').classList.remove('open');
   document.body.style.overflow = '';
 }
+
 function closePost(e) {
   if (e.target === document.getElementById('modal')) closePostBtn();
 }
 
-// CONTENIDO DEL POST EN ESPAÑOL
-var postES = '<p>Hay una escena cerca del final del libro que no me abandona. Los prisioneros acaban de ser liberados. Después de años de campos, de frío, de hambre, de ver morir a los que estaban al lado — de repente, campo abierto. Frankl describe cómo algunos empiezan a caminar entre las plantas y las flores, y simplemente las pisan. Sin malicia, sin conciencia. Como si la libertad recién recuperada no supiera todavía qué hacer consigo misma. Él se detiene en eso y dice algo que me pareció muy razonable: la libertad sin sentido puede volverse tan destructiva como la opresión.</p>'
-+ '<p>Llegué a esa escena por un reel de Instagram, que tampoco es el origen más literario del mundo. Pero algo en esa imagen — creo que fue que había una pregunta enorme escondida en un gesto pequeño — me hizo sentir que ese libro tenía algo que yo andaba buscando sin saber bien cómo nombrarlo. Últimamente me doy vueltas con la pregunta del sentido. No solo como ejercicio filosófico sino como algo más personal. Frankl me mostró que no estoy sola en esa inquietud.</p>'
-+ '<p>Lo que más me sorprendió no fue el testimonio de los campos, aunque eso también sacude y remueve. Fue descubrir que Frankl no trata la pregunta por el sentido como una de esas preguntas que se lanzan al aire para que suenen profundas. La trabaja. La exprime desde adentro, desde la experiencia más extrema que pueda existir, hasta que extrae algo concreto y útil. Eso me parece un acto de valentía intelectual poco común.</p>'
-+ '<p>La logoterapia parte de una idea simple y a la vez bastante radical: la motivación más profunda del ser humano no es el placer ni el poder, sino la búsqueda de sentido. Y el sentido, dice Frankl, no se inventa — se responde. La vida nos hace preguntas a través de las circunstancias, y nuestra tarea es contestarlas con acciones, con elecciones, con presencia.</p>'
-+ '<p>Frankl propone tres caminos al sentido: crear o hacer algo, amar profundamente a alguien o algo, y — el más difícil — encontrar sentido incluso en el sufrimiento inevitable, eligiendo cómo pararse frente a lo que no se puede cambiar.</p>'
-+ '<p>Quizás lo que más me quedó es la idea de que entre lo que nos pasa y lo que hacemos con eso siempre hay un espacio. Esa libertad interior, dice Frankl, es la última dignidad que nadie puede quitarle a nadie.</p>'
-+ '<p>Me pregunto si en los libros que leyeron ustedes apareció algo parecido: no necesariamente la pregunta por el sentido, pero sí alguna idea que los haya obligado a mirarse. Eso es lo que más me interesa — no tanto de qué tratan los libros, sino qué les hicieron.</p>';
 
-// CONTENIDO DEL POST EN INGLÉS
-var postEN = '<p>There is a scene near the end of the book that stays with me. The prisoners have just been liberated. After years of camps, cold, hunger, of watching those beside them die — suddenly, open fields. Frankl describes how some of them start walking through the flowers and plants and simply trample them. Without malice, without awareness. As though freedom, so recently recovered, did not yet know what to do with itself. He pauses on this and says something I found deeply reasonable: freedom without meaning can become just as destructive as oppression.</p>'
-+ '<p>I came to that scene through an Instagram reel, which is not the most literary of origins. But something in that image — I think it was a huge question hidden inside a tiny gesture — made me feel that this book held something I had been looking for without quite knowing how to name it. Lately I keep circling back to the question of meaning. Not just as a philosophical exercise, but as something more personal. Frankl showed me I am not alone in that unease.</p>'
-+ '<p>What surprised me most was not the testimony of the camps, though that shakes and moves you too. It was discovering that Frankl does not treat the question of meaning as one of those questions you throw into the air to sound profound and leave floating there. He works it. He wrings it from the inside, from the most extreme experience imaginable, until he extracts something concrete and useful.</p>'
-+ '<p>Logotherapy starts from a simple and yet quite radical idea: the deepest human motivation is not pleasure or power, but the search for meaning. And meaning, Frankl says, is not invented — it is answered. Life asks us questions through our circumstances, and our task is to answer them with actions, choices, presence.</p>'
-+ '<p>Frankl proposes three paths to meaning: creating or doing something, loving someone or something deeply, and — the hardest — finding meaning even in unavoidable suffering, by choosing how to stand before what cannot be changed.</p>'
-+ '<p>Perhaps what stayed with me most is the idea that between what happens to us and what we do with it, there is always a space. That inner freedom, says Frankl, is the last dignity no one can take from anyone.</p>'
-+ '<p>I wonder whether in the books you have read something similar appeared — not necessarily the question of meaning, but some idea that forced you to look at yourself. That is what interests me most — not so much what books are about, but what they do to you.</p>';
-
+// ============================================================
 // CAMBIO DE IDIOMA
+// ============================================================
+var currentLang = 'es';
+
 function setLang(lang) {
+  currentLang = lang;
   document.documentElement.lang = lang;
   document.getElementById('btn-es').classList.toggle('active', lang === 'es');
   document.getElementById('btn-en').classList.toggle('active', lang === 'en');
@@ -72,20 +264,51 @@ function setLang(lang) {
   var aboutH = document.querySelector('.about-h');
   if (aboutH) {
     aboutH.innerHTML = lang === 'en'
-      ? 'Mathematician, teacher,<br>and <em>incurably curious.</em>'
-      : 'Matemática, docente,<br>y <em>curiosa incorregible.</em>';
+      ? 'Mathematics <br>to <em>understand the world.</em>'
+      : 'Matemática <br>para <em>entender el mundo.</em>';
   }
 
-  document.getElementById('modal-body-content').innerHTML = lang === 'en' ? postEN : postES;
+  renderBlog(lang, currentCat);
+  renderProyectos(lang);
+
+  if (currentPostIndex >= 0) {
+    var p = POSTS[currentPostIndex];
+    if (p) {
+      document.getElementById('modal-body-content').innerHTML =
+        lang === 'en' ? p.contenido_en : p.contenido_es;
+      document.getElementById('modal-title').textContent =
+        lang === 'en' ? p.titulo_en : p.titulo_es;
+    }
+  }
 }
 
+
+// ============================================================
 // SCROLL REVEAL
-var obs = new IntersectionObserver(function(entries) {
+// ============================================================
+var revealObserver;
+
+function reobserve() {
+  document.querySelectorAll('.reveal:not(.in)').forEach(function(el) {
+    if (revealObserver) revealObserver.observe(el);
+  });
+}
+
+revealObserver = new IntersectionObserver(function(entries) {
   entries.forEach(function(e) {
     if (e.isIntersecting) e.target.classList.add('in');
   });
 }, { threshold: 0.08 });
 
 document.querySelectorAll('.reveal').forEach(function(el) {
-  obs.observe(el);
+  revealObserver.observe(el);
+});
+
+
+// ============================================================
+// INIT — renderizá blog y proyectos al cargar
+// ============================================================
+document.addEventListener('DOMContentLoaded', function() {
+  renderBlog('es', 'all');
+  renderProyectos('es');
 });

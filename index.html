@@ -17,20 +17,14 @@
 }
 html{scroll-behavior:smooth}
 body{background:var(--white);color:var(--text);font-family:var(--body);overflow-x:hidden;-webkit-font-smoothing:antialiased}
-
-/* FONDO TORNASOL */
-.iridescent{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.9;
+.iridescent{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.6;
   background:linear-gradient(135deg,rgba(220,210,255,.55) 0%,rgba(255,220,240,.35) 20%,rgba(210,235,255,.4) 40%,rgba(225,215,255,.5) 60%,rgba(255,215,235,.35) 80%,rgba(205,230,255,.45) 100%);
   background-size:400% 400%;animation:shift 12s ease-in-out infinite alternate}
 @keyframes shift{0%{background-position:0% 50%}100%{background-position:100% 50%}}
 .iridescent::after{content:'';position:absolute;inset:0;
   background:radial-gradient(ellipse at 30% 40%,rgba(200,185,255,.3) 0%,transparent 60%),
              radial-gradient(ellipse at 75% 60%,rgba(255,200,230,.25) 0%,transparent 55%)}
-
-/* Z-INDEX — contenido encima de estrellas y tornasol */
 section,footer,nav{position:relative;z-index:1}
-
-/* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.2rem 3rem;display:flex;align-items:center;justify-content:space-between;background:rgba(250,248,252,.92);backdrop-filter:blur(12px);border-bottom:1px solid transparent;transition:border-color .3s}
 nav.scrolled{border-color:var(--mid)}
 .nav-name{font-family:var(--display);font-size:1.05rem;font-weight:400;font-style:italic;color:var(--text)}
@@ -41,8 +35,6 @@ nav.scrolled{border-color:var(--mid)}
 .lang-btn{padding:.3rem .75rem;background:transparent;border:none;color:var(--muted);cursor:pointer;letter-spacing:.07em;transition:all .2s;font-family:var(--sans);font-size:.65rem}
 .lang-btn.active{background:var(--accent);color:#fff}
 .lang-btn:not(.active):hover{background:var(--light);color:var(--text)}
-
-/* HERO */
 #hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:0 4rem;gap:5rem;max-width:1280px;margin:0 auto;padding-top:5rem}
 .hero-eyebrow{font-family:var(--sans);font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:2rem}
 .hero-name{font-family:var(--display);font-size:clamp(3.2rem,6.5vw,5.8rem);font-weight:400;line-height:1.02;margin-bottom:1.25rem;color:var(--text)}
@@ -57,14 +49,10 @@ nav.scrolled{border-color:var(--mid)}
 .photo-wrap img{width:100%;height:100%;object-fit:cover;display:block}
 .photo-placeholder-text{font-family:var(--sans);font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;opacity:.6}
 .photo-cap{margin-top:.85rem;font-family:var(--body);font-size:.82rem;font-style:italic;color:var(--muted)}
-
-/* DIVISORES */
 .hr{border:none;border-top:1px solid var(--mid);margin:0 4rem}
 .quote-wrap{padding:5rem 4rem;max-width:860px;margin:0 auto;text-align:center}
 .quote-wrap blockquote{font-family:var(--display);font-size:clamp(1.4rem,2.8vw,2rem);font-weight:400;font-style:italic;line-height:1.5;color:var(--text)}
 .quote-wrap cite{display:block;margin-top:1.25rem;font-family:var(--sans);font-size:.65rem;letter-spacing:.13em;text-transform:uppercase;color:var(--subtle);font-style:normal}
-
-/* SOBRE MÍ */
 #sobre-mi{padding:8rem 4rem;max-width:1100px;margin:0 auto}
 .about-h{font-family:var(--display);font-size:clamp(1.8rem,3vw,2.6rem);font-weight:400;line-height:1.25;margin-bottom:1.75rem}
 .about-h em{font-style:italic;color:var(--accent)}
@@ -77,8 +65,6 @@ nav.scrolled{border-color:var(--mid)}
 .hobbies-row{display:flex;flex-wrap:wrap;gap:.45rem}
 .htag{padding:.35rem .85rem;border:1px solid var(--mid);font-family:var(--sans);font-size:.7rem;color:var(--muted);letter-spacing:.04em;transition:all .2s;cursor:default;border-radius:100px}
 .htag:hover{border-color:var(--accent);color:var(--accent)}
-
-/* CV */
 #cv{background:var(--off);padding:8rem 4rem}
 .cv-in{max-width:1100px;margin:0 auto}
 .section-head{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:4rem;padding-bottom:2rem;border-bottom:1px solid var(--mid)}
@@ -97,6 +83,9 @@ nav.scrolled{border-color:var(--mid)}
 .cv-date{font-family:var(--sans);font-size:.65rem;color:var(--accent);white-space:nowrap;font-weight:500}
 .cv-org{font-family:var(--body);font-size:.85rem;color:var(--muted);font-style:italic;margin-bottom:.3rem}
 .cv-desc{font-family:var(--body);font-size:.88rem;color:var(--muted);line-height:1.75}
+.cv-subitem{padding-left:1rem;border-left:2px solid var(--light);margin-top:.6rem}
+.cv-subitem-title{font-family:var(--body);font-size:.88rem;font-weight:500;color:var(--text);margin-bottom:.2rem}
+.cv-subitem-desc{font-family:var(--body);font-size:.85rem;color:var(--muted);line-height:1.7}
 .award-row{padding:.9rem 0;border-bottom:1px solid var(--light);display:flex;gap:1rem;align-items:baseline}
 .award-row:last-child{border:none}
 .award-name{font-family:var(--body);font-size:.95rem;font-weight:500;flex:1;color:var(--text)}
@@ -106,8 +95,10 @@ nav.scrolled{border-color:var(--mid)}
 .acad-links{display:flex;flex-direction:column;gap:.65rem;margin-top:.25rem}
 .acad-links a{font-family:var(--sans);font-size:.75rem;color:var(--muted);text-decoration:none;transition:color .2s}
 .acad-links a:hover{color:var(--accent)}
-
-/* BLOG */
+.lang-row{display:flex;justify-content:space-between;align-items:baseline;padding:.6rem 0;border-bottom:1px solid var(--light)}
+.lang-row:last-child{border:none}
+.lang-name{font-family:var(--body);font-size:.95rem;color:var(--text)}
+.lang-level{font-family:var(--sans);font-size:.68rem;color:var(--muted);letter-spacing:.04em}
 #blog{padding:8rem 4rem;max-width:1100px;margin:0 auto}
 .blog-top{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:3.5rem}
 .blog-top h2{font-family:var(--display);font-size:clamp(2rem,4vw,3rem);font-weight:400;color:var(--text)}
@@ -125,8 +116,6 @@ nav.scrolled{border-color:var(--mid)}
 .btag{font-family:var(--sans);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;padding:.22rem .65rem;border:1px solid var(--mid);color:var(--muted);text-align:center;border-radius:100px}
 .btag.personal{border-color:var(--accent2);color:var(--accent2)}
 .btag.stem{border-color:#5b8a7a;color:#5b8a7a}
-
-/* MODAL */
 .modal-overlay{display:none;position:fixed;inset:0;background:rgba(30,26,46,.6);z-index:200;align-items:flex-start;justify-content:center;overflow-y:auto;padding:4rem 1rem;backdrop-filter:blur(4px)}
 .modal-overlay.open{display:flex}
 .modal{background:var(--white);max-width:720px;width:100%;padding:4rem;position:relative;margin:auto;border-top:3px solid var(--accent)}
@@ -138,8 +127,6 @@ nav.scrolled{border-color:var(--mid)}
 .modal-body{font-family:var(--body);font-size:1.05rem;line-height:1.9;color:var(--muted)}
 .modal-body p{margin-bottom:1.25rem}
 .modal-body p:last-child{margin:0}
-
-/* PROYECTOS */
 #proyectos{background:var(--off);padding:8rem 4rem}
 .proy-in{max-width:1100px;margin:0 auto}
 .proy-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.75rem}
@@ -151,31 +138,17 @@ nav.scrolled{border-color:var(--mid)}
 .pfoot{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--light);padding-top:.9rem}
 .ptechs{font-family:var(--sans);font-size:.65rem;color:var(--subtle)}
 .parrow{font-size:.85rem;color:var(--accent);text-decoration:none}
-
-/* CONTACTO */
 #contacto{padding:8rem 4rem;max-width:860px;margin:0 auto;text-align:center}
 #contacto h2{font-family:var(--display);font-size:clamp(2.5rem,5vw,4rem);font-weight:400;font-style:italic;line-height:1.1;margin-bottom:1.4rem;color:var(--text)}
 .csub{font-family:var(--body);font-size:1.05rem;color:var(--muted);line-height:1.8;max-width:540px;margin:0 auto 2.75rem}
-.csocs{display:flex;justify-content:center;flex-wrap:wrap;gap:.75rem;margin-bottom:4rem}
+.csocs{display:flex;justify-content:center;flex-wrap:wrap;gap:.75rem;margin-bottom:2rem}
 .csoc{display:inline-block;padding:.55rem 1.25rem;border:1px solid var(--mid);font-family:var(--sans);font-size:.68rem;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:all .2s;border-radius:2px}
 .csoc:hover{border-color:var(--accent);color:var(--accent)}
-.cform{text-align:left;display:grid;gap:1.1rem}
-.crow{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem}
-.cg{display:flex;flex-direction:column;gap:.35rem}
-.clabel{font-family:var(--sans);font-size:.62rem;letter-spacing:.13em;text-transform:uppercase;color:var(--muted)}
-.cinput,.ctextarea{background:var(--off);border:1px solid var(--mid);padding:.7rem 1rem;font-family:var(--body);font-size:.95rem;color:var(--text);outline:none;transition:border-color .2s;width:100%}
-.cinput:focus,.ctextarea:focus{border-color:var(--accent)}
-.ctextarea{min-height:120px;resize:vertical;font-style:italic}
-.csend{background:var(--accent);color:#fff;border:none;padding:.75rem 2.25rem;font-family:var(--sans);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:background .2s;align-self:flex-start;border-radius:2px}
-.csend:hover{background:var(--text)}
-
 footer{border-top:1px solid var(--mid);padding:1.75rem 4rem;display:flex;justify-content:space-between;align-items:center}
 .fname{font-family:var(--display);font-size:1rem;font-weight:400;font-style:italic;color:var(--muted)}
 .fcopy{font-family:var(--sans);font-size:.65rem;letter-spacing:.08em;color:var(--subtle)}
-
 .reveal{opacity:0;transform:translateY(18px);transition:opacity .65s ease,transform .65s ease}
 .reveal.in{opacity:1;transform:none}
-
 @media(max-width:900px){
   nav{padding:1rem 1.25rem;gap:.5rem;flex-wrap:wrap}.nav-links{gap:1rem}
   #hero{grid-template-columns:1fr;padding:7rem 1.5rem 4rem;gap:2.5rem}.hero-photo{max-width:260px}
@@ -184,7 +157,6 @@ footer{border-top:1px solid var(--mid);padding:1.75rem 4rem;display:flex;justify
   .cv-cols{grid-template-columns:1fr}
   .blog-top{flex-direction:column;align-items:flex-start;gap:1.25rem}
   .proy-grid{grid-template-columns:1fr}
-  .crow{grid-template-columns:1fr}
   #blog,#cv,#proyectos,#contacto{padding:5rem 1.5rem}
   .bitem{grid-template-columns:1fr;gap:.3rem}.bdate{display:none}
   footer{flex-direction:column;gap:.4rem;text-align:center;padding:1.5rem}
@@ -194,7 +166,6 @@ footer{border-top:1px solid var(--mid);padding:1.75rem 4rem;display:flex;justify
 </style>
 </head>
 <body>
-
 <div class="iridescent"></div>
 
 <nav id="nav">
@@ -225,7 +196,6 @@ footer{border-top:1px solid var(--mid);padding:1.75rem 4rem;display:flex;justify
   </div>
   <div class="hero-photo">
     <img src="julipg.jpeg" alt="Julieta Améndola" style="aspect-ratio:3/4;object-fit:cover;width:100%">
-    </div>
   </div>
 </section>
 
@@ -239,12 +209,12 @@ footer{border-top:1px solid var(--mid);padding:1.75rem 4rem;display:flex;justify
 <!-- SOBRE MÍ -->
 <section id="sobre-mi">
   <div class="reveal">
-    <h2 class="about-h" data-es="Matemática <br>para <em>entender el mundo.</em>" data-en="Mathematics <br>to <em>understand the world.</em>">Matemática <br>para <em>entender el mundo.</em></h2>
+    <h2 class="about-h" data-es="Matemática <br>para <em>entender el mundo.</em>" data-en="Mathematics <br> to <em>understand the world.</em>">atemática <br>para <em>entender el mundo.</em></h2>
 
     <p class="about-p"
-      data-es="Soy Julieta, matemática en formación y apasionada de las ciencias desde que tengo memoria. Estoy terminando mi Licenciatura en Ciencias Matemáticas en la Universidad Nacional del Centro de la Provincia de Buenos Aires, donde actualmente desarrollo mi tesis de grado en la intersección entre matemática, física y computación: trabajo sobre el problema inverso en tomografía óptica difusa, un campo que combina todo lo que más me entusiasma."
-      data-en="I'm Julieta, a mathematician in training and passionate about science for as long as I can remember. I'm finishing my degree in Mathematical Sciences at the Universidad Nacional del Centro de la Provincia de Buenos Aires, where I'm currently working on my undergraduate thesis at the intersection of mathematics, physics and computation: the inverse problem in diffuse optical tomography — a field that combines everything I love most.">
-      Soy Julieta, matemática en formación y apasionada de las ciencias desde que tengo memoria. Estoy terminando mi Licenciatura en Ciencias Matemáticas en la Universidad Nacional del Centro de la Provincia de Buenos Aires, donde actualmente desarrollo mi tesis de grado en la intersección entre matemática, física y computación: trabajo sobre el problema inverso en tomografía óptica difusa, un campo que combina todo lo que más me entusiasma.
+      data-es="Soy Julieta, matemática &#127462;&#127479;&#127470;&#127481; en formación, viviendo en Tandil, Argentina. Estoy terminando mi Licenciatura en Ciencias Matemáticas en la Universidad Nacional del Centro de la Provincia de Buenos Aires, donde desarrollo mi tesis en la intersección entre matemática, física y computación: el problema inverso en tomografía óptica difusa, un campo que combina todo lo que más me entusiasma."
+      data-en="I'm Julieta, an &#127462;&#127479;&#127470;&#127481; mathematician in training, living in Tandil, Argentina. I'm finishing my degree in Mathematical Sciences at the Universidad Nacional del Centro de la Provincia de Buenos Aires, where I'm working on my thesis at the intersection of mathematics, physics and computation: the inverse problem in diffuse optical tomography — a field that combines everything I love most.">
+      Soy Julieta, matemática 🇦🇷🇮🇹 en formación, viviendo en Tandil, Argentina. Estoy terminando mi Licenciatura en Ciencias Matemáticas en la Universidad Nacional del Centro de la Provincia de Buenos Aires, donde desarrollo mi tesis en la intersección entre matemática, física y computación: el problema inverso en tomografía óptica difusa, un campo que combina todo lo que más me entusiasma.
     </p>
 
     <p class="about-p"
@@ -256,9 +226,9 @@ footer{border-top:1px solid var(--mid);padding:1.75rem 4rem;display:flex;justify
     <div class="about-subsection">
       <div class="about-subsection-title" data-es="Lo que me mueve" data-en="What drives me">Lo que me mueve</div>
       <p class="about-p"
-        data-es="Me apasiona usar la matemática para resolver problemas desafiantes, en cualquier ámbito. No me interesa la matemática encerrada en sí misma, sino la que dialoga con la física, la computación, la biología, la ingeniería. Esa curiosidad me llevó a participar en proyectos de deep learning con Neuromatch Academy junto a personas de todo el mundo, a trabajar en un proyecto sobre geometría arterial y aterosclerosis en el Instituto PLADEMA, y a obtener una beca Friends of Fulbright que me permitió estudiar en Indiana University Indianapolis en 2023, una experiencia que marcó un antes y un después en mi formación."
+        data-es="Me apasiona usar la matemática para resolver problemas desafiantes, en cualquier ámbito. No me interesa la matemática encerrada en sí misma, sino la que dialoga con la física, la computación, la biología, la ingeniería. Esa curiosidad me llevó a proyectos de deep learning con Neuromatch Academy junto a personas de todo el mundo, a trabajar en un proyecto sobre geometría arterial y aterosclerosis en el Instituto PLADEMA, y a obtener una beca Friends of Fulbright que me permitió estudiar en Indiana University Indianapolis en 2023, una experiencia que marcó un antes y un después en mi formación."
         data-en="I'm passionate about using mathematics to solve challenging problems in any field. I'm not interested in mathematics closed in on itself, but mathematics that talks to physics, computation, biology, engineering. That curiosity led me to deep learning projects with Neuromatch Academy alongside people from around the world, to work on arterial geometry and atherosclerosis at PLADEMA Institute, and to receive a Friends of Fulbright scholarship that allowed me to study at Indiana University Indianapolis in 2023 — an experience that changed my path.">
-        Me apasiona usar la matemática para resolver problemas desafiantes, en cualquier ámbito. No me interesa la matemática encerrada en sí misma, sino la que dialoga con la física, la computación, la biología, la ingeniería. Esa curiosidad me llevó a participar en proyectos de deep learning con Neuromatch Academy junto a personas de todo el mundo, a trabajar en un proyecto sobre geometría arterial y aterosclerosis en el Instituto PLADEMA, y a obtener una beca Friends of Fulbright que me permitió estudiar en Indiana University Indianapolis en 2023, una experiencia que marcó un antes y un después en mi formación.
+        Me apasiona usar la matemática para resolver problemas desafiantes, en cualquier ámbito. No me interesa la matemática encerrada en sí misma, sino la que dialoga con la física, la computación, la biología, la ingeniería. Esa curiosidad me llevó a proyectos de deep learning con Neuromatch Academy junto a personas de todo el mundo, a trabajar en un proyecto sobre geometría arterial y aterosclerosis en el Instituto PLADEMA, y a obtener una beca Friends of Fulbright que me permitió estudiar en Indiana University Indianapolis en 2023, una experiencia que marcó un antes y un después en mi formación.
       </p>
     </div>
 
@@ -314,25 +284,38 @@ footer{border-top:1px solid var(--mid);padding:1.75rem 4rem;display:flex;justify
       <a href="#" data-es="↓ Descargar PDF" data-en="↓ Download PDF">↓ Descargar PDF</a>
     </div>
     <div class="cv-cols">
+      <!-- COLUMNA IZQUIERDA -->
       <div>
         <div class="cv-group reveal">
           <div class="cv-glabel" data-es="Experiencia de investigación" data-en="Research experience">Experiencia de investigación</div>
+
           <div class="cv-row">
             <div class="cv-rh"><span class="cv-role" data-es="Tesista de grado" data-en="Undergraduate thesis researcher">Tesista de grado</span><span class="cv-date">2024 — <span data-es="presente" data-en="present">presente</span></span></div>
             <div class="cv-org">UNCPBA · Tandil, Argentina</div>
             <div class="cv-desc" data-es="Tesis sobre el problema inverso en tomografía óptica difusa utilizando diferentes enfoques de redes neuronales artificiales." data-en="Thesis on the inverse problem in diffuse optical tomography using different artificial neural network approaches.">Tesis sobre el problema inverso en tomografía óptica difusa utilizando diferentes enfoques de redes neuronales artificiales.</div>
           </div>
+
           <div class="cv-row">
             <div class="cv-rh"><span class="cv-role" data-es="Asistente de investigación" data-en="Research assistant">Asistente de investigación</span><span class="cv-date">2022 — 2023</span></div>
             <div class="cv-org">Instituto PLADEMA – UNICEN · Tandil</div>
-            <div class="cv-desc" data-es="Investigación interdisciplinaria en enfermedad coronaria: modelos matemáticos e IA para predecir riesgo cardiovascular según geometría arterial. Presentación en el Congreso Mar y Sierras 2023." data-en="Interdisciplinary research on coronary artery disease: mathematical and AI models to predict cardiovascular risk based on arterial geometry. Presented at Mar y Sierras Conference, 2023.">Investigación interdisciplinaria en enfermedad coronaria: modelos matemáticos e IA para predecir riesgo cardiovascular según geometría arterial. Presentación en el Congreso Mar y Sierras 2023.</div>
+            <div class="cv-desc" data-es="Investigación interdisciplinaria en enfermedad coronaria: modelos matemáticos y aprendizaje de máquina para predecir riesgo cardiovascular según geometría arterial. Presentación de resultados preliminares en el Congreso Mar y Sierras 2023 (expositora)." data-en="Interdisciplinary research on coronary artery disease: mathematical models and machine learning to predict cardiovascular risk based on arterial geometry. Presented preliminary results at Mar y Sierras Conference 2023 (speaker).">Investigación interdisciplinaria en enfermedad coronaria: modelos matemáticos y aprendizaje de máquina para predecir riesgo cardiovascular según geometría arterial. Presentación de resultados preliminares en el Congreso Mar y Sierras 2023 (expositora).</div>
           </div>
+
           <div class="cv-row">
             <div class="cv-rh"><span class="cv-role">Neuromatch Academy — Deep Learning</span><span class="cv-date">2022, 2023</span></div>
             <div class="cv-org" data-es="Programa internacional · Online" data-en="International programme · Online">Programa internacional · Online</div>
-            <div class="cv-desc" data-es="Formación en redes convolucionales y recurrentes, modelos generativos, RL, series temporales y NLP. Proyectos de investigación con equipos internacionales en cada edición." data-en="Training in convolutional and recurrent networks, generative models, reinforcement learning, time series and NLP. Research projects with international teams each edition.">Formación en redes convolucionales y recurrentes, modelos generativos, RL, series temporales y NLP. Proyectos de investigación con equipos internacionales en cada edición.</div>
+            <div class="cv-desc" data-es="Formación intensiva en herramientas estadísticas y matemáticas aplicadas a IA: redes convolucionales y recurrentes, modelos generativos, aprendizaje por refuerzo, series temporales y NLP." data-en="Intensive training in statistical and mathematical tools applied to AI: convolutional and recurrent networks, generative models, reinforcement learning, time series and NLP.">Formación intensiva en herramientas estadísticas y matemáticas aplicadas a IA: redes convolucionales y recurrentes, modelos generativos, aprendizaje por refuerzo, series temporales y NLP.</div>
+            <div class="cv-subitem" style="margin-top:.75rem">
+              <div class="cv-subitem-title">Deep Learning with Reinforcement Learning (2022)</div>
+              <div class="cv-subitem-desc" data-es="Proyecto interdisciplinario con participantes de varios países. Investigación sobre estrategias de trading usando un dataset de Binance, implementando y evaluando modelos de deep learning." data-en="Interdisciplinary project with participants from various countries. Research on trading strategies using a Binance dataset, implementing and evaluating deep learning models.">Proyecto interdisciplinario con participantes de varios países. Investigación sobre estrategias de trading usando un dataset de Binance, implementando y evaluando modelos de deep learning.</div>
+            </div>
+            <div class="cv-subitem" style="margin-top:.5rem">
+              <div class="cv-subitem-title">Deep Learning with Computer Vision (2023)</div>
+              <div class="cv-subitem-desc" data-es="Proyecto interdisciplinario internacional centrado en detección de gestos manuales. Comparación del rendimiento de una red convolucional con transfer learning versus reglas codificadas manualmente." data-en="International interdisciplinary project focused on hand gesture detection. Compared the performance of a convolutional neural network using transfer learning against hand-coded rules for gesture detection.">Proyecto interdisciplinario internacional centrado en detección de gestos manuales. Comparación del rendimiento de una red convolucional con transfer learning versus reglas codificadas manualmente.</div>
+            </div>
           </div>
         </div>
+
         <div class="cv-group reveal">
           <div class="cv-glabel" data-es="Docencia" data-en="Teaching">Docencia</div>
           <div class="cv-row">
@@ -342,43 +325,105 @@ footer{border-top:1px solid var(--mid);padding:1.75rem 4rem;display:flex;justify
           </div>
           <div class="cv-row">
             <div class="cv-rh"><span class="cv-role" data-es="Tutora privada de matemática" data-en="Private mathematics tutor">Tutora privada de matemática</span><span class="cv-date">2020 — <span data-es="presente" data-en="present">presente</span></span></div>
-            <div class="cv-desc" data-es="Más de 500 horas de tutoría en Análisis Numérico, Cálculo, Cálculo Multivariable, Variable Compleja y Álgebra Lineal." data-en="Over 500 hours of tutoring in Numerical Analysis, Calculus, Multivariable Calculus, Complex Variable and Linear Algebra.">Más de 500 horas de tutoría en Análisis Numérico, Cálculo, Cálculo Multivariable, Variable Compleja y Álgebra Lineal.</div>
+            <div class="cv-desc" data-es="Tutoría universitaria en Análisis Numérico, Cálculo, Cálculo Multivariable, Variable Compleja y Álgebra Lineal. Preparación de estudiantes para competencias de matemática." data-en="University-level tutoring in Numerical Analysis, Calculus, Multivariable Calculus, Complex Variable and Linear Algebra. Preparation of students for mathematics competitions.">Tutoría universitaria en Análisis Numérico, Cálculo, Cálculo Multivariable, Variable Compleja y Álgebra Lineal. Preparación de estudiantes para competencias de matemática.</div>
+          </div>
+        </div>
+
+        <div class="cv-group reveal">
+          <div class="cv-glabel" data-es="Liderazgo y voluntariado" data-en="Leadership &amp; volunteering">Liderazgo y voluntariado</div>
+          <div class="cv-row">
+            <div class="cv-rh"><span class="cv-role" data-es="Fundadora, Women in STEM UNCPBA" data-en="Founder, Women in STEM UNCPBA">Fundadora, Women in STEM UNCPBA</span><span class="cv-date">2023</span></div>
+            <div class="cv-desc" data-es="Creación de una comunidad para promover la participación femenina y el liderazgo en ciencia, tecnología, ingeniería y matemática en la UNCPBA." data-en="Established a community to promote female participation and leadership in science, technology, engineering and mathematics at UNCPBA.">Creación de una comunidad para promover la participación femenina y el liderazgo en ciencia, tecnología, ingeniería y matemática en la UNCPBA.</div>
+          </div>
+          <div class="cv-row">
+            <div class="cv-rh"><span class="cv-role" data-es="Representante estudiantil, Departamento de Matemática" data-en="Student representative, Department of Mathematics">Representante estudiantil, Departamento de Matemática</span><span class="cv-date">2023</span></div>
+            <div class="cv-org">UNICEN · Tandil</div>
+            <div class="cv-desc" data-es="Representante electa, facilitando la comunicación y resolución de conflictos entre estudiantes y docentes." data-en="Elected representative facilitating communication and conflict resolution between students and faculty.">Representante electa, facilitando la comunicación y resolución de conflictos entre estudiantes y docentes.</div>
           </div>
           <div class="cv-row">
             <div class="cv-rh"><span class="cv-role" data-es="Instructora, Taller de Olimpíadas Matemáticas" data-en="Instructor, Mathematics Olympiad Workshop">Instructora, Taller de Olimpíadas Matemáticas</span><span class="cv-date">2021</span></div>
             <div class="cv-org">UNCPBA · Virtual</div>
+            <div class="cv-desc" data-es="Preparación de estudiantes de secundaria para la Olimpíada Argentina de Matemática." data-en="Preparation of secondary school students for the Argentine Mathematics Olympiad.">Preparación de estudiantes de secundaria para la Olimpíada Argentina de Matemática.</div>
+          </div>
+          <div class="cv-row">
+            <div class="cv-rh"><span class="cv-role" data-es="Organizadora, Ada Lovelace Day" data-en="Organiser, Ada Lovelace Day">Organizadora, Ada Lovelace Day</span><span class="cv-date">2024</span></div>
+            <div class="cv-desc" data-es="Co-organización y conducción de dos talleres para niñas de 10–12 años, orientados a inspirar la participación femenina en STEM." data-en="Co-organised and led two workshops for girls aged 10–12, aimed at inspiring young women to explore STEM fields.">Co-organización y conducción de dos talleres para niñas de 10–12 años, orientados a inspirar la participación femenina en STEM.</div>
           </div>
         </div>
+
         <div class="cv-group reveal">
           <div class="cv-glabel" data-es="Congresos y eventos" data-en="Conferences &amp; events">Congresos y eventos</div>
-          <div class="cv-row"><div class="cv-rh"><span class="cv-role" data-es="Reunión Anual de la Unión Matemática Argentina" data-en="Annual Meeting of the Argentine Mathematical Union">Reunión Anual de la Unión Matemática Argentina</span><span class="cv-date">2022, 2023, 2025</span></div></div>
-          <div class="cv-row"><div class="cv-rh"><span class="cv-role">Monteiro Meeting, Bahía Blanca</span><span class="cv-date">2023</span></div></div>
-          <div class="cv-row"><div class="cv-rh"><span class="cv-role" data-es="Reunión Anual de la Asociación Física Argentina" data-en="Annual Meeting of the Argentine Physics Association">Reunión Anual de la Asociación Física Argentina</span><span class="cv-date">2019</span></div></div>
+          <div class="cv-row">
+            <div class="cv-rh"><span class="cv-role" data-es="Congreso Mar y Sierras · Expositora" data-en="Mar y Sierras Conference · Speaker">Congreso Mar y Sierras · Expositora</span><span class="cv-date">2023</span></div>
+          </div>
+          <div class="cv-row">
+            <div class="cv-rh"><span class="cv-role" data-es="Reunión Anual de la Unión Matemática Argentina" data-en="Annual Meeting of the Argentine Mathematical Union">Reunión Anual de la Unión Matemática Argentina</span><span class="cv-date">2022, 2023, 2025</span></div>
+          </div>
+          <div class="cv-row">
+            <div class="cv-rh"><span class="cv-role" data-es="Reunión Anual de la Asociación Física Argentina" data-en="Annual Meeting of the Argentine Physics Association">Reunión Anual de la Asociación Física Argentina</span><span class="cv-date">2019</span></div>
+          </div>
         </div>
       </div>
+
+      <!-- COLUMNA DERECHA -->
       <div>
         <div class="cv-group reveal">
           <div class="cv-glabel" data-es="Formación" data-en="Education">Formación</div>
           <div class="cv-row">
             <div class="cv-role" data-es="Licenciatura en Ciencias Matemáticas" data-en="BSc + MSc in Mathematical Sciences">Licenciatura en Ciencias Matemáticas</div>
             <div class="cv-org">UNCPBA · Tandil</div>
-            <div class="cv-desc" style="font-size:.75rem;margin-top:.25rem" data-es="Promedio 9.1 (sin aplazos). Esperada 2026." data-en="GPA 9.1/10 (no failed courses). Expected 2026.">Promedio 9.1 (sin aplazos). Esperada 2026.</div>
+            <div class="cv-desc" style="font-size:.75rem;margin-top:.25rem" data-es="Promedio 9.1 (sin aplazos) / 8.6 (con aplazos). Esperada 2026." data-en="GPA 9.1/10 (no failed courses) / 8.6/10 (including failed courses). Expected 2026.">Promedio 9.1 (sin aplazos) / 8.6 (con aplazos). Esperada 2026.</div>
           </div>
           <div class="cv-row">
-            <div class="cv-role" data-es="Programa de inglés académico avanzado" data-en="Advanced Academic English Programme">Programa de inglés académico avanzado</div>
-            <div class="cv-org">Indiana University · EE.UU. · 2023</div>
-            <div class="cv-desc" style="font-size:.75rem;margin-top:.25rem" data-es="Beca Friends of Fulbright — Embajada de EE.UU." data-en="Friends of Fulbright Scholarship — U.S. Embassy">Beca Friends of Fulbright — Embajada de EE.UU.</div>
-          </div>
-          <div class="cv-row">
-            <div class="cv-role">Cambridge English: First (FCE) — B2</div>
-            <div class="cv-org">Cambridge Assessment · 2018</div>
+            <div class="cv-role" data-es="Licenciatura en Física (incompleta)" data-en="Bachelor of Science in Physics (incomplete)">Licenciatura en Física (incompleta)</div>
+            <div class="cv-org">UNCPBA · Tandil</div>
+            <div class="cv-desc" style="font-size:.75rem;margin-top:.25rem" data-es="Dos años completados antes de transferir a Matemática." data-en="Two years completed before transferring to Mathematical Sciences.">Dos años completados antes de transferir a Matemática.</div>
           </div>
         </div>
+
         <div class="cv-group reveal">
           <div class="cv-glabel" data-es="Premios &amp; becas" data-en="Awards &amp; scholarships">Premios &amp; becas</div>
-          <div class="award-row"><span class="award-name" data-es="Beca Friends of Fulbright — Embajada de EE.UU." data-en="Friends of Fulbright Scholarship — U.S. Embassy">Beca Friends of Fulbright — Embajada de EE.UU.</span><span class="award-year">2023</span></div>
+          <div class="award-row">
+            <div style="flex:1">
+              <div class="award-name" data-es="Beca Friends of Fulbright — Embajada de EE.UU." data-en="Friends of Fulbright Scholarship — U.S. Embassy">Beca Friends of Fulbright — Embajada de EE.UU.</div>
+              <div class="cv-desc" style="font-size:.8rem;margin-top:.3rem" data-es="Programa de inmersión completa en inglés en Indiana University. Convivencia con familia local en Indianapolis durante 7 semanas. Cursos de Topología, Ética y Escritura Académica." data-en="Comprehensive English immersion programme at Indiana University. Lived with a local family in Indianapolis for 7 weeks. Attended courses covering Topology, Ethics and Academic Writing.">Programa de inmersión completa en inglés en Indiana University. Convivencia con familia local en Indianapolis durante 7 semanas. Cursos de Topología, Ética y Escritura Académica.</div>
+            </div>
+            <span class="award-year">2023</span>
+          </div>
           <div class="award-row"><span class="award-name" data-es="Mención de Honor, Olimpíada Interuniversitaria de Matemática" data-en="Honorable Mention, Argentine Interuniversity Mathematics Competition">Mención de Honor, Olimpíada Interuniversitaria de Matemática</span><span class="award-year">2022</span></div>
         </div>
+
+        <div class="cv-group reveal">
+          <div class="cv-glabel" data-es="Cursos" data-en="Courses">Cursos</div>
+          <div class="cv-row">
+            <div class="cv-rh"><span class="cv-role">Neuromatch Academy — Deep Learning</span><span class="cv-date">2022, 2023</span></div>
+            <div class="cv-org" data-es="Programa internacional · Online" data-en="International programme · Online">Programa internacional · Online</div>
+          </div>
+          <div class="cv-row">
+            <div class="cv-rh"><span class="cv-role" data-es="Curso de programación en Python" data-en="Programming in Python course">Curso de programación en Python</span><span class="cv-date">2021</span></div>
+            <div class="cv-org">UNSaM · Argentina</div>
+          </div>
+          <div class="cv-row">
+            <div class="cv-rh"><span class="cv-role" data-es="Métodos de Descomposición Temporal" data-en="Methods of Temporal Decomposition">Métodos de Descomposición Temporal</span><span class="cv-date">2023</span></div>
+            <div class="cv-org" data-es="Monteiro Meeting · Bahía Blanca" data-en="Monteiro Meeting · Bahía Blanca">Monteiro Meeting · Bahía Blanca</div>
+          </div>
+          <div class="cv-row">
+            <div class="cv-rh"><span class="cv-role" data-es="Modelos Matemáticos en Neurociencia" data-en="Mathematical Models in Neuroscience">Modelos Matemáticos en Neurociencia</span><span class="cv-date">2022</span></div>
+            <div class="cv-org" data-es="Reunión Anual UMA" data-en="Annual Meeting UMA">Reunión Anual UMA</div>
+          </div>
+          <div class="cv-row">
+            <div class="cv-rh"><span class="cv-role" data-es="Teoría de Control" data-en="Control Theory">Teoría de Control</span><span class="cv-date">2023</span></div>
+            <div class="cv-org" data-es="Reunión Anual UMA" data-en="Annual Meeting UMA">Reunión Anual UMA</div>
+          </div>
+        </div>
+
+        <div class="cv-group reveal">
+          <div class="cv-glabel" data-es="Idiomas" data-en="Languages">Idiomas</div>
+          <div class="lang-row"><span class="lang-name" data-es="Español" data-en="Spanish">Español</span><span class="lang-level" data-es="Nativo" data-en="Native">Nativo</span></div>
+          <div class="lang-row"><span class="lang-name" data-es="Inglés" data-en="English">Inglés</span><span class="lang-level" data-es="Avanzado (Cambridge FCE B2 · Fulbright)" data-en="Advanced (Cambridge FCE B2 · Fulbright)">Avanzado (Cambridge FCE B2 · Fulbright)</span></div>
+          <div class="lang-row"><span class="lang-name" data-es="Italiano" data-en="Italian">Italiano</span><span class="lang-level" data-es="Básico" data-en="Basic">Básico</span></div>
+        </div>
+
         <div class="cv-group reveal">
           <div class="cv-glabel" data-es="Herramientas" data-en="Tools">Herramientas</div>
           <div class="pills">
@@ -388,10 +433,11 @@ footer{border-top:1px solid var(--mid);padding:1.75rem 4rem;display:flex;justify
             <span class="pi">Git</span><span class="pi">GitHub</span><span class="pi">Scilab</span>
           </div>
         </div>
+
         <div class="cv-group reveal">
           <div class="cv-glabel" data-es="Perfiles" data-en="Profiles">Perfiles</div>
           <div class="acad-links">
-            <a href="https://github.com/universoandante" target="_blank">GitHub &#8594; universoandante</a>
+            <a href="https://github.com/julietaamendola" target="_blank">GitHub &#8594; julietaamendola</a>
             <a href="https://www.linkedin.com/in/julieta-am%C3%A9ndola-b95bab208/" target="_blank">LinkedIn &#8594; Julieta Améndola</a>
             <a href="https://instagram.com/unamatematica" target="_blank">Instagram &#8594; @unamatematica</a>
           </div>
@@ -411,7 +457,6 @@ footer{border-top:1px solid var(--mid);padding:1.75rem 4rem;display:flex;justify
       <button class="btab" onclick="filterBlog('stem',this)" data-es="STEM" data-en="STEM">STEM</button>
     </div>
   </div>
-  <!-- Los posts se renderizan automáticamente desde data.js -->
   <div class="blog-list reveal" id="blog-list"></div>
 </section>
 
@@ -432,7 +477,6 @@ footer{border-top:1px solid var(--mid);padding:1.75rem 4rem;display:flex;justify
     <div class="section-head reveal">
       <h2><em data-es="Proyectos" data-en="Projects">Proyectos</em> &amp; <span data-es="investigación" data-en="research">investigación</span></h2>
     </div>
-    <!-- Los proyectos se renderizan automáticamente desde data.js -->
     <div class="proy-grid" id="proy-grid"></div>
   </div>
 </section>
@@ -440,12 +484,12 @@ footer{border-top:1px solid var(--mid);padding:1.75rem 4rem;display:flex;justify
 <!-- CONTACTO -->
 <section id="contacto">
   <h2 data-es="Hablemos." data-en="Let's talk.">Hablemos.</h2>
-  <p class="csub" data-es="¿Tenés una pregunta sobre mi investigación, querés colaborar, o simplemente charlar sobre matemática, ciencia o cómo pintar tus piezas de cerámica? Escribime." data-en="Do you have a question about my research, want to collaborate, or just chat about math, science or how to paint your ceramics pieces? Write to me.">¿Tenés una pregunta sobre mi investigación, querés colaborar, o simplemente charlar sobre matemática, ciencia o cómo pintar tus piezas de cerámica? Escribime.</p>
+  <p class="csub" data-es="¿Tenés una pregunta sobre mi investigación, querés colaborar, o simplemente charlar sobre matemática, libros o cerámica? Escribime." data-en="Do you have a question about my research, want to collaborate, or just chat about math, books or ceramics? Write to me.">¿Tenés una pregunta sobre mi investigación, querés colaborar, o simplemente charlar sobre matemática, libros o cerámica? Escribime.</p>
   <div class="csocs">
     <a href="https://github.com/julietaamendola" target="_blank" class="csoc">GitHub &#8599;</a>
     <a href="https://www.linkedin.com/in/julieta-am%C3%A9ndola-b95bab208/" target="_blank" class="csoc">LinkedIn &#8599;</a>
     <a href="https://instagram.com/unamatematica" target="_blank" class="csoc">@unamatematica &#8599;</a>
-    <a href="https://instagram.com/universoandante" target="_blank" class="csoc">@universoandante &#8599;</a>    
+    <a href="https://instagram.com/universoandante" target="_blank" class="csoc">@universoandante &#8599;</a>
   </div>
 </section>
 

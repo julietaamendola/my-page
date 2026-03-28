@@ -111,7 +111,7 @@ var PROYECTOS = [
     techs_es: 'Divulgación · Comunidad',
     techs_en: 'Outreach · Community',
     link: '#'
-  }
+  },
   {
     num: '04',
     titulo_es: 'Embeddings en espacios hiperbólicos para datos con estructura jerárquica',

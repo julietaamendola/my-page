@@ -112,4 +112,23 @@ var PROYECTOS = [
     techs_en: 'Outreach · Community',
     link: '#'
   }
+  {
+    num: '04',
+    titulo_es: 'Embeddings en espacios hiperbólicos para datos con estructura jerárquica',
+    titulo_en: 'Embeddings in hyperbolic spaces for hierarchically structured data',
+    desc_es: 'Artículo publicado en la Revista TAMI Vol. 4 (Febrero 2025), en el marco del VI Taller de Matemática Industrial. Problema propuesto por Mercado Libre. Exploración de geometría hiperbólica — modelos de Poincaré y Lorentz — para generar embeddings que preserven estructuras jerárquicas mejor que los enfoques euclídeos.',
+    desc_en: 'Article published in Revista TAMI Vol. 4 (February 2025), as part of the VI Industrial Mathematics Workshop. Problem proposed by Mercado Libre. Exploration of hyperbolic geometry — Poincaré and Lorentz models — to generate embeddings that preserve hierarchical structures better than Euclidean approaches.',
+    techs: 'Python · PyTorch · NumPy',
+    link: 'https://www.linkedin.com/feed/update/urn:li:activity:7378797774185652224/?originTrackingId=jRe5C3IBFXkP2KEo9R6dIA%3D%3D'
+  },
+  {
+    num: '05',
+    titulo_es: 'Solución publicada en el Noticiero de la UMA',
+    titulo_en: 'Solution published in the UMA Newsletter',
+    desc_es: 'La solución al problema de la CIMA 2022 —probar que la suma de los cuatro vectores exteriores de un tetraedro es igual a cero— fue incluida en el noticiero de la Unión Matemática Argentina, junto a otras soluciones destacadas. En colaboración con Santiago Giordani.',
+    desc_en: 'The solution to a CIMA 2022 problem — proving that the sum of the four outward normal vectors of a tetrahedron equals zero — was included in the Argentine Mathematical Union newsletter, alongside other highlighted solutions. In collaboration with Santiago Giordani.',
+    techs_es: 'Geometría · Álgebra lineal',
+    techs_en: 'Geometry · Linear algebra',
+    link: '#'
+  },
 ];

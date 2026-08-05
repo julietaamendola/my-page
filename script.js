@@ -205,14 +205,25 @@ function openPost(i) {
   currentPostIndex = i;
   var lang = currentLang;
 
-  document.getElementById('modal-label').textContent =
-    lang === 'en' ? (p.label_en || '') : (p.label_es || '');
-  document.getElementById('modal-title').textContent =
-    lang === 'en' ? p.titulo_en : p.titulo_es;
-  document.getElementById('modal-sub').innerHTML =
-    lang === 'en' ? (p.subtitulo_en || '') : (p.subtitulo_es || '');
-  document.getElementById('modal-body-content').innerHTML =
-    lang === 'en' ? p.contenido_en : p.contenido_es;
+  var modal = document.querySelector('.modal');
+  var bodyEl = document.getElementById('modal-body-content');
+
+  if (p.notionUrl) {
+    // Post cuyo contenido vive en Notion: se embebe en un iframe
+    modal.classList.add('notion-mode');
+    var url = (lang === 'en' && p.notionUrl_en) ? p.notionUrl_en : p.notionUrl;
+    bodyEl.innerHTML = '<iframe class="notion-frame" src="' + url + '" loading="lazy" allowfullscreen></iframe>';
+  } else {
+    // Post con contenido local (comportamiento original)
+    modal.classList.remove('notion-mode');
+    document.getElementById('modal-label').textContent =
+      lang === 'en' ? (p.label_en || '') : (p.label_es || '');
+    document.getElementById('modal-title').textContent =
+      lang === 'en' ? p.titulo_en : p.titulo_es;
+    document.getElementById('modal-sub').innerHTML =
+      lang === 'en' ? (p.subtitulo_en || '') : (p.subtitulo_es || '');
+    bodyEl.innerHTML = lang === 'en' ? p.contenido_en : p.contenido_es;
+  }
 
   // Actualizar URL sin recargar la página
   var newUrl = window.location.pathname + window.location.search.replace(/[?&]post=\d+/, '');
@@ -228,6 +239,7 @@ function openPost(i) {
 
 function closePostBtn() {
   document.getElementById('modal').classList.remove('open');
+  document.getElementById('modal').classList.remove('notion-mode');
   document.body.style.overflow = '';
   currentPostIndex = -1;
   // Limpiar el parámetro de la URL al cerrar
@@ -328,7 +340,7 @@ function setLang(lang) {
 
   if (currentPostIndex >= 0) {
     var p = POSTS[currentPostIndex];
-    if (p) {
+    if (p && !p.notionUrl) {
       document.getElementById('modal-body-content').innerHTML =
         lang === 'en' ? p.contenido_en : p.contenido_es;
       document.getElementById('modal-title').textContent =

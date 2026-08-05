@@ -33,7 +33,12 @@ var POSTS = [
     tag: 'Personal',
     destacado: true,
     activo: true,
-    notionUrl: 'https://julietaamendola.notion.site/ebd//3b31101523a780caa576d8ee9a95e553'
+    notionUrl: 'https://julietaamendola.notion.site/ebd//3b31101523a780caa576d8ee9a95e553',
+    // notionUrl_en: pegá acá el link de embed de la versión en inglés
+    // de esta misma página (si la escribís en Notion en inglés también).
+    // Si no la traducís, dejá esta línea comentada/ausente y va a usar
+    // siempre el link de notionUrl (español).
+    notionUrl_en: 'https://julietaamendola.notion.site/ebd//REEMPLAZAR-CON-LINK-EN-INGLES'
   },
   {
     fecha_es: 'Abr 2026',
@@ -45,6 +50,8 @@ var POSTS = [
     destacado: true,
     activo: true,
     notionUrl: 'https://julietaamendola.notion.site/ebd//3b31101523a780729158f4f7e3c53aad'
+    // Este post no tiene notionUrl_en todavía → si alguien lo abre en
+    // inglés, va a ver igual la versión en español (fallback automático).
   },
   {
     fecha_es: 'Próximamente',

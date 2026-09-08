@@ -1,0 +1,104 @@
+project:
+  type: book
+  output-dir: ../metodos
+
+book:
+  title: "Métodos Matemáticos para la Física"
+  author: "Julieta Améndola"
+  date: today
+  date-format: "MMMM YYYY"
+  site-url: https://julietaamendola.github.io/my-page/metodos/
+  repo-url: https://github.com/julietaamendola/my-page
+  search: true
+  downloads: [pdf]
+  output-file: metodos-matematicos-para-la-fisica
+  sidebar:
+    tools:
+      - icon: house-door
+        href: https://julietaamendola.github.io/my-page/
+        text: "Volver al inicio"
+  page-footer:
+    left: "Julieta Améndola · Tandil, Argentina"
+    right: "[Volver al inicio](https://julietaamendola.github.io/my-page/)"
+  chapters:
+    - index.qmd
+    - part: "Ecuaciones diferenciales ordinarias y métodos generales"
+      chapters:
+        - 01-edo.qmd
+        - 02-sturm-liouville.qmd
+        - 03-fourier.qmd
+        - 04-green.qmd
+        - 05-distribuciones.qmd
+        - 06-laplace.qmd
+        - 07-transformada-fourier.qmd
+    - part: "Ecuaciones en derivadas parciales y métodos avanzados"
+      chapters:
+        - 08-edp.qmd
+        - 09-hiperbolicas.qmd
+        - 10-parabolicas.qmd
+        - 11-elipticas.qmd
+        - 12-funciones-especiales.qmd
+        - 13-asintoticos.qmd
+        - 14-integrales.qmd
+    - bibliografia.qmd
+
+bibliography: referencias.bib
+
+lang: es
+
+format:
+  html:
+    theme:
+      light: [cosmo, ../estilos/juli.scss]
+      dark: [cosmo, ../estilos/juli-dark.scss]
+    include-in-header:
+      text: |
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    toc: true
+    toc-title: "En esta página"
+    number-sections: true
+    fig-align: center
+    html-math-method: mathjax
+    code-fold: true
+    code-summary: "Ver el código de la figura"
+    include-after-body: interactivo.html
+  pdf:
+    # En papel el codigo no se puede plegar, asi que solo va la figura.
+    echo: false
+    documentclass: scrbook
+    papersize: a4
+    lang: es
+    geometry:
+      - top=25mm
+      - bottom=25mm
+      - inner=28mm
+      - outer=22mm
+    number-sections: true
+    colorlinks: true
+    linkcolor: violet
+    urlcolor: violet
+    include-in-header:
+      text: |
+        \usepackage{amsmath,amssymb}
+        % babel-spanish deja "Figura 8.1.:" con dos signos de puntuacion
+        \usepackage{caption}
+        \captionsetup{labelsep=space}
+
+crossref:
+  chapters: true
+  thm-title: "Teorema"
+  lem-title: "Lema"
+  cor-title: "Corolario"
+  prp-title: "Proposición"
+  def-title: "Definición"
+  exm-title: "Ejemplo"
+  exr-title: "Ejercicio"
+  eq-prefix: ""
+  thm-prefix: "Teorema"
+  def-prefix: "Definición"
+  exm-prefix: "Ejemplo"
+  exr-prefix: "Ejercicio"
+  fig-prefix: "Figura"
+  sec-prefix: "sección"

@@ -1,0 +1,10 @@
+# Desarrollos asintóticos {#sec-asintoticos}
+
+::: {.callout-note appearance="simple"}
+## Capítulo en construcción
+Abajo está el temario. El contenido se agrega en orden de necesidad.
+:::
+
+## Temario {.unnumbered}
+
+Expansión asintótica de funciones integrales. Método de la fase estacionaria. Orden dominante en ecuaciones diferenciales. Problemas singulares irregulares. Empalme de soluciones asintóticas.

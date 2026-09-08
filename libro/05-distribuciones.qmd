@@ -1,0 +1,10 @@
+# Distribuciones {#sec-distribuciones}
+
+::: {.callout-note appearance="simple"}
+## Capítulo en construcción
+Abajo está el temario. El contenido se agrega en orden de necesidad.
+:::
+
+## Temario {.unnumbered}
+
+Delta de Dirac. Sucesiones y distribuciones. Función salto. Representaciones y cálculos con distribuciones. Aplicaciones.

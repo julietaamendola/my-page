@@ -1,0 +1,74 @@
+# Renderiza los cuatro proyectos Quarto y publica el sitio en GitHub Pages.
+#
+# ANTES DE QUE ESTO FUNCIONE, una sola vez:
+#   GitHub → el repo → Settings → Pages → Build and deployment → Source: "GitHub Actions"
+# Mientras esa opción siga en "Deploy from a branch", el paso de publicar falla
+# (el sitio se sigue viendo igual, servido desde la rama).
+
+name: Publicar la página
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Si se pushean dos commits seguidos, que gane el último y no se pisen entre sí.
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  construir:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Instalar Quarto y TinyTeX
+        uses: quarto-dev/quarto-actions/setup@v2
+        with:
+          version: 1.10.18
+          tinytex: true
+
+      - name: Instalar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Instalar los paquetes que usan las figuras
+        run: pip install jupyter pyyaml matplotlib numpy nbformat nbclient
+
+      - name: Renderizar el blog
+        run: quarto render
+        working-directory: escritos
+
+      - name: Renderizar los proyectos
+        run: quarto render
+        working-directory: proy
+
+      - name: Renderizar el libro
+        run: quarto render
+        working-directory: libro
+
+      - name: Renderizar el CV
+        run: quarto render
+        working-directory: cv
+
+      - name: Empaquetar el sitio
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+  publicar:
+    needs: construir
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - id: deploy
+        uses: actions/deploy-pages@v4

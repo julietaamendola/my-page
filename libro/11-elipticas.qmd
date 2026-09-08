@@ -1,0 +1,10 @@
+# Ecuaciones elípticas {#sec-elipticas}
+
+::: {.callout-note appearance="simple"}
+## Capítulo en construcción
+Abajo está el temario. El contenido se agrega en orden de necesidad.
+:::
+
+## Temario {.unnumbered}
+
+Ecuación de Laplace en coordenadas curvilíneas, soluciones particulares. Funciones armónicas. Separación de variables. Integral de Poisson. Función de la fuente. Teoría del potencial. Desarrollo en multipolos. Teorema de Helmholtz. Transformación conforme. Ecuación biarmónica.

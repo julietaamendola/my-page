@@ -1,0 +1,55 @@
+---
+title: "Proyectos"
+subtitle: "Investigación, código y divulgación"
+toc: false
+---
+
+::: {.proy-lista}
+
+### [El problema inverso en tomografía óptica difusa](p/01-dot.qmd) {.pt}
+
+Reconstruir el interior de un medio a partir de la luz que sale de su superficie. Tesis de
+licenciatura: simulación por elementos finitos, un dataset propio de 15.000 muestras y
+aprendizaje profundo, todo corriendo en una máquina de escritorio.
+
+[Tesis · 2024–presente]{.pm}
+
+### [Morfología coronaria y riesgo cardiovascular](p/02-pladema.qmd) {.pt}
+
+Instituto PLADEMA, proyecto JOVIN. Caracterizar matemáticamente la geometría de las arterias
+coronarias y usar aprendizaje automático para estimar riesgo cardiovascular a partir de esa
+forma.
+
+[Investigación · 2022–2023]{.pm}
+
+### [Embeddings en espacios hiperbólicos](p/03-tami.qmd) {.pt}
+
+VI Taller de Matemática Industrial, con un problema propuesto por Mercado Libre. Geometría
+hiperbólica para representar datos con estructura jerárquica, cuando el espacio euclídeo se
+queda corto.
+
+[Matemática industrial · 2025]{.pm}
+
+### [orbit-propagator](p/04-orbit.qmd) {.pt}
+
+Propagación de órbitas de satélites reales a partir de datos orbitales en vivo, con un
+integrador Runge–Kutta escrito desde las ecuaciones de movimiento y comparado contra el
+propagador estándar.
+
+[Código · 2026]{.pm}
+
+### [Una solución publicada en el Noticiero de la UMA](p/05-uma.qmd) {.pt}
+
+El problema de la CIMA 2022: probar que los cuatro vectores normales exteriores de un
+tetraedro, pesados por el área de su cara, suman cero.
+
+[Competencia · 2022]{.pm}
+
+### [Women in STEM UNCPBA](p/06-wis.qmd) {.pt}
+
+Una comunidad para promover la participación femenina en ciencia, tecnología, ingeniería y
+matemática dentro de la facultad.
+
+[Comunidad · 2023]{.pm}
+
+:::

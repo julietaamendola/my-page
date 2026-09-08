@@ -1,0 +1,112 @@
+# Ecuaciones parabólicas {#sec-parabolicas}
+
+::: {.callout-note appearance="simple"}
+## Capítulo en construcción
+Abajo está el temario. Después hay un **adelanto**, con un ejemplo resuelto.
+:::
+
+## Temario {.unnumbered}
+
+Propagación del calor. Ecuación de difusión. Condiciones de contorno. Separación de variables. Función influencia o de fuente puntual. Funciones de Green para las condiciones de contorno e iniciales.
+
+## Adelanto: por qué el calor borra los detalles {.unnumbered}
+
+Una barra de longitud $1$, aislada en los costados, con los dos extremos mantenidos a
+temperatura cero. Si $u(x,t)$ es la temperatura, el problema es
+
+$$
+u_t = k\,u_{xx}, \qquad u(0,t) = u(1,t) = 0, \qquad u(x,0) = \varphi(x).
+$$ {#eq-calor}
+
+Separando variables, $u = X(x)T(t)$, las condiciones de contorno dejan como únicos modos
+posibles $X_n(x) = \sin(n\pi x)$, y para cada uno la parte temporal decae exponencialmente:
+
+$$
+u(x,t) \;=\; \sum_{n=1}^{\infty} b_n\, e^{-(n\pi)^2 k t}\, \sin(n\pi x),
+\qquad b_n = 2\int_0^1 \varphi(x)\,\sin(n\pi x)\,dx .
+$$ {#eq-calor-sol}
+
+Los $b_n$ son los coeficientes de la serie de Fourier en senos de la condición inicial: es el
+@sec-fourier entrando por la puerta de atrás. Lo nuevo es el factor $e^{-(n\pi)^2kt}$, y ahí
+está toda la física del problema.
+
+Fijate en el exponente: **crece con el cuadrado del número de modo**. El modo $n=10$ se apaga
+$100$ veces más rápido que el $n=1$. Y los detalles finos de la condición inicial —una esquina,
+un escalón, un pico— son justamente los que necesitan modos altos para representarse. El
+resultado es que la difusión **borra los detalles antes que las formas grandes**, y lo hace de
+inmediato: apenas $t>0$, la serie de la @eq-calor-sol converge tan rápido que la solución es
+infinitamente derivable, por más fea que fuera $\varphi$.
+
+```{python}
+#| label: fig-calor
+#| fig-cap: "La @eq-calor-sol con $k=1$ y una condición inicial discontinua: un escalón que vale $1$ en el interior y $0$ en los extremos. En $t=0$ se ve el fenómeno de Gibbs del @sec-fourier, porque la serie está truncada. Un instante después no queda ni rastro: los modos altos, que son los que producían las oscilaciones, ya se apagaron."
+#| fig-width: 6.8
+#| fig-height: 3.5
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+VIOLETA, VIOLETA2, TINTA, GRIS = "#7c5cbf", "#b48ec8", "#1e1a2e", "#a99fc0"
+
+def u(x, t, k=1.0, N=201):
+    """Solucion de la ecuacion del calor para el escalon, truncada en N modos."""
+    s = np.zeros((len(t), len(x)))
+    for n in range(1, N + 1, 2):        # el escalon solo excita los modos impares
+        s += (4/(n*np.pi))*np.outer(np.exp(-(n*np.pi)**2*k*t), np.sin(n*np.pi*x))
+    return s
+
+xs = np.linspace(0, 1, 600)
+ts = np.array([0.0, 0.002, 0.01, 0.04, 0.12])
+U = u(xs, ts)
+
+fig, ax = plt.subplots(figsize=(6.8, 3.5))
+for i, (tt, c) in enumerate(zip(ts, [TINTA, "#4b2f80", VIOLETA, VIOLETA2, GRIS])):
+    ax.plot(xs, U[i], color=c, lw=1.6, label=f"$t = {tt}$")
+ax.set_xlabel("$x$"); ax.set_ylabel("$u(x,t)$")
+ax.legend(fontsize=8, frameon=False)
+ax.spines[["top", "right"]].set_visible(False)
+fig.tight_layout()
+plt.show()
+```
+
+Esta es la diferencia de fondo con las ecuaciones hiperbólicas del @sec-hiperbolicas, donde una
+discontinuidad en el dato inicial viaja intacta para siempre. También es la razón por la que el
+problema del calor **hacia atrás en el tiempo** está mal planteado: si los modos altos se
+apagan hacia adelante, hacia atrás explotan, y dos condiciones iniciales muy distintas producen
+temperaturas de hoy indistinguibles.
+
+::: {.content-visible when-format="html"}
+```{=html}
+<div class="video">
+  <iframe src="https://www.youtube-nocookie.com/embed/ToIXSwZ1pJU"
+          title="Solving the heat equation — 3Blue1Brown"
+          loading="lazy" allowfullscreen
+          allow="accelerometer; clipboard-write; encrypted-media; picture-in-picture"></iframe>
+</div>
+<p class="video-pie">Grant Sanderson (3Blue1Brown), <em>Solving the heat equation</em>. Recorre
+la separación de variables con la ecuación del calor como excusa, que es exactamente el orden
+en que la usamos acá.</p>
+```
+:::
+
+::: {.content-visible when-format="pdf"}
+Video recomendado: Grant Sanderson (3Blue1Brown), *Solving the heat equation*,
+<https://www.youtube.com/watch?v=ToIXSwZ1pJU>.
+:::
+
+::: {.ejercicio data-respuesta="0.0702" data-tol="0.0015" data-rotulo="Para calcular"}
+Tomemos la condición inicial más simple posible, $\varphi(x) = \sin(\pi x)$, con $k = 1$. La
+serie de la @eq-calor-sol tiene un solo término y la solución es
+$u(x,t) = e^{-\pi^2 t}\sin(\pi x)$.
+
+**¿En qué tiempo la temperatura del centro de la barra cae a la mitad de su valor inicial?**
+Escribí el resultado con tres decimales.
+
+::: {.explica}
+Hay que resolver $e^{-\pi^2 t} = \tfrac12$, o sea $t = \ln 2 / \pi^2 = 0{,}0702$.
+
+Lo interesante es cómo cambia esto con el modo. Para $\varphi(x) = \sin(n\pi x)$ el mismo
+cálculo da $t_n = \ln 2/(n\pi)^2$: el modo $n$ se apaga a la mitad $n^2$ veces más rápido. Para
+$n=10$ ya estamos en $t \approx 0{,}0007$.
+:::
+:::

@@ -1,0 +1,61 @@
+# Antes de empezar {.unnumbered}
+
+Este libro nace de dar clases particulares de Métodos Matemáticos para la Física, que es
+una materia rara: no tiene un objeto propio de estudio. No es "la teoría de X". Es una caja
+de herramientas, y como toda caja de herramientas se justifica por lo que se puede hacer con
+ella.
+
+Eso trae un problema de aprendizaje muy concreto. Uno puede aprender a resolver una ecuación
+de Sturm–Liouville, a calcular una función de Green y a invertir una transformada de Laplace,
+y salir de la materia sin haber entendido nunca que son tres formas de contestar la misma
+pregunta. Este libro está escrito para que esa pregunta esté siempre a la vista.
+
+## Cómo está pensado
+
+Cada capítulo va del problema físico a la herramienta matemática, y no al revés. Primero
+aparece una situación —una cuerda que vibra, una barra que se calienta, un potencial que hay
+que reconstruir— y recién después la maquinaria que la resuelve. La razón no es pedagógica
+sino histórica: casi todos estos métodos se inventaron así.
+
+Los teoremas están enunciados con precisión y las demostraciones están cuando aportan algo.
+Cuando una demostración es larga y no enseña nada que no se vea mejor en un ejemplo, la
+reemplazo por el ejemplo y digo dónde encontrarla.
+
+Al final de cada capítulo hay ejercicios. Algunos son de cálculo, para fijar la mecánica.
+Otros piden interpretar un resultado, que es lo que la materia realmente evalúa.
+
+## Sobre el orden
+
+El orden de este libro sigue el del programa de la cátedra de Métodos Matemáticos de la
+Facultad de Ciencias Exactas de la UNCPBA, para que a quien esté cursando le sirva capítulo
+por capítulo. Pero está escrito para poder leerse salteado: cada capítulo dice al empezar
+qué necesita y dónde está.
+
+## Aviso
+
+Todo el contenido de este libro es original. El programa de la materia y el orden de los
+temas siguen a la cátedra; la bibliografía de referencia está al final y se cita donde
+corresponde.
+
+## Qué hay hoy en este borrador
+
+La numeración sigue la del programa de la cátedra, para que cada capítulo coincida con lo que
+se está cursando. Los catorce capítulos ya están, cada uno con su temario; el contenido se
+escribe en orden de necesidad.
+
+Lo que se puede leer ahora:
+
+| | |
+|:---|:---|
+| **[8 · Ecuaciones en derivadas parciales](08-edp.qmd)** | El capítulo escrito, de punta a punta: la pregunta de fondo, características, la clasificación con su demostración, ejemplos y ejercicios. |
+| **[3 · Series de Fourier](03-fourier.qmd)** | Un adelanto sobre el fenómeno de Gibbs, con una figura hecha con código y un ejercicio interactivo. |
+| **[10 · Ecuaciones parabólicas](10-parabolicas.qmd)** | Un adelanto sobre por qué la difusión borra los detalles, resuelto y graficado. |
+| Los otros once | Por ahora, el temario. |
+
+Los adelantos están para mostrar de qué está hecho el libro: **teoría**, **figuras generadas
+con código** —el código está a la vista, plegado, en cada figura—, **videos** cuando alguien ya
+explicó algo mejor de lo que yo podría, **ejercicios interactivos** que corrigen y explican, y
+ejercicios de lápiz y papel con la solución escondida.
+
+Todo el libro se puede descargar en PDF desde el ícono de la barra lateral. En papel, las
+partes interactivas se convierten en ejercicios comunes.

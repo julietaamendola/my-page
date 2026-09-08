@@ -1,0 +1,48 @@
+---
+title: "Embeddings en espacios hiperbólicos"
+description: "VI Taller de Matemática Industrial, con un problema propuesto por Mercado Libre. Geometría hiperbólica para representar datos con estructura jerárquica, cuando el espacio euclídeo se queda corto."
+orden: 3
+---
+
+## Cómo funciona un TAMI
+
+Un taller de matemática industrial es lo más parecido a una consultoría matemática que existe
+en el ámbito académico: una empresa lleva un problema real que no tiene resuelto, y un equipo
+de matemáticos lo ataca contra reloj durante una semana. El VI TAMI fue en FaMAF, Universidad
+Nacional de Córdoba, en 2025, y el problema que trabajé lo propuso **Mercado Libre**.
+
+## El problema, y por qué la geometría importa
+
+Un catálogo de productos es un árbol: categorías que contienen subcategorías que contienen
+productos. Para que un modelo trabaje con esa estructura hay que representar cada nodo como un
+vector — un *embedding* — de modo que las distancias entre vectores reflejen las relaciones
+del árbol.
+
+Y ahí aparece un problema geométrico genuino. **En el espacio euclídeo, un árbol no entra.**
+El número de nodos a distancia $r$ de la raíz crece exponencialmente con $r$, mientras que el
+volumen de una bola euclídea crece solo polinomialmente. Meter una estructura exponencial en
+un espacio de crecimiento polinomial obliga a distorsionar: los nodos lejanos terminan
+representados más cerca de lo que deberían.
+
+El espacio hiperbólico no tiene ese problema. Su volumen **crece exponencialmente con el
+radio**, que es exactamente la tasa a la que crece un árbol. La consecuencia práctica es
+llamativa: una jerarquía que en el espacio euclídeo necesita muchísimas dimensiones para
+representarse con poca distorsión, en el hiperbólico entra en unas pocas.
+
+Exploramos los dos modelos habituales del espacio hiperbólico —el **disco de Poincaré** y el
+**modelo de Lorentz**— y las dificultades reales de optimizar en una variedad de curvatura
+negativa, donde las operaciones usuales del descenso por gradiente no valen tal cual.
+
+## Qué salió
+
+**«Embeddings en espacios hiperbólicos para datos con estructura jerárquica»**,
+*Revista TAMI*, Vol. 4 (2025), en equipo.
+
+::: {.callout-note appearance="simple"}
+La Revista TAMI es la publicación del taller: recoge los informes de cada equipo y no tiene
+referato ni DOI. Es producción escrita, no un artículo con arbitraje, y así corresponde
+citarla.
+:::
+
+**«De la geometría diferencial a tu carrito»** — charla en el Congreso Mar y Sierras (2025),
+contando la experiencia del taller y el problema.

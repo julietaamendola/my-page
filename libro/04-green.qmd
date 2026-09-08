@@ -1,0 +1,10 @@
+# Función de Green {#sec-green}
+
+::: {.callout-note appearance="simple"}
+## Capítulo en construcción
+Abajo está el temario. El contenido se agrega en orden de necesidad.
+:::
+
+## Temario {.unnumbered}
+
+Ecuaciones diferenciales lineales con funciones impulsivas. Función de Green. Función de Green para el operador de Sturm–Liouville. Desarrollo en serie para la función de Green. Aplicaciones a vigas cargadas y conductores eléctricos cargados.

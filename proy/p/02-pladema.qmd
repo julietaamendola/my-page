@@ -1,0 +1,46 @@
+---
+title: "Morfología coronaria y riesgo cardiovascular"
+description: "Instituto PLADEMA, proyecto JOVIN. Caracterizar matemáticamente la geometría de las arterias coronarias y usar aprendizaje automático para estimar riesgo cardiovascular a partir de esa forma."
+orden: 2
+---
+
+## La idea
+
+El riesgo cardiovascular se estima habitualmente con factores clínicos: edad, presión,
+colesterol, tabaquismo. La pregunta del proyecto era otra: **¿la forma misma de las arterias
+coronarias dice algo que esos factores no dicen?**
+
+Hay razones para pensar que sí. La aterosclerosis no se deposita al azar: aparece
+preferentemente donde el flujo se separa, donde hay recirculación, donde la tensión de corte
+sobre la pared baja. Y dónde pasa eso depende de la geometría: curvaturas, ángulos de
+bifurcación, tortuosidad. Si la geometría condiciona el flujo y el flujo condiciona la
+enfermedad, la geometría debería ser predictiva.
+
+## Qué hicimos
+
+Trabajé como asistente de investigación en el Instituto PLADEMA (UNICEN), dentro del proyecto
+JOVIN, *Herramientas de Computación Científica e Inteligencia Artificial en Cardiología*, con
+**Carlos Bulant** como referente.
+
+La parte que me tocó fue la caracterización matemática de la geometría arterial y el
+entrenamiento de modelos de aprendizaje automático sobre esos descriptores.
+
+Además participé del **grupo quincenal de discusión de literatura de machine learning** del
+instituto, junto a investigadores y doctorandos: se acordaba un paper, se leía y después se
+debatía. Es la forma en que uno aprende a leer literatura críticamente, que es buena parte
+del trabajo de investigar.
+
+## Qué salió
+
+**Una exposición en el Congreso Mar y Sierras (2023)**, con resultados preliminares:
+*«Estudio de morfología coronaria y su potencial uso para la estratificación de riesgo
+cardiovascular»*.
+
+**Una beca EVC-CIN (2024)**, del Consejo Interuniversitario Nacional, otorgada sobre esta
+línea de trabajo. No la ejecuté: para entonces ya me había movido al tema de mi tesis. El
+mérito de una beca por convocatoria es haber sido seleccionada, y la razón del cambio fue una
+decisión de investigación, no un abandono.
+
+## Período
+
+2022–2023 · Instituto PLADEMA, UNICEN, Tandil.

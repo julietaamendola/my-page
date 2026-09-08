@@ -1,0 +1,486 @@
+<style>
+/* ---------- Ejercicios interactivos y videos del libro ---------- */
+:root {
+  --ej-borde: #ddd6ee;  --ej-fondo: #faf8fc;  --ej-tinta: #1e1a2e;
+  --ej-tenue: #6b6080;  --ej-acento: #7c5cbf;
+  --ej-bien: #3f8f5f;   --ej-bien-fondo: #eaf5ee;
+  --ej-mal:  #b8564f;   --ej-mal-fondo:  #f9ecea;
+}
+body.quarto-dark {
+  --ej-borde: #3b3459;  --ej-fondo: #1a1630;  --ej-tinta: #ece8f5;
+  --ej-tenue: #a79fc0;  --ej-acento: #b79ce9;
+  --ej-bien: #7fc79a;   --ej-bien-fondo: #1c2d24;
+  --ej-mal:  #e09a94;   --ej-mal-fondo:  #2e1e1e;
+}
+
+.ejercicio {
+  border: 1px solid var(--ej-borde);
+  border-left: 3px solid var(--ej-acento);
+  background: var(--ej-fondo);
+  border-radius: 4px;
+  padding: 1.1rem 1.25rem .95rem;
+  margin: 1.8rem 0;
+}
+.ejercicio > .ej-rotulo {
+  font-size: .68rem; letter-spacing: .13em; text-transform: uppercase;
+  font-weight: 600; color: var(--ej-acento); margin-bottom: .5rem;
+}
+.ejercicio p { margin-bottom: .7rem; }
+
+.ej-ops { display: flex; flex-direction: column; gap: .45rem; margin: .9rem 0 .3rem; }
+.ej-op {
+  text-align: left; width: 100%; cursor: pointer;
+  border: 1px solid var(--ej-borde); border-radius: 4px;
+  background: transparent; color: var(--ej-tinta);
+  padding: .6rem .8rem; font: inherit; font-size: .95rem; line-height: 1.45;
+  transition: border-color .15s, background .15s;
+}
+.ej-op:hover:not([disabled]) { border-color: var(--ej-acento); }
+.ej-op[data-estado="bien"] { border-color: var(--ej-bien); background: var(--ej-bien-fondo); }
+.ej-op[data-estado="mal"]  { border-color: var(--ej-mal);  background: var(--ej-mal-fondo); opacity: .85; }
+.ej-op[disabled] { cursor: default; }
+.ej-op .ej-marca { float: right; font-weight: 700; margin-left: .6rem; }
+.ej-op[data-estado="bien"] .ej-marca { color: var(--ej-bien); }
+.ej-op[data-estado="mal"]  .ej-marca { color: var(--ej-mal); }
+
+.ej-num { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; margin: .9rem 0 .3rem; }
+.ej-num input {
+  border: 1px solid var(--ej-borde); border-radius: 4px; background: transparent;
+  color: var(--ej-tinta); padding: .5rem .7rem; font: inherit; font-size: .95rem; width: 11rem;
+}
+.ej-num input:focus { outline: none; border-color: var(--ej-acento); }
+.ej-num button {
+  border: 1px solid var(--ej-acento); border-radius: 4px; background: var(--ej-acento);
+  color: #fff; padding: .5rem 1rem; font: inherit; font-size: .82rem;
+  letter-spacing: .06em; cursor: pointer;
+}
+body.quarto-dark .ej-num button { color: #14111f; }
+.ej-num .ej-veredicto { font-size: .9rem; }
+.ej-num .ej-veredicto[data-estado="bien"] { color: var(--ej-bien); }
+.ej-num .ej-veredicto[data-estado="mal"]  { color: var(--ej-mal); }
+
+.explica {
+  border-top: 1px dashed var(--ej-borde);
+  margin-top: .9rem; padding-top: .8rem;
+  font-size: .93rem; color: var(--ej-tenue);
+}
+.explica > *:last-child { margin-bottom: 0; }
+.explica[hidden] { display: none !important; }
+
+/* ---------- Videos ---------- */
+.video {
+  position: relative; width: 100%; aspect-ratio: 16 / 9;
+  margin: 1.6rem 0 .6rem; border-radius: 4px; overflow: hidden;
+  border: 1px solid var(--ej-borde);
+}
+.video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.video-pie { font-size: .82rem; color: var(--ej-tenue); margin-top: -.2rem; }
+</style>
+
+<script>
+(function () {
+  function armar() {
+    document.querySelectorAll('.ejercicio').forEach(function (caja) {
+      if (caja.dataset.listo) return;
+      caja.dataset.listo = '1';
+
+      var rotulo = document.createElement('div');
+      rotulo.className = 'ej-rotulo';
+      rotulo.textContent = caja.dataset.rotulo || 'Para pensar';
+      caja.insertBefore(rotulo, caja.firstChild);
+
+      var explica = caja.querySelector('.explica');
+      if (explica) explica.hidden = true;
+
+      var lista = caja.querySelector('ul');
+      if (lista) return opcionMultiple(caja, lista, explica);
+      if (caja.dataset.respuesta !== undefined) return numerico(caja, explica);
+    });
+  }
+
+  function opcionMultiple(caja, lista, explica) {
+    var ops = document.createElement('div');
+    ops.className = 'ej-ops';
+    var botones = [];
+
+    Array.prototype.forEach.call(lista.children, function (li) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'ej-op';
+      b.innerHTML = li.innerHTML;
+      b.dataset.correcta = li.querySelector('.bien') ? '1' : '0';
+      ops.appendChild(b);
+      botones.push(b);
+    });
+    lista.parentNode.replaceChild(ops, lista);
+
+    botones.forEach(function (b) {
+      b.addEventListener('click', function () {
+        var bien = b.dataset.correcta === '1';
+        b.dataset.estado = bien ? 'bien' : 'mal';
+        if (!b.querySelector('.ej-marca')) {
+          var m = document.createElement('span');
+          m.className = 'ej-marca';
+          m.textContent = bien ? '✓' : '✕';
+          b.appendChild(m);
+        }
+        if (bien) {
+          botones.forEach(function (o) { o.disabled = true; });
+          if (explica) explica.hidden = false;
+        }
+      });
+    });
+  }
+
+  function numerico(caja, explica) {
+    var esperado = parseFloat(caja.dataset.respuesta);
+    var tol = parseFloat(caja.dataset.tol || '0');
+    var fila = document.createElement('div');
+    fila.className = 'ej-num';
+    fila.innerHTML =
+      '<input type="text" inputmode="decimal" aria-label="Tu respuesta" placeholder="tu respuesta">' +
+      '<button type="button">Comprobar</button>' +
+      '<span class="ej-veredicto"></span>';
+    caja.insertBefore(fila, explica || null);
+
+    var campo = fila.querySelector('input');
+    var boton = fila.querySelector('button');
+    var veredicto = fila.querySelector('.ej-veredicto');
+
+    function comprobar() {
+      var v = parseFloat(campo.value.replace(',', '.'));
+      if (isNaN(v)) {
+        veredicto.dataset.estado = 'mal';
+        veredicto.textContent = 'Escribí un número.';
+        return;
+      }
+      if (Math.abs(v - esperado) <= tol) {
+        veredicto.dataset.estado = 'bien';
+        veredicto.textContent = '✓ Correcto.';
+        if (explica) explica.hidden = false;
+      } else {
+        veredicto.dataset.estado = 'mal';
+        veredicto.textContent = '✕ Todavía no. Probá de nuevo.';
+      }
+    }
+    boton.addEventListener('click', comprobar);
+    campo.addEventListener('keydown', function (e) { if (e.key === 'Enter') comprobar(); });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', armar);
+  } else {
+    armar();
+  }
+})();
+</script>
+
+<style>
+/* ---------- Lienzos interactivos (gráficos con sliders) ---------- */
+.lienzo {
+  border: 1px solid var(--ej-borde);
+  border-left: 3px solid var(--ej-acento);
+  background: var(--ej-fondo);
+  border-radius: 4px;
+  padding: 1rem 1.15rem .85rem;
+  margin: 1.8rem 0;
+}
+.lienzo > .ej-rotulo {
+  font-size: .68rem; letter-spacing: .13em; text-transform: uppercase;
+  font-weight: 600; color: var(--ej-acento); margin-bottom: .55rem;
+}
+.lienzo canvas { display: block; width: 100%; height: auto; }
+.lienzo-controles {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: .5rem 1.3rem; margin-top: .85rem;
+}
+.lienzo-control { display: flex; align-items: center; gap: .55rem; }
+.lienzo-control label {
+  font-size: .85rem; color: var(--ej-tinta); min-width: 2.4rem;
+  font-variant-numeric: tabular-nums;
+}
+.lienzo-control input[type="range"] {
+  flex: 1; min-width: 0; accent-color: var(--ej-acento); height: 1.1rem;
+}
+.lienzo-control .lienzo-valor {
+  font-size: .82rem; color: var(--ej-acento); min-width: 3.1rem;
+  text-align: right; font-variant-numeric: tabular-nums;
+}
+.lienzo-pie {
+  font-size: .87rem; color: var(--ej-tenue); margin: .8rem 0 0;
+  border-top: 1px dashed var(--ej-borde); padding-top: .7rem;
+}
+.lienzo-pie > *:last-child { margin-bottom: 0; }
+</style>
+
+<script>
+/* Motor de figuras interactivas.
+   Cada página registra sus dibujos en window.LIENZO antes de que esto corra:
+
+     window.LIENZO = window.LIENZO || {};
+     window.LIENZO.miFigura = function (P, v) { ... };
+
+   y en el markdown se escribe
+
+     <div class="lienzo" data-figura="miFigura" data-alto="330"
+          data-rotulo="Probá"
+          data-sliders='[{"id":"c","min":-2,"max":2,"paso":0.1,"valor":1,"rotulo":"c"}]'>
+     </div>
+*/
+(function () {
+  window.LIENZO = window.LIENZO || {};
+
+  function leerColores(el) {
+    var s = getComputedStyle(el);
+    function c(n, alt) { return (s.getPropertyValue(n) || alt).trim() || alt; }
+    return {
+      tinta:   c('--ej-tinta',  '#1e1a2e'),
+      tenue:   c('--ej-tenue',  '#6b6080'),
+      acento:  c('--ej-acento', '#7c5cbf'),
+      borde:   c('--ej-borde',  '#ddd6ee'),
+      fondo:   c('--ej-fondo',  '#faf8fc'),
+      bien:    c('--ej-bien',   '#3f8f5f'),
+      mal:     c('--ej-mal',    '#b8564f'),
+      suave:   c('--ej-tenue',  '#a99fc0')
+    };
+  }
+
+  // ---- helpers de dibujo que recibe cada figura ----
+  function Pincel(ctx, w, h, col) {
+    this.ctx = ctx; this.w = w; this.h = h; this.col = col;
+  }
+  Pincel.prototype.marco = function (caja, dx, dy) {
+    var bx = caja[0], by = caja[1], bw = caja[2], bh = caja[3];
+    return {
+      caja: caja, dx: dx, dy: dy,
+      X: function (v) { return bx + (v - dx[0]) / (dx[1] - dx[0]) * bw; },
+      Y: function (v) { return by + bh - (v - dy[0]) / (dy[1] - dy[0]) * bh; }
+    };
+  };
+  Pincel.prototype.ejes = function (m, rx, ry, titulo) {
+    var c = this.ctx, k = m.caja, col = this.col;
+    c.save();
+    c.strokeStyle = col.suave; c.lineWidth = 1; c.globalAlpha = .9;
+    c.beginPath();
+    c.moveTo(k[0], k[1]); c.lineTo(k[0], k[1] + k[3]); c.lineTo(k[0] + k[2], k[1] + k[3]);
+    c.stroke();
+    c.globalAlpha = 1;
+    c.fillStyle = col.tenue;
+    function num(v) { return (Math.round(v * 100) / 100).toString().replace('.', ','); }
+    c.font = '10px system-ui, sans-serif';
+    c.textAlign = 'left';  c.fillText(num(m.dx[0]), k[0], k[1] + k[3] + 14);
+    c.textAlign = 'right'; c.fillText(num(m.dx[1]), k[0] + k[2], k[1] + k[3] + 14);
+    c.font = '11px system-ui, sans-serif';
+    if (rx) { c.textAlign = 'center'; c.fillText(rx, k[0] + k[2] / 2, k[1] + k[3] + 27); }
+    if (ry) { c.textAlign = 'left';   c.fillText(ry, k[0] + 5, k[1] + 12); }
+    if (titulo) {
+      c.textAlign = 'left'; c.fillStyle = col.tinta; c.font = '12px system-ui, sans-serif';
+      c.fillText(titulo, k[0], k[1] - 10);
+    }
+    c.restore();
+  };
+  Pincel.prototype.recorte = function (m, dibujar) {
+    var c = this.ctx, k = m.caja;
+    c.save(); c.beginPath(); c.rect(k[0] - .5, k[1] - .5, k[2] + 1, k[3] + 1); c.clip();
+    dibujar(); c.restore();
+  };
+  Pincel.prototype.curva = function (m, pts, color, ancho, alfa, guion) {
+    var c = this.ctx;
+    if (!pts.length) return;
+    c.save();
+    c.strokeStyle = color; c.lineWidth = ancho || 1.5;
+    c.globalAlpha = (alfa === undefined ? 1 : alfa);
+    c.lineJoin = 'round'; c.lineCap = 'round';
+    if (guion) c.setLineDash(guion);
+    c.beginPath();
+    c.moveTo(m.X(pts[0][0]), m.Y(pts[0][1]));
+    for (var i = 1; i < pts.length; i++) c.lineTo(m.X(pts[i][0]), m.Y(pts[i][1]));
+    c.stroke(); c.restore();
+  };
+  Pincel.prototype.punto = function (m, x, y, color, r) {
+    var c = this.ctx;
+    c.save(); c.fillStyle = color;
+    c.beginPath(); c.arc(m.X(x), m.Y(y), r || 4.5, 0, 6.2832); c.fill();
+    c.restore();
+  };
+  Pincel.prototype.texto = function (px, py, s, color, tam, alin) {
+    var c = this.ctx;
+    c.save();
+    c.fillStyle = color; c.font = (tam || 11) + 'px system-ui, sans-serif';
+    c.textAlign = alin || 'left';
+    c.fillText(s, px, py);
+    c.restore();
+  };
+
+  // ---- proyección 3D ortográfica, para los lienzos que la usen ----
+  Pincel.prototype.camara = function (caja, dom, azim, elev, escala) {
+    var bx = caja[0], by = caja[1], bw = caja[2], bh = caja[3];
+    var cx = bx + bw / 2, cy = by + bh / 2;
+    var sa = Math.sin(azim), ca = Math.cos(azim);
+    var se = Math.sin(elev), ce = Math.cos(elev);
+    var k = (escala || 0.44) * Math.min(bw, bh);
+    var ax = dom.ax || 1, ay = dom.ay || 1, az = dom.az || 1;
+    function nor(v, r) { return 2 * (v - r[0]) / (r[1] - r[0]) - 1; }
+    function xyz(x, y, z) {
+      return [nor(x, dom.x) * ax, nor(y, dom.y) * ay, nor(z, dom.z) * az];
+    }
+    return {
+      caja: caja, dom: dom,
+      pt: function (x, y, z) {
+        var p = xyz(x, y, z);
+        var u = -p[0] * sa + p[1] * ca;
+        var v = -(p[0] * ca + p[1] * sa) * se + p[2] * ce;
+        return [cx + k * u, cy - k * v];
+      },
+      prof: function (x, y, z) {
+        var p = xyz(x, y, z);
+        return (p[0] * ca + p[1] * sa) * ce + p[2] * se;
+      }
+    };
+  };
+
+  Pincel.prototype.curva3 = function (cam, pts, color, ancho, alfa, guion) {
+    var c = this.ctx;
+    if (!pts.length) return;
+    c.save();
+    c.strokeStyle = color; c.lineWidth = ancho || 1.4;
+    c.globalAlpha = (alfa === undefined ? 1 : alfa);
+    c.lineJoin = 'round'; c.lineCap = 'round';
+    if (guion) c.setLineDash(guion);
+    c.beginPath();
+    var p = cam.pt(pts[0][0], pts[0][1], pts[0][2]);
+    c.moveTo(p[0], p[1]);
+    for (var i = 1; i < pts.length; i++) {
+      p = cam.pt(pts[i][0], pts[i][1], pts[i][2]);
+      c.lineTo(p[0], p[1]);
+    }
+    c.stroke(); c.restore();
+  };
+
+  Pincel.prototype.punto3 = function (cam, x, y, z, color, r) {
+    var c = this.ctx, p = cam.pt(x, y, z);
+    c.save(); c.fillStyle = color;
+    c.beginPath(); c.arc(p[0], p[1], r || 4.5, 0, 6.2832); c.fill(); c.restore();
+  };
+
+  // caja de referencia: el piso, las cuatro aristas verticales y los rótulos
+  Pincel.prototype.caja3 = function (cam, rx, ry, rz) {
+    var d = cam.dom, col = this.col;
+    var x0 = d.x[0], x1 = d.x[1], y0 = d.y[0], y1 = d.y[1], z0 = d.z[0], z1 = d.z[1];
+    var piso = [[x0, y0, z0], [x1, y0, z0], [x1, y1, z0], [x0, y1, z0], [x0, y0, z0]];
+    this.curva3(cam, piso, col.borde, 1.2, 1);
+    [[x0, y0], [x1, y0], [x1, y1], [x0, y1]].forEach(function (e) {
+      this.curva3(cam, [[e[0], e[1], z0], [e[0], e[1], z1]], col.borde, 1, .55, [3, 4]);
+    }, this);
+    var t;
+    if (rx) { t = cam.pt((x0 + x1) / 2, y0, z0); this.texto(t[0], t[1] + 16, rx, col.tenue, 11, 'center'); }
+    if (ry) { t = cam.pt(x1, (y0 + y1) / 2, z0); this.texto(t[0] + 12, t[1] + 6, ry, col.tenue, 11, 'left'); }
+    if (rz) { t = cam.pt(x0, y1, z1); this.texto(t[0] - 10, t[1], rz, col.tenue, 11, 'right'); }
+  };
+
+  // ---- construcción de un lienzo ----
+  function armarLienzo(caja) {
+    if (caja.dataset.listo) return;
+    caja.dataset.listo = '1';
+
+    var dibujo = window.LIENZO[caja.dataset.figura];
+    if (typeof dibujo !== 'function') return;
+
+    var rot = document.createElement('div');
+    rot.className = 'ej-rotulo';
+    rot.textContent = caja.dataset.rotulo || 'Probá moviendo los controles';
+    caja.insertBefore(rot, caja.firstChild);
+
+    var pie = caja.querySelector('.lienzo-pie');
+
+    var lienzo = document.createElement('canvas');
+    caja.insertBefore(lienzo, pie || null);
+
+    var defs = [];
+    try { defs = JSON.parse(caja.dataset.sliders || '[]'); } catch (e) { defs = []; }
+
+    var fila = document.createElement('div');
+    fila.className = 'lienzo-controles';
+    var entradas = {};
+    var salidas = {};
+
+    defs.forEach(function (d) {
+      var cel = document.createElement('div');
+      cel.className = 'lienzo-control';
+      var et = document.createElement('label');
+      et.textContent = d.rotulo || d.id;
+      var inp = document.createElement('input');
+      inp.type = 'range';
+      inp.min = d.min; inp.max = d.max;
+      inp.step = (d.paso === undefined ? 0.01 : d.paso);
+      inp.value = (d.valor === undefined ? d.min : d.valor);
+      inp.setAttribute('aria-label', d.rotulo || d.id);
+      var val = document.createElement('span');
+      val.className = 'lienzo-valor';
+      cel.appendChild(et); cel.appendChild(inp); cel.appendChild(val);
+      fila.appendChild(cel);
+      entradas[d.id] = inp; salidas[d.id] = val;
+      inp.addEventListener('input', pintar);
+    });
+    caja.insertBefore(fila, pie || null);
+
+    var alto = parseInt(caja.dataset.alto || '330', 10);
+
+    function pintar() {
+      var ancho = lienzo.clientWidth || caja.clientWidth || 640;
+      var dpr = window.devicePixelRatio || 1;
+      lienzo.width = Math.round(ancho * dpr);
+      lienzo.height = Math.round(alto * dpr);
+      lienzo.style.height = alto + 'px';
+
+      var ctx = lienzo.getContext('2d');
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.clearRect(0, 0, ancho, alto);
+
+      var col = leerColores(caja);
+      var v = {};
+      defs.forEach(function (d) {
+        var x = parseFloat(entradas[d.id].value);
+        v[d.id] = x;
+        var dec = (d.decimales === undefined ? 2 : d.decimales);
+        salidas[d.id].textContent = (d.formato ? d.formato : '') + x.toFixed(dec) +
+                                   (d.sufijo ? d.sufijo : '');
+      });
+
+      dibujo(new Pincel(ctx, ancho, alto, col), v);
+    }
+
+    caja._pintar = pintar;
+    pintar();
+    // una segunda pasada cuando ya se aplicó el layout definitivo
+    setTimeout(pintar, 60);
+  }
+
+  function armarTodos() {
+    document.querySelectorAll('.lienzo').forEach(armarLienzo);
+  }
+  function repintarTodos() {
+    document.querySelectorAll('.lienzo').forEach(function (c) {
+      if (c._pintar) c._pintar();
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', armarTodos);
+  } else {
+    armarTodos();
+  }
+
+  var temporizador;
+  window.addEventListener('resize', function () {
+    clearTimeout(temporizador);
+    temporizador = setTimeout(repintarTodos, 120);
+  });
+
+  // el libro cambia entre claro y oscuro poniendo una clase en <body>
+  if (window.MutationObserver) {
+    new MutationObserver(repintarTodos)
+      .observe(document.body, { attributes: true, attributeFilter: ['class'] });
+  }
+})();
+</script>

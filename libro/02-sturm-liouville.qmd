@@ -1,0 +1,10 @@
+# El problema de Sturm–Liouville {#sec-sturm}
+
+::: {.callout-note appearance="simple"}
+## Capítulo en construcción
+Abajo está el temario. El contenido se agrega en orden de necesidad.
+:::
+
+## Temario {.unnumbered}
+
+Producto interno entre funciones. Sistemas de funciones ortogonales. Desigualdad de Bessel. Propiedades de soluciones de ecuaciones diferenciales ordinarias. Teoremas de separación, oscilación y comparación de Sturm. Autofunciones y autovalores. Operadores autoadjuntos. Fórmulas de Lagrange y Green. Problema de Sturm–Liouville regular.

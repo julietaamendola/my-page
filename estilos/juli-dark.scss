@@ -1,0 +1,128 @@
+/*-- scss:defaults --*/
+// Version oscura. Mismos roles de color que juli.scss, otros valores.
+
+$font-family-sans-serif: 'Inter', system-ui, -apple-system, sans-serif !default;
+$font-family-serif:      'Alegreya', Georgia, serif !default;
+
+$white:      #14111f;
+$off:        #1a1630;
+$light:      #241f3d;
+$mid:        #3b3459;
+$ink:        #ece8f5;
+$muted:      #a79fc0;
+$subtle:     #7d7499;
+$accent:     #b79ce9;
+$accent2:    #c9aede;
+
+$body-bg:    $white;
+$body-color: $ink;
+$link-color: $accent;
+
+$font-size-root: 17px;
+$code-bg: $light;
+$code-color: $ink;
+
+/*-- scss:rules --*/
+body { font-family: 'Alegreya', Georgia, serif; line-height: 1.72; }
+h1, h2, h3, h4 { font-family: 'Playfair Display', Georgia, serif; font-weight: 400; text-wrap: balance; }
+h1 em, h2 em { font-style: italic; color: $accent; }
+.sidebar nav[role="doc-toc"] > h2, #toc-title {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: .62rem; letter-spacing: .14em; text-transform: uppercase;
+  color: $muted; font-weight: 500;
+}
+.navbar { border-bottom: 1px solid $mid; }
+.navbar-brand { font-family: 'Playfair Display', Georgia, serif; font-style: italic; }
+.theorem, .lemma, .corollary, .proposition, .definition, .example, .exercise {
+  border-left: 2px solid $accent; background: $off;
+  padding: .9rem 1.15rem; margin: 1.6rem 0; border-radius: 0 3px 3px 0;
+}
+.theorem strong:first-child, .lemma strong:first-child, .corollary strong:first-child,
+.proposition strong:first-child, .definition strong:first-child,
+.example strong:first-child, .exercise strong:first-child {
+  font-family: 'Inter', system-ui, sans-serif; font-size: .68rem; letter-spacing: .12em;
+  text-transform: uppercase; color: $accent; font-weight: 600; display: block; margin-bottom: .4rem;
+}
+.definition, .example { border-left-color: $accent2; }
+.definition strong:first-child, .example strong:first-child { color: $accent2; }
+.proof { margin: 1.2rem 0 1.6rem; padding-left: 1.15rem; border-left: 1px solid $mid; }
+.math.display { overflow-x: auto; overflow-y: hidden; }
+figure figcaption, .figure-caption { font-family: 'Inter', system-ui, sans-serif; font-size: .78rem; color: $muted; }
+pre.sourceCode { border: 1px solid $mid; border-radius: 3px; background: $off; }
+thead th {
+  font-family: 'Inter', system-ui, sans-serif; font-size: .7rem; letter-spacing: .08em;
+  text-transform: uppercase; color: $muted; border-bottom: 1px solid $mid !important;
+}
+
+/* --- Barra lateral en modo oscuro ---
+   Sin esto, Quarto deja el texto de los capitulos casi del color del fondo
+   y en la barra solo se ven los numeros. */
+.sidebar-navigation .sidebar-item-text,
+.sidebar-navigation .menu-text,
+.sidebar-navigation a,
+.sidebar-navigation .sidebar-section .sidebar-item-text,
+.quarto-sidebar-toggle-title,
+.sidebar-title, .sidebar-title a {
+  color: $ink;
+}
+.sidebar-navigation .sidebar-item-text:hover,
+.sidebar-navigation a:hover { color: $accent; }
+
+/* Titulos de las partes del libro */
+.sidebar-navigation .sidebar-item .sidebar-item-container > .sidebar-item-text.sidebar-link,
+.sidebar-navigation > .sidebar-item > .sidebar-item-container > .sidebar-item-text { color: $ink; }
+.sidebar-item-section > .sidebar-item-container > .sidebar-item-text { color: $muted; }
+
+/* Capitulo activo */
+.sidebar-navigation .active > .sidebar-item-container > .sidebar-item-text,
+.sidebar-navigation .sidebar-item-text.active,
+.sidebar-navigation a.active { color: $accent; font-weight: 500; }
+
+/* Numeracion de capitulos en la barra */
+.sidebar-navigation .chapter-number { color: $subtle; }
+
+/* Buscador */
+.sidebar .aa-Autocomplete .aa-Form, #quarto-search .aa-Form {
+  background: $off; border-color: $mid;
+}
+#quarto-search .aa-Input, #quarto-search .aa-Input::placeholder { color: $ink; }
+
+/* Indice de la derecha */
+#quarto-margin-sidebar .nav-link, nav[role="doc-toc"] a { color: $muted; }
+#quarto-margin-sidebar .nav-link:hover, nav[role="doc-toc"] a:hover { color: $accent; }
+#quarto-margin-sidebar .nav-link.active, nav[role="doc-toc"] a.active {
+  color: $accent; border-left-color: $accent;
+}
+
+/* Migas de pan y pie */
+.quarto-title-breadcrumbs .breadcrumb a { color: $muted; }
+.nav-page a, .nav-footer a { color: $muted; }
+.nav-page a:hover, .nav-footer a:hover { color: $accent; }
+.nav-footer { border-top: 1px solid $mid; }
+
+/* Bloques de callout */
+div.callout { background: $off; }
+div.callout .callout-body { color: $ink; }
+div.callout .callout-title { color: $ink; }
+
+/* Tablas */
+table, .table { color: $ink; }
+.table > :not(caption) > * > * { background-color: transparent; color: $ink; }
+
+// --- Listado de proyectos ---
+.proy-lista h3.pt {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.35rem; font-weight: 400; margin: 2.4rem 0 .5rem;
+}
+.proy-lista h3.pt a { color: $ink; text-decoration: none; border-bottom: 1px solid transparent; }
+.proy-lista h3.pt a:hover { color: $accent; border-bottom-color: $accent; }
+.proy-lista p { color: $muted; max-width: 68ch; margin-bottom: .5rem; }
+.proy-lista .pm {
+  font-family: 'Inter', system-ui, sans-serif; font-size: .68rem;
+  letter-spacing: .1em; text-transform: uppercase; color: $subtle;
+}
+.proy-lista > div, .proy-lista { border: none; }
+
+.proy-lista h3.pt a::after { content: ' \2192'; color: $accent; opacity: 0; transition: opacity .2s; }
+.proy-lista h3.pt a:hover::after { opacity: 1; }
+.proy-lista p:has(.pm) { margin-top: -.2rem; }

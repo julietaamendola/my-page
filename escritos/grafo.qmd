@@ -1,0 +1,297 @@
+---
+title: "El grafo"
+subtitle: "Las entradas del blog y cómo se enlazan entre sí"
+page-layout: full
+title-block-banner: false
+toc: false
+---
+
+Cada círculo es una entrada. Cada línea, un link de una entrada a otra. El tamaño depende de
+cuántas conexiones tiene. Pasá el mouse por encima para ver los vecinos, arrastrá para
+reacomodar, hacé clic para ir a la entrada.
+
+El grafo se arma solo: cada vez que se renderiza el blog, un script lee los archivos fuente y
+recalcula los enlaces. No hay una lista que mantener a mano.
+
+```{python}
+#| echo: false
+#| output: asis
+
+import glob
+import html
+import json
+import os
+import re
+
+import yaml
+
+POSTS = sorted(glob.glob("posts/*.qmd"))
+
+def leer(ruta):
+    with open(ruta, encoding="utf-8") as f:
+        texto = f.read()
+    meta = {}
+    if texto.startswith("---"):
+        fin = texto.find("\n---", 3)
+        if fin > 0:
+            meta = yaml.safe_load(texto[3:fin]) or {}
+            texto = texto[fin + 4:]
+    # el codigo no cuenta como texto ni como enlaces
+    cuerpo = re.sub(r"```.*?```", "", texto, flags=re.S)
+    return meta, cuerpo
+
+# Enlaces de Markdown a otro .qmd/.md/.html, y wikilinks de Obsidian.
+RE_MD = re.compile(r"\]\(\s*([^)\s]+?\.(?:qmd|md|html))(?:#[^)]*)?\s*\)")
+RE_WIKI = re.compile(r"\[\[([^\]|#]+)")
+
+nodos, salidas = [], {}
+for ruta in POSTS:
+    slug = os.path.splitext(os.path.basename(ruta))[0]
+    meta, cuerpo = leer(ruta)
+    cats = meta.get("categories") or []
+    if isinstance(cats, str):
+        cats = [cats]
+    destinos = set()
+    for m in RE_MD.findall(cuerpo) + RE_WIKI.findall(cuerpo):
+        destinos.add(os.path.splitext(os.path.basename(m.strip()))[0])
+    salidas[slug] = destinos
+    nodos.append({
+        "id": slug,
+        "titulo": str(meta.get("title", slug)),
+        "fecha": str(meta.get("date", "")),
+        "cats": [str(c) for c in cats],
+        "palabras": len(cuerpo.split()),
+        "url": f"posts/{slug}.html",
+    })
+
+conocidos = {n["id"] for n in nodos}
+pares = {frozenset((o, d)) for o, ds in salidas.items() for d in ds
+         if d in conocidos and d != o}
+enlaces = [dict(zip(("o", "d"), tuple(p))) for p in pares]
+
+grados = {n["id"]: 0 for n in nodos}
+for e in enlaces:
+    grados[e["o"]] += 1
+    grados[e["d"]] += 1
+for n in nodos:
+    n["grado"] = grados[n["id"]]
+
+datos = json.dumps({"nodos": nodos, "enlaces": enlaces}, ensure_ascii=False)
+
+sueltas = [n["titulo"] for n in nodos if n["grado"] == 0]
+
+print(f"""
+<div id="grafo-caja">
+  <canvas id="grafo"></canvas>
+  <div id="grafo-tip" hidden></div>
+</div>
+<style>
+#grafo-caja {{ position: relative; margin: 2rem 0 1rem; }}
+#grafo {{ width: 100%; height: 500px; display: block; cursor: grab; }}
+#grafo.arrastrando {{ cursor: grabbing; }}
+#grafo-tip {{
+  position: absolute; pointer-events: none; max-width: 22rem;
+  padding: .55rem .7rem; border-radius: .4rem; font-size: .82rem; line-height: 1.35;
+  background: #1e1a2e; color: #f2eef8; box-shadow: 0 6px 22px rgba(30,26,46,.28);
+}}
+#grafo-tip b {{ display: block; font-weight: 600; margin-bottom: .15rem; }}
+#grafo-tip span {{ opacity: .72; font-size: .74rem; }}
+</style>
+<script>
+(function () {{
+  const DATOS = {datos};
+  const lienzo = document.getElementById('grafo');
+  const tip = document.getElementById('grafo-tip');
+  const ctx = lienzo.getContext('2d');
+
+  const PALETA = {{
+    claro: {{ tinta: '#1e1a2e', gris: '#a99fc0', linea: '#ddd6ee',
+              stem: '#7c5cbf', personal: '#b48ec8', otra: '#8f86a8' }},
+    oscuro: {{ tinta: '#ece8f5', gris: '#7d7499', linea: '#3b3459',
+               stem: '#b79ce9', personal: '#c9aede', otra: '#8f86a8' }}
+  }};
+  const esOscuro = () => document.body.classList.contains('quarto-dark');
+  const color = n => {{
+    const p = esOscuro() ? PALETA.oscuro : PALETA.claro;
+    const c = (n.cats || []).map(x => x.toLowerCase());
+    if (c.includes('personal')) return p.personal;
+    if (c.includes('stem')) return p.stem;
+    return p.otra;
+  }};
+
+  const nodos = DATOS.nodos.map((n, i) => Object.assign({{}}, n, {{
+    x: Math.cos(i * 2.4) * 190 + (Math.random() - .5) * 40,
+    y: Math.sin(i * 2.4) * 150 + (Math.random() - .5) * 40,
+    vx: 0, vy: 0,
+    r: 9 + Math.min(11, n.grado * 2.6)
+  }}));
+  const porId = Object.fromEntries(nodos.map(n => [n.id, n]));
+  const enlaces = DATOS.enlaces.map(e => ({{ o: porId[e.o], d: porId[e.d] }}));
+  const vecinos = {{}};
+  nodos.forEach(n => (vecinos[n.id] = new Set([n.id])));
+  enlaces.forEach(e => {{ vecinos[e.o.id].add(e.d.id); vecinos[e.d.id].add(e.o.id); }});
+
+  let W = 0, H = 0, alfa = 1, activo = null, arrastrado = null, origen = null;
+
+  function medir() {{
+    const dpr = window.devicePixelRatio || 1;
+    W = lienzo.clientWidth; H = lienzo.clientHeight;
+    lienzo.width = W * dpr; lienzo.height = H * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }}
+
+  function paso() {{
+    const cx = W / 2, cy = H / 2;
+    for (let i = 0; i < nodos.length; i++) {{
+      for (let j = i + 1; j < nodos.length; j++) {{
+        const a = nodos[i], b = nodos[j];
+        let dx = b.x - a.x, dy = b.y - a.y;
+        let d2 = dx * dx + dy * dy;
+        if (d2 < 1) {{ dx = Math.random() - .5; dy = Math.random() - .5; d2 = 1; }}
+        const f = 11000 / d2;
+        const d = Math.sqrt(d2);
+        a.vx -= f * dx / d; a.vy -= f * dy / d;
+        b.vx += f * dx / d; b.vy += f * dy / d;
+      }}
+    }}
+    enlaces.forEach(e => {{
+      const dx = e.d.x - e.o.x, dy = e.d.y - e.o.y;
+      const d = Math.hypot(dx, dy) || 1;
+      const f = (d - 190) * 0.014;
+      e.o.vx += f * dx / d; e.o.vy += f * dy / d;
+      e.d.vx -= f * dx / d; e.d.vy -= f * dy / d;
+    }});
+    nodos.forEach(n => {{
+      n.vx += (cx - n.x) * 0.0045; n.vy += (cy - n.y) * 0.0045;
+      if (n === arrastrado) {{ n.vx = n.vy = 0; return; }}
+      n.vx *= 0.86; n.vy *= 0.86;
+      n.x += n.vx * alfa; n.y += n.vy * alfa;
+      n.x = Math.max(n.r + 4, Math.min(W - n.r - 4, n.x));
+      n.y = Math.max(n.r + 16, Math.min(H - n.r - 20, n.y));
+    }});
+  }}
+
+  function ajustar() {{
+    let ix = 1e9, fx = -1e9, iy = 1e9, fy = -1e9;
+    nodos.forEach(n => {{
+      ix = Math.min(ix, n.x); fx = Math.max(fx, n.x);
+      iy = Math.min(iy, n.y); fy = Math.max(fy, n.y);
+    }});
+    const e = Math.min((W - 160) / Math.max(fx - ix, 1),
+                       (H - 100) / Math.max(fy - iy, 1), 2.4);
+    const cx = (ix + fx) / 2, cy = (iy + fy) / 2;
+    nodos.forEach(n => {{
+      n.x = W / 2 + (n.x - cx) * e;
+      n.y = H / 2 + (n.y - cy) * e;
+      n.vx = n.vy = 0;
+    }});
+  }}
+
+  function dibujar() {{
+    const p = esOscuro() ? PALETA.oscuro : PALETA.claro;
+    ctx.clearRect(0, 0, W, H);
+    ctx.lineWidth = 1.2;
+    enlaces.forEach(e => {{
+      const on = !activo || activo === e.o || activo === e.d;
+      ctx.strokeStyle = p.linea;
+      ctx.globalAlpha = on ? 1 : .25;
+      ctx.beginPath(); ctx.moveTo(e.o.x, e.o.y); ctx.lineTo(e.d.x, e.d.y); ctx.stroke();
+    }});
+    ctx.globalAlpha = 1;
+    ctx.textAlign = 'center';
+    ctx.font = '500 11.5px system-ui, -apple-system, Segoe UI, sans-serif';
+    nodos.forEach(n => {{
+      const on = !activo || vecinos[activo.id].has(n.id);
+      ctx.globalAlpha = on ? 1 : .25;
+      ctx.beginPath(); ctx.arc(n.x, n.y, n.r, 0, 6.2832);
+      ctx.fillStyle = color(n); ctx.fill();
+      if (n === activo) {{ ctx.lineWidth = 2; ctx.strokeStyle = p.tinta; ctx.stroke(); }}
+      const t = n.titulo.length > 34 ? n.titulo.slice(0, 33) + '…' : n.titulo;
+      ctx.fillStyle = on ? p.tinta : p.gris;
+      ctx.fillText(t, n.x, n.y + n.r + 13);
+    }});
+    ctx.globalAlpha = 1;
+  }}
+
+  function cuadro() {{
+    if (alfa > 0.02 || arrastrado) {{ paso(); if (!arrastrado) alfa *= 0.985; }}
+    dibujar();
+    requestAnimationFrame(cuadro);
+  }}
+
+  function enPos(ev) {{
+    const c = lienzo.getBoundingClientRect();
+    return {{ x: ev.clientX - c.left, y: ev.clientY - c.top }};
+  }}
+  function buscar(x, y) {{
+    return nodos.find(n => Math.hypot(n.x - x, n.y - y) <= n.r + 5) || null;
+  }}
+
+  lienzo.addEventListener('mousemove', ev => {{
+    const {{ x, y }} = enPos(ev);
+    if (arrastrado) {{ arrastrado.x = x; arrastrado.y = y; return; }}
+    activo = buscar(x, y);
+    if (activo) {{
+      tip.hidden = false;
+      const fecha = activo.fecha ? '<span>' + activo.fecha + ' · ' + activo.grado +
+        (activo.grado === 1 ? ' conexión' : ' conexiones') + '</span>' : '';
+      tip.innerHTML = '<b>' + activo.titulo + '</b>' + fecha;
+      tip.style.left = Math.min(x + 14, lienzo.clientWidth - 260) + 'px';
+      tip.style.top = (y + 14) + 'px';
+      lienzo.style.cursor = 'pointer';
+    }} else {{
+      tip.hidden = true;
+      lienzo.style.cursor = 'grab';
+    }}
+  }});
+  lienzo.addEventListener('mouseleave', () => {{ activo = null; tip.hidden = true; }});
+  lienzo.addEventListener('mousedown', ev => {{
+    const {{ x, y }} = enPos(ev);
+    arrastrado = buscar(x, y);
+    if (arrastrado) {{ origen = {{ x: x, y: y }}; lienzo.classList.add('arrastrando'); }}
+  }});
+  window.addEventListener('mouseup', ev => {{
+    if (arrastrado) {{
+      const {{ x, y }} = enPos(ev);
+      // Solo es un clic si el mouse casi no se movio desde que se apreto.
+      const movido = origen ? Math.hypot(x - origen.x, y - origen.y) : 0;
+      const destino = arrastrado.url;
+      arrastrado = null; origen = null;
+      alfa = Math.max(alfa, .05);
+      lienzo.classList.remove('arrastrando');
+      if (movido < 5) location.href = destino;
+    }}
+  }});
+  window.addEventListener('resize', () => {{ medir(); for (let i = 0; i < 120; i++) paso(); ajustar(); }});
+  new MutationObserver(dibujar).observe(document.body, {{ attributes: true, attributeFilter: ['class'] }});
+
+  medir();
+  for (let i = 0; i < 320; i++) paso();
+  ajustar();
+  alfa = 0.015;
+  cuadro();
+}})();
+</script>
+""")
+
+if sueltas:
+    lista = ", ".join("*" + html.escape(t) + "*" for t in sueltas)
+    print(f"\n::: {{.callout-note}}\n## Entradas todavía sin enlazar\n\n{lista}\n:::\n")
+```
+
+Los colores siguen la categoría: violeta para STEM, lila para Personal.
+
+## Cómo escribir para que el grafo crezca
+
+Basta con enlazar una entrada desde otra, con un link de Markdown común:
+
+``` markdown
+Esto lo conté en [la primera entrega](tf-lic-01-vaso-de-leche.qmd).
+```
+
+Da lo mismo si el enlace apunta al `.qmd` o al `.html`, y el código de las figuras se ignora.
+
+Si escribís en Obsidian, andá a **Ajustes → Archivos y enlaces** y activá *Usar enlaces de
+Markdown* con *Ruta relativa al archivo*. Con eso Obsidian escribe links normales en lugar de
+`[[wikilinks]]`, el grafo de Obsidian sigue funcionando igual, y esta página los detecta sin
+que haya que hacer nada más.

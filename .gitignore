@@ -1,0 +1,28 @@
+# Carpetas de trabajo de Quarto.
+# Los .qmd y los _files intermedios que Quarto deja al lado del fuente no van al
+# repositorio: lo que se publica son las carpetas de salida (blog, proyectos, metodos).
+.quarto/
+**/.quarto/
+**/*.quarto_ipynb
+**/*.quarto_ipynb_*
+/escritos/posts/*_files/
+/libro/*_files/
+/proy/*_files/
+/proy/p/*_files/
+/cv/*_files/
+**/*_files/figure-pdf/
+
+# Archivos temporales de despliegue
+_stage.tgz
+_deploy.tgz
+
+# La guia de trabajo es para uso propio, no va al repositorio publico.
+GUIA.md
+
+# Sistema
+.DS_Store
+Thumbs.db
+__pycache__/
+
+# Carpeta donde el escritorio deja los archivos entregados. No va al repositorio.
+Claude outputs/

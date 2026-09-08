@@ -1,0 +1,10 @@
+# Ecuaciones hiperbólicas {#sec-hiperbolicas}
+
+::: {.callout-note appearance="simple"}
+## Capítulo en construcción
+Abajo está el temario. El contenido se agrega en orden de necesidad.
+:::
+
+## Temario {.unnumbered}
+
+Problemas tipo. Condiciones de contorno e iniciales. Teorema de unicidad. Método de D'Alembert. Método de separación de variables. Ecuaciones no homogéneas. Función de Green. Analogías físicas. Oscilaciones de cuerdas y membranas. Propagación de ondas en el espacio. Ecuaciones del campo electromagnético. Potenciales del campo electromagnético.

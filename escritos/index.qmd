@@ -1,0 +1,15 @@
+---
+title: "El blog"
+subtitle: "Matemática en lugares inesperados, y algunas cosas personales"
+listing:
+  contents: posts
+  sort: "date desc"
+  type: default
+  categories: true
+  sort-ui: false
+  filter-ui: false
+  feed: true
+  fields: [date, title, description, categories]
+page-layout: full
+title-block-banner: false
+---

@@ -1,0 +1,7 @@
+# Todos los archivos de texto se guardan con fin de linea LF en el repositorio.
+# Evita que Git para Windows marque los archivos enteros como modificados.
+* text=auto eol=lf
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.pdf binary

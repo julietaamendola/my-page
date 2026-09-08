@@ -1,0 +1,10 @@
+# Funciones especiales {#sec-especiales}
+
+::: {.callout-note appearance="simple"}
+## Capítulo en construcción
+Abajo está el temario. El contenido se agrega en orden de necesidad.
+:::
+
+## Temario {.unnumbered}
+
+Funciones cilíndricas de Bessel, Hankel y Neumann. Funciones esféricas: polinomios de Legendre y armónicos esféricos. Polinomios de Hermite y de Laguerre. Funciones hipergeométrica e hipergeométrica confluente. Funciones Gamma, error y relacionadas.

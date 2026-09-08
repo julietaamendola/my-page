@@ -1,0 +1,75 @@
+---
+title: "El problema inverso en tomografía óptica difusa"
+description: "Reconstruir el interior de un medio a partir de la luz que sale de su superficie. Tesis de licenciatura: simulación por elementos finitos, un dataset propio de 15.000 muestras y aprendizaje profundo, todo corriendo en una máquina de escritorio."
+orden: 1
+date: last-modified
+date-format: "[Actualizado en] MMMM [de] YYYY"
+---
+
+## El problema
+
+Un medio turbio —tejido vivo, leche, niebla— no deja ver su interior. La luz que entra no
+viaja en línea recta: se dispersa miles de veces antes de salir. Pero *algo* sale, y ese algo
+depende de lo que hay adentro.
+
+La tomografía óptica difusa parte de ahí. Se ilumina la superficie de un cuerpo con fuentes
+en distintas posiciones y se mide, en detectores también sobre la superficie, cuánta luz
+llega y con cuánto retraso de fase. La pregunta es la inversa: **conociendo solo lo que se
+mide afuera, ¿se puede reconstruir el mapa de propiedades ópticas de adentro?**
+
+Es un problema inverso mal condicionado. El operador directo —el que va del interior a las
+mediciones— es difusivo, y difundir es promediar: borra los detalles. Invertirlo significa
+deshacer un promedio, y eso amplifica cualquier ruido de medición hasta volverlo dominante.
+
+::: {.callout-note appearance="simple"}
+## Por qué importa
+La misma estructura matemática aparece en tomografía de impedancia eléctrica, en tomografía
+sísmica y en problemas de dispersión inversa. Lo que se resuelve acá se traslada.
+:::
+
+## Qué hice
+
+**Un dataset propio.** No había uno adecuado, así que lo construí: alrededor de **15.000
+simulaciones** del problema directo por el método de elementos finitos, sobre mallas
+tetraédricas tridimensionales de casi **1,5 millones de tetraedros**. El solver es de
+terceros; el aporte está en el diseño del conjunto de datos.
+
+**La elección del refinamiento de malla.** Intenté acotar el error a priori, pero varias de
+las cantidades necesarias son difíciles de estimar incluso computacionalmente. Lo resolví con
+**extrapolación de Richardson**: comparar la solución en tres niveles de refinamiento para
+estimar el orden de convergencia y, con eso, decidir cuál era suficiente. El resultado no es
+la malla ideal, es la mejor que entra en 16 GB de memoria — y saberlo con fundamento en lugar
+de a ojo.
+
+**Una normalización con sentido físico.** El z-score estándar no respeta la estructura del
+problema. En su lugar, pasar de la representación compleja a amplitud y fase, y medir cada
+par fuente-detector *relativo al medio homogéneo de referencia*. Eso deja los datos en un
+rango comparable sin borrar la información física.
+
+**Aumentación por simetría.** El dominio es un cilindro, y un cilindro tiene 24 simetrías.
+Aplicarlas al azar en cada muestra de entrenamiento multiplica el conjunto sin generar una
+sola simulación más.
+
+**Y una restricción elegida.** Todo corre en una máquina de escritorio. No fue por falta de
+opciones: el objetivo desde el principio fue que el método se pudiera entrenar con pocos
+recursos. En un problema con destino clínico, un método que necesita un clúster no se usa al
+lado de un paciente.
+
+## Lo que no funcionó
+
+Empecé en dos dimensiones con una librería que resultó tener artefactos de error numérico
+propios. Detectar que la fuente del error era la herramienta y no el método, y decidir
+cambiarla a mitad de camino, costó tiempo pero era la única salida. La segunda mitad del
+trabajo corre sobre otro solver y en tres dimensiones.
+
+## Estado
+
+En escritura. Defensa prevista para fines de 2026.
+
+**Dirección:** Guido Rodrigo Baez. **Codirección:** Mauro Natale.
+Facultad de Ciencias Exactas, UNCPBA.
+
+::: {.callout-tip appearance="simple"}
+El detalle de la arquitectura de los modelos queda fuera de esta página hasta después de la
+defensa.
+:::

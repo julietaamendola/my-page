@@ -1,0 +1,10 @@
+# Transformada de Fourier {#sec-tfourier}
+
+::: {.callout-note appearance="simple"}
+## Capítulo en construcción
+Abajo está el temario. El contenido se agrega en orden de necesidad.
+:::
+
+## Temario {.unnumbered}
+
+Fórmula integral de Fourier. Fórmulas de inversión. Transformada de Fourier directa e inversa. Propiedades, teorema de Parseval. Transformada de Fourier de distribuciones. Transformada seno y coseno. Convolución, correlación y autocorrelación. Resolución de ecuaciones diferenciales con transformadas.

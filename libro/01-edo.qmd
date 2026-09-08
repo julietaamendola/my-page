@@ -1,0 +1,10 @@
+# Ecuaciones diferenciales ordinarias {#sec-edo}
+
+::: {.callout-note appearance="simple"}
+## Capítulo en construcción
+Abajo está el temario. El contenido se agrega en orden de necesidad.
+:::
+
+## Temario {.unnumbered}
+
+Ecuaciones no lineales de primer orden: Bernoulli y Riccati. Ecuaciones diferenciales lineales. Wronskiano. Soluciones de ecuaciones homogéneas e inhomogéneas. Lema de Abel. Método de variación de parámetros. Método de reducción de orden. Puntos ordinarios. Puntos singulares regulares e irregulares. Método de Frobenius. Ecuaciones diferenciales especiales: hipergeométrica, de Bessel, de Legendre. Desarrollos en el infinito.

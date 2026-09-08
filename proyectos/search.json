@@ -1,0 +1,191 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Proyectos",
+    "section": "",
+    "text": "El problema inverso en tomografía óptica difusa\nReconstruir el interior de un medio a partir de la luz que sale de su superficie. Tesis de licenciatura: simulación por elementos finitos, un dataset propio de 15.000 muestras y aprendizaje profundo, todo corriendo en una máquina de escritorio.\nTesis · 2024–presente\n\n\nMorfología coronaria y riesgo cardiovascular\nInstituto PLADEMA, proyecto JOVIN. Caracterizar matemáticamente la geometría de las arterias coronarias y usar aprendizaje automático para estimar riesgo cardiovascular a partir de esa forma.\nInvestigación · 2022–2023\n\n\nEmbeddings en espacios hiperbólicos\nVI Taller de Matemática Industrial, con un problema propuesto por Mercado Libre. Geometría hiperbólica para representar datos con estructura jerárquica, cuando el espacio euclídeo se queda corto.\nMatemática industrial · 2025\n\n\norbit-propagator\nPropagación de órbitas de satélites reales a partir de datos orbitales en vivo, con un integrador Runge–Kutta escrito desde las ecuaciones de movimiento y comparado contra el propagador estándar.\nCódigo · 2026\n\n\nUna solución publicada en el Noticiero de la UMA\nEl problema de la CIMA 2022: probar que los cuatro vectores normales exteriores de un tetraedro, pesados por el área de su cara, suman cero.\nCompetencia · 2022\n\n\nWomen in STEM UNCPBA\nUna comunidad para promover la participación femenina en ciencia, tecnología, ingeniería y matemática dentro de la facultad.\nComunidad · 2023"
+  },
+  {
+    "objectID": "p/01-dot.html",
+    "href": "p/01-dot.html",
+    "title": "El problema inverso en tomografía óptica difusa",
+    "section": "",
+    "text": "Un medio turbio —tejido vivo, leche, niebla— no deja ver su interior. La luz que entra no viaja en línea recta: se dispersa miles de veces antes de salir. Pero algo sale, y ese algo depende de lo que hay adentro.\nLa tomografía óptica difusa parte de ahí. Se ilumina la superficie de un cuerpo con fuentes en distintas posiciones y se mide, en detectores también sobre la superficie, cuánta luz llega y con cuánto retraso de fase. La pregunta es la inversa: conociendo solo lo que se mide afuera, ¿se puede reconstruir el mapa de propiedades ópticas de adentro?\nEs un problema inverso mal condicionado. El operador directo —el que va del interior a las mediciones— es difusivo, y difundir es promediar: borra los detalles. Invertirlo significa deshacer un promedio, y eso amplifica cualquier ruido de medición hasta volverlo dominante.\n\n\n\n\n\n\nNotaPor qué importa\n\n\n\nLa misma estructura matemática aparece en tomografía de impedancia eléctrica, en tomografía sísmica y en problemas de dispersión inversa. Lo que se resuelve acá se traslada."
+  },
+  {
+    "objectID": "p/01-dot.html#el-problema",
+    "href": "p/01-dot.html#el-problema",
+    "title": "El problema inverso en tomografía óptica difusa",
+    "section": "",
+    "text": "Un medio turbio —tejido vivo, leche, niebla— no deja ver su interior. La luz que entra no viaja en línea recta: se dispersa miles de veces antes de salir. Pero algo sale, y ese algo depende de lo que hay adentro.\nLa tomografía óptica difusa parte de ahí. Se ilumina la superficie de un cuerpo con fuentes en distintas posiciones y se mide, en detectores también sobre la superficie, cuánta luz llega y con cuánto retraso de fase. La pregunta es la inversa: conociendo solo lo que se mide afuera, ¿se puede reconstruir el mapa de propiedades ópticas de adentro?\nEs un problema inverso mal condicionado. El operador directo —el que va del interior a las mediciones— es difusivo, y difundir es promediar: borra los detalles. Invertirlo significa deshacer un promedio, y eso amplifica cualquier ruido de medición hasta volverlo dominante.\n\n\n\n\n\n\nNotaPor qué importa\n\n\n\nLa misma estructura matemática aparece en tomografía de impedancia eléctrica, en tomografía sísmica y en problemas de dispersión inversa. Lo que se resuelve acá se traslada."
+  },
+  {
+    "objectID": "p/01-dot.html#qué-hice",
+    "href": "p/01-dot.html#qué-hice",
+    "title": "El problema inverso en tomografía óptica difusa",
+    "section": "Qué hice",
+    "text": "Qué hice\nUn dataset propio. No había uno adecuado, así que lo construí: alrededor de 15.000 simulaciones del problema directo por el método de elementos finitos, sobre mallas tetraédricas tridimensionales de casi 1,5 millones de tetraedros. El solver es de terceros; el aporte está en el diseño del conjunto de datos.\nLa elección del refinamiento de malla. Intenté acotar el error a priori, pero varias de las cantidades necesarias son difíciles de estimar incluso computacionalmente. Lo resolví con extrapolación de Richardson: comparar la solución en tres niveles de refinamiento para estimar el orden de convergencia y, con eso, decidir cuál era suficiente. El resultado no es la malla ideal, es la mejor que entra en 16 GB de memoria — y saberlo con fundamento en lugar de a ojo.\nUna normalización con sentido físico. El z-score estándar no respeta la estructura del problema. En su lugar, pasar de la representación compleja a amplitud y fase, y medir cada par fuente-detector relativo al medio homogéneo de referencia. Eso deja los datos en un rango comparable sin borrar la información física.\nAumentación por simetría. El dominio es un cilindro, y un cilindro tiene 24 simetrías. Aplicarlas al azar en cada muestra de entrenamiento multiplica el conjunto sin generar una sola simulación más.\nY una restricción elegida. Todo corre en una máquina de escritorio. No fue por falta de opciones: el objetivo desde el principio fue que el método se pudiera entrenar con pocos recursos. En un problema con destino clínico, un método que necesita un clúster no se usa al lado de un paciente."
+  },
+  {
+    "objectID": "p/01-dot.html#lo-que-no-funcionó",
+    "href": "p/01-dot.html#lo-que-no-funcionó",
+    "title": "El problema inverso en tomografía óptica difusa",
+    "section": "Lo que no funcionó",
+    "text": "Lo que no funcionó\nEmpecé en dos dimensiones con una librería que resultó tener artefactos de error numérico propios. Detectar que la fuente del error era la herramienta y no el método, y decidir cambiarla a mitad de camino, costó tiempo pero era la única salida. La segunda mitad del trabajo corre sobre otro solver y en tres dimensiones."
+  },
+  {
+    "objectID": "p/01-dot.html#estado",
+    "href": "p/01-dot.html#estado",
+    "title": "El problema inverso en tomografía óptica difusa",
+    "section": "Estado",
+    "text": "Estado\nEn escritura. Defensa prevista para fines de 2026.\nDirección: Guido Rodrigo Baez. Codirección: Mauro Natale. Facultad de Ciencias Exactas, UNCPBA.\n\n\n\n\n\n\nEl detalle de la arquitectura de los modelos queda fuera de esta página hasta después de la defensa."
+  },
+  {
+    "objectID": "p/02-pladema.html",
+    "href": "p/02-pladema.html",
+    "title": "Morfología coronaria y riesgo cardiovascular",
+    "section": "",
+    "text": "El riesgo cardiovascular se estima habitualmente con factores clínicos: edad, presión, colesterol, tabaquismo. La pregunta del proyecto era otra: ¿la forma misma de las arterias coronarias dice algo que esos factores no dicen?\nHay razones para pensar que sí. La aterosclerosis no se deposita al azar: aparece preferentemente donde el flujo se separa, donde hay recirculación, donde la tensión de corte sobre la pared baja. Y dónde pasa eso depende de la geometría: curvaturas, ángulos de bifurcación, tortuosidad. Si la geometría condiciona el flujo y el flujo condiciona la enfermedad, la geometría debería ser predictiva."
+  },
+  {
+    "objectID": "p/02-pladema.html#la-idea",
+    "href": "p/02-pladema.html#la-idea",
+    "title": "Morfología coronaria y riesgo cardiovascular",
+    "section": "",
+    "text": "El riesgo cardiovascular se estima habitualmente con factores clínicos: edad, presión, colesterol, tabaquismo. La pregunta del proyecto era otra: ¿la forma misma de las arterias coronarias dice algo que esos factores no dicen?\nHay razones para pensar que sí. La aterosclerosis no se deposita al azar: aparece preferentemente donde el flujo se separa, donde hay recirculación, donde la tensión de corte sobre la pared baja. Y dónde pasa eso depende de la geometría: curvaturas, ángulos de bifurcación, tortuosidad. Si la geometría condiciona el flujo y el flujo condiciona la enfermedad, la geometría debería ser predictiva."
+  },
+  {
+    "objectID": "p/02-pladema.html#qué-hicimos",
+    "href": "p/02-pladema.html#qué-hicimos",
+    "title": "Morfología coronaria y riesgo cardiovascular",
+    "section": "Qué hicimos",
+    "text": "Qué hicimos\nTrabajé como asistente de investigación en el Instituto PLADEMA (UNICEN), dentro del proyecto JOVIN, Herramientas de Computación Científica e Inteligencia Artificial en Cardiología, con Carlos Bulant como referente.\nLa parte que me tocó fue la caracterización matemática de la geometría arterial y el entrenamiento de modelos de aprendizaje automático sobre esos descriptores.\nAdemás participé del grupo quincenal de discusión de literatura de machine learning del instituto, junto a investigadores y doctorandos: se acordaba un paper, se leía y después se debatía. Es la forma en que uno aprende a leer literatura críticamente, que es buena parte del trabajo de investigar."
+  },
+  {
+    "objectID": "p/02-pladema.html#qué-salió",
+    "href": "p/02-pladema.html#qué-salió",
+    "title": "Morfología coronaria y riesgo cardiovascular",
+    "section": "Qué salió",
+    "text": "Qué salió\nUna exposición en el Congreso Mar y Sierras (2023), con resultados preliminares: «Estudio de morfología coronaria y su potencial uso para la estratificación de riesgo cardiovascular».\nUna beca EVC-CIN (2024), del Consejo Interuniversitario Nacional, otorgada sobre esta línea de trabajo. No la ejecuté: para entonces ya me había movido al tema de mi tesis. El mérito de una beca por convocatoria es haber sido seleccionada, y la razón del cambio fue una decisión de investigación, no un abandono."
+  },
+  {
+    "objectID": "p/02-pladema.html#período",
+    "href": "p/02-pladema.html#período",
+    "title": "Morfología coronaria y riesgo cardiovascular",
+    "section": "Período",
+    "text": "Período\n2022–2023 · Instituto PLADEMA, UNICEN, Tandil."
+  },
+  {
+    "objectID": "p/04-orbit.html",
+    "href": "p/04-orbit.html",
+    "title": "orbit-propagator",
+    "section": "",
+    "text": "Trazas de tierra de cuatro satélites a lo largo de cuatro horas y media, propagadas con SGP4 y proyectadas sobre coordenadas geográficas."
+  },
+  {
+    "objectID": "p/04-orbit.html#qué-hace",
+    "href": "p/04-orbit.html#qué-hace",
+    "title": "orbit-propagator",
+    "section": "Qué hace",
+    "text": "Qué hace\nToma los elementos orbitales reales de cuatro satélites —la Estación Espacial Internacional, el Hubble, un Starlink y el NOAA-20— directamente de CelesTrak, y propaga sus trayectorias por dos caminos distintos.\nSGP4, el propagador analítico que se usa operativamente para todo objeto rastreado públicamente. Es el estándar y sirve de referencia.\nUn integrador Runge–Kutta de cuarto orden escrito desde las ecuaciones de movimiento, con tres modelos de fuerza que se pueden encadenar:\n\ngravedad kepleriana, tratando a la Tierra como masa puntual;\nperturbación J2, que incorpora el achatamiento ecuatorial de la Tierra;\nJ2 más arrastre atmosférico, con un modelo exponencial por capas."
+  },
+  {
+    "objectID": "p/04-orbit.html#el-detalle-que-suele-salir-mal",
+    "href": "p/04-orbit.html#el-detalle-que-suele-salir-mal",
+    "title": "orbit-propagator",
+    "section": "El detalle que suele salir mal",
+    "text": "El detalle que suele salir mal\nSGP4 no devuelve posiciones en un sistema inercial estándar: las devuelve en TEME, su propio sistema de referencia. Convertir eso a latitud y longitud no es una rotación por el tiempo sidéreo, como suele hacerse. TEME difiere de los sistemas inerciales estándar por precesión y nutación, y saltearse esas correcciones introduce un error sistemático en las trazas.\nEl proyecto aplica la cadena completa de transformación TEME → GCRS → ITRF, con las correcciones de la IAU."
+  },
+  {
+    "objectID": "p/04-orbit.html#lo-que-este-proyecto-no-hace",
+    "href": "p/04-orbit.html#lo-que-este-proyecto-no-hace",
+    "title": "orbit-propagator",
+    "section": "Lo que este proyecto no hace",
+    "text": "Lo que este proyecto no hace\nUna comparación cuantitativa seria entre el integrador propio y SGP4 no se puede hacer midiendo el error de posición en coordenadas cartesianas: ese error mezcla dos cosas distintas, la diferencia real entre los modelos de fuerza y la diferencia de fase orbital, que crece sin que el modelo sea peor. Hacerlo bien exige trabajar en elementos orbitales osculantes. Queda para un proyecto siguiente y está anotado como tal.\nEl modelo de atmósfera exponencial también tiene su límite: es un modelo medio estático, mientras que la densidad real en órbita baja varía fuertemente con la actividad solar y geomagnética. Da órdenes de magnitud del arrastre, no propagación de precisión."
+  },
+  {
+    "objectID": "p/04-orbit.html#código",
+    "href": "p/04-orbit.html#código",
+    "title": "orbit-propagator",
+    "section": "Código",
+    "text": "Código\ngithub.com/julietaamendola/orbit-propagator\nPython, con sgp4, skyfield, numpy, scipy, matplotlib y cartopy. Referencias: Vallado & McClain, Fundamentals of Astrodynamics and Applications, y la documentación de formatos de CelesTrak."
+  },
+  {
+    "objectID": "p/06-wis.html",
+    "href": "p/06-wis.html",
+    "title": "Women in STEM UNCPBA",
+    "section": "",
+    "text": "En 2023 fundé Women in STEM UNCPBA, una comunidad dentro de la Facultad de Ciencias Exactas para promover la participación de mujeres en ciencia, tecnología, ingeniería y matemática.\nLo que efectivamente hicimos:\n\nCiclos de cine y discusión, con películas que después se debatían.\nEncuentros abiertos con estudiantes de la facultad, informales, para juntarse y hablar.\nArmado de grupos de trabajo alrededor de proyectos a futuro."
+  },
+  {
+    "objectID": "p/06-wis.html#qué-fue",
+    "href": "p/06-wis.html#qué-fue",
+    "title": "Women in STEM UNCPBA",
+    "section": "",
+    "text": "En 2023 fundé Women in STEM UNCPBA, una comunidad dentro de la Facultad de Ciencias Exactas para promover la participación de mujeres en ciencia, tecnología, ingeniería y matemática.\nLo que efectivamente hicimos:\n\nCiclos de cine y discusión, con películas que después se debatían.\nEncuentros abiertos con estudiantes de la facultad, informales, para juntarse y hablar.\nArmado de grupos de trabajo alrededor de proyectos a futuro."
+  },
+  {
+    "objectID": "p/06-wis.html#qué-pasó-después",
+    "href": "p/06-wis.html#qué-pasó-después",
+    "title": "Women in STEM UNCPBA",
+    "section": "Qué pasó después",
+    "text": "Qué pasó después\nLa comunidad estuvo activa unos meses y no juntó la masa crítica para sostenerse. Es la historia habitual de la mayoría de las iniciativas estudiantiles, y prefiero contarla así antes que dejar una fecha abierta que sugiera una continuidad que no existió.\nLo que sí quedó fue la experiencia de armar algo desde cero: convocar, sostener una agenda y coordinar gente que no tenía por qué estar ahí."
+  },
+  {
+    "objectID": "p/06-wis.html#aparte",
+    "href": "p/06-wis.html#aparte",
+    "title": "Women in STEM UNCPBA",
+    "section": "Aparte",
+    "text": "Aparte\nEl Ada Lovelace Day 2024 de la facultad fue una iniciativa distinta, que a veces aparece mezclada con esta. Lo organizó la Facultad de Ciencias Exactas; yo impulsé la edición de ese año, participé de las reuniones de planificación y de las decisiones sobre su ejecución, y coordiné las actividades durante la jornada, con talleres para niñas de 10 a 12 años."
+  },
+  {
+    "objectID": "p/03-tami.html",
+    "href": "p/03-tami.html",
+    "title": "Embeddings en espacios hiperbólicos",
+    "section": "",
+    "text": "Un taller de matemática industrial es lo más parecido a una consultoría matemática que existe en el ámbito académico: una empresa lleva un problema real que no tiene resuelto, y un equipo de matemáticos lo ataca contra reloj durante una semana. El VI TAMI fue en FaMAF, Universidad Nacional de Córdoba, en 2025, y el problema que trabajé lo propuso Mercado Libre."
+  },
+  {
+    "objectID": "p/03-tami.html#cómo-funciona-un-tami",
+    "href": "p/03-tami.html#cómo-funciona-un-tami",
+    "title": "Embeddings en espacios hiperbólicos",
+    "section": "",
+    "text": "Un taller de matemática industrial es lo más parecido a una consultoría matemática que existe en el ámbito académico: una empresa lleva un problema real que no tiene resuelto, y un equipo de matemáticos lo ataca contra reloj durante una semana. El VI TAMI fue en FaMAF, Universidad Nacional de Córdoba, en 2025, y el problema que trabajé lo propuso Mercado Libre."
+  },
+  {
+    "objectID": "p/03-tami.html#el-problema-y-por-qué-la-geometría-importa",
+    "href": "p/03-tami.html#el-problema-y-por-qué-la-geometría-importa",
+    "title": "Embeddings en espacios hiperbólicos",
+    "section": "El problema, y por qué la geometría importa",
+    "text": "El problema, y por qué la geometría importa\nUn catálogo de productos es un árbol: categorías que contienen subcategorías que contienen productos. Para que un modelo trabaje con esa estructura hay que representar cada nodo como un vector — un embedding — de modo que las distancias entre vectores reflejen las relaciones del árbol.\nY ahí aparece un problema geométrico genuino. En el espacio euclídeo, un árbol no entra. El número de nodos a distancia \\(r\\) de la raíz crece exponencialmente con \\(r\\), mientras que el volumen de una bola euclídea crece solo polinomialmente. Meter una estructura exponencial en un espacio de crecimiento polinomial obliga a distorsionar: los nodos lejanos terminan representados más cerca de lo que deberían.\nEl espacio hiperbólico no tiene ese problema. Su volumen crece exponencialmente con el radio, que es exactamente la tasa a la que crece un árbol. La consecuencia práctica es llamativa: una jerarquía que en el espacio euclídeo necesita muchísimas dimensiones para representarse con poca distorsión, en el hiperbólico entra en unas pocas.\nExploramos los dos modelos habituales del espacio hiperbólico —el disco de Poincaré y el modelo de Lorentz— y las dificultades reales de optimizar en una variedad de curvatura negativa, donde las operaciones usuales del descenso por gradiente no valen tal cual."
+  },
+  {
+    "objectID": "p/03-tami.html#qué-salió",
+    "href": "p/03-tami.html#qué-salió",
+    "title": "Embeddings en espacios hiperbólicos",
+    "section": "Qué salió",
+    "text": "Qué salió\n«Embeddings en espacios hiperbólicos para datos con estructura jerárquica», Revista TAMI, Vol. 4 (2025), en equipo.\n\n\n\n\n\n\nLa Revista TAMI es la publicación del taller: recoge los informes de cada equipo y no tiene referato ni DOI. Es producción escrita, no un artículo con arbitraje, y así corresponde citarla.\n\n\n\n«De la geometría diferencial a tu carrito» — charla en el Congreso Mar y Sierras (2025), contando la experiencia del taller y el problema."
+  },
+  {
+    "objectID": "p/05-uma.html",
+    "href": "p/05-uma.html",
+    "title": "Una solución publicada en el Noticiero de la UMA",
+    "section": "",
+    "text": "La Competencia Interuniversitaria de Matemática Argentina es una de las competencias universitarias más duras del país. En la edición de 2022, uno de los problemas pedía probar que, dado un tetraedro, la suma de sus cuatro vectores normales exteriores —cada uno con módulo igual al área de la cara que corresponde— es el vector nulo.\nEl enunciado es de una simplicidad engañosa. Es un hecho puramente geométrico, sin números, y admite varias demostraciones de sabores muy distintos: una de álgebra lineal con productos vectoriales, una de cálculo vectorial que sale del teorema de la divergencia aplicado a un campo constante, y una que es casi un argumento físico sobre la presión uniforme en un cuerpo sumergido, que no puede empujarlo en ninguna dirección.\nY no es una curiosidad: el mismo resultado, generalizado, es lo que garantiza la conservación en los métodos de volúmenes finitos."
+  },
+  {
+    "objectID": "p/05-uma.html#el-problema",
+    "href": "p/05-uma.html#el-problema",
+    "title": "Una solución publicada en el Noticiero de la UMA",
+    "section": "",
+    "text": "La Competencia Interuniversitaria de Matemática Argentina es una de las competencias universitarias más duras del país. En la edición de 2022, uno de los problemas pedía probar que, dado un tetraedro, la suma de sus cuatro vectores normales exteriores —cada uno con módulo igual al área de la cara que corresponde— es el vector nulo.\nEl enunciado es de una simplicidad engañosa. Es un hecho puramente geométrico, sin números, y admite varias demostraciones de sabores muy distintos: una de álgebra lineal con productos vectoriales, una de cálculo vectorial que sale del teorema de la divergencia aplicado a un campo constante, y una que es casi un argumento físico sobre la presión uniforme en un cuerpo sumergido, que no puede empujarlo en ninguna dirección.\nY no es una curiosidad: el mismo resultado, generalizado, es lo que garantiza la conservación en los métodos de volúmenes finitos."
+  },
+  {
+    "objectID": "p/05-uma.html#el-resultado",
+    "href": "p/05-uma.html#el-resultado",
+    "title": "Una solución publicada en el Noticiero de la UMA",
+    "section": "El resultado",
+    "text": "El resultado\nMención de Honor en la CIMA 2022, y la solución quedó publicada en el Noticiero de la Unión Matemática Argentina, junto a otras soluciones destacadas de esa edición.\nEn colaboración con Santiago Giordani."
+  }
+]

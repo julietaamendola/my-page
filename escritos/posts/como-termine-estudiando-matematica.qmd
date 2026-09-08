@@ -1,0 +1,58 @@
+---
+title: "Cómo terminé estudiando matemática"
+description: "Quería ser astronauta. Tenía seis años. El camino desde ahí hasta una tesis sobre problemas inversos pasó por las olimpíadas, un telescopio y un cambio de carrera."
+date: 2025-06-04
+categories: [Personal]
+---
+
+Bueno… quería ser astronauta.
+
+Así arranca todo. Tenía seis años, vimos el sistema solar en la escuela y fuimos a un mini
+museo en mi ciudad. Y yo, obvio, salí diciendo: "quiero ser astronauta".
+
+## Primero fueron los problemas raros
+
+Me interesaban mucho las ciencias naturales, y me llamaban la atención unos problemas de
+*pensamiento lateral* que la maestra nos llevaba como tarea opcional. Opcional, pero yo los
+hacía todos.
+
+Fue pasando el tiempo y me anoté en las olimpíadas de matemática. **A los trece llegué a mi
+primer nacional.** Y ahí pasó algo que no esperaba: conocí gente que jugaba con los mismos
+temas raros que yo. Resulta que no era la única.
+
+## Después apareció la física
+
+En esa época empecé a leer a Stephen Hawking, a mirar videos de Quantum Fracture y de
+Santaolalla, y quedé encantada con el experimento de la doble rendija y con las conjeturas
+sobre la geometría y la expansión del universo.
+
+Y con la astronomía. Hice un curso con el **Grupo de Observadores del Cielo**, y ahí uno de
+sus integrantes me empezó a hablar de derivadas e integrales, de las trayectorias de los
+cuerpos celestes y de las leyes de Kepler. Además, para posicionar el telescopio había que
+ubicarse usando coordenadas esféricas.
+
+Cuánta matemática, de repente.
+
+::: {.callout-note appearance="simple"}
+De ese curso salió, muchos años después, [una serie sobre la esfera celeste](esfera-celeste.qmd):
+por qué la distancia entre dos estrellas no se calcula como en el plano.
+:::
+
+## El plot twist
+
+Durante toda la secundaria juraba que iba a estudiar física. Pero después empecé a dudar:
+física, astronomía, matemática. Lo que realmente me interesaba era la **física teórica**.
+
+Al final arranqué física en la UNICEN, pero como la orientación era bastante experimental,
+terminé metiéndome también en matemática. Durante un tiempo cursé las dos a la vez.
+
+## Spoiler: estudiar matemática no es fácil
+
+Hay que bancarse mucha frustración, las dudas, los errores, y convivir con el perfeccionismo.
+Pero cuando entendés algo, cuando te das cuenta de que podés resolver problemas que antes no,
+te sentís un superhéroe.
+
+## No sé si alguna vez voy a pisar la Luna
+
+Pero gracias a las matemáticas llegué bastante más lejos de lo que pensaba. Y ahora me puedo
+divertir contando las cosas que aprendí y que estoy aprendiendo.

@@ -1,0 +1,28 @@
+---
+title: "Una solución publicada en el Noticiero de la UMA"
+description: "El problema de la CIMA 2022: probar que los cuatro vectores normales exteriores de un tetraedro, pesados por el área de su cara, suman cero. La solución se publicó en el boletín de la Unión Matemática Argentina."
+orden: 5
+---
+
+## El problema
+
+La Competencia Interuniversitaria de Matemática Argentina es una de las competencias
+universitarias más duras del país. En la edición de 2022, uno de los problemas pedía probar
+que, dado un tetraedro, **la suma de sus cuatro vectores normales exteriores —cada uno con
+módulo igual al área de la cara que corresponde— es el vector nulo**.
+
+El enunciado es de una simplicidad engañosa. Es un hecho puramente geométrico, sin números, y
+admite varias demostraciones de sabores muy distintos: una de álgebra lineal con productos
+vectoriales, una de cálculo vectorial que sale del teorema de la divergencia aplicado a un
+campo constante, y una que es casi un argumento físico sobre la presión uniforme en un cuerpo
+sumergido, que no puede empujarlo en ninguna dirección.
+
+Y no es una curiosidad: el mismo resultado, generalizado, es lo que garantiza la conservación
+en los métodos de volúmenes finitos.
+
+## El resultado
+
+Mención de Honor en la CIMA 2022, y la solución quedó publicada en el **Noticiero de la Unión
+Matemática Argentina**, junto a otras soluciones destacadas de esa edición.
+
+En colaboración con **Santiago Giordani**.

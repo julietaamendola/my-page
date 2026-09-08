@@ -1,0 +1,134 @@
+---
+title: "Julieta Améndola"
+subtitle: "Licenciatura en Ciencias Matemáticas · UNCPBA · Tandil, Argentina"
+format:
+  pdf:
+    documentclass: scrartcl
+    papersize: a4
+    fontsize: 10pt
+    geometry:
+      - top=20mm
+      - bottom=20mm
+      - left=20mm
+      - right=20mm
+    colorlinks: true
+    linkcolor: violet
+    urlcolor: violet
+    number-sections: false
+    include-in-header:
+      text: |
+        \usepackage{titlesec}
+        \usepackage{enumitem}
+        \usepackage{xcolor}
+        \definecolor{violeta}{HTML}{7C5CBF}
+        \definecolor{gris}{HTML}{6B6080}
+        \titleformat{\section}{\normalfont\bfseries\color{violeta}\scshape\small}{}{0pt}{}[\vspace{-.6em}\color{violeta}\rule{\linewidth}{.4pt}]
+        \titlespacing{\section}{0pt}{1.4em}{.7em}
+        \titleformat{\subsection}{\normalfont\bfseries\normalsize}{}{0pt}{}
+        \titlespacing{\subsection}{0pt}{.9em}{.2em}
+        \setlist[itemize]{leftmargin=1.2em,itemsep=.15em,topsep=.25em}
+        \renewcommand{\baselinestretch}{1.05}
+lang: es
+---
+
+\vspace{-1em}
+\noindent\small
+julietaamendola7@gmail.com · [julietaamendola.github.io/my-page](https://julietaamendola.github.io/my-page/) · [linkedin.com/in/julieta-améndola](https://www.linkedin.com/in/julieta-am%C3%A9ndola-b95bab208/)
+\normalsize
+
+## Formación
+
+**Licenciatura en Ciencias Matemáticas** — UNCPBA, Facultad de Ciencias Exactas, Tandil.
+Plan de cinco años y 3045 horas presenciales. Avance 96%: todos los finales, optativas y
+créditos aprobados; resta la defensa de tesis, prevista para fines de 2026.
+Promedio 9,1 sin aplazos y 8,6 con aplazos.
+*Optativas:* Álgebra Lineal para Aprendizaje Automático, Inteligencia Artificial, Taller de
+Matemática Aplicada, Programación en Python, Animación con GeoGebra, Relatividad Especial.
+
+**Licenciatura en Ciencias Físicas (incompleta)** — UNCPBA, 2019–2021.
+Avance 42%, promedio 9/10. Durante 2020 cursé ambas carreras en paralelo.
+
+**Programa de Inglés Académico Avanzado** — Indiana University Indianapolis, 2023.
+Beca Friends of Fulbright. Cursos de Topología, Ética y Escritura Académica.
+
+## Investigación
+
+**Tesista de grado** — UNCPBA · 2024–presente
+: El problema inverso en tomografía óptica difusa: reconstruir las propiedades ópticas del
+  interior de un medio a partir de mediciones de luz en su superficie. El trabajo abarca el
+  estudio teórico del problema directo y del inverso, la generación de un dataset propio de
+  unas 15.000 simulaciones por elementos finitos sobre mallas tetraédricas tridimensionales,
+  la elección del refinamiento de malla mediante extrapolación de Richardson, un esquema de
+  normalización con criterio físico, aumentación de datos por las simetrías del dominio, y el
+  diseño y entrenamiento de modelos de aprendizaje profundo bajo la restricción de correr en
+  una máquina de escritorio.
+  Dirección: Guido Rodrigo Baez. Codirección: Mauro Natale.
+
+**Asistente de investigación** — Instituto PLADEMA, UNICEN · 2022–2023
+: Proyecto JOVIN, *Herramientas de Computación Científica e Inteligencia Artificial en
+  Cardiología*. Caracterización matemática de la geometría arterial coronaria y modelos de
+  aprendizaje automático para estimar riesgo cardiovascular a partir de ella. Participación en
+  el grupo quincenal de discusión de literatura de machine learning del instituto, junto a
+  investigadores y doctorandos.
+
+**Neuromatch Academy — Deep Learning** · 2022 y 2023
+: Escuela internacional intensiva, íntegramente en inglés, cursada en dos ediciones y las dos
+  con beca. Cada edición incluye un proyecto de investigación en equipo interdisciplinario e
+  internacional: entrenamiento de un agente de aprendizaje por refuerzo sobre datos de mercado
+  (2022) y detección de gestos manuales comparando una red convolucional con transfer learning
+  contra reglas geométricas programadas a mano (2023).
+
+## Becas y distinciones
+
+- **Beca Friends of Fulbright** — U.S. Department of State / Embajada de EE.UU. en Argentina, 2023. Siete semanas en Indiana University Indianapolis, con familia anfitriona.
+- **Beca EVC-CIN** — Consejo Interuniversitario Nacional, 2024. Otorgada; no ejecutada por cambio de línea de investigación.
+- **Mención de Honor** — Competencia Interuniversitaria de Matemática Argentina (CIMA), 2022. Solución publicada en el Noticiero de la Unión Matemática Argentina.
+- **Selección para la I Escuela de Computación Cuántica (ECCI)** — UNRN y UNAHUR, Bariloche, 2026. Con estadía y almuerzos becados.
+- **Becas de Neuromatch Academy** — 2022 y 2023, las dos ediciones cursadas con beca.
+- **Medalla al mejor promedio** — Instituto Nuestra Señora de Fátima, Olavarría, 2018.
+
+## Docencia
+
+**Ayudante de cátedra** — UNICEN, Tandil · 2021–2025
+: Análisis Matemático I (2021, 2023), Matemática Computacional (2022–2025), Cálculo II (2024)
+  y Cálculo I (2025). Cinco años consecutivos en cuatro materias distintas, con alumnos de
+  matemática, de ingeniería y de una tecnicatura en desarrollo de aplicaciones informáticas.
+  En las clases prácticas trabajaba banco por banco, respondiendo consultas teóricas y
+  prácticas de cada alumno, y también expliqué teoría y práctica en el pizarrón. Desarrollo de
+  recursos interactivos en GeoGebra para Análisis Matemático I y corrección de evaluaciones en
+  el Taller de Matemática Computacional.
+
+**Clases particulares de matemática** — modalidad virtual · 2020–presente
+: Más de 500 horas de clases de matemática universitaria: Análisis Matemático I, II y III,
+  Cálculo, Cálculo Multivariable, Análisis Numérico, Variable Compleja, Álgebra Lineal,
+  Geometría y Álgebra Lineal, Matemática Discreta y Elementos de Lógica y Teoría de Conjuntos.
+  Preparación de alumnos de primaria y secundaria para las olimpíadas OMA, Ñandú y Olimpíada
+  de Mayo.
+
+**Instructora, Taller de Olimpíadas Matemáticas** — UNCPBA, virtual · 2021
+
+## Producción escrita y congresos
+
+- **«Embeddings en espacios hiperbólicos para datos con estructura jerárquica»** — *Revista TAMI*, Vol. 4 (2025). Informe del problema propuesto por Mercado Libre en el VI Taller de Matemática Industrial, FaMAF-UNC. Publicación del taller, sin referato.
+- **Solución de la CIMA 2022** — Noticiero de la Unión Matemática Argentina, con Santiago Giordani.
+- **Congreso Mar y Sierras** — expositora, 2023 y 2025. Tres exposiciones: *«Estudio de morfología coronaria y su potencial uso para la estratificación de riesgo cardiovascular»* (2023), *«El problema del diariero»* sobre optimización convexa, con Valentín Agnone (2025), y *«De la geometría diferencial a tu carrito»* (2025).
+- **Tercer Encuentro Conjunto RSME–UMA** — Bariloche, 2025. Encuentro internacional de la Real Sociedad Matemática Española y la Unión Matemática Argentina.
+- **Reunión Anual de la UMA** — Neuquén (2022) y Salta (2023).
+- **VI Taller de Matemática Industrial (TAMI)** — FaMAF, UNC, 2025.
+- **Reunión Anual de la Asociación Física Argentina** — 2019.
+
+## Liderazgo y extensión
+
+- **Fundadora, Women in STEM UNCPBA** (2023). Ciclos de cine y discusión, encuentros abiertos con estudiantes de la facultad y armado de grupos de trabajo.
+- **Organización de la Olimpíada Matemática Argentina** — UNCPBA, Tandil y Necochea, 2019–presente.
+- **Representante estudiantil, Departamento de Matemática** — UNICEN, 2023. Electa.
+- **Ada Lovelace Day** — UNICEN, 2024. Impulsora y coordinadora de actividades.
+- **Alumni Fulbright, Grupo Mar del Plata** — 2023–presente.
+
+## Idiomas y herramientas
+
+**Idiomas.** Español nativo. Inglés avanzado (Cambridge FCE B2 · Fulbright). Italiano básico.
+Francés, nociones.
+
+**Herramientas.** Python, PyTorch, TensorFlow, scikit-learn, NumPy, SciPy, Pandas, Matplotlib,
+Seaborn, Manim, GeoGebra, LaTeX, Quarto, Git, GitHub, Bash, MATLAB, Scilab.

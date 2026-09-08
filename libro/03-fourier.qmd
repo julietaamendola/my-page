@@ -1,0 +1,136 @@
+# Series de Fourier {#sec-fourier}
+
+::: {.callout-note appearance="simple"}
+## Capítulo en construcción
+Abajo está el temario. Después hay un **adelanto**: una sección escrita, para ver cómo va a
+estar armado cada capítulo cuando esté terminado.
+:::
+
+## Temario {.unnumbered}
+
+Definición de serie de Fourier. Condiciones para que una serie de Fourier converja a la función. Series en seno y en coseno. Forma compleja. Convergencias puntual y en media. Desigualdad de Bessel e identidad de Parseval. Aplicaciones.
+
+## Adelanto: qué pasa en un salto {.unnumbered}
+
+Una serie de Fourier es una suma de senos y cosenos, que son funciones perfectamente suaves.
+La pregunta natural es qué puede hacer una suma así frente a una función que **salta**.
+
+La onda cuadrada es el caso de manual. Vale $-1$ en $(-\pi, 0)$ y $+1$ en $(0, \pi)$, y su
+serie de Fourier resulta
+
+$$
+f(x) \;\sim\; \frac{4}{\pi} \sum_{k \text{ impar}} \frac{\sin kx}{k}
+\;=\; \frac{4}{\pi}\left( \sin x + \frac{\sin 3x}{3} + \frac{\sin 5x}{5} + \cdots \right).
+$$ {#eq-cuadrada}
+
+El teorema de Dirichlet dice que esta serie converge a $f(x)$ en todo punto donde $f$ es
+continua, y en el salto converge al **promedio de los dos límites laterales**. Acá, a cero.
+
+Eso es la convergencia puntual. Lo que no dice es qué forma tienen las sumas parciales por el
+camino, y ahí aparece algo que sorprende la primera vez.
+
+```{python}
+#| label: fig-gibbs
+#| fig-cap: "Izquierda: las sumas parciales de la @eq-cuadrada con 1, 5 y 25 términos. Derecha: un acercamiento al salto en $x=0$. La oscilación se aprieta contra la discontinuidad a medida que crece $N$, pero el pico **no baja**: se estaciona en $1{,}17898$."
+#| fig-width: 8.6
+#| fig-height: 3.4
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+VIOLETA, VIOLETA2, TINTA, GRIS = "#7c5cbf", "#b48ec8", "#1e1a2e", "#a99fc0"
+
+def parcial(x, N):
+    """Suma parcial de la serie de la onda cuadrada, hasta el termino N."""
+    s = np.zeros_like(x)
+    for k in range(1, N + 1, 2):
+        s += np.sin(k*x)/k
+    return 4/np.pi*s
+
+x = np.linspace(-np.pi, np.pi, 4000)
+fig, axs = plt.subplots(1, 2, figsize=(8.6, 3.4))
+
+axs[0].plot(x, np.sign(np.sin(x)), color=TINTA, lw=1.6, label="onda cuadrada")
+for N, c in [(1, GRIS), (5, VIOLETA2), (25, VIOLETA)]:
+    axs[0].plot(x, parcial(x, N), color=c, lw=1.3, label=f"$N={N}$")
+axs[0].set_ylim(-1.45, 1.45); axs[0].set_xlabel("$x$")
+axs[0].legend(fontsize=8, frameon=False, loc="lower right")
+
+for N, c in [(25, VIOLETA2), (101, VIOLETA), (401, TINTA)]:
+    z = np.linspace(1e-6, 0.9, 60000)
+    y = parcial(z, N)
+    axs[1].plot(z, y, color=c, lw=1.3, label=f"$N={N}$ · máx {y.max():.5f}")
+axs[1].axhline(1, color=GRIS, ls=":", lw=1)
+axs[1].set_xlim(0, .9); axs[1].set_ylim(.9, 1.25); axs[1].set_xlabel("$x$")
+axs[1].legend(fontsize=8, frameon=False, loc="lower right")
+
+for a in axs:
+    a.spines[["top", "right"]].set_visible(False)
+fig.tight_layout()
+plt.show()
+```
+
+Esto es el **fenómeno de Gibbs**. La suma parcial se pasa del valor límite en un pico que no
+se achica nunca: se corre hacia el salto y se angosta, pero su altura tiende a
+
+$$
+\frac{2}{\pi}\int_0^{\pi} \frac{\sin t}{t}\,dt \;=\; 1{,}178979\ldots
+$$ {#eq-gibbs}
+
+Es decir, casi un $18\%$ por encima del valor $1$ hacia el que converge la serie, o un $9\%$
+del salto total, que vale $2$. Y no es un defecto de la onda cuadrada: aparece en el mismo
+porcentaje en **cualquier** función con un salto.
+
+No hay contradicción con Dirichlet. La convergencia puntual dice que, fijado un $x$, la
+sucesión de sumas parciales tiende a $f(x)$. El pico también tiende a $x=0$, así que para cada
+$x$ fijo termina quedando a la izquierda del punto. Lo que falla es la convergencia
+**uniforme**: no hay ningún $N$ a partir del cual todas las sumas parciales estén dentro de una
+banda estrecha alrededor de $f$.
+
+::: {.content-visible when-format="html"}
+```{=html}
+<div class="video">
+  <iframe src="https://www.youtube-nocookie.com/embed/r6sGWTCMz2k"
+          title="But what is a Fourier series? — 3Blue1Brown"
+          loading="lazy" allowfullscreen
+          allow="accelerometer; clipboard-write; encrypted-media; picture-in-picture"></iframe>
+</div>
+<p class="video-pie">Grant Sanderson (3Blue1Brown), <em>But what is a Fourier series? From heat
+flow to circle drawings</em>. La construcción con círculos que aparece a partir del minuto 10
+es la mejor intuición que conozco de por qué los coeficientes son integrales.</p>
+```
+:::
+
+::: {.content-visible when-format="pdf"}
+Video recomendado: Grant Sanderson (3Blue1Brown), *But what is a Fourier series? From heat flow
+to circle drawings*, <https://www.youtube.com/watch?v=r6sGWTCMz2k>.
+:::
+
+::: {.ejercicio}
+La @eq-cuadrada evaluada en el punto de salto $x = 0$ da $\sin 0 + \tfrac{1}{3}\sin 0 + \cdots$,
+que es cero. Pero la onda cuadrada no vale cero en $x=0$: vale $-1$ por izquierda y $+1$ por
+derecha. ¿Qué está pasando?
+
+- [La serie está mal calculada.]{.mal}
+- [La serie converge al promedio de los límites laterales, que es cero.]{.bien}
+- [La serie diverge en el punto de salto.]{.mal}
+- [La serie converge a $+1$, porque es el valor por derecha.]{.mal}
+
+::: {.explica}
+Es exactamente lo que garantiza el teorema de Dirichlet: en un punto de salto la serie converge
+a $\tfrac{1}{2}\big(f(x^-) + f(x^+)\big)$. Acá, $\tfrac{1}{2}(-1 + 1) = 0$. La serie no
+"conoce" el valor que le asignemos a $f$ en el punto: los coeficientes son integrales, y
+cambiar una función en un punto aislado no cambia ninguna integral.
+:::
+:::
+
+::: {.callout-tip collapse="true"}
+## Para hacer a mano: el valor de $\pi/4$
+
+Evaluando la @eq-cuadrada en $x = \pi/2$, deducir la fórmula de Leibniz
+$$
+\frac{\pi}{4} = 1 - \frac13 + \frac15 - \frac17 + \cdots
+$$
+y estimar cuántos términos hacen falta para obtener tres decimales correctos. La respuesta al
+segundo punto explica por qué nadie calcula $\pi$ así.
+:::

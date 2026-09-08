@@ -1,0 +1,32 @@
+---
+title: "Women in STEM UNCPBA"
+description: "Una comunidad para promover la participación femenina en ciencia, tecnología, ingeniería y matemática dentro de la facultad. Fundada en 2023."
+orden: 6
+---
+
+## Qué fue
+
+En 2023 fundé Women in STEM UNCPBA, una comunidad dentro de la Facultad de Ciencias Exactas
+para promover la participación de mujeres en ciencia, tecnología, ingeniería y matemática.
+
+Lo que efectivamente hicimos:
+
+- **Ciclos de cine y discusión**, con películas que después se debatían.
+- **Encuentros abiertos** con estudiantes de la facultad, informales, para juntarse y hablar.
+- **Armado de grupos de trabajo** alrededor de proyectos a futuro.
+
+## Qué pasó después
+
+La comunidad estuvo activa unos meses y no juntó la masa crítica para sostenerse. Es la
+historia habitual de la mayoría de las iniciativas estudiantiles, y prefiero contarla así
+antes que dejar una fecha abierta que sugiera una continuidad que no existió.
+
+Lo que sí quedó fue la experiencia de armar algo desde cero: convocar, sostener una agenda y
+coordinar gente que no tenía por qué estar ahí.
+
+## Aparte
+
+El **Ada Lovelace Day 2024** de la facultad fue una iniciativa distinta, que a veces aparece
+mezclada con esta. Lo organizó la Facultad de Ciencias Exactas; yo impulsé la edición de ese
+año, participé de las reuniones de planificación y de las decisiones sobre su ejecución, y
+coordiné las actividades durante la jornada, con talleres para niñas de 10 a 12 años.

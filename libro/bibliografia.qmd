@@ -1,0 +1,52 @@
+# Bibliografía {.unnumbered}
+
+Los textos que uso, y para qué sirve cada uno.
+
+**González, A. G.** *Métodos Matemáticos de la Física.* UNCPBA.
+El programa de la cátedra y el orden de los temas siguen a este texto.
+
+**Boyce, W. E. y DiPrima, R. C.** *Elementary Differential Equations and Boundary Value
+Problems.* Wiley.
+El más accesible para todo lo de ecuaciones ordinarias y problemas de contorno.
+
+**Zachmanoglou, E. C. y Thoe, D. W.** *Introduction to Partial Differential Equations with
+Applications.* Dover.
+Clasificación, características y formas canónicas. Es el que mejor explica el capítulo 8.
+
+**Strauss, W. A.** *Partial Differential Equations: An Introduction.* Wiley.
+El mejor primer libro de EDP que conozco. Corto, honesto sobre lo que no demuestra, y con
+capítulos separados para onda, difusión y Laplace.
+
+**Evans, L. C.** *Partial Differential Equations.* American Mathematical Society.
+La referencia de posgrado. El capítulo 3, sobre ecuaciones no lineales de primer orden y
+bandas características, es el mejor tratamiento del tema que existe.
+
+**Dallos, D.** *Notas de clase de Ecuaciones Diferenciales II.* 2024.
+Notas de un curso de Licenciatura en Matemática. Cubre curvas y superficies integrales de
+campos vectoriales antes de las EDP de primer orden, que es el orden que hace que el método
+de las características se entienda en vez de memorizarse. En español.
+
+**Butkov, E.** *Mathematical Physics.* Addison-Wesley.
+Cubre casi todo el programa desde el lado del físico. Bueno para ver de dónde sale cada
+herramienta.
+
+**Stakgold, I.** *Boundary Value Problems of Mathematical Physics.* SIAM.
+La referencia seria para funciones de Green y distribuciones.
+
+**Tijonov, A. N. y Samarsky, A. A.** *Ecuaciones de la Física Matemática.* Mir.
+Clásico, con muchísimos problemas físicos resueltos en detalle.
+
+**Bender, C. M. y Orszag, S. A.** *Advanced Mathematical Methods for Scientists and
+Engineers.* Springer.
+Para desarrollos asintóticos. No tiene rival en ese tema.
+
+**Lighthill, M. J.** *An Introduction to Fourier Analysis and Generalised Functions.*
+Cambridge University Press.
+Corto y luminoso. La mejor entrada a distribuciones.
+
+**Courant, R. y Hilbert, D.** *Methods of Mathematical Physics.* Wiley.
+La obra de referencia. No para aprender de cero, sí para consultar.
+
+**Spiegel, M., Lipschutz, S. y Liu, J.** *Mathematical Handbook of Formulas and Tables.*
+McGraw-Hill.
+Tablas de transformadas y de funciones especiales.

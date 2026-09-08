@@ -1,0 +1,10 @@
+# Ecuaciones integrales {#sec-integrales}
+
+::: {.callout-note appearance="simple"}
+## Capítulo en construcción
+Abajo está el temario. El contenido se agrega en orden de necesidad.
+:::
+
+## Temario {.unnumbered}
+
+Ecuaciones del tipo de Fredholm y de Volterra. Ecuaciones integrales resueltas por transformadas.

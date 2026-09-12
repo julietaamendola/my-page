@@ -323,5 +323,17 @@ var MATERIAL = [
     meta_en: 'Draft · chapter 8 complete, previews in 3 and 10',
     link: 'metodos/index.html',
     activo: true
+  },
+  {
+    tipo_es: 'Guías resueltas',
+    tipo_en: 'Worked guides',
+    titulo_es: 'Guías resueltas de Análisis Matemático II',
+    titulo_en: 'Worked guides for Calculus II',
+    desc_es: 'Los ejercicios de la cátedra resueltos con el razonamiento adelante y la cuenta atrás, con figuras que se pueden mover: relieves que se giran, caminos que se deforman, campos y superficies con deslizadores, y preguntas que se contestan en la página. Dos guías hasta ahora: campos conservativos y función potencial, y extremos de funciones de varias variables, esta última con un capítulo final que lleva los mismos métodos a la estadística, la mecánica celeste y el diseño de redes.',
+    desc_en: 'The course exercises, solved with the reasoning first and the algebra second, illustrated with figures you can move: surfaces you rotate, paths you deform, fields and surfaces with sliders, and questions you answer on the page. Two guides so far: conservative fields and potential functions, and extrema of functions of several variables, the latter closing with a chapter that takes the same methods to statistics, celestial mechanics and network design.',
+    meta_es: '2 guías · web interactiva y PDF',
+    meta_en: '2 guides · interactive web and PDF',
+    link: 'guias/index.html',
+    activo: true
   }
 ];

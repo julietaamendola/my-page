@@ -1,0 +1,266 @@
+---
+title: "Resumen y mapa de la guía"
+---
+
+## Los resultados, todos juntos {#sec-tabla}
+
+| Ej. | Campo | ¿Cons.? | Función potencial |
+|---|---|:--:|---|
+| 13.a | $(2xy + e^y,\ x^2 + xe^y)$ | sí | $x^2y + xe^y + C$ |
+| 13.b | $(3x^2y^2 - y,\ 2x^3y - x)$ | sí | $x^3y^2 - xy$ |
+| 13.c | $(2xyz,\ x^2z + z,\ x^2y + y)$ | sí | $yz\,(x^2+1) + C$ |
+| 18.a | $(xe^x,\ 1 + \cos y)$ | sí | $e^x(x-1) + y + \operatorname{sen} y + C$ |
+| 18.b | $(\operatorname{sen} y + 2xy,\ x\cos y + x^2)$ | sí | $x \operatorname{sen} y + x^2 y + C$ |
+| 18.c | $\left(\frac{1}{x-1},\ y^2+2\right)$ | sí$^{(x>1)}$ | $\ln(x-1) + \frac{y^3}{3} + 2y - \frac73$ |
+| 18.d | $(y^2 + x,\ 2xy + y)$ | sí | $xy^2 + \frac{x^2}{2} + \frac{y^2}{2} - 35$ |
+| 19 | Coulomb, $\varepsilon Q q\, \vec r / r^3$ | sí$^{*}$ | $-\dfrac{\varepsilon Q q}{r} + C$ |
+| 20 | $(2xy + 3,\ x^2 + 4y)$ | sí | $x^2y + 3x + 2y^2 + C$;  $W = 12$ |
+| 21 | Gravitatorio, $-GMm\,\vec r/r^3$ | sí$^{*}$ | $\dfrac{GMm}{r} + C$ |
+
+: Los campos de la guía de la cátedra. $^{*}$ en $\mathbb{R}^3 \setminus \{\vec 0\}$. {tbl-colwidths="[8,34,10,48]"}
+
+Y los contraejemplos del @sec-remolino y el @sec-vortice, que son los que cierran el tema:
+
+| Campo | Dominio | rot | ¿Cons.? | Por qué |
+|---|---|:--:|:--:|---|
+| $(-y,\ x)$ | $\mathbb{R}^2$ | $2$ | no | falla el test; $\oint = 2\pi R^2$ |
+| $(-y^2,\ x^2)$ | $\mathbb{R}^2$ | $2(x+y)$ | no | falla el test salvo sobre $y=-x$ |
+| $\left(\frac{-y}{x^2+y^2},\ \frac{x}{x^2+y^2}\right)$ | $\mathbb{R}^2 \setminus \{\vec 0\}$ | $0$ | **no** | pasa el test, pero el dominio tiene un agujero: $\oint = 2\pi$ |
+| el mismo, en $x>0$ | semiplano | $0$ | sí | el semiplano es simplemente conexo; $f = \operatorname{arctg}(y/x)$ |
+| $(2xy+3-cy,\ x^2+4y+cx)$ | $\mathbb{R}^2$ | $2c$ | solo si $c=0$ | la planta con cinta del @sec-planta |
+
+: Los campos que no son conservativos, y la razón exacta en cada caso. {tbl-colwidths="[26,17,8,10,39]"}
+
+## El mapa de equivalencias {#sec-mapa}
+
+Esta es la cadena que conviene tener clavada, con sus hipótesis en el lugar correcto. Sea
+$\vec F$ un campo $C^1$ sobre un abierto **conexo** $D$:
+
+$$
+\vec F \text{ conservativo}
+\iff \oint_C \vec F \cdot d\vec r = 0 \ \ \forall\, C \text{ cerrada en } D
+\iff \text{la integral de línea no depende del camino.}
+$$
+
+Estas tres son equivalentes **siempre**. La cuarta condición se engancha solo con una hipótesis
+extra:
+
+$$
+\vec F \text{ conservativo} \;\Longrightarrow\; \operatorname{rot} \vec F = \vec 0
+\qquad \text{(siempre, por Schwarz)}
+$$
+$$
+\operatorname{rot} \vec F = \vec 0 \;\Longrightarrow\; \vec F \text{ conservativo}
+\qquad \text{\textbf{solo si } } D \text{ es simplemente conexo.}
+$$
+
+La flecha que falla es la de vuelta, y el @sec-vortice es el contraejemplo que la rompe.
+
+```{python}
+#| label: fig-mapa
+#| fig-cap: "El árbol de decisión completo. Las dos ramas de la derecha son las dos maneras distintas de que un campo no sea conservativo, y se confunden todo el tiempo: en una falla la cuenta, en la otra falla la forma del dominio."
+#| fig-width: 7.4
+#| fig-height: 5.0
+
+import matplotlib.pyplot as plt
+from matplotlib.patches import FancyBboxPatch, FancyArrowPatch
+
+VIOLETA, VIOLETA2, TINTA, GRIS = "#7c5cbf", "#b48ec8", "#1e1a2e", "#a99fc0"
+VERDE, ROJO = "#2f6b48", "#9c443d"
+
+fig, ax = plt.subplots(figsize=(7.4, 5.0))
+ax.set_xlim(0, 10); ax.set_ylim(0, 10); ax.axis("off")
+
+def caja(x, y, w, h, texto, color, relleno, tam=8.5, negrita=False):
+    ax.add_patch(FancyBboxPatch((x - w/2, y - h/2), w, h,
+                                boxstyle="round,pad=0.12", linewidth=1.2,
+                                edgecolor=color, facecolor=relleno))
+    ax.text(x, y, texto, ha="center", va="center", fontsize=tam, color=color,
+            fontweight="bold" if negrita else "normal", linespacing=1.45)
+
+def flecha(x0, y0, x1, y1, etiqueta="", dx=0, dy=0, color=GRIS):
+    ax.add_patch(FancyArrowPatch((x0, y0), (x1, y1), arrowstyle="-|>",
+                                 mutation_scale=12, linewidth=1.1, color=color))
+    if etiqueta:
+        ax.text((x0+x1)/2 + dx, (y0+y1)/2 + dy, etiqueta, ha="center", va="center",
+                fontsize=7.6, color=color,
+                bbox=dict(boxstyle="round,pad=0.18", fc="white", ec="none"))
+
+caja(5, 9.3, 5.4, .9, "Escribir $P$, $Q$ (, $R$) y el dominio $D$\ndonde el campo es $C^1$",
+     TINTA, "#faf8fc")
+flecha(5, 8.85, 5, 8.05)
+
+caja(5, 7.6, 3.6, .8, "¿$\\mathrm{rot}\\ \\vec F = \\vec 0$ en $D$?", VIOLETA, "#f2eef8", 9)
+flecha(5, 7.2, 5, 6.35, "sí", -.35, 0)
+flecha(6.8, 7.6, 8.6, 7.6, "no", 0, .3, ROJO)
+
+caja(8.9, 7.6, 2.5, 1.35,
+     "NO conservativo\n\nexhibir el par que\nno coincide", ROJO, "#f8eae8", 8)
+
+caja(5, 5.9, 4.0, .8, "¿$D$ es simplemente conexo?", VIOLETA, "#f2eef8", 9)
+flecha(5, 5.5, 5, 4.65, "sí", -.35, 0)
+flecha(7.0, 5.9, 8.6, 5.15, "no", .25, .25, ROJO)
+
+caja(8.9, 4.4, 2.5, 1.9,
+     "El test NO alcanza\n\nbuscar una curva\ncerrada con\n$\\oint \\neq 0$\n(el vórtice)",
+     ROJO, "#f8eae8", 8)
+
+caja(5, 4.2, 4.6, .8, "CONSERVATIVO · el potencial existe", VERDE, "#e6f3ec", 9, True)
+flecha(5, 3.8, 5, 3.0)
+
+caja(5, 2.55, 5.0, .9, "Integrar una componente\n$f = \\int P\\,dx + g(y)$", TINTA, "#faf8fc")
+flecha(5, 2.1, 5, 1.45)
+
+caja(5, 1.0, 5.6, .9,
+     "Ajustar con las otras: $f_y = Q$ (y $f_z = R$)\nFijar $C$ con el dato · verificar $\\nabla f = \\vec F$",
+     TINTA, "#faf8fc")
+
+ax.text(1.35, 2.55, "si acá aparece\nun $g'(y)$ que\ndepende de $x$:\nerror de cuenta",
+        ha="center", va="center", fontsize=7.4, color=GRIS, style="italic", linespacing=1.5)
+
+fig.tight_layout()
+plt.show()
+```
+
+## Para llevarse {#sec-llevarse}
+
+::: {.callout-tip}
+## Las siete cosas que de verdad hay que tener
+
+1. **El test se hace primero.** Antes de integrar nada. Cuesta dos renglones y decide si el
+   ejercicio tiene solución.
+2. **El dominio es parte de la respuesta.** "Es conservativo" sin decir dónde es una respuesta
+   incompleta, y en los ejercicios con denominadores o logaritmos, directamente mal.
+3. **La constante de integración es una función**, de todas las variables que no integraste. Ese
+   es el error más frecuente del tema.
+4. **Si $g'(y)$ depende de $x$, algo está mal.** O el campo no era conservativo, o hay un error de
+   cuenta en la integral anterior.
+5. **Verificar siempre.** Calcular $\nabla f$ y comparar con $\vec F$ cuesta diez segundos y
+   atrapa casi todos los errores.
+6. **19 y 21 son el mismo campo central con distinta constante.** Vale la pena memorizar el
+   resultado general: si $\vec F = \dfrac{k\,\vec r}{r^3}$, entonces $f = -\dfrac{k}{r} + C$. Con
+   $k = \varepsilon Qq$ da Coulomb; con $k = -GMm$, gravedad.
+7. **El potencial $f$ no es la energía potencial $U$.** $U = -f$. Si el enunciado pide "la función
+   potencial", se responde con $f$ y se aclara el signo.
+:::
+
+::: {.callout-warning}
+## Y las tres trampas
+
+- **"Todos los campos de la guía son conservativos"** no es un teorema. En un parcial la respuesta
+  correcta puede ser "no existe", y entonces lo que hay que escribir es el par de derivadas que no
+  coincide. Nada más.
+- **"Rotor nulo implica conservativo"** es falso sin la hipótesis del dominio. El @sec-vortice
+  está en la guía para eso.
+- **"El dominio tiene un agujero, entonces no es conservativo"** es el error simétrico, y también
+  es falso: $\vec F = (x,y)/(x^2+y^2)$ vive en el plano agujereado y tiene potencial
+  $f = \tfrac12 \ln(x^2+y^2)$.
+:::
+
+## Autoevaluación {#sec-autoevaluacion}
+
+Cinco preguntas para cerrar. Si salen las cinco, el tema está.
+
+::: {.ejercicio}
+$\vec F(x,y) = (e^y,\ xe^y + \operatorname{sen} y)$. ¿Es conservativo en $\mathbb{R}^2$?
+
+- [Sí, y $f = xe^y - \cos y + C$.]{.bien}
+- [Sí, y $f = xe^y + \operatorname{sen} y + C$.]{.mal}
+- [No, porque $P_y = e^y$ y $Q_x = e^y + \cos y$.]{.mal}
+- [No se puede decidir sin más datos.]{.mal}
+
+::: {.explica}
+**La correcta es la primera.** $P_y = e^y$ y $Q_x = e^y$: coinciden, y $\mathbb{R}^2$ es simplemente conexo. Integrando,
+$f = \int e^y dx = xe^y + g(y)$, y de $f_y = xe^y + g'(y) = xe^y + \operatorname{sen} y$ sale
+$g'(y) = \operatorname{sen} y$, o sea $g = -\cos y + C$.
+
+La segunda opción es el error de copiar la componente en vez de integrarla; se descarta en el
+acto verificando: $\partial_y (xe^y + \operatorname{sen} y) = xe^y + \cos y \neq Q$.
+:::
+:::
+
+::: {.ejercicio data-respuesta="0" data-tol="0.0001" data-rotulo="Para calcular"}
+Sea $\vec F$ el campo del ejercicio 20, $(2xy+3,\ x^2+4y)$, y sea $C$ la elipse
+$\dfrac{x^2}{4} + y^2 = 1$ recorrida una vez en sentido antihorario. ¿Cuánto vale
+$\oint_C \vec F \cdot d\vec r$?
+
+::: {.explica}
+Cero, y no hace falta ni parametrizar la elipse ni usar Green. El campo es conservativo en todo
+$\mathbb{R}^2$ y la curva es cerrada: el @thm-tfil da $f(A) - f(A) = 0$.
+
+Si uno insiste con Green: $\oint = \iint_\Omega (Q_x - P_y)\, dA = \iint_\Omega 0 \, dA = 0$.
+Mismo resultado, más trabajo.
+:::
+:::
+
+::: {.ejercicio}
+Un campo $\vec F$ tiene $\operatorname{rot} \vec F = \vec 0$ en $D = \mathbb{R}^3$ menos el eje
+$z$ entero (no un punto: toda la recta). ¿Se puede concluir que es conservativo?
+
+- [Sí: sacarle una recta a $\mathbb{R}^3$ no cambia nada, igual que sacarle un punto.]{.mal}
+- [No: $\mathbb{R}^3$ sin el eje $z$ no es simplemente conexo, porque un lazo que rodea el eje no se puede contraer.]{.bien}
+- [No, porque un dominio que no es acotado nunca es simplemente conexo.]{.mal}
+- [Sí, porque en $\mathbb{R}^3$ el rotor nulo siempre alcanza.]{.mal}
+
+::: {.explica}
+**La correcta es la segunda.** Sacarle un **punto** a $\mathbb{R}^3$ conserva la simple conexión, pero sacarle una **recta** no:
+un lazo que rodea el eje $z$ está atrapado igual que en el plano agujereado. De hecho el
+contraejemplo es el mismo vórtice, leído en el espacio:
+$\vec F = \left(\frac{-y}{x^2+y^2},\ \frac{x}{x^2+y^2},\ 0\right)$ tiene rotor nulo ahí y
+circulación $2\pi$ alrededor del eje.
+
+Ese campo es exactamente el campo magnético de un cable recto con corriente, salvo constantes: la
+circulación no nula es la ley de Ampère.
+
+La tercera opción confunde "acotado" con "simplemente conexo": $\mathbb{R}^3$ entero no es acotado
+y sí es simplemente conexo.
+:::
+:::
+
+::: {.ejercicio}
+Estás haciendo un ejercicio en $\mathbb{R}^3$ y, después de integrar $P$ en $x$ y ajustar con $Q$,
+te queda $f = x^2z + yz + h(z)$. Ajustás con $R = x^2 + y + 4z$. ¿Qué obtenés?
+
+- [$h'(z) = 4z$, entonces $h(z) = 2z^2 + C$.]{.bien}
+- [$h'(z) = 4z + x^2 + y$, entonces el campo no era conservativo.]{.mal}
+- [$h(z) = C$, porque siempre termina siendo constante.]{.mal}
+
+::: {.explica}
+**La correcta es la primera.** $f_z = x^2 + y + h'(z)$, y al igualar a $R = x^2 + y + 4z$ los términos $x^2 + y$ se cancelan y
+queda $h'(z) = 4z$, o sea $h = 2z^2 + C$. El potencial completo es $f = x^2z + yz + 2z^2 + C$.
+
+La tercera opción es la costumbre mal aprendida de los ejercicios de la guía, donde casualmente
+$h'$ siempre daba cero. No es una regla: depende del campo.
+:::
+:::
+
+::: {.ejercicio}
+¿Cuál de estos razonamientos es válido para probar que un campo **no** es conservativo?
+
+- [Dibujé el campo y las flechas parecen girar.]{.mal}
+- [Encontré una curva cerrada con $\oint \vec F \cdot d\vec r \neq 0$.]{.bien}
+- [Intenté aplicar la receta y no me salió.]{.mal}
+- [El dominio tiene un agujero.]{.mal}
+
+::: {.explica}
+La única demostración completa de las cuatro es la segunda: una curva cerrada con circulación no
+nula contradice directamente el teorema fundamental, sin hipótesis adicionales sobre el dominio.
+
+Exhibir el par $P_y \neq Q_x$ también sirve y suele ser más corto, pero ojo con el orden lógico:
+eso prueba que no es conservativo porque *todo* campo conservativo tiene rotor nulo (Schwarz), no
+por el recíproco.
+
+El dibujo sugiere, la receta que "no sale" puede ser un error de cuenta, y el agujero en el
+dominio no prueba nada por sí solo.
+:::
+:::
+
+---
+
+::: {.callout-note appearance="simple"}
+## Qué sigue
+
+El teorema de Green apareció varias veces acá como herramienta prestada —para interpretar el
+rotor, para calcular la diferencia entre dos rutas, para justificar por qué el vórtice es
+especial—. Es el candidato natural para la próxima guía de esta colección.
+:::

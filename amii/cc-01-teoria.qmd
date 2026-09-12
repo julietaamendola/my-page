@@ -1,0 +1,500 @@
+---
+title: "La teoría, en cinco ideas"
+---
+
+Toda la guía gira alrededor de una sola ecuación:
+
+$$
+\nabla f = \vec F .
+$$
+
+Encontrar la "altura" $f$ cuya pendiente es el campo $\vec F$. Este capítulo explica qué
+significa eso, por qué importa, cómo se detecta y cómo se hace.
+
+## Qué estamos buscando {#sec-que-buscamos}
+
+::: {#def-conservativo}
+## Campo conservativo
+
+Un campo vectorial $\vec F : D \subseteq \mathbb{R}^n \to \mathbb{R}^n$ es **conservativo**
+(o *campo de gradientes*) si existe un campo **escalar** $f : D \to \mathbb{R}$, llamado
+**función potencial**, tal que
+
+$$
+\nabla f = \vec F
+\qquad \Longleftrightarrow \qquad
+\left( \frac{\partial f}{\partial x}, \frac{\partial f}{\partial y}, \frac{\partial f}{\partial z} \right) = (P, Q, R).
+$$ {#eq-definicion}
+:::
+
+Leído al revés: **dadas las derivadas parciales, hay que reconstruir la función.** Es el problema
+inverso de derivar, pero en varias variables y con varias condiciones simultáneas. Y como toda
+condición simultánea, puede no tener solución: la mayoría de los campos vectoriales **no** son
+conservativos. Eso es lo primero que conviene tener en la cabeza, porque las guías —esta
+incluida— están llenas de ejemplos que sí lo son, y eso da una impresión equivocada.
+
+::: {.callout-tip appearance="simple"}
+## La intuición del terreno
+
+Pensá en $f$ como la altura de una montaña sobre el punto $(x,y)$. Entonces $\vec F = \nabla f$
+es, en cada punto, la flecha que indica hacia dónde subir más rápido y con qué pendiente.
+
+Un campo es conservativo cuando sus flechas son consistentes con **algún** relieve: si caminás en
+círculo y volvés al punto de partida, tenés que volver a la misma altura. Un campo que "sube
+siempre" dando la vuelta completa —como la escalera imposible de Escher— no proviene de ninguna
+altura, y por lo tanto no es conservativo.
+:::
+
+La @fig-relieve-fija muestra el relieve del ejemplo que vamos a usar en todo el capítulo
+siguiente, $f(x,y) = x^2y + x^3 + y^2$, y su campo de gradientes dibujado en el piso.
+
+```{python}
+#| label: fig-relieve-fija
+#| fig-cap: "Izquierda: el relieve $f(x,y)=x^2y+x^3+y^2$. Derecha: el mismo relieve visto desde arriba, con sus curvas de nivel y las flechas de $\\vec F = \\nabla f$. Las flechas cruzan las curvas de nivel perpendicularmente y apuntan hacia lo alto; donde las curvas se aprietan, la pendiente es grande y las flechas se alargan."
+#| fig-width: 7.6
+#| fig-height: 3.5
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+VIOLETA, VIOLETA2, TINTA, GRIS = "#7c5cbf", "#b48ec8", "#1e1a2e", "#a99fc0"
+
+f  = lambda x, y: x**2*y + x**3 + y**2
+Fx = lambda x, y: 2*x*y + 3*x**2
+Fy = lambda x, y: x**2 + 2*y
+
+xs = np.linspace(-1.5, 1.5, 120)
+ys = np.linspace(-1.5, 1.5, 120)
+X, Y = np.meshgrid(xs, ys)
+Z = f(X, Y)
+
+fig = plt.figure(figsize=(7.6, 3.5))
+
+ax = fig.add_subplot(1, 2, 1, projection="3d")
+ax.plot_surface(X, Y, Z, cmap="BuPu_r", linewidth=0, antialiased=True,
+                rstride=3, cstride=3, alpha=.95)
+ax.contour(X, Y, Z, levels=10, zdir="z", offset=Z.min(), colors=VIOLETA2, linewidths=.6)
+ax.set_xlabel("$x$", labelpad=-6); ax.set_ylabel("$y$", labelpad=-6)
+ax.set_zlabel("$f$", labelpad=-8)
+ax.tick_params(labelsize=6, pad=-2)
+ax.view_init(elev=26, azim=-56)
+
+ax2 = fig.add_subplot(1, 2, 2)
+ax2.contourf(X, Y, Z, levels=24, cmap="BuPu_r", alpha=.85)
+ax2.contour(X, Y, Z, levels=12, colors=TINTA, linewidths=.5, alpha=.45)
+xq = np.linspace(-1.35, 1.35, 11)
+XQ, YQ = np.meshgrid(xq, xq)
+U, V = Fx(XQ, YQ), Fy(XQ, YQ)
+ax2.quiver(XQ, YQ, U, V, color=TINTA, width=.0045, scale=42, alpha=.85)
+ax2.set_xlabel("$x$"); ax2.set_ylabel("$y$")
+ax2.set_aspect("equal")
+
+fig.tight_layout()
+plt.show()
+```
+
+::: {.content-visible when-format="html"}
+En pantalla el mismo relieve se puede girar, y el deslizador corta la montaña a la altura que
+quieras para ver de dónde sale cada curva de nivel.
+:::
+
+```{=html}
+<div class="lienzo" data-figura="relieve" data-alto="420"
+     data-rotulo="Arrastrá para girar · el deslizador corta el relieve"
+     data-sliders='[{"id":"c","min":-4,"max":8,"paso":0.1,"valor":2,"rotulo":"corte","decimales":1},{"id":"campo","min":0,"max":1,"paso":1,"valor":1,"rotulo":"flechas","decimales":0}]'>
+  <div class="lienzo-pie">
+    La curva blanca es el borde del corte a altura \(c\): todos los puntos donde \(f = c\). Su
+    sombra violeta en el piso es la <b>curva de nivel</b> de toda la vida. Girá hasta mirar desde
+    arriba y vas a ver el dibujo de la derecha de la figura anterior; girá hasta mirar de costado
+    y vas a ver que la curva de nivel es, literalmente, una curva de nivel.
+  </div>
+</div>
+<script>
+window.LIENZO = window.LIENZO || {};
+window.LIENZO.relieve = function (P, v) {
+  var V = CV.vista('relieve'), col = P.col;
+  var caja = [26, 14, P.w - 52, P.h - 40];
+  var dom = { x: [-1.5, 1.5], y: [-1.5, 1.5], z: [-5.5, 9], ax: 1, ay: 1, az: .78 };
+  var cam = P.camara(caja, dom, V.azim, V.elev, .40);
+  var f = function (x, y) { return x*x*y + x*x*x + y*y; };
+  var F = function (x, y) { return [2*x*y + 3*x*x, x*x + 2*y]; };
+  var piso = dom.z[0];
+
+  P.caja3(cam, 'x', 'y', 'f');
+
+  // el campo de gradientes, dibujado en el piso
+  if (v.campo > .5) {
+    var n = 9, i, j, x, y, g;
+    for (i = 0; i < n; i++) for (j = 0; j < n; j++) {
+      x = -1.35 + 2.7 * i / (n - 1);
+      y = -1.35 + 2.7 * j / (n - 1);
+      g = F(x, y);
+      var nn = Math.hypot(g[0], g[1]);
+      CV.flecha3(P, cam, x, y, piso, g[0], g[1],
+                 6 + 9 * Math.sqrt(Math.min(1, nn / 7)), col.tinta, 1);
+    }
+  }
+
+  // la sombra del corte, en el piso
+  CV.contornos3(P, cam, f, [v.c], piso, col.acento, 1.8, .95);
+
+  // el relieve
+  CV.malla3(P, cam, f, { n: 30, zmin: -5.5, zmax: 9, alfa: .94 });
+
+  // el corte a altura c, apoyado sobre la superficie
+  CV.contornos3(P, cam, f, [v.c], 'nivel', '#ffffff', 2.4, 1);
+
+  // el plano del corte, insinuado con un rectángulo punteado
+  var r = [[-1.5,-1.5],[1.5,-1.5],[1.5,1.5],[-1.5,1.5],[-1.5,-1.5]];
+  P.curva3(cam, r.map(function (p) { return [p[0], p[1], v.c]; }), col.acento, 1, .35, [4,5]);
+
+  P.texto(caja[0] + 2, caja[1] + 14, 'f (x,y) = ' + v.c.toFixed(1), col.acento, 12.5);
+};
+// CV vive en campos.html, que se inyecta al final del body: esperamos a que cargue todo.
+window.addEventListener('load', function () { CV.rotable('relieve', { azim: -0.62, elev: 0.42 }); });
+</script>
+```
+
+## Por qué importa: el teorema fundamental de las integrales de línea {#sec-tfil}
+
+::: {#thm-tfil}
+## Teorema fundamental de las integrales de línea
+
+Si $\vec F = \nabla f$ con $f$ de clase $C^1$ en $D$ abierto, y $C \subset D$ es una curva suave
+a trozos que va de $A$ a $B$, entonces
+
+$$
+\int_C \vec F \cdot d\vec r = f(B) - f(A).
+$$ {#eq-tfil}
+:::
+
+La demostración es la regla de la cadena leída al revés: si $\vec r(t)$ parametriza $C$ con
+$t \in [a,b]$, entonces
+$\frac{d}{dt} f(\vec r(t)) = \nabla f(\vec r(t)) \cdot \vec r\,'(t) = \vec F(\vec r(t)) \cdot \vec r\,'(t)$,
+y la integral de una derivada es la diferencia de los valores en los extremos. Es Barrow, con el
+gradiente haciendo de derivada.
+
+Tres consecuencias que se usan todo el tiempo:
+
+::: {.receta}
+1. **El trabajo no depende del camino, solo de los extremos.** Es una diferencia de alturas: ir de
+   $A$ a $B$ por donde sea acumula lo mismo.
+2. **Sobre cualquier curva cerrada el trabajo es cero:** $\oint_C \vec F \cdot d\vec r = 0$, porque
+   $A = B$.
+3. **Una integral de línea complicada se calcula evaluando $f$ en dos puntos,** sin parametrizar
+   nada. Este es el ahorro de cuentas que hace que valga la pena buscar el potencial.
+:::
+
+En física esto es la conservación de la energía. Se define la energía potencial $U = -f$ y
+entonces $W = -\Delta U$; si $\vec F$ es la única fuerza, el teorema del trabajo y la energía
+cinética da $\Delta E_c = W = -\Delta U$, o sea que $E_c + U$ se mantiene constante. De ahí el
+nombre *conservativo*.
+
+::: {.callout-important appearance="simple"}
+## El recíproco también vale, y es el que cierra la equivalencia
+
+Si $\vec F$ es continuo en un abierto **conexo** $D$ y la integral de línea no depende del
+camino, entonces $\vec F$ es conservativo: se fija un punto base $X_0 \in D$, se define
+$f(X) = \int_{X_0}^{X} \vec F \cdot d\vec r$ —que está bien definida justamente porque no depende
+del camino— y se verifica que $\nabla f = \vec F$.
+
+O sea:
+
+$$
+\vec F \text{ conservativo}
+\iff \oint_C \vec F \cdot d\vec r = 0 \ \ \forall\, C \text{ cerrada}
+\iff \text{la integral no depende del camino.}
+$$
+
+**Estas tres son siempre equivalentes, en cualquier abierto conexo.** La condición de derivadas
+cruzadas de la sección que sigue es otra cosa, y ahí es donde aparece la letra chica.
+:::
+
+## Cómo detectarlo: la condición de las derivadas cruzadas {#sec-test}
+
+Si $\vec F = \nabla f$ y $\vec F$ es de clase $C^1$, entonces $f$ es de clase $C^2$ y el teorema
+de Schwarz dice $f_{xy} = f_{yx}$. Traducido a las componentes de $\vec F$:
+
+**En el plano,** con $\vec F = (P,Q)$:
+
+$$
+\frac{\partial P}{\partial y} = \frac{\partial Q}{\partial x}.
+$$ {#eq-test2d}
+
+**En el espacio,** con $\vec F = (P,Q,R)$, la condición equivale a $\operatorname{rot} \vec F = \vec 0$:
+
+$$
+\operatorname{rot} \vec F = \nabla \times \vec F =
+\left( \frac{\partial R}{\partial y} - \frac{\partial Q}{\partial z} \right) \vec i +
+\left( \frac{\partial P}{\partial z} - \frac{\partial R}{\partial x} \right) \vec j +
+\left( \frac{\partial Q}{\partial x} - \frac{\partial P}{\partial y} \right) \vec k = \vec 0,
+$$ {#eq-rot}
+
+o sea las tres igualdades $P_y = Q_x$, $P_z = R_x$, $Q_z = R_y$.
+
+En el plano se usa el **rotor escalar**, que es la tercera componente de @eq-rot:
+
+$$
+\operatorname{rot} \vec F = \frac{\partial Q}{\partial x} - \frac{\partial P}{\partial y}.
+$$ {#eq-rot2d}
+
+### Qué mide el rotor {#sec-que-mide-rot}
+
+El rotor no es una cuenta arbitraria que sirve para testear: **mide la circulación por unidad de
+área**. El teorema de Green lo dice con todas las letras: para una región $\Omega$ con borde
+$\partial\Omega$ recorrido en sentido antihorario,
+
+$$
+\oint_{\partial \Omega} \vec F \cdot d\vec r = \iint_{\Omega} \left( \frac{\partial Q}{\partial x} - \frac{\partial P}{\partial y} \right) dA .
+$$ {#eq-green}
+
+Si tomamos $\Omega$ = un cuadradito de lado $h$ centrado en un punto y hacemos $h \to 0$:
+
+$$
+\operatorname{rot} \vec F(x_0,y_0) = \lim_{h \to 0} \frac{1}{h^2} \oint_{\partial \Omega_h} \vec F \cdot d\vec r .
+$$
+
+Es decir: **el rotor en un punto es cuánto trabajo neto acumula una vuelta infinitesimal alrededor
+de ese punto, por unidad de área**. Si eso no es cero, hay una vuelta cerrada con trabajo no nulo,
+y entonces no puede haber potencial. Ahí está, en una línea, por qué el test es necesario.
+
+La imagen física es un molinete: si ponés una rueda de paletas diminuta en un punto y el fluido la
+hace girar, el rotor en ese punto no es cero. Su velocidad angular es exactamente la mitad del
+rotor.
+
+```{python}
+#| label: fig-rotor-mapa
+#| fig-cap: "El rotor como mapa de colores, para los dos campos extremos de la figura interactiva. Izquierda: $\\vec F = (2xy+3x^2,\\ x^2+2y)$, con $\\operatorname{rot} \\vec F = 0$ en todo el plano; el color plano es el test cumpliéndose. Derecha: $\\vec G = (-y^2,\\ x^2)$, con $\\operatorname{rot} \\vec G = 2(x+y)$, que es positivo arriba de la antidiagonal y negativo abajo. Sobre la recta $y=-x$ el rotor se anula: ahí, y solo ahí, el molinete queda quieto."
+#| fig-width: 7.4
+#| fig-height: 3.3
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+TINTA = "#1e1a2e"
+xs = np.linspace(-1.5, 1.5, 200)
+X, Y = np.meshgrid(xs, xs)
+xq = np.linspace(-1.3, 1.3, 11)
+XQ, YQ = np.meshgrid(xq, xq)
+
+campos = [
+    ("$\\vec F = (2xy+3x^2,\\ x^2+2y)$", lambda x, y: (2*x*y+3*x**2, x**2+2*y),
+     np.zeros_like(X)),
+    ("$\\vec G = (-y^2,\\ x^2)$", lambda x, y: (-y**2, x**2), 2*(X+Y)),
+]
+
+fig, axes = plt.subplots(1, 2, figsize=(7.4, 3.3))
+for ax, (tit, campo, rot) in zip(axes, campos):
+    im = ax.pcolormesh(X, Y, rot, cmap="PuOr_r", vmin=-6, vmax=6, shading="auto")
+    U, V = campo(XQ, YQ)
+    ax.quiver(XQ, YQ, U, V, color=TINTA, width=.005, scale=30, alpha=.9)
+    ax.set_title(tit, fontsize=9)
+    ax.set_aspect("equal"); ax.set_xlabel("$x$")
+    fig.colorbar(im, ax=ax, fraction=.046, pad=.03).set_label("rot", fontsize=8)
+axes[0].set_ylabel("$y$")
+fig.tight_layout()
+plt.show()
+```
+
+```{=html}
+<div class="lienzo" data-figura="molinete" data-alto="400"
+     data-rotulo="El molinete: movelo por el campo y mirá si gira"
+     data-sliders='[{"id":"lam","min":0,"max":1,"paso":0.02,"valor":0,"rotulo":"mezcla","decimales":2},{"id":"cx","min":-1.2,"max":1.2,"paso":0.05,"valor":0.6,"rotulo":"x₀","decimales":2},{"id":"cy","min":-1.2,"max":1.2,"paso":0.05,"valor":0.4,"rotulo":"y₀","decimales":2},{"id":"h","min":0.08,"max":1.2,"paso":0.02,"valor":0.6,"rotulo":"lado h","decimales":2},{"id":"t","min":0,"max":6,"paso":0.05,"valor":0,"rotulo":"tiempo","decimales":2}]'>
+  <div class="lienzo-pie">
+    El campo es \(\vec F_\lambda = (1-\lambda)\,(2xy+3x^2,\ x^2+2y) + \lambda\,(-y^2,\ x^2)\).
+    Con <b>mezcla = 0</b> es el campo conservativo del ejemplo; con <b>mezcla = 1</b> es
+    \(\vec G=(-y^2,x^2)\), que no lo es. La circulación sobre el cuadradito se calcula
+    numéricamente, recorriendo el borde en sentido antihorario; dividida por el área \(h^2\)
+    da el rotor, tal cual predice la fórmula de Green. Bajá el lado \(h\) y mirá cómo el cociente se
+    clava en el valor teórico. Con el <b>tiempo</b> gira el molinete: su velocidad angular es
+    la mitad del rotor, y cambia de signo al cruzar la recta \(y=-x\).
+  </div>
+</div>
+<script>
+window.LIENZO = window.LIENZO || {};
+window.LIENZO.molinete = function (P, v) {
+  var col = P.col, c = P.ctx;
+  var caja = [46, 64, P.w - 74, P.h - 102];
+  var lado = Math.min(caja[2], caja[3]);
+  caja = [caja[0] + (caja[2] - lado) / 2, caja[1], lado, lado];
+  var m = P.marco(caja, [-1.5, 1.5], [-1.5, 1.5]);
+  var lam = v.lam;
+  var F = function (x, y) {
+    return [(1-lam)*(2*x*y + 3*x*x) + lam*(-y*y),
+            (1-lam)*(x*x + 2*y)     + lam*(x*x)];
+  };
+  var rot = function (x, y) { return 2*lam*(x + y); };
+
+  P.ejes(m, 'x', 'y', null);
+  P.recorte(m, function () {
+    CV.campo(P, m, F, { n: 16, color: col.tinta, largo: 12, alfa: .5 });
+  });
+
+  // el cuadradito, recorrido en sentido antihorario
+  var x0 = v.cx, y0 = v.cy, h = v.h, a = h / 2;
+  var lados = [
+    function (s) { return [x0 - a + h*s, y0 - a]; },
+    function (s) { return [x0 + a, y0 - a + h*s]; },
+    function (s) { return [x0 + a - h*s, y0 + a]; },
+    function (s) { return [x0 - a, y0 + a - h*s]; }
+  ];
+  var W = 0;
+  lados.forEach(function (r) { W += CV.trabajo(F, r, 0, 1, 250); });
+
+  var esq = [[x0-a,y0-a],[x0+a,y0-a],[x0+a,y0+a],[x0-a,y0+a],[x0-a,y0-a]];
+  c.save();
+  c.fillStyle = col.acento; c.globalAlpha = .1;
+  c.beginPath();
+  esq.forEach(function (p, i) { var xx = m.X(p[0]), yy = m.Y(p[1]); i ? c.lineTo(xx,yy) : c.moveTo(xx,yy); });
+  c.fill(); c.restore();
+  P.curva(m, esq, col.acento, 1.6, .95);
+
+  // flechas de recorrido sobre el borde
+  lados.forEach(function (r) {
+    var p = r(.42), q = r(.58);
+    CV.flechaPx(P, m.X(p[0]), m.Y(p[1]), m.X(q[0]), m.Y(q[1]), col.acento, 1.6, 6);
+  });
+
+  // el molinete
+  var rc = rot(x0, y0), ang = -rc * v.t / 2;
+  var CX = m.X(x0), CY = m.Y(y0), R = 15;
+  c.save();
+  c.translate(CX, CY); c.rotate(ang);
+  c.strokeStyle = col.tinta; c.lineWidth = 2; c.lineCap = 'round';
+  for (var k = 0; k < 4; k++) {
+    c.beginPath(); c.moveTo(0, 0);
+    c.lineTo(R * Math.cos(k*Math.PI/2), R * Math.sin(k*Math.PI/2));
+    c.stroke();
+  }
+  c.beginPath(); c.arc(0, 0, 2.6, 0, 6.2832); c.fillStyle = col.tinta; c.fill();
+  c.restore();
+  if (Math.abs(rc) > 1e-9) {
+    c.save();
+    c.strokeStyle = rc > 0 ? col.bien : col.mal; c.lineWidth = 1.8;
+    c.beginPath(); c.arc(CX, CY, R + 7, -0.5, 3.3, rc < 0); c.stroke();
+    c.restore();
+  }
+
+  // lecturas
+  var y = 18, sep = 15;
+  function linea(s, color) { P.texto(caja[0] - 12, y, s, color || col.tenue, 12); y += sep; }
+  var coc = h > 0 ? W / (h*h) : 0;
+  linea('rot F (x₀,y₀) = 2λ(x₀+y₀) = ' + rc.toFixed(3), col.tinta);
+  linea('circulación medida sobre la cajita = ' + W.toFixed(4), col.acento);
+  linea('circulación / h² = ' + coc.toFixed(3) +
+        (Math.abs(coc - rc) < 5e-3 ? '   ✓ coincide con el rotor' : ''),
+        Math.abs(coc - rc) < 5e-3 ? col.bien : col.tenue);
+
+  P.texto(caja[0] + caja[2], caja[1] + caja[3] + 30,
+          lam < .01 ? 'conservativo' : (lam > .99 ? 'no conservativo' : 'mezcla'),
+          lam < .01 ? col.bien : col.mal, 12, 'right');
+};
+</script>
+```
+
+## Cuidado con el dominio {#sec-dominio}
+
+::: {.callout-warning}
+## La letra chica del test
+
+La condición de derivadas cruzadas es **necesaria** siempre (es Schwarz), pero solo es
+**suficiente** si el dominio $D$ es abierto y **simplemente conexo**: sin agujeros, en el sentido
+de que toda curva cerrada contenida en $D$ se puede contraer a un punto sin salirse de $D$.
+
+El contraejemplo clásico es
+
+$$
+\vec F = \left( \frac{-y}{x^2+y^2},\ \frac{x}{x^2+y^2} \right)
+\qquad \text{en } \mathbb{R}^2 \setminus \{(0,0)\},
+$$ {#eq-vortice}
+
+que cumple $P_y = Q_x$ en todo su dominio y sin embargo su circulación sobre la circunferencia
+unitaria vale $2\pi \neq 0$: **no es conservativo**. Por eso, antes de concluir, siempre hay que
+decir en *qué región* se trabaja.
+:::
+
+Este campo tiene un capítulo propio: el @sec-vortice lo mira de cerca, con el potencial
+multivaluado incluido, porque es el ejemplo que separa "el test da bien" de "el campo es
+conservativo".
+
+Dos observaciones que suelen confundirse:
+
+- En $\mathbb{R}^3$, **sacarle un punto no rompe la simple conexión**: toda curva cerrada se puede
+  contraer esquivando el origen. Por eso en los ejercicios @sec-ej19 y @sec-ej21 alcanza con
+  $\operatorname{rot} \vec F = \vec 0$ para concluir.
+- En $\mathbb{R}^2$, **sacarle un punto sí la rompe**: una circunferencia alrededor del agujero no
+  se puede contraer. Por eso @eq-vortice se salva del test.
+
+## La receta para hallar $f$ {#sec-receta}
+
+::: {.receta}
+1. **Identificar componentes y dominio.** Escribir $P$, $Q$ (y $R$) y anotar dónde son de clase
+   $C^1$. Si aparecen denominadores, raíces o logaritmos, ahí está la restricción del dominio, y
+   además hay que mirar si lo que queda es simplemente conexo.
+2. **Testear las derivadas cruzadas.** Calcular $P_y$ y $Q_x$ (y las otras dos parejas en
+   $\mathbb{R}^3$). Si no coinciden, se termina acá: el campo **no** es conservativo y no existe
+   potencial. Si coinciden y el dominio es simplemente conexo, existe.
+3. **Integrar una componente.** Elegir la más fácil de integrar. Si integramos $P$ respecto de $x$,
+   la "constante" de integración es una función de las *otras* variables:
+   $f(x,y) = \int P(x,y)\,dx + g(y)$.
+4. **Derivar respecto de la otra variable e igualar.** Se impone $f_y = Q$. Los términos que ya
+   salieron de la integración se cancelan y queda una ecuación simple para $g'(y)$. Se integra y se
+   obtiene $g$. En $\mathbb{R}^3$ se repite el mecanismo una vez más con $R$.
+5. **Fijar la constante y verificar.** El potencial queda determinado salvo una constante $C$ (en
+   cada componente conexa del dominio). Si el enunciado da un dato del tipo $f(P_0) = k$ —"tal que
+   $f(2;1) = 0$" o "nivel 3 en $(1;-5)$"— se reemplaza y se despeja $C$. Por último, conviene
+   calcular $\nabla f$ y comprobar que da $\vec F$.
+:::
+
+::: {.callout-caution collapse="true"}
+## Señales de que algo salió mal
+
+- Al hacer el paso 4 aparece un $g'(y)$ que **todavía depende de $x$**. Eso es imposible:
+  significa que el campo no era conservativo, o que hay un error de cuenta en el paso 3. Si el
+  test del paso 2 dio bien, es lo segundo.
+- Olvidar que la constante de integración es una **función** de las demás variables, y escribir
+  solo "$+C$". Ese es el error más frecuente de todos.
+- En $\mathbb{R}^3$, hacer el segundo ajuste y escribir "$+C$" en vez de "$+h(z)$". Mismo error,
+  una vuelta más adentro.
+- Confundir el potencial $f$ (con $\nabla f = \vec F$) con la energía potencial $U = -f$ de la
+  física. Los ejercicios @sec-ej19 y @sec-ej21 piden explícitamente "la función potencial", así
+  que se responde con $f$, aclarando el signo.
+- Concluir "es conservativo" sin decir en qué región. Si el campo tiene denominadores, el dominio
+  es parte de la respuesta.
+:::
+
+::: {.ejercicio}
+Un campo $\vec F$ de clase $C^1$ en $\mathbb{R}^2 \setminus \{(0,0)\}$ cumple
+$P_y = Q_x$ en todo su dominio. ¿Qué se puede afirmar?
+
+- [Es conservativo, porque cumple el test.]{.mal}
+- [Es conservativo en cualquier disco abierto contenido en el dominio, pero puede no serlo en todo el dominio.]{.bien}
+- [No es conservativo, porque el dominio tiene un agujero.]{.mal}
+- [No se puede afirmar nada: el test no dice nada sin información extra.]{.mal}
+
+::: {.explica}
+**La correcta es la segunda.** El test es **local**: donde el dominio se ve como un disco (simplemente conexo), rot nulo alcanza
+y el potencial existe. El problema es pegar esos potenciales locales en uno solo que sirva para
+todo el dominio agujereado, y eso puede fallar —de hecho falla para @eq-vortice—. La tercera
+opción es el error simétrico: que el dominio tenga un agujero no impide que el campo sea
+conservativo. El campo $\vec F = (x,y)/(x^2+y^2)$, por ejemplo, vive en el mismo dominio
+agujereado y sí tiene potencial: $f = \tfrac12 \ln(x^2+y^2)$.
+:::
+:::
+
+::: {.ejercicio data-respuesta="2" data-tol="0.001" data-rotulo="Para calcular"}
+Sea $\vec F(x,y) = \left(3x^2y + \alpha y^2,\ x^3 + 4xy\right)$. ¿Para qué valor de $\alpha$ el
+campo es conservativo en $\mathbb{R}^2$?
+
+::: {.explica}
+$P_y = 3x^2 + 2\alpha y$ y $Q_x = 3x^2 + 4y$. Para que coincidan en **todo** el plano tienen que
+ser iguales como funciones, o sea $2\alpha y = 4y$ para todo $y$, y de ahí $\alpha = 2$.
+
+Con ese valor el potencial sale en dos renglones:
+$f = \int (3x^2y + 2y^2)\,dx = x^3y + 2xy^2 + g(y)$, y de $f_y = x^3 + 4xy + g'(y) = x^3 + 4xy$
+resulta $g' = 0$. Queda $f(x,y) = x^3y + 2xy^2 + C$.
+
+Con cualquier otro $\alpha$ el rotor vale $\operatorname{rot}\vec F = 4y - 2\alpha y = (4-2\alpha)y$,
+que se anula solo sobre el eje $x$: el campo tendría molinetes girando en casi todo el plano.
+:::
+:::

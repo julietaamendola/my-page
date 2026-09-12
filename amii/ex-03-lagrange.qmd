@@ -1,0 +1,560 @@
+---
+title: "Multiplicadores de Lagrange"
+---
+
+Hasta acá, cuando el borde de una región aparecía, lo parametrizábamos. Eso funciona mientras la
+curva se deje parametrizar cómodamente; una circunferencia sí, una superficie de nivel cualquiera
+en $\mathbb{R}^3$ casi nunca. El método de los multiplicadores resuelve el problema sin
+parametrizar nada, y de paso explica *por qué* los extremos con restricción están donde están.
+
+## El método {#sec-lagrange}
+
+::: {#thm-lagrange}
+## Multiplicadores de Lagrange
+
+Sean $f, g \in C^1$ en un abierto de $\mathbb{R}^n$. Si $f$ alcanza un extremo sobre el conjunto
+de nivel $S = \{P : g(P) = c\}$ en un punto $P_0 \in S$ con $\nabla g(P_0) \neq \vec 0$, entonces
+existe $\lambda \in \mathbb{R}$ —el **multiplicador de Lagrange**— tal que
+
+$$
+\nabla f(P_0) = \lambda\, \nabla g(P_0),
+\qquad \text{junto con} \qquad g(P_0) = c .
+$$ {#eq-lagrange}
+:::
+
+En la práctica se resuelve el sistema de $n+1$ ecuaciones con incógnitas $x_1, \dots, x_n, \lambda$,
+se obtienen los candidatos y se compara el valor de $f$ en cada uno. Si $S$ es **compacto**,
+Weierstrass garantiza que el mayor es el máximo y el menor el mínimo, y no hace falta ningún
+criterio extra. Con dos restricciones $g_1 = c_1$, $g_2 = c_2$ la condición es
+$\nabla f = \lambda_1 \nabla g_1 + \lambda_2 \nabla g_2$.
+
+::: {.callout-tip appearance="simple"}
+## Por qué la condición es esa, y no otra
+
+Sobre la curva $g = c$, moverse un poquito cambia $f$ en $\nabla f \cdot \vec v$, donde $\vec v$ es
+la dirección de avance. Pero $\vec v$ no es libre: para no salirse de la curva tiene que ser
+**tangente** a ella, es decir perpendicular a $\nabla g$.
+
+Si $\nabla f$ tuviera alguna componente en la dirección tangente, avanzando para ese lado $f$
+crecería y volviendo atrás decrecería: no habría extremo. Entonces, en un extremo, $\nabla f$ no
+puede tener componente tangencial: **tiene que ser paralelo a $\nabla g$**. Eso es exactamente
+@eq-lagrange, y $\lambda$ es simplemente la proporción entre los dos.
+
+Geométricamente: en un extremo, la curva de nivel de $f$ que pasa por el punto es **tangente** a
+la restricción. Si la cortara, habría puntos de la restricción a los dos lados de esa curva de
+nivel, con valores mayores y menores.
+:::
+
+## El dibujo que resuelve el método {#sec-tangencia}
+
+Tomemos el último ejercicio de la práctica, que es chiquito y sirve de laboratorio:
+
+*¿Cuál es el valor máximo que toma $f(x,y) = 4x^2 + 2y^2 + 5$ sobre la curva
+$x^2 + y^2 - 2y = 0$?*
+
+::: {.callout-note appearance="simple"}
+## Antes de nada: la curva es una circunferencia
+
+Completando cuadrados,
+
+$$
+x^2 + y^2 - 2y = 0 \iff x^2 + (y-1)^2 = 1 ,
+$$
+
+la circunferencia de centro $(0,1)$ y radio $1$. Es compacta, así que el máximo y el mínimo
+existen.
+:::
+
+```{=html}
+<div class="lienzo" data-figura="tangencia" data-alto="330"
+     data-rotulo="Recorré la restricción y mirá cuándo los dos gradientes se alinean"
+     data-sliders='[{"id":"t","min":0,"max":360,"paso":1,"valor":30,"rotulo":"posición t°","decimales":0}]'>
+  <div class="lienzo-pie">
+    La circunferencia violeta es la restricción \(g=0\); las elipses grises son curvas de nivel de
+    \(f\). En el punto que elegís se dibujan \(\nabla f\) (violeta) y \(\nabla g\) (verde), y en
+    naranja la curva de nivel de \(f\) que pasa por ahí. Movelo: en casi todas las posiciones la
+    curva naranja <b>cruza</b> la circunferencia, y ahí hay puntos con \(f\) mayor y menor al
+    lado. Solo en \(t=90°\) y \(t=270°\) —los puntos \((0,2)\) y \((0,0)\)— la curva de nivel es
+    <b>tangente</b> y los dos gradientes quedan paralelos. Esos son los dos candidatos, y el
+    panel de la derecha muestra que uno es el máximo y el otro el mínimo.
+  </div>
+</div>
+<script>
+window.LIENZO = window.LIENZO || {};
+window.LIENZO.tangencia = function (P, v) {
+  var col = P.col;
+  var f  = function (x, y) { return 4*x*x + 2*y*y + 5; };
+  var gf = function (x, y) { return [8*x, 4*y]; };
+  var gg = function (x, y) { return [2*x, 2*y - 2]; };
+  var r  = function (u) { return [Math.cos(2*Math.PI*u), 1 + Math.sin(2*Math.PI*u)]; };
+
+  var lado = Math.min(P.h - 84, P.w * 0.52 - 44);
+  var cajaI = [44, 40, lado, lado];
+  var cajaD = [44 + lado + 56, 40, P.w - (44 + lado + 56) - 18, lado];
+
+  // --- el plano ---
+  var m = P.marco(cajaI, [-2.2, 2.2], [-1.1, 3.3]);
+  P.ejes(m, 'x', 'y', null);
+  P.recorte(m, function () {
+    var niv = [], q;
+    for (q = 5; q <= 30; q += 2) niv.push(q);
+    CV.contornos(P, m, f, niv, col.suave, 1, .65);
+  });
+  var circ = [], i;
+  for (i = 0; i <= 220; i++) circ.push(r(i/220));
+  P.curva(m, circ, col.acento, 2.4, 1);
+
+  var u = v.t / 360, p = r(u), fp = f(p[0], p[1]);
+  // la curva de nivel que pasa por el punto
+  P.recorte(m, function () {
+    CV.contornos(P, m, f, [fp], '#c98a3a', 2.4, 1);
+  });
+
+  var a = gf(p[0], p[1]), b = gg(p[0], p[1]);
+  CV.flecha(P, m, p[0], p[1], a[0], a[1], 44, col.acento, 2.4);
+  CV.flecha(P, m, p[0], p[1], b[0], b[1], 30, col.bien, 2.4);
+  P.punto(m, p[0], p[1], col.tinta, 5);
+  P.punto(m, 0, 2, col.bien, 4);
+  P.punto(m, 0, 0, col.bien, 4);
+
+  // ¿son paralelos? el producto cruzado dice que si
+  var cruz = Math.abs(a[0]*b[1] - a[1]*b[0]);
+  var na = Math.hypot(a[0],a[1]), nb = Math.hypot(b[0],b[1]);
+  var paralelos = (na < 1e-9 || nb < 1e-9) ? false : (cruz/(na*nb) < 0.02);
+
+  // --- f a lo largo de la restricción ---
+  var mD = P.marco(cajaD, [0, 360], [4, 14]);
+  P.ejes(mD, 't°', 'f', null);
+  var pts = [];
+  for (i = 0; i <= 240; i++) {
+    var q = r(i/240);
+    pts.push([360*i/240, f(q[0], q[1])]);
+  }
+  P.recorte(mD, function () { P.curva(mD, pts, col.acento, 2.4, 1); });
+  P.curva(mD, [[0, 13], [360, 13]], col.suave, 1, .8, [4,4]);
+  P.curva(mD, [[0, 5], [360, 5]], col.suave, 1, .8, [4,4]);
+  P.punto(mD, v.t, fp, col.tinta, 5);
+  P.texto(mD.X(4), mD.Y(13) - 5, '13', col.tenue, 10);
+  P.texto(mD.X(4), mD.Y(5) - 5, '5', col.tenue, 10);
+
+  P.texto(cajaI[0] - 12, 16, 'f = ' + fp.toFixed(3), col.tinta, 12.5);
+  P.texto(cajaD[0] + cajaD[2], 16,
+          paralelos ? '∇f ∥ ∇g : candidato' : '∇f y ∇g no son paralelos',
+          paralelos ? col.bien : col.tenue, 12.5, 'right');
+};
+</script>
+```
+
+### Método 1: sustituir {#sec-ej21-sust}
+
+De la restricción, $x^2 = 2y - y^2$. Para que exista $x$ real hace falta $2y - y^2 \ge 0$, o sea
+$y \in [0,2]$. Reemplazando:
+
+$$
+F(y) = 4(2y - y^2) + 2y^2 + 5 = -2y^2 + 8y + 5 , \qquad y \in [0,2].
+$$
+
+Es una parábola hacia abajo con vértice en $y = \tfrac{8}{4} = 2$, justo en el extremo derecho del
+intervalo. Como $F$ es creciente en todo $[0,2]$, el máximo está en $y = 2$:
+
+$$
+F(2) = -8 + 16 + 5 = 13, \qquad \text{y ahí } x^2 = 2\cdot2 - 4 = 0 \Rightarrow x = 0 .
+$$
+
+El mínimo es $F(0) = 5$, en $(0,0)$.
+
+### Método 2: multiplicadores {#sec-ej21-lagrange}
+
+Con $g(x,y) = x^2 + y^2 - 2y$:
+
+$$
+\begin{cases}
+8x = \lambda\, 2x & (1)\\
+4y = \lambda\,(2y - 2) & (2)\\
+x^2 + y^2 - 2y = 0 & (3)
+\end{cases}
+$$
+
+De (1): $2x(4 - \lambda) = 0$, así que $x = 0$ **o** $\lambda = 4$.
+
+- **Si $x = 0$:** de (3), $y^2 - 2y = 0 \Rightarrow y = 0$ o $y = 2$. Candidatos $(0,0)$ y $(0,2)$.
+- **Si $\lambda = 4$:** de (2), $4y = 8y - 8 \Rightarrow y = 2$; de (3), $x^2 = 4 - 4 = 0$, o sea
+  $x = 0$: es el mismo punto $(0,2)$.
+
+Evaluamos: $f(0,0) = 5$ y $f(0,2) = 0 + 8 + 5 = 13$.
+
+::: {.resultado}
+El valor máximo es $f(0,2) = 13$, alcanzado en $(0,2)$. El mínimo sobre la curva es $f(0,0) = 5$.
+:::
+
+::: {.callout-warning appearance="simple"}
+## El error más frecuente con Lagrange
+
+En (1) la tentación es dividir por $x$ y escribir $\lambda = 4$ directo. Eso **pierde los
+candidatos con $x = 0$**, que en este ejercicio son justamente los dos que importan.
+
+Cada vez que en el sistema aparezca un producto igualado a cero, hay que **separar en casos**, no
+dividir. Lo mismo pasa cuando queda $\lambda = 0$ como posibilidad: es un caso legítimo que hay
+que mirar aparte, y es donde se esconden las respuestas en los ejercicios con simetría.
+:::
+
+## Qué significa $\lambda$ {#sec-lambda}
+
+El multiplicador no es un artefacto de la cuenta que se tira al terminar: tiene una lectura, y es
+la que hace que este método se use en economía, en física estadística y en optimización numérica.
+
+Si llamamos $M(c)$ al valor máximo de $f$ sobre la restricción $g = c$, entonces —bajo hipótesis
+razonables de regularidad—
+
+$$
+\frac{dM}{dc} = \lambda .
+$$ {#eq-lambda}
+
+Es decir: **$\lambda$ mide cuánto mejora el óptimo si se afloja un poquito la restricción**. En
+un problema de producción con presupuesto $c$, $\lambda$ es lo que rinde el próximo peso; por eso
+en economía se lo llama *precio sombra*. En termodinámica, los multiplicadores que aparecen al
+maximizar la entropía con energía fija resultan ser la temperatura inversa.
+
+Un $\lambda$ grande dice que la restricción está apretando fuerte; un $\lambda \approx 0$ dice que
+la restricción casi no molesta y el óptimo restringido está cerca del libre.
+
+## La temperatura de una esfera {#sec-ej15}
+
+*Suponiendo que $T(x,y,z) = 100\,x y^2 z$ representa, en grados, la temperatura en cualquier punto
+de la superficie esférica $x^2+y^2+z^2 = 4$, determinar los puntos más fríos y más calientes y la
+temperatura en cada uno.*
+
+La esfera es compacta y $T$ continua: los extremos existen. Con $g = x^2+y^2+z^2$:
+
+$$
+\begin{cases}
+T_x = 100y^2z = 2\lambda x & (1)\\
+T_y = 200xyz = 2\lambda y & (2)\\
+T_z = 100xy^2 = 2\lambda z & (3)\\
+x^2+y^2+z^2 = 4 & (4)
+\end{cases}
+$$
+
+**El truco: multiplicar cada ecuación por su variable.** Llamando $K = 100xy^2z$ —que es
+justamente $T$—:
+
+$$
+x \cdot (1): \ K = 2\lambda x^2, \qquad
+y \cdot (2): \ 2K = 2\lambda y^2, \qquad
+z \cdot (3): \ K = 2\lambda z^2 .
+$$
+
+**Candidatos con $T \neq 0$.** Si $K \neq 0$ entonces $\lambda \neq 0$ y, dividiendo,
+
+$$
+y^2 = 2x^2, \qquad z^2 = x^2 .
+$$
+
+Sustituyendo en (4): $x^2 + 2x^2 + x^2 = 4x^2 = 4$, o sea $x = \pm 1$, $y = \pm\sqrt2$,
+$z = \pm 1$ (ocho combinaciones de signos). En esos puntos $y^2 = 2$, y entonces
+
+$$
+T = 100\,x\,y^2 z = 100 \cdot 2 \cdot xz = 200\,xz .
+$$
+
+Como $x, z \in \{1,-1\}$: si tienen **igual** signo, $T = 200$; si tienen signos **opuestos**,
+$T = -200$.
+
+**Candidatos con $T = 0$.** Si $x = 0$, $y = 0$ o $z = 0$ entonces $T = 0$, que queda entre $-200$
+y $200$.
+
+::: {.resultado}
+**Puntos más calientes** ($T = 200°$): los que tienen $x$ y $z$ del mismo signo,
+
+$$
+(1,\sqrt2,1), \quad (1,-\sqrt2,1), \quad (-1,\sqrt2,-1), \quad (-1,-\sqrt2,-1).
+$$
+
+**Puntos más fríos** ($T = -200°$): los que tienen $x$ y $z$ de signos opuestos,
+
+$$
+(1,\sqrt2,-1), \quad (1,-\sqrt2,-1), \quad (-1,\sqrt2,1), \quad (-1,-\sqrt2,1).
+$$
+:::
+
+```{=html}
+<div class="lienzo" data-figura="esfera" data-alto="420"
+     data-rotulo="Arrastrá para girar la esfera"
+     data-sliders='[{"id":"corte","min":-200,"max":200,"paso":5,"valor":-220,"rotulo":"resaltar T ≥","decimales":0}]'>
+  <div class="lienzo-pie">
+    La esfera está pintada por su temperatura: violeta oscuro lo más frío, dorado lo más
+    caliente. Los puntos marcados son los ocho extremos. Fijate en la simetría: la temperatura
+    depende de \(y\) solo a través de \(y^2\), así que los hemisferios \(y&gt;0\) e \(y&lt;0\) son
+    idénticos — por eso los extremos vienen de a pares. El deslizador apaga todo lo que esté por
+    debajo del corte, para ver dónde quedan las zonas calientes.
+  </div>
+</div>
+<script>
+window.LIENZO = window.LIENZO || {};
+window.LIENZO.esfera = function (P, v) {
+  var V = CV.vista('esfera'), col = P.col;
+  var caja = [26, 34, P.w - 52, P.h - 62];
+  var R = 2;
+  var dom = { x: [-R, R], y: [-R, R], z: [-R, R], ax: 1, ay: 1, az: 1 };
+  var cam = P.camara(caja, dom, V.azim, V.elev, .42);
+  var T = function (x, y, z) { return 100*x*y*y*z; };
+
+  // la esfera, parametrizada por (phi, theta)
+  CV.superficie3(P, cam,
+    function (ph, th) {
+      return [R*Math.sin(ph)*Math.cos(th), R*Math.sin(ph)*Math.sin(th), R*Math.cos(ph)];
+    },
+    0.001, Math.PI - 0.001, 0, 2*Math.PI,
+    { nu: 46, nv: 92, alfa: 1, malla: false,
+      color: function (ph, th, p) {
+        var t = T(p[0], p[1], p[2]);
+        if (t < v.corte) return CV.mezcla('#2a2545', '#3a3560', 0.5);
+        return CV.rampa((t + 200) / 400);
+      } });
+
+  // los ocho extremos
+  var s2 = Math.SQRT2;
+  [[1,s2,1],[1,-s2,1],[-1,s2,-1],[-1,-s2,-1]].forEach(function (p) {
+    if (cam.prof(p[0],p[1],p[2]) > 0.06) P.punto3(cam, p[0], p[1], p[2], col.bien, 5.5);
+  });
+  [[1,s2,-1],[1,-s2,-1],[-1,s2,1],[-1,-s2,1]].forEach(function (p) {
+    if (cam.prof(p[0],p[1],p[2]) > 0.06) P.punto3(cam, p[0], p[1], p[2], col.mal, 5.5);
+  });
+
+  P.texto(caja[0], 16, 'T = 100 x y² z   sobre  x²+y²+z² = 4', col.tinta, 12.5);
+  P.texto(caja[0] + caja[2], 16, 'máx 200°   ·   mín −200°', col.tenue, 12.5, 'right');
+  P.texto(caja[0], caja[1] + caja[3] + 22,
+          v.corte <= -200 ? 'sin corte' : 'apagado todo lo que tiene T < ' + v.corte,
+          col.tenue, 11.5);
+};
+window.addEventListener('load', function () { CV.rotable('esfera', { azim: -0.9, elev: 0.35 }); });
+</script>
+```
+
+## La joya: formas cuadráticas y autovalores {#sec-ej10}
+
+*Calcular el máximo valor de $f(x,y,z) = x^2 + xy + y^2 + xz + z^2$ sobre la superficie esférica
+de radio $1$ centrada en el origen.*
+
+Se puede atacar a mano, pero conviene reconocer la estructura primero, porque el resultado vale
+para cualquier problema de esta forma.
+
+::: {.callout-important}
+## El atajo que conviene memorizar
+
+Si $f$ es una **forma cuadrática** $f(X) = X^t A X$ con $A$ simétrica, y la restricción es
+$\|X\|^2 = 1$, entonces $\nabla f = 2AX$ y $\nabla g = 2X$, de modo que el sistema de Lagrange
+
+$$
+2AX = \lambda\, 2X \qquad \text{es exactamente} \qquad AX = \lambda X .
+$$
+
+O sea: **los candidatos son los autovectores unitarios de $A$**, y en cada uno
+
+$$
+f(X) = X^t A X = X^t(\lambda X) = \lambda \|X\|^2 = \lambda .
+$$
+
+Por lo tanto: *el máximo de $f$ sobre la esfera unidad es el mayor autovalor de $A$, y el mínimo
+es el menor*. El multiplicador de Lagrange **es** el autovalor, y el valor de la función también.
+:::
+
+Acá la matriz es
+
+$$
+A = \begin{pmatrix} 1 & \tfrac12 & \tfrac12 \\[2pt] \tfrac12 & 1 & 0 \\[2pt] \tfrac12 & 0 & 1 \end{pmatrix},
+$$
+
+donde los términos cruzados se reparten mitad y mitad para que $A$ quede simétrica: $xy$ aporta
+$\tfrac12$ en las posiciones $(1,2)$ y $(2,1)$, y lo mismo $xz$.
+
+**Resolviendo el sistema.** Restando (2) $-$ (3) del sistema $AX = \lambda X$:
+
+$$
+2y - 2z = 2\lambda(y-z) \implies (y-z)(2 - 2\lambda) = 0 \implies y = z \ \text{ o } \ \lambda = 1 .
+$$
+
+- **Caso $\lambda = 1$:** queda $x = 0$ y $z = -y$; con la restricción, $2y^2 = 1$. Ahí $f = 1$.
+- **Caso $y = z$:** las dos primeras ecuaciones dan $x = (2\lambda - 2)y$, y sustituyendo,
+  $2\lambda^2 - 4\lambda + 1 = 0$, o sea
+
+$$
+\lambda = \frac{4 \pm \sqrt{16-8}}{4} = 1 \pm \frac{\sqrt2}{2} .
+$$
+
+Los tres autovalores son entonces
+
+$$
+\lambda_1 = 1 - \frac{\sqrt2}{2} \approx 0{,}293, \qquad
+\lambda_2 = 1, \qquad
+\lambda_3 = 1 + \frac{\sqrt2}{2} \approx 1{,}707 .
+$$
+
+**El punto donde se alcanza el máximo.** Para $\lambda_3 = 1 + \tfrac{\sqrt2}{2}$ es $y = z$ y
+$x = (2\lambda-2)y = \sqrt2\, y$, de donde $x^2 = 2y^2$. Con $x^2+y^2+z^2 = 2y^2+y^2+y^2 = 4y^2 = 1$:
+
+$$
+y = z = \pm\tfrac12, \qquad x = \pm\tfrac{\sqrt2}{2}.
+$$
+
+Verificación:
+$f\!\left(\tfrac{\sqrt2}{2}, \tfrac12, \tfrac12\right)
+= \tfrac12 + \tfrac{\sqrt2}{2}\cdot\tfrac12 + \tfrac14 + \tfrac{\sqrt2}{2}\cdot\tfrac12 + \tfrac14
+= 1 + \tfrac{\sqrt2}{2}$ ✓
+
+::: {.resultado}
+$$
+\max f = 1 + \frac{\sqrt2}{2} = \frac{2+\sqrt2}{2} \approx 1{,}707,
+$$
+
+alcanzado en $\pm\left(\tfrac{\sqrt2}{2}, \tfrac12, \tfrac12\right)$. El mínimo sobre la esfera es
+$1 - \tfrac{\sqrt2}{2} \approx 0{,}293$.
+:::
+
+El caso de dos variables se puede mirar entero en un dibujo, y es el mismo zoológico del
+@sec-zoo visto desde otro ángulo: los autovalores de la Hessiana que clasificaban el punto crítico
+son, ahora, los valores extremos de la forma sobre la circunferencia unidad.
+
+```{=html}
+<div class="lienzo" data-figura="autovalores" data-alto="330"
+     data-rotulo="Armá tu matriz simétrica y mirá dónde están los autovalores"
+     data-sliders='[{"id":"a","min":-3,"max":3,"paso":0.1,"valor":2,"rotulo":"a","decimales":1},{"id":"b","min":-3,"max":3,"paso":0.1,"valor":1,"rotulo":"b","decimales":1},{"id":"c","min":-3,"max":3,"paso":0.1,"valor":1,"rotulo":"c","decimales":1},{"id":"t","min":0,"max":360,"paso":1,"valor":20,"rotulo":"θ°","decimales":0}]'>
+  <div class="lienzo-pie">
+    Con \(A=\begin{pmatrix}a&amp;b\\b&amp;c\end{pmatrix}\), la función es
+    \(f(x,y)=ax^2+2bxy+cy^2\) y la restricción es la circunferencia unidad. El panel derecho es
+    \(f\) a lo largo de la circunferencia: sus dos máximos y sus dos mínimos ocurren en las
+    direcciones de los <b>autovectores</b> (las rectas verdes de la izquierda), y sus valores son
+    los <b>autovalores</b> de \(A\). Movés \(a\), \(b\), \(c\) y las rectas giran solas,
+    manteniéndose siempre perpendiculares entre sí, porque \(A\) es simétrica.
+  </div>
+</div>
+<script>
+window.LIENZO = window.LIENZO || {};
+window.LIENZO.autovalores = function (P, v) {
+  var col = P.col;
+  var a = v.a, b = v.b, c = v.c;
+  var f = function (x, y) { return a*x*x + 2*b*x*y + c*y*y; };
+
+  // autovalores y autovectores de [[a,b],[b,c]]
+  var tr = a + c, dt = a*c - b*b;
+  var dis = Math.sqrt(Math.max(0, tr*tr/4 - dt));
+  var l1 = tr/2 + dis, l2 = tr/2 - dis;
+  function autovec(l) {
+    var vx = b, vy = l - a;
+    if (Math.hypot(vx, vy) < 1e-9) { vx = l - c; vy = b; }
+    if (Math.hypot(vx, vy) < 1e-9) { vx = 1; vy = 0; }
+    var n = Math.hypot(vx, vy);
+    return [vx/n, vy/n];
+  }
+  var e1 = autovec(l1), e2 = autovec(l2);
+
+  var lado = Math.min(P.h - 84, P.w * 0.52 - 44);
+  var cajaI = [44, 40, lado, lado];
+  var cajaD = [44 + lado + 56, 40, P.w - (44 + lado + 56) - 18, lado];
+
+  // --- el plano ---
+  var m = P.marco(cajaI, [-1.6, 1.6], [-1.6, 1.6]);
+  P.ejes(m, 'x', 'y', null);
+  P.recorte(m, function () {
+    var niv = [], q, M = Math.max(Math.abs(l1), Math.abs(l2), 0.5);
+    for (q = -2.2*M; q <= 2.2*M; q += M/3) niv.push(q);
+    CV.contornos(P, m, f, niv, col.suave, 1, .6);
+  });
+  var circ = [], i, t;
+  for (i = 0; i <= 220; i++) { t = 2*Math.PI*i/220; circ.push([Math.cos(t), Math.sin(t)]); }
+  P.curva(m, circ, col.acento, 2.2, 1);
+  // las direcciones propias
+  [[e1, l1], [e2, l2]].forEach(function (e) {
+    P.curva(m, [[-1.5*e[0][0], -1.5*e[0][1]], [1.5*e[0][0], 1.5*e[0][1]]], col.bien, 1.8, .9);
+    P.punto(m, e[0][0], e[0][1], col.bien, 4.5);
+    P.punto(m, -e[0][0], -e[0][1], col.bien, 4.5);
+  });
+  var th = v.t * Math.PI/180, px = Math.cos(th), py = Math.sin(th);
+  P.punto(m, px, py, col.tinta, 5.5);
+
+  // --- f sobre la circunferencia ---
+  var M = Math.max(Math.abs(l1), Math.abs(l2), 0.5) * 1.25;
+  var mD = P.marco(cajaD, [0, 360], [-M, M]);
+  P.ejes(mD, 'θ°', 'f', null);
+  P.curva(mD, [[0, 0], [360, 0]], col.suave, 1, .8);
+  P.curva(mD, [[0, l1], [360, l1]], col.bien, 1, .85, [4,4]);
+  P.curva(mD, [[0, l2], [360, l2]], col.bien, 1, .85, [4,4]);
+  var pts = [];
+  for (i = 0; i <= 240; i++) {
+    var u = 2*Math.PI*i/240;
+    pts.push([360*i/240, f(Math.cos(u), Math.sin(u))]);
+  }
+  P.recorte(mD, function () { P.curva(mD, pts, col.acento, 2.4, 1); });
+  P.punto(mD, v.t, f(px, py), col.tinta, 5);
+  P.texto(mD.X(6), mD.Y(l1) - 5, 'λ₁ = ' + l1.toFixed(3), col.bien, 10.5);
+  P.texto(mD.X(354), mD.Y(l2) + 13, 'λ₂ = ' + l2.toFixed(3), col.bien, 10.5, 'right');
+
+  P.texto(cajaI[0] - 12, 16, 'f = ' + f(px, py).toFixed(3), col.tinta, 12.5);
+  P.texto(cajaD[0] + cajaD[2], 16,
+          'traza = ' + tr.toFixed(2) + '  ·  det = ' + dt.toFixed(2), col.tenue, 12, 'right');
+};
+</script>
+```
+
+::: {.ejercicio}
+En la figura de arriba, ¿por qué las dos rectas verdes son siempre perpendiculares?
+
+- [Porque están dibujadas así por conveniencia del gráfico.]{.mal}
+- [Porque $A$ es simétrica, y los autovectores de una matriz simétrica correspondientes a autovalores distintos son ortogonales.]{.bien}
+- [Porque la restricción es una circunferencia.]{.mal}
+- [Porque los autovalores son reales.]{.mal}
+
+::: {.explica}
+**La correcta es la segunda.** Si $Av_1 = \lambda_1 v_1$ y $Av_2 = \lambda_2 v_2$ con
+$\lambda_1 \neq \lambda_2$, entonces
+
+$$
+\lambda_1 (v_1 \cdot v_2) = (Av_1)\cdot v_2 = v_1 \cdot (Av_2) = \lambda_2 (v_1 \cdot v_2),
+$$
+
+donde el paso del medio usa que $A$ es simétrica. Restando,
+$(\lambda_1 - \lambda_2)(v_1\cdot v_2) = 0$, y como los autovalores son distintos, $v_1 \cdot v_2 = 0$.
+
+Y las Hessianas **siempre** son simétricas, por el teorema de Schwarz. Por eso el zoológico del
+@sec-zoo se ve siempre como un par de direcciones perpendiculares, una en la que la función sube
+más rápido y otra en la que sube más despacio (o baja).
+:::
+:::
+
+::: {.ejercicio data-respuesta="5" data-tol="0.001" data-rotulo="Para calcular"}
+¿Cuál es el máximo de $f(x,y) = 3x^2 + 4xy + 3y^2$ sobre la circunferencia $x^2+y^2 = 1$?
+
+::: {.explica}
+Es una forma cuadrática con $A = \begin{pmatrix} 3 & 2 \\ 2 & 3\end{pmatrix}$: los términos
+cruzados $4xy$ se reparten como $2$ y $2$. Sus autovalores salen de
+$\det(A - \lambda I) = (3-\lambda)^2 - 4 = 0$, o sea $3 - \lambda = \pm 2$:
+
+$$
+\lambda_1 = 5, \qquad \lambda_2 = 1 .
+$$
+
+El máximo es $5$, alcanzado en la dirección del autovector de $\lambda_1$, que es
+$\left(\tfrac{\sqrt2}{2}, \tfrac{\sqrt2}{2}\right)$; el mínimo es $1$, en la dirección
+perpendicular.
+
+Sin el atajo habría que armar el sistema de Lagrange y resolverlo; con el atajo son dos renglones.
+:::
+:::
+
+::: {.ejercicio}
+Estás maximizando $f$ sobre $g = c$ y el sistema de Lagrange te da un candidato con $\lambda = 0$.
+¿Qué significa?
+
+- [Que el candidato no sirve y hay que descartarlo.]{.mal}
+- [Que en ese punto $\nabla f = \vec 0$: es un punto crítico de $f$ sin restricción que, por casualidad, cae sobre la restricción.]{.bien}
+- [Que la restricción es redundante.]{.mal}
+
+::: {.explica}
+**La correcta es la segunda.** $\nabla f = 0 \cdot \nabla g$ quiere decir $\nabla f = \vec 0$. El
+punto es un candidato perfectamente legítimo: hay que evaluarlo y compararlo como a cualquier
+otro.
+
+Leído con @eq-lambda, $\lambda = 0$ dice que aflojar la restricción **no mejora nada**, y tiene
+sentido: el óptimo restringido coincide con un punto crítico libre, así que moverse no ayuda.
+:::
+:::

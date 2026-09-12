@@ -1,0 +1,104 @@
+project:
+  type: book
+  output-dir: ../guias
+
+book:
+  title: "Guías resueltas de Análisis Matemático II"
+  subtitle: "Con figuras que se pueden tocar"
+  author: "Julieta Améndola"
+  date: today
+  date-format: "MMMM YYYY"
+  site-url: https://julietaamendola.github.io/my-page/guias/
+  repo-url: https://github.com/julietaamendola/my-page
+  search: true
+  downloads: [pdf]
+  output-file: guias-resueltas-amii
+  sidebar:
+    tools:
+      - icon: house-door
+        href: https://julietaamendola.github.io/my-page/
+        text: "Volver al inicio"
+  page-footer:
+    left: "Julieta Améndola · Tandil, Argentina"
+    right: "[Volver al inicio](https://julietaamendola.github.io/my-page/)"
+  chapters:
+    - index.qmd
+    - part: "Campos conservativos y función potencial"
+      chapters:
+        - cc-01-teoria.qmd
+        - cc-02-ejemplo.qmd
+        - cc-03-no-conservativos.qmd
+        - cc-04-ejercicios.qmd
+        - cc-05-resumen.qmd
+    - part: "Extremos de funciones de varias variables"
+      chapters:
+        - ex-01-criterio.qmd
+        - ex-02-absolutos.qmd
+        - ex-03-lagrange.qmd
+        - ex-04-problemas.qmd
+        - ex-05-otras-ciencias.qmd
+
+lang: es
+
+format:
+  html:
+    theme:
+      light: [cosmo, ../estilos/juli.scss]
+      dark: [cosmo, ../estilos/juli-dark.scss]
+    include-in-header:
+      text: |
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    toc: true
+    toc-title: "En esta página"
+    toc-depth: 3
+    number-sections: true
+    fig-align: center
+    html-math-method: mathjax
+    code-fold: true
+    code-summary: "Ver el código de la figura"
+    include-after-body:
+      - interactivo.html
+      - campos.html
+  pdf:
+    # En papel el codigo no se puede plegar, asi que solo va la figura.
+    echo: false
+    documentclass: scrbook
+    papersize: a4
+    lang: es
+    geometry:
+      - top=25mm
+      - bottom=25mm
+      - inner=28mm
+      - outer=22mm
+    number-sections: true
+    colorlinks: true
+    linkcolor: violet
+    urlcolor: violet
+    include-in-header:
+      text: |
+        \usepackage{amsmath,amssymb}
+        % babel-spanish deja "Figura 8.1.:" con dos signos de puntuacion
+        \usepackage{caption}
+        \captionsetup{labelsep=space}
+        % Segun la distribucion de LaTeX, las partes del libro pueden salir
+        % rotuladas en ingles ("Part I"). Esto lo fuerza al castellano.
+        \AtBeginDocument{\renewcommand{\partname}{Parte}}
+
+crossref:
+  chapters: true
+  thm-title: "Teorema"
+  lem-title: "Lema"
+  cor-title: "Corolario"
+  prp-title: "Proposición"
+  def-title: "Definición"
+  exm-title: "Ejemplo"
+  exr-title: "Ejercicio"
+  eq-prefix: ""
+  thm-prefix: "Teorema"
+  def-prefix: "Definición"
+  exm-prefix: "Ejemplo"
+  exr-prefix: "Ejercicio"
+  fig-prefix: "Figura"
+  sec-prefix: "sección"

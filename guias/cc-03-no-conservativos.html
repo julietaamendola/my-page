@@ -1,0 +1,2350 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>3&nbsp; Cuando no es conservativo – Guías resueltas de Análisis Matemático II</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./cc-04-ejercicios.html" rel="next">
+<link href="./cc-02-ejemplo.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-891dd5176bf95b17de68806a21930ba5.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b1f6f59901d8c56d2526ac399150cbdd.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-891dd5176bf95b17de68806a21930ba5.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-4066913a89cd1e841a95a6df55b72e95.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-d1fb5515054595077617aa4c220a6d99.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-4066913a89cd1e841a95a6df55b72e95.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No se han encontrado resultados",
+    "search-matching-documents-text": "documentos encontrados",
+    "search-copy-link-title": "Copiar el enlace en la búsqueda",
+    "search-hide-matches-text": "Ocultar resultados adicionales",
+    "search-more-match-text": "resultado adicional en este documento",
+    "search-more-matches-text": "resultados adicionales en este documento",
+    "search-clear-button-title": "Borrar",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Buscar"
+  }
+}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;0,700;1,400;1,500&amp;family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./cc-01-teoria.html">Campos conservativos y función potencial</a></li><li class="breadcrumb-item"><a href="./cc-03-no-conservativos.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Cuando no es conservativo</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Buscar" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Guías resueltas de Análisis Matemático II</a> 
+        <div class="sidebar-tools-main tools-wide">
+    <a href="https://julietaamendola.github.io/my-page/" title="Volver al inicio" class="quarto-navigation-tool px-1" aria-label="Volver al inicio"><i class="bi bi-house-door"></i></a>
+    <a href="https://github.com/julietaamendola/my-page" title="Ejecutar el código" class="quarto-navigation-tool px-1" aria-label="Ejecutar el código"><i class="bi bi-github"></i></a>
+    <a href="./guias-resueltas-amii.pdf" title="Descargar PDF" class="quarto-navigation-tool px-1" aria-label="Descargar PDF"><i class="bi bi-file-pdf"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Alternar modo oscuro"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Buscar"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Presentación</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Campos conservativos y función potencial</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cc-01-teoria.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">La teoría, en cinco ideas</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cc-02-ejemplo.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Un ejemplo, paso a paso</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cc-03-no-conservativos.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Cuando no es conservativo</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cc-04-ejercicios.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Los ejercicios de la guía</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cc-05-resumen.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Resumen y mapa de la guía</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Extremos de funciones de varias variables</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ex-01-criterio.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Puntos críticos y el criterio del Hessiano</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ex-02-absolutos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Extremos absolutos: casi siempre en el borde</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ex-03-lagrange.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Multiplicadores de Lagrange</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ex-04-problemas.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Problemas de optimización</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ex-05-otras-ciencias.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Los mismos métodos, en otras ciencias</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">En esta página</h2>
+   
+  <ul>
+  <li><a href="#sec-remolino" id="toc-sec-remolino" class="nav-link active" data-scroll-target="#sec-remolino"><span class="header-section-number">3.1</span> El remolino: cuando el test falla</a>
+  <ul class="collapse">
+  <li><a href="#sec-receta-falla" id="toc-sec-receta-falla" class="nav-link" data-scroll-target="#sec-receta-falla"><span class="header-section-number">3.1.1</span> Qué pasa si uno insiste con la receta</a></li>
+  <li><a href="#sec-vuelta" id="toc-sec-vuelta" class="nav-link" data-scroll-target="#sec-vuelta"><span class="header-section-number">3.1.2</span> La consecuencia que se ve: la vuelta no cierra</a></li>
+  <li><a href="#sec-consecuencias" id="toc-sec-consecuencias" class="nav-link" data-scroll-target="#sec-consecuencias"><span class="header-section-number">3.1.3</span> Las consecuencias, una por una</a></li>
+  </ul></li>
+  <li><a href="#sec-vortice" id="toc-sec-vortice" class="nav-link" data-scroll-target="#sec-vortice"><span class="header-section-number">3.2</span> El vórtice: cuando el test da bien y aun así no hay potencial</a>
+  <ul class="collapse">
+  <li><a href="#sec-multivaluado" id="toc-sec-multivaluado" class="nav-link" data-scroll-target="#sec-multivaluado"><span class="header-section-number">3.2.1</span> El potencial existe, pero es multivaluado</a></li>
+  </ul></li>
+  <li><a href="#sec-planta" id="toc-sec-planta" class="nav-link" data-scroll-target="#sec-planta"><span class="header-section-number">3.3</span> Una consecuencia con contexto: la planta del ejercicio 20</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./cc-01-teoria.html">Campos conservativos y función potencial</a></li><li class="breadcrumb-item"><a href="./cc-03-no-conservativos.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Cuando no es conservativo</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Cuando no es conservativo</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Todos los campos de la guía de la cátedra resultan conservativos. Eso es una elección didáctica razonable —así se practica la receta— pero deja una impresión falsa, porque en la práctica la mayoría de los campos vectoriales <strong>no</strong> tienen potencial, y en un parcial es perfectamente posible que la respuesta correcta sea “no existe tal campo escalar”.</p>
+<p>Este capítulo es el contrapeso. Hay dos maneras distintas de que un campo no sea conservativo, y conviene no mezclarlas:</p>
+<ol type="1">
+<li><strong>El rotor no es nulo.</strong> El campo falla el test. Es el caso fácil de detectar y el que aparece en <a href="#sec-remolino" class="quarto-xref"><span>Sección 3.1</span></a>.</li>
+<li><strong>El rotor es nulo pero el dominio tiene un agujero.</strong> El campo pasa el test y aun así no tiene potencial global. Es el caso traicionero, y va en <a href="#sec-vortice" class="quarto-xref"><span>Sección 3.2</span></a>.</li>
+</ol>
+<section id="sec-remolino" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="sec-remolino"><span class="header-section-number">3.1</span> El remolino: cuando el test falla</h2>
+<p>Tomemos el campo más simple posible con rotor no nulo:</p>
+<p><span id="eq-remolino"><span class="math display">\[
+\vec G(x,y) = (-y,\ x).
+\tag{3.1}\]</span></span></p>
+<p>Cada flecha es perpendicular al vector posición y del mismo módulo: es el campo de velocidades de un disco que gira como cuerpo rígido con velocidad angular <span class="math inline">\(1\)</span>.</p>
+<p><strong>El test.</strong> <span class="math inline">\(P = -y\)</span> y <span class="math inline">\(Q = x\)</span>, así que</p>
+<p><span class="math display">\[
+\frac{\partial P}{\partial y} = -1, \qquad \frac{\partial Q}{\partial x} = 1,
+\qquad \operatorname{rot} \vec G = Q_x - P_y = 2 .
+\]</span></p>
+<p>No coinciden, y el dominio es todo <span class="math inline">\(\mathbb{R}^2\)</span>. Entonces <span class="math inline">\(\vec G\)</span> es <span class="chip no">no conservativo</span>, y ahí se termina: <strong>no existe</strong> ninguna función potencial. Esa es la respuesta completa, y la cuenta de dos renglones que la justifica es toda la demostración que hace falta.</p>
+<section id="sec-receta-falla" class="level3" data-number="3.1.1">
+<h3 data-number="3.1.1" class="anchored" data-anchor-id="sec-receta-falla"><span class="header-section-number">3.1.1</span> Qué pasa si uno insiste con la receta</h3>
+<p>Vale la pena ver el choque de frente, porque es exactamente el síntoma que hay que reconocer si uno se saltea el test. Integramos <span class="math inline">\(P\)</span> respecto de <span class="math inline">\(x\)</span>:</p>
+<p><span class="math display">\[
+f(x,y) = \int (-y)\, dx = -xy + g(y).
+\]</span></p>
+<p>Derivamos respecto de <span class="math inline">\(y\)</span> e igualamos a <span class="math inline">\(Q\)</span>:</p>
+<p><span class="math display">\[
+f_y = -x + g'(y) \;\stackrel{!}{=}\; x
+\quad \Longrightarrow \quad
+g'(y) = 2x .
+\]</span></p>
+<p>Y eso es <strong>imposible</strong>: el lado izquierdo es una función de <span class="math inline">\(y\)</span> sola y el derecho depende de <span class="math inline">\(x\)</span>. No hay ningún <span class="math inline">\(g\)</span> que arregle esto.</p>
+<div class="callout callout-style-simple callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Importante</span>La señal, en una línea
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Si al hacer el paso 4 te queda un <span class="math inline">\(g'(y)\)</span> que depende de <span class="math inline">\(x\)</span>, hay exactamente dos posibilidades: o te equivocaste en la integral del paso 3, o el campo no es conservativo. El test del paso 2 es el que distingue una cosa de la otra, y por eso se hace <strong>primero</strong>.</p>
+</div>
+</div>
+</section>
+<section id="sec-vuelta" class="level3" data-number="3.1.2">
+<h3 data-number="3.1.2" class="anchored" data-anchor-id="sec-vuelta"><span class="header-section-number">3.1.2</span> La consecuencia que se ve: la vuelta no cierra</h3>
+<p>Sobre la circunferencia <span class="math inline">\(\vec r(t) = (\cos t, \operatorname{sen} t)\)</span>, <span class="math inline">\(t \in [0, 2\pi]\)</span>, con <span class="math inline">\(d\vec r = (-\operatorname{sen} t, \cos t)\, dt\)</span>:</p>
+<p><span class="math display">\[
+\oint_C \vec G \cdot d\vec r
+= \int_0^{2\pi} \big[ (-\operatorname{sen} t)(-\operatorname{sen} t) + (\cos t)(\cos t) \big] dt
+= \int_0^{2\pi} 1 \, dt = 2\pi \neq 0 .
+\]</span></p>
+<p>Sobre una circunferencia de radio <span class="math inline">\(R\)</span> la cuenta da <span class="math inline">\(2\pi R^2\)</span>, que es lo mismo que predice Green: <span class="math inline">\(\iint_{\Omega} 2 \, dA = 2 \pi R^2\)</span>.</p>
+<p>Dar una vuelta completa y acumular trabajo positivo es imposible si las flechas fueran la pendiente de un relieve: no se puede volver al punto de partida habiendo subido todo el tiempo. Eso es la escalera imposible de Escher, y es la razón de fondo por la que no hay potencial.</p>
+<div id="cell-fig-remolino" class="cell" data-fig-height="5.4" data-fig-width="7.4" data-execution_count="1">
+<details class="code-fold">
+<summary>Ver el código de la figura</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>VIOLETA, VIOLETA2, TINTA, GRIS <span class="op">=</span> <span class="st">"#7c5cbf"</span>, <span class="st">"#b48ec8"</span>, <span class="st">"#1e1a2e"</span>, <span class="st">"#a99fc0"</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>campos <span class="op">=</span> [</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"conservativo:  $</span><span class="ch">\\</span><span class="st">vec F = (2xy+3x^2,</span><span class="ch">\\</span><span class="st"> x^2+2y)$"</span>,</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>     <span class="kw">lambda</span> x, y: (<span class="dv">2</span><span class="op">*</span>x<span class="op">*</span>y <span class="op">+</span> <span class="dv">3</span><span class="op">*</span>x<span class="op">**</span><span class="dv">2</span>, x<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">2</span><span class="op">*</span>y), VIOLETA),</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    (<span class="st">"remolino:  $</span><span class="ch">\\</span><span class="st">vec G = (-y,</span><span class="ch">\\</span><span class="st"> x)$"</span>,</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>     <span class="kw">lambda</span> x, y: (<span class="op">-</span>y, x), <span class="st">"#b8564f"</span>),</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">2</span><span class="op">*</span>np.pi, <span class="dv">1200</span>)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>rx, ry <span class="op">=</span> np.cos(t), np.sin(t)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>dx, dy <span class="op">=</span> <span class="op">-</span>np.sin(t), np.cos(t)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="fl">7.4</span>, <span class="fl">5.4</span>),</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>                         gridspec_kw<span class="op">=</span>{<span class="st">"height_ratios"</span>: [<span class="fl">1.5</span>, <span class="dv">1</span>]})</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>xq <span class="op">=</span> np.linspace(<span class="op">-</span><span class="fl">1.6</span>, <span class="fl">1.6</span>, <span class="dv">13</span>)</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>XQ, YQ <span class="op">=</span> np.meshgrid(xq, xq)</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> k, (tit, campo, color) <span class="kw">in</span> <span class="bu">enumerate</span>(campos):</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    ax <span class="op">=</span> axes[<span class="dv">0</span>][k]</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    U, V <span class="op">=</span> campo(XQ, YQ)</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    ax.quiver(XQ, YQ, U, V, color<span class="op">=</span>TINTA, width<span class="op">=</span><span class="fl">.005</span>, scale<span class="op">=</span><span class="dv">34</span>, alpha<span class="op">=</span><span class="fl">.65</span>)</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    ax.plot(rx, ry, color<span class="op">=</span>color, lw<span class="op">=</span><span class="fl">2.2</span>)</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    <span class="co"># la flecha del sentido de recorrido</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>    ax.annotate(<span class="st">""</span>, xy<span class="op">=</span>(rx[<span class="dv">300</span>], ry[<span class="dv">300</span>]), xytext<span class="op">=</span>(rx[<span class="dv">270</span>], ry[<span class="dv">270</span>]),</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>                arrowprops<span class="op">=</span><span class="bu">dict</span>(arrowstyle<span class="op">=</span><span class="st">"-|&gt;"</span>, color<span class="op">=</span>color, lw<span class="op">=</span><span class="dv">2</span>))</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>    ax.set_title(tit, fontsize<span class="op">=</span><span class="fl">8.5</span>)</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>    ax.set_aspect(<span class="st">"equal"</span>)<span class="op">;</span> ax.set_xticks([<span class="op">-</span><span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>])<span class="op">;</span> ax.set_yticks([<span class="op">-</span><span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>])</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>    ax.tick_params(labelsize<span class="op">=</span><span class="dv">7</span>)</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>    P, Q <span class="op">=</span> campo(rx, ry)</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>    integrando <span class="op">=</span> P<span class="op">*</span>dx <span class="op">+</span> Q<span class="op">*</span>dy</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>    W <span class="op">=</span> np.concatenate([[<span class="dv">0</span>], np.cumsum((integrando[<span class="dv">1</span>:] <span class="op">+</span> integrando[:<span class="op">-</span><span class="dv">1</span>])<span class="op">/</span><span class="dv">2</span> <span class="op">*</span> np.diff(t))])</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>    ax2 <span class="op">=</span> axes[<span class="dv">1</span>][k]</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>    ax2.plot(t<span class="op">/</span>(<span class="dv">2</span><span class="op">*</span>np.pi), W, color<span class="op">=</span>color, lw<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>    ax2.axhline(<span class="dv">0</span>, color<span class="op">=</span>GRIS, lw<span class="op">=</span><span class="fl">.8</span>)</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>    ax2.set_xlabel(<span class="st">"fracción de la vuelta"</span>)</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>    ax2.set_ylim(<span class="op">-</span><span class="fl">2.2</span>, <span class="fl">6.9</span>)</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>    ax2.spines[[<span class="st">"top"</span>, <span class="st">"right"</span>]].set_visible(<span class="va">False</span>)</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>    ax2.tick_params(labelsize<span class="op">=</span><span class="dv">7</span>)</span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>    ax2.annotate(<span class="ss">f"$</span><span class="ch">\\</span><span class="ss">oint = </span><span class="sc">{</span>W[<span class="op">-</span><span class="dv">1</span>]<span class="sc">:.3f}</span><span class="ss">$"</span>, (<span class="dv">1</span>, W[<span class="op">-</span><span class="dv">1</span>]), textcoords<span class="op">=</span><span class="st">"offset points"</span>,</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>                 xytext<span class="op">=</span>(<span class="op">-</span><span class="dv">8</span>, <span class="dv">6</span>), ha<span class="op">=</span><span class="st">"right"</span>, fontsize<span class="op">=</span><span class="dv">9</span>, color<span class="op">=</span>color)</span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>][<span class="dv">0</span>].set_ylabel(<span class="st">"trabajo acumulado"</span>)</span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>fig.tight_layout()</span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div id="fig-remolino" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-remolino-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="cc-03-no-conservativos_files/figure-html/fig-remolino-output-1.png" width="701" height="509" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-remolino-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;3.1: Arriba: dos campos y una misma circunferencia recorrida en sentido antihorario. Abajo: el trabajo acumulado a lo largo de la vuelta. El campo conservativo sube y baja, y vuelve exactamente a cero —el punto de llegada es el de partida y la altura es la misma—. El remolino empuja siempre a favor del recorrido y acumula sin parar hasta <span class="math inline">\(2\pi \approx 6{,}283\)</span>. Esa diferencia entre volver a cero y no volver es, gráficamente, toda la definición de campo conservativo.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="lienzo" data-figura="remolino" data-alto="350" data-rotulo="Dale la vuelta y mirá si el trabajo vuelve a cero" data-sliders="[{&quot;id&quot;:&quot;campo&quot;,&quot;min&quot;:0,&quot;max&quot;:1,&quot;paso&quot;:1,&quot;valor&quot;:1,&quot;rotulo&quot;:&quot;remolino&quot;,&quot;decimales&quot;:0},{&quot;id&quot;:&quot;R&quot;,&quot;min&quot;:0.3,&quot;max&quot;:1.6,&quot;paso&quot;:0.05,&quot;valor&quot;:1,&quot;rotulo&quot;:&quot;radio R&quot;,&quot;decimales&quot;:2},{&quot;id&quot;:&quot;t&quot;,&quot;min&quot;:0,&quot;max&quot;:1,&quot;paso&quot;:0.01,&quot;valor&quot;:1,&quot;rotulo&quot;:&quot;vuelta&quot;,&quot;decimales&quot;:2}]">
+  <div class="lienzo-pie">
+    Con <b>remolino = 0</b> el campo es el conservativo del capítulo anterior; con
+    <b>remolino = 1</b> es \(\vec G = (-y,x)\). El trabajo se calcula numéricamente sobre el arco
+    recorrido. Fijate en dos cosas: en el campo conservativo el trabajo sube y baja pero cierra
+    en cero <b>para cualquier radio</b>; en el remolino la vuelta completa da \(2\pi R^2\), que
+    crece con el área encerrada, exactamente como dice \(\oint = \iint \operatorname{rot}\).
+  </div>
+</div>
+<script>
+window.LIENZO = window.LIENZO || {};
+window.LIENZO.remolino = function (P, v) {
+  var col = P.col;
+  var esRem = v.campo > .5;
+  var F = esRem ? function (x, y) { return [-y, x]; }
+                : function (x, y) { return [2*x*y + 3*x*x, x*x + 2*y]; };
+  var R = v.R;
+  var r = function (u) { return [R*Math.cos(2*Math.PI*u), R*Math.sin(2*Math.PI*u)]; };
+
+  // el panel del plano va cuadrado (si no, las circunferencias salen elipses)
+  // y tan grande como entre; el de la derecha se queda con lo que sobra.
+  var lado = Math.min(P.h - 84, P.w * 0.52 - 44);
+  var cajaI = [44, 40, lado, lado];
+  var cajaD = [44 + lado + 54, 40, P.w - (44 + lado + 54) - 16, lado];
+
+  // panel del plano
+  var m = P.marco(cajaI, [-1.8, 1.8], [-1.8, 1.8]);
+  P.ejes(m, 'x', 'y', null);
+  P.recorte(m, function () {
+    CV.campo(P, m, F, { n: 13, color: col.tinta, largo: 11, alfa: .42 });
+  });
+  function arco(u0, u1, n) {
+    var a = [], i;
+    for (i = 0; i <= n; i++) a.push(r(u0 + (u1-u0)*i/n));
+    return a;
+  }
+  P.curva(m, arco(0, 1, 160), col.suave, 1.3, .8, [4, 4]);
+  var color = esRem ? col.mal : col.acento;
+  if (v.t > 0.002) P.curva(m, arco(0, v.t, 160), color, 2.6, 1);
+  var B = r(v.t);
+  P.punto(m, R, 0, col.tinta, 4);
+  P.punto(m, B[0], B[1], color, 5);
+  // flecha de sentido
+  if (v.t > 0.05) {
+    var a = r(v.t - 0.02), b = r(v.t);
+    CV.flechaPx(P, m.X(a[0]), m.Y(a[1]), m.X(b[0]), m.Y(b[1]), color, 2.2, 8);
+  }
+
+  // panel del trabajo acumulado
+  var tope = esRem ? Math.max(2, 2*Math.PI*R*R*1.15) : 3.2;
+  var piso = esRem ? -tope*0.12 : -3.2;
+  var mD = P.marco(cajaD, [0, 1], [piso, tope]);
+  P.ejes(mD, 'fracción de la vuelta', 'W', null);
+  P.curva(mD, [[0, 0], [1, 0]], col.suave, 1, .9);
+
+  var pts = [[0, 0]], W = 0, N = 120, i;
+  for (i = 1; i <= N; i++) { W += CV.trabajo(F, r, (i-1)/N, i/N, 8); pts.push([i/N, W]); }
+  P.recorte(mD, function () { P.curva(mD, pts, color, 2.4, 1); });
+  var idx = Math.max(0, Math.min(N, Math.round(v.t * N)));
+  P.punto(mD, pts[idx][0], pts[idx][1], color, 5);
+
+  // lecturas
+  var teo = esRem ? 2*Math.PI*R*R : 0;
+  P.texto(cajaI[0] - 10, 14, esRem ? 'rot G = 2' : 'rot F = 0', col.tinta, 12);
+  P.texto(cajaD[0] + cajaD[2], 14,
+          'W acumulado = ' + pts[idx][1].toFixed(3), color, 12.5, 'right');
+  P.texto(cajaD[0] + cajaD[2], 30,
+          'vuelta completa: ' + pts[N][1].toFixed(3) +
+          '   (teórico ' + teo.toFixed(3) + ')', col.tenue, 11.5, 'right');
+};
+</script>
+</section>
+<section id="sec-consecuencias" class="level3" data-number="3.1.3">
+<h3 data-number="3.1.3" class="anchored" data-anchor-id="sec-consecuencias"><span class="header-section-number">3.1.3</span> Las consecuencias, una por una</h3>
+<p>Que un campo no sea conservativo no es solo “no se puede hacer el ejercicio”. Cambia cosas concretas:</p>
+<div class="receta">
+<ol type="1">
+<li><strong>No hay función potencial, y por lo tanto no hay energía potencial.</strong> En física esto significa que la energía mecánica <span class="math inline">\(E_c + U\)</span> <strong>no se conserva</strong>: no existe ningún <span class="math inline">\(U\)</span> que cumpla <span class="math inline">\(W = -\Delta U\)</span>. De ahí, literalmente, el nombre del tema.</li>
+<li><strong>El trabajo depende del camino.</strong> No hay atajo: para calcular <span class="math inline">\(\int_C \vec F \cdot d\vec r\)</span> hay que parametrizar <span class="math inline">\(C\)</span> y hacer la integral. Dos rutas entre los mismos puntos dan números distintos, y la diferencia entre ellas es —por Green— el rotor integrado sobre la región que encierran.</li>
+<li><strong>No hay curvas equipotenciales.</strong> No existe ninguna familia de curvas a lo largo de las cuales el campo no haga trabajo. En un campo conservativo esas curvas son las de nivel de <span class="math inline">\(f\)</span> y son una herramienta de cálculo; acá, sencillamente, no están.</li>
+<li><strong>Un circuito cerrado entrega o consume energía neta.</strong> <span class="math inline">\(\oint \vec F \cdot d\vec r \neq 0\)</span> significa que recorrer un ciclo y volver al punto de partida deja un saldo. En un campo de fuerzas puramente posicional eso sería una máquina de movimiento perpetuo, y por eso las fuerzas fundamentales estáticas —gravedad, electrostática— son conservativas.</li>
+<li><strong>Pero a cambio, Green se vuelve útil.</strong> Para curvas cerradas, <span class="math inline">\(\oint_{\partial\Omega} \vec F \cdot d\vec r = \iint_\Omega (Q_x - P_y)\, dA\)</span> convierte una integral de línea molesta en una integral doble fácil. Cuando el rotor no es nulo, ese es el camino corto.</li>
+</ol>
+</div>
+<div class="callout callout-style-simple callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Advertencia</span>Un cuidado con el ejemplo del rozamiento
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Es habitual escuchar “el rozamiento es la fuerza no conservativa típica”, y es cierto que no conserva la energía, pero <strong>no es un contraejemplo de este tema</strong>: el rozamiento depende de la velocidad, no solo de la posición, así que ni siquiera es un campo vectorial <span class="math inline">\(\vec F(x,y,z)\)</span>. No se le puede calcular el rotor.</p>
+<p>Contraejemplos honestos, que sí son campos de posición con rotor no nulo:</p>
+<ul>
+<li><strong>El campo eléctrico inducido.</strong> La ley de Faraday dice <span class="math inline">\(\nabla \times \vec E = -\partial \vec B / \partial t\)</span>: si el campo magnético varía en el tiempo, el campo eléctrico tiene rotor y no es conservativo. Su circulación sobre un circuito cerrado es exactamente la fuerza electromotriz, que es lo que hace andar un generador. La “energía que se gana dando vueltas” existe de verdad; la paga el campo magnético.</li>
+<li><strong>El campo de velocidades de un fluido en rotación</strong>, que es <a href="#eq-remolino" class="quarto-xref"><span>3.1</span></a> con otras unidades. Una hélice puesta en el agua gira: ese giro es el rotor.</li>
+</ul>
+</div>
+</div>
+</section>
+</section>
+<section id="sec-vortice" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="sec-vortice"><span class="header-section-number">3.2</span> El vórtice: cuando el test da bien y aun así no hay potencial</h2>
+<p>Este es el ejemplo importante, el que justifica toda la letra chica sobre el dominio. Sea</p>
+<p><span id="eq-vortice2"><span class="math display">\[
+\vec V(x,y) = \left( \frac{-y}{x^2+y^2},\ \frac{x}{x^2+y^2} \right)
+\qquad \text{en } D = \mathbb{R}^2 \setminus \{(0,0)\} .
+\tag{3.2}\]</span></span></p>
+<p><strong>El test da bien.</strong> Con <span class="math inline">\(P = -y/(x^2+y^2)\)</span> y <span class="math inline">\(Q = x/(x^2+y^2)\)</span>:</p>
+<p><span class="math display">\[
+\frac{\partial P}{\partial y} = \frac{-(x^2+y^2) + y \cdot 2y}{(x^2+y^2)^2} = \frac{y^2 - x^2}{(x^2+y^2)^2},
+\qquad
+\frac{\partial Q}{\partial x} = \frac{(x^2+y^2) - x \cdot 2x}{(x^2+y^2)^2} = \frac{y^2 - x^2}{(x^2+y^2)^2} .
+\]</span></p>
+<p>Son iguales <strong>en todo el dominio</strong>. <span class="math inline">\(\operatorname{rot} \vec V = 0\)</span> en cada punto donde el campo está definido.</p>
+<p><strong>Y sin embargo no es conservativo.</strong> Sobre la circunferencia unitaria, <span class="math inline">\(\vec r(t) = (\cos t, \operatorname{sen} t)\)</span>, el campo vale <span class="math inline">\(\vec V = (-\operatorname{sen} t, \cos t)\)</span> y otra vez</p>
+<p><span class="math display">\[
+\oint_C \vec V \cdot d\vec r = \int_0^{2\pi} 1\, dt = 2\pi \neq 0 .
+\]</span></p>
+<p>Si existiera <span class="math inline">\(f\)</span> con <span class="math inline">\(\nabla f = \vec V\)</span> en todo <span class="math inline">\(D\)</span>, el <a href="cc-01-teoria.html#thm-tfil" class="quarto-xref">Teorema&nbsp;<span>1.1</span></a> daría <span class="math inline">\(0\)</span>. Entonces no existe. <span class="chip no">no conservativo en <span class="math inline">\(D\)</span></span></p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Importante</span>Dónde está la trampa
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>El culpable es el agujero. <span class="math inline">\(D = \mathbb{R}^2 \setminus \{(0,0)\}\)</span> <strong>no es simplemente conexo</strong>: la circunferencia unitaria no se puede contraer a un punto sin pasar por el origen, donde el campo explota. El teorema que dice “rotor nulo <span class="math inline">\(\Rightarrow\)</span> conservativo” tiene esa hipótesis, y acá falla.</p>
+<p>Y hay más: sobre <strong>cualquier</strong> curva cerrada de <span class="math inline">\(D\)</span>, la circulación vale <span class="math inline">\(2\pi n\)</span>, donde <span class="math inline">\(n\)</span> es el número de vueltas que la curva da alrededor del origen. Si la curva no encierra el agujero, da cero y el campo se comporta como si fuera conservativo. Solo las curvas que rodean el agujero “ven” que el campo tiene algo raro.</p>
+</div>
+</div>
+<div id="cell-fig-vortice" class="cell" data-fig-height="4.6" data-fig-width="6.4" data-execution_count="2">
+<details class="code-fold">
+<summary>Ver el código de la figura</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>TINTA, GRIS <span class="op">=</span> <span class="st">"#1e1a2e"</span>, <span class="st">"#a99fc0"</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>VERDE, ROJO <span class="op">=</span> <span class="st">"#2f6b48"</span>, <span class="st">"#b8564f"</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> V(x, y):</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    d <span class="op">=</span> x<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> y<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">-</span>y<span class="op">/</span>d, x<span class="op">/</span>d</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>xq <span class="op">=</span> np.linspace(<span class="op">-</span><span class="fl">2.8</span>, <span class="fl">2.8</span>, <span class="dv">16</span>)          <span class="co"># par: la grilla no pisa el origen</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>XQ, YQ <span class="op">=</span> np.meshgrid(xq, xq)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>R <span class="op">=</span> np.hypot(XQ, YQ)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>dentro <span class="op">=</span> R <span class="op">&gt;</span> <span class="fl">.3</span>                          <span class="co"># el campo explota en el agujero</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>XQ, YQ <span class="op">=</span> XQ[dentro], YQ[dentro]</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>U, W <span class="op">=</span> V(XQ, YQ)</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>norma <span class="op">=</span> np.hypot(U, W)</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="fl">6.4</span>, <span class="fl">4.6</span>))</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="co"># largo proporcional a la raiz de la norma: se ve el decaimiento 1/r sin que</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="co"># las flechas de afuera desaparezcan</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>largo <span class="op">=</span> np.sqrt(norma <span class="op">/</span> norma.<span class="bu">max</span>())</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>ax.quiver(XQ, YQ, U<span class="op">/</span>norma<span class="op">*</span>largo, W<span class="op">/</span>norma<span class="op">*</span>largo, color<span class="op">=</span>TINTA,</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>          width<span class="op">=</span><span class="fl">.0045</span>, scale<span class="op">=</span><span class="dv">11</span>, alpha<span class="op">=</span><span class="fl">.7</span>)</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">2</span><span class="op">*</span>np.pi, <span class="dv">400</span>)</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (cx, cy, R, color, etiqueta, ancla, desp, ali) <span class="kw">in</span> [</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>        (<span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">1.5</span>, ROJO, <span class="st">"encierra el agujero</span><span class="ch">\n</span><span class="st">$</span><span class="ch">\\</span><span class="st">oint = 2</span><span class="ch">\\</span><span class="st">pi$"</span>,</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>         (<span class="dv">0</span>, <span class="op">-</span><span class="fl">1.5</span>), (<span class="dv">0</span>, <span class="op">-</span><span class="dv">26</span>), <span class="st">"center"</span>),</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>        (<span class="fl">1.7</span>, <span class="fl">1.4</span>, <span class="fl">0.8</span>, VERDE, <span class="st">"no lo encierra</span><span class="ch">\n</span><span class="st">$</span><span class="ch">\\</span><span class="st">oint = 0$"</span>,</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>         (<span class="fl">1.7</span>, <span class="fl">2.2</span>), (<span class="dv">4</span>, <span class="dv">12</span>), <span class="st">"center"</span>)]:</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>    ax.plot(cx <span class="op">+</span> R<span class="op">*</span>np.cos(t), cy <span class="op">+</span> R<span class="op">*</span>np.sin(t), color<span class="op">=</span>color, lw<span class="op">=</span><span class="fl">2.2</span>)</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>    ax.annotate(etiqueta, ancla, textcoords<span class="op">=</span><span class="st">"offset points"</span>, xytext<span class="op">=</span>desp,</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>                ha<span class="op">=</span>ali, fontsize<span class="op">=</span><span class="fl">8.5</span>, color<span class="op">=</span>color)</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>ax.plot(<span class="dv">0</span>, <span class="dv">0</span>, <span class="st">"x"</span>, color<span class="op">=</span>ROJO, ms<span class="op">=</span><span class="dv">9</span>, mew<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>ax.annotate(<span class="st">"el agujero"</span>, (<span class="dv">0</span>, <span class="dv">0</span>), textcoords<span class="op">=</span><span class="st">"offset points"</span>, xytext<span class="op">=</span>(<span class="dv">9</span>, <span class="op">-</span><span class="dv">14</span>),</span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>            fontsize<span class="op">=</span><span class="fl">8.5</span>, color<span class="op">=</span>ROJO)</span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"$x$"</span>)<span class="op">;</span> ax.set_ylabel(<span class="st">"$y$"</span>)</span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>ax.set_aspect(<span class="st">"equal"</span>)<span class="op">;</span> ax.set_xlim(<span class="op">-</span><span class="dv">3</span>, <span class="fl">3.4</span>)<span class="op">;</span> ax.set_ylim(<span class="op">-</span><span class="fl">3.2</span>, <span class="fl">3.4</span>)</span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>fig.tight_layout()</span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div id="fig-vortice" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-vortice-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="cc-03-no-conservativos_files/figure-html/fig-vortice-output-1.png" width="427" height="432" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-vortice-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;3.2: El vórtice y dos curvas cerradas. La verde no encierra el agujero: la región que rodea está enteramente dentro del dominio, Green se aplica, y como el rotor es nulo la circulación da cero. La roja sí lo encierra: adentro hay un punto donde el campo no está definido, Green no se puede usar, y la circulación da <span class="math inline">\(2\pi\)</span>. Las flechas se dibujan más oscuras donde el campo es más intenso; cerca del agujero crece como <span class="math inline">\(1/r\)</span>.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="lienzo" data-figura="vortice" data-alto="420" data-rotulo="Movés el círculo: solo importa si encierra el agujero" data-sliders="[{&quot;id&quot;:&quot;cx&quot;,&quot;min&quot;:-2,&quot;max&quot;:2,&quot;paso&quot;:0.05,&quot;valor&quot;:0,&quot;rotulo&quot;:&quot;centro x&quot;,&quot;decimales&quot;:2},{&quot;id&quot;:&quot;cy&quot;,&quot;min&quot;:-2,&quot;max&quot;:2,&quot;paso&quot;:0.05,&quot;valor&quot;:0,&quot;rotulo&quot;:&quot;centro y&quot;,&quot;decimales&quot;:2},{&quot;id&quot;:&quot;R&quot;,&quot;min&quot;:0.2,&quot;max&quot;:1.8,&quot;paso&quot;:0.05,&quot;valor&quot;:1,&quot;rotulo&quot;:&quot;radio&quot;,&quot;decimales&quot;:2}]">
+  <div class="lienzo-pie">
+    El rotor de \(\vec V\) es cero en cada punto del dominio, así que la integral sobre cualquier
+    curva cerrada <b>que no encierre el origen</b> vale cero, por Green. Pero apenas el círculo se
+    traga el agujero, la circulación salta a \(2\pi \approx 6{,}283\), y no depende del radio ni
+    de la forma: solo de cuántas vueltas le da al agujero. Ese salto es el agujero haciéndose
+    ver.
+  </div>
+</div>
+<script>
+window.LIENZO = window.LIENZO || {};
+window.LIENZO.vortice = function (P, v) {
+  var col = P.col;
+  var V = function (x, y) {
+    var d = x*x + y*y;
+    if (d < 1e-6) return [0, 0];
+    return [-y/d, x/d];
+  };
+  var r = function (u) {
+    return [v.cx + v.R*Math.cos(2*Math.PI*u), v.cy + v.R*Math.sin(2*Math.PI*u)];
+  };
+  var d0 = Math.hypot(v.cx, v.cy);
+  var encierra = d0 < v.R - 1e-9;
+  var toca = Math.abs(d0 - v.R) < 0.06;
+
+  var caja = [48, 34, P.w - 90, P.h - 86];
+  var lado = Math.min(caja[2], caja[3]);
+  caja = [caja[0] + (caja[2]-lado)/2, caja[1], lado, lado];
+  var m = P.marco(caja, [-3, 3], [-3, 3]);
+  P.ejes(m, 'x', 'y', null);
+  P.recorte(m, function () {
+    CV.campo(P, m, V, { n: 19, color: col.tinta, largo: 11, alfa: .45, porNorma: true });
+  });
+
+  // el agujero
+  var c = P.ctx;
+  c.save();
+  c.strokeStyle = col.mal; c.lineWidth = 1.6;
+  c.beginPath(); c.arc(m.X(0), m.Y(0), 5, 0, 6.2832); c.stroke();
+  c.beginPath(); c.moveTo(m.X(0)-4, m.Y(0)-4); c.lineTo(m.X(0)+4, m.Y(0)+4);
+  c.moveTo(m.X(0)-4, m.Y(0)+4); c.lineTo(m.X(0)+4, m.Y(0)-4); c.stroke();
+  c.restore();
+  P.texto(m.X(0) + 9, m.Y(0) + 16, 'agujero', col.mal, 11);
+
+  // la curva
+  var pts = [], i;
+  for (i = 0; i <= 200; i++) pts.push(r(i/200));
+  var color = encierra ? col.mal : col.bien;
+  P.recorte(m, function () { P.curva(m, pts, color, 2.4, 1); });
+  [0.12, 0.37, 0.62, 0.87].forEach(function (u) {
+    var a = r(u - 0.02), b = r(u + 0.02);
+    CV.flechaPx(P, m.X(a[0]), m.Y(a[1]), m.X(b[0]), m.Y(b[1]), color, 2.4, 9);
+  });
+
+  var W = CV.trabajo(V, r, 0, 1, 4000);
+
+  P.texto(caja[0] - 14, 16, 'rot V = 0 en todo el dominio', col.tinta, 12);
+  P.texto(caja[0] - 14, 32,
+          'circulación = ' + W.toFixed(3) +
+          (toca ? '   (el borde roza el agujero)' : ''), color, 12.5);
+  P.texto(caja[0] + caja[2] + 30, 32,
+          encierra ? 'encierra el agujero → 2π' : 'no lo encierra → 0',
+          color, 12.5, 'right');
+};
+</script>
+<section id="sec-multivaluado" class="level3" data-number="3.2.1">
+<h3 data-number="3.2.1" class="anchored" data-anchor-id="sec-multivaluado"><span class="header-section-number">3.2.1</span> El potencial existe, pero es multivaluado</h3>
+<p>Que no haya potencial <strong>global</strong> no quiere decir que no haya nada. En cualquier disco contenido en <span class="math inline">\(D\)</span> —por ejemplo, todo el semiplano <span class="math inline">\(x &gt; 0\)</span>— el campo sí tiene potencial, y es el ángulo polar:</p>
+<p><span class="math display">\[
+\theta(x,y) = \operatorname{arctg}\!\left( \frac{y}{x} \right),
+\qquad
+\nabla \theta = \left( \frac{-y}{x^2+y^2},\ \frac{x}{x^2+y^2} \right) = \vec V .
+\]</span></p>
+<p>El problema es pegar esos potenciales locales en uno solo. Si uno recorre una vuelta alrededor del origen, el ángulo crece continuamente y al volver al punto de partida vale <span class="math inline">\(\theta + 2\pi\)</span>: no es una función, es una <strong>rampa en espiral</strong>. El “relieve” de este campo existe, pero es la rampa de un estacionamiento, no un terreno: podés volver al mismo punto del plano un piso más arriba.</p>
+<div id="cell-fig-helicoide" class="cell" data-fig-height="4.6" data-fig-width="6.2" data-execution_count="3">
+<details class="code-fold">
+<summary>Ver el código de la figura</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>VIOLETA, TINTA, GRIS <span class="op">=</span> <span class="st">"#7c5cbf"</span>, <span class="st">"#1e1a2e"</span>, <span class="st">"#a99fc0"</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>th <span class="op">=</span> np.linspace(<span class="op">-</span><span class="fl">2.6</span><span class="op">*</span>np.pi, <span class="fl">2.6</span><span class="op">*</span>np.pi, <span class="dv">400</span>)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>rr <span class="op">=</span> np.linspace(<span class="fl">0.28</span>, <span class="fl">1.5</span>, <span class="dv">40</span>)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>TH, RR <span class="op">=</span> np.meshgrid(th, rr)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>X, Y, Z <span class="op">=</span> RR<span class="op">*</span>np.cos(TH), RR<span class="op">*</span>np.sin(TH), TH</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="fl">6.2</span>, <span class="fl">4.6</span>))</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> fig.add_subplot(<span class="dv">111</span>, projection<span class="op">=</span><span class="st">"3d"</span>)</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>ax.plot_surface(X, Y, Z, cmap<span class="op">=</span><span class="st">"BuPu_r"</span>, linewidth<span class="op">=</span><span class="dv">0</span>, rstride<span class="op">=</span><span class="dv">1</span>, cstride<span class="op">=</span><span class="dv">6</span>, alpha<span class="op">=</span><span class="fl">.92</span>)</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="co"># una vuelta completa a radio 1</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>t1 <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">2</span><span class="op">*</span>np.pi, <span class="dv">300</span>)</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>ax.plot(np.cos(t1), np.sin(t1), t1, color<span class="op">=</span>VIOLETA, lw<span class="op">=</span><span class="fl">2.6</span>)</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>ax.plot([<span class="dv">1</span>, <span class="dv">1</span>], [<span class="dv">0</span>, <span class="dv">0</span>], [<span class="dv">0</span>, <span class="dv">2</span><span class="op">*</span>np.pi], color<span class="op">=</span>TINTA, lw<span class="op">=</span><span class="fl">1.2</span>, ls<span class="op">=</span><span class="st">"--"</span>)</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>ax.scatter([<span class="dv">1</span>, <span class="dv">1</span>], [<span class="dv">0</span>, <span class="dv">0</span>], [<span class="dv">0</span>, <span class="dv">2</span><span class="op">*</span>np.pi], color<span class="op">=</span>TINTA, s<span class="op">=</span><span class="dv">18</span>)</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>ax.text(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">2</span><span class="op">*</span>np.pi <span class="op">+</span> <span class="fl">1.1</span>, <span class="st">"$</span><span class="ch">\\</span><span class="st">theta + 2</span><span class="ch">\\</span><span class="st">pi$"</span>, fontsize<span class="op">=</span><span class="dv">9</span>, color<span class="op">=</span>TINTA)</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>ax.text(<span class="dv">1</span>, <span class="dv">0</span>, <span class="op">-</span><span class="fl">1.9</span>, <span class="st">"$</span><span class="ch">\\</span><span class="st">theta$"</span>, fontsize<span class="op">=</span><span class="dv">9</span>, color<span class="op">=</span>TINTA)</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"$x$"</span>, labelpad<span class="op">=-</span><span class="dv">6</span>)<span class="op">;</span> ax.set_ylabel(<span class="st">"$y$"</span>, labelpad<span class="op">=-</span><span class="dv">6</span>)</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>ax.set_zlabel(<span class="st">"$</span><span class="ch">\\</span><span class="st">theta$"</span>, labelpad<span class="op">=-</span><span class="dv">6</span>)</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>ax.tick_params(labelsize<span class="op">=</span><span class="dv">6</span>, pad<span class="op">=-</span><span class="dv">2</span>)</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>ax.view_init(elev<span class="op">=</span><span class="dv">22</span>, azim<span class="op">=-</span><span class="dv">62</span>)</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>fig.tight_layout()</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div id="fig-helicoide" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-helicoide-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="cc-03-no-conservativos_files/figure-html/fig-helicoide-output-1.png" width="432" height="432" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-helicoide-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;3.3: El potencial del vórtice: la superficie <span class="math inline">\(z = \theta\)</span> sobre el plano agujereado. No es el gráfico de ninguna función, porque sobre cada punto del plano hay infinitos valores separados por <span class="math inline">\(2\pi\)</span>. Dar una vuelta alrededor del agujero y volver al mismo <span class="math inline">\((x,y)\)</span> deja la altura <span class="math inline">\(2\pi\)</span> más arriba: esa es, exactamente, la circulación que da <span class="math inline">\(2\pi \neq 0\)</span>. La línea violeta marca una vuelta completa.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="lienzo" data-figura="helicoide" data-alto="420" data-rotulo="Arrastrá para girar la rampa" data-sliders="[{&quot;id&quot;:&quot;vueltas&quot;,&quot;min&quot;:0.25,&quot;max&quot;:1.5,&quot;paso&quot;:0.05,&quot;valor&quot;:1,&quot;rotulo&quot;:&quot;vueltas&quot;,&quot;decimales&quot;:2}]">
+  <div class="lienzo-pie">
+    Girala hasta mirar desde arriba: la rampa se proyecta sobre el plano agujereado y se ve el
+    campo \(\vec V\) de siempre. Girala de costado y se ve por qué no hay potencial: subiendo por
+    la curva blanca volvés al mismo \((x,y)\) a una altura \(2\pi\) mayor. El deslizador acorta
+    o alarga el recorrido; el desnivel entre las dos puntas es la circulación.
+  </div>
+</div>
+<script>
+window.LIENZO = window.LIENZO || {};
+window.LIENZO.helicoide = function (P, v) {
+  var Vv = CV.vista('helicoide'), col = P.col;
+  var caja = [26, 16, P.w - 52, P.h - 44];
+  var TMAX = 2*Math.PI*1.35;
+  var dom = { x: [-1.6, 1.6], y: [-1.6, 1.6], z: [-TMAX, TMAX], ax: 1, ay: 1, az: .92 };
+  var cam = P.camara(caja, dom, Vv.azim, Vv.elev, .40);
+
+  P.caja3(cam, 'x', 'y', 'θ');
+
+  // la rampa: (r, θ) ↦ (r cos θ, r sen θ, θ)
+  CV.superficie3(P, cam,
+    function (r, t) { return [r*Math.cos(t), r*Math.sin(t), t]; },
+    0.3, 1.5, -TMAX, TMAX,
+    { nu: 10, nv: 120, alfa: 1, malla: false,
+      color: function (r, t) { return CV.rampa((t + TMAX) / (2*TMAX)); } });
+
+  // el campo, proyectado en el piso
+  var n = 9, i, j, x, y, d;
+  for (i = 0; i < n; i++) for (j = 0; j < n; j++) {
+    x = -1.4 + 2.8*i/(n-1); y = -1.4 + 2.8*j/(n-1);
+    d = x*x + y*y;
+    if (d < 0.09 || d > 2.4) continue;
+    CV.flecha3(P, cam, x, y, dom.z[0], -y/d, x/d, 11, col.tinta, 1);
+  }
+
+  // una vuelta a radio 1
+  var tope = 2*Math.PI*v.vueltas, pts = [], N = 220;
+  for (i = 0; i <= N; i++) {
+    var t = tope * i / N;
+    pts.push([Math.cos(t), Math.sin(t), t]);
+  }
+  P.curva3(cam, pts, '#ffffff', 3.2, 1);
+  P.curva3(cam, [[1, 0, 0], [1, 0, tope]], col.tinta, 1.4, .85, [4, 4]);
+  P.punto3(cam, 1, 0, 0, col.tinta, 4.5);
+  P.punto3(cam, 1, 0, tope, col.tinta, 4.5);
+
+  P.texto(caja[0], caja[1] + 14,
+          'desnivel = circulación = ' + tope.toFixed(3), col.acento, 12.5);
+};
+window.addEventListener('load', function () { CV.rotable('helicoide', { azim: -0.7, elev: 0.34 }); });
+</script>
+<div class="callout callout-style-simple callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Un detalle que conviene tener claro
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Si el dominio se achica a uno simplemente conexo —el semiplano <span class="math inline">\(x&gt;0\)</span>, o el plano sin el semieje negativo— el <strong>mismo</strong> campo <a href="#eq-vortice2" class="quarto-xref"><span>3.2</span></a> sí es conservativo, con <span class="math inline">\(f = \operatorname{arctg}(y/x)\)</span> (más precisamente, con la rama del ángulo que corresponda). Ser conservativo no es una propiedad de la fórmula del campo: <strong>es una propiedad del par campo–dominio</strong>. Por eso el paso 1 de la receta es escribir el dominio, y por eso en el ejercicio 18.c del <a href="cc-04-ejercicios.html#sec-ej18" class="quarto-xref"><span>Sección 4.2</span></a> la respuesta cambia según el semiplano.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="sec-planta" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="sec-planta"><span class="header-section-number">3.3</span> Una consecuencia con contexto: la planta del ejercicio 20</h2>
+<p>El <a href="cc-04-ejercicios.html#sec-ej20" class="quarto-xref"><span>Sección 4.4</span></a> modela un vehículo autónomo en una planta industrial con el campo <span class="math inline">\(\vec F = (2xy + 3,\ x^2 + 4y)\)</span>, que es conservativo, y esa es precisamente la razón por la que el ejercicio pide interpretar el potencial: el trabajo del campo no depende de la ruta, así que la planificación de rutas puede decidirse por otros criterios.</p>
+<p>Supongamos ahora que la planta agrega una <strong>cinta transportadora circular</strong> alrededor del centro, que empuja al vehículo tangencialmente. El campo pasa a ser</p>
+<p><span id="eq-planta"><span class="math display">\[
+\vec F_c(x,y) = (2xy + 3 - c\,y,\ x^2 + 4y + c\,x),
+\tag{3.3}\]</span></span></p>
+<p>donde <span class="math inline">\(c\)</span> mide la intensidad de la cinta. El rotor es</p>
+<p><span class="math display">\[
+\operatorname{rot} \vec F_c = (2x + c) - (2x - c) = 2c ,
+\]</span></p>
+<p>o sea que con <span class="math inline">\(c \neq 0\)</span> el campo deja de ser conservativo, y todas las conclusiones del ejercicio 20 se caen. En números, el trabajo de <span class="math inline">\((0,0)\)</span> a <span class="math inline">\((2,1)\)</span>:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 62%">
+<col style="width: 38%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Ruta</th>
+<th>Trabajo</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Pasillo quebrado: <span class="math inline">\((0,0) \to (2,0) \to (2,1)\)</span></td>
+<td><span class="math inline">\(12 + 2c\)</span></td>
+</tr>
+<tr class="even">
+<td>Diagonal recta: <span class="math inline">\((0,0) \to (2,1)\)</span></td>
+<td><span class="math inline">\(12\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>La diferencia es <span class="math inline">\(2c\)</span>, y no es casualidad: las dos rutas encierran un triángulo de área <span class="math inline">\(1\)</span>, y por Green la diferencia tiene que ser <span class="math inline">\(\iint \operatorname{rot} = 2c \cdot 1 = 2c\)</span>. Con la cinta prendida, <strong>elegir el pasillo cambia el balance energético</strong>, un ciclo de reparto cerrado no vuelve a cero, y no tiene sentido hablar de “la energía almacenada en la posición <span class="math inline">\((x,y)\)</span>”.</p>
+<div class="ejercicio" data-respuesta="6" data-tol="0.001" data-rotulo="Para calcular">
+<p>Con el campo <a href="#eq-planta" class="quarto-xref"><span>3.3</span></a> y <span class="math inline">\(c = 3\)</span>, el vehículo hace un circuito cerrado: va de <span class="math inline">\((0,0)\)</span> a <span class="math inline">\((2,1)\)</span> por la diagonal y vuelve por el pasillo quebrado. ¿Cuánto trabajo neto le entrega el campo en ese ciclo, en valor absoluto?</p>
+<div class="explica">
+<p>Por Green, <span class="math inline">\(\left|\oint \vec F_c \cdot d\vec r\right| = \left|\iint_\Omega 2c \, dA\right| = 2c \cdot \text{área}\)</span>. El triángulo de vértices <span class="math inline">\((0,0)\)</span>, <span class="math inline">\((2,0)\)</span> y <span class="math inline">\((2,1)\)</span> tiene área <span class="math inline">\(\tfrac12 \cdot 2 \cdot 1 = 1\)</span>, así que el resultado es <span class="math inline">\(2 \cdot 3 \cdot 1 = 6\)</span>.</p>
+<p>También sale de la tabla: <span class="math inline">\((12 + 2c) - 12 = 2c = 6\)</span>.</p>
+<p>Lo importante no es el número sino qué significa: el vehículo termina donde empezó y el campo le entregó <span class="math inline">\(6\)</span> unidades de energía. Con <span class="math inline">\(c = 0\)</span> eso sería imposible.</p>
+</div>
+</div>
+<div class="ejercicio">
+<p>¿Cuál de estas afirmaciones sobre el vórtice <a href="#eq-vortice2" class="quarto-xref"><span>3.2</span></a> es <strong>falsa</strong>?</p>
+<ul>
+<li><span class="mal">Su rotor es nulo en todo punto de su dominio.</span></li>
+<li><span class="mal">No existe <span class="math inline">\(f\)</span> con <span class="math inline">\(\nabla f = \vec V\)</span> definida en todo <span class="math inline">\(\mathbb{R}^2 \setminus \{(0,0)\}\)</span>.</span></li>
+<li><span class="bien">Como el rotor es nulo, la circulación sobre cualquier curva cerrada del dominio es cero.</span></li>
+<li><span class="mal">Restringido al semiplano <span class="math inline">\(x &gt; 0\)</span>, el campo es conservativo.</span></li>
+</ul>
+<div class="explica">
+<p>La falsa es la tercera, y es justamente la conclusión apresurada que el ejemplo existe para romper. La circulación es cero solo sobre las curvas cerradas que <strong>no encierran el origen</strong>; las que le dan <span class="math inline">\(n\)</span> vueltas dan <span class="math inline">\(2\pi n\)</span>.</p>
+<p>El razonamiento correcto es: Green necesita que el campo sea <span class="math inline">\(C^1\)</span> en <strong>toda</strong> la región encerrada por la curva, y si la curva rodea el origen, el campo no está definido ahí adentro. La hipótesis que falla no es “rotor nulo”, es “el campo vive en toda la región”.</p>
+</div>
+</div>
+<div class="ejercicio">
+<p>Estás resolviendo un ejercicio y, al hacer el paso 4, te queda <span class="math inline">\(g'(y) = 3x^2 + 2y\)</span>. ¿Qué hacés?</p>
+<ul>
+<li><span class="mal">Integro respecto de <span class="math inline">\(y\)</span> tratando <span class="math inline">\(x\)</span> como constante: <span class="math inline">\(g = 3x^2y + y^2\)</span>.</span></li>
+<li><span class="bien">Vuelvo a testear <span class="math inline">\(P_y\)</span> y <span class="math inline">\(Q_x\)</span>: o el campo no era conservativo, o me equivoqué en la integral del paso 3.</span></li>
+<li><span class="mal">Concluyo que el campo no es conservativo y termino ahí.</span></li>
+<li><span class="mal">Cambio el orden: integro <span class="math inline">\(Q\)</span> respecto de <span class="math inline">\(y\)</span> y empiezo de nuevo.</span></li>
+</ul>
+<div class="explica">
+<p><strong>La correcta es la segunda.</strong> La primera opción es el error clásico y produce una <span class="math inline">\(f\)</span> que no cumple <span class="math inline">\(\nabla f = \vec F\)</span>: <span class="math inline">\(g\)</span> es, por construcción, una función de <span class="math inline">\(y\)</span> sola.</p>
+<p>La tercera va en la dirección correcta pero se apura: si el test del paso 2 ya había dado bien, la contradicción <strong>tiene</strong> que venir de un error de cuenta. Volver a mirar el test distingue los dos casos en treinta segundos.</p>
+<p>La cuarta puede funcionar de rebote, pero es arreglar a ciegas: si el error era de cuenta, lo más probable es que se repita.</p>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<style>
+/* ---------- Ejercicios interactivos y videos del libro ---------- */
+:root {
+  --ej-borde: #ddd6ee;  --ej-fondo: #faf8fc;  --ej-tinta: #1e1a2e;
+  --ej-tenue: #6b6080;  --ej-acento: #7c5cbf;
+  --ej-bien: #3f8f5f;   --ej-bien-fondo: #eaf5ee;
+  --ej-mal:  #b8564f;   --ej-mal-fondo:  #f9ecea;
+}
+body.quarto-dark {
+  --ej-borde: #3b3459;  --ej-fondo: #1a1630;  --ej-tinta: #ece8f5;
+  --ej-tenue: #a79fc0;  --ej-acento: #b79ce9;
+  --ej-bien: #7fc79a;   --ej-bien-fondo: #1c2d24;
+  --ej-mal:  #e09a94;   --ej-mal-fondo:  #2e1e1e;
+}
+
+.ejercicio {
+  border: 1px solid var(--ej-borde);
+  border-left: 3px solid var(--ej-acento);
+  background: var(--ej-fondo);
+  border-radius: 4px;
+  padding: 1.1rem 1.25rem .95rem;
+  margin: 1.8rem 0;
+}
+.ejercicio > .ej-rotulo {
+  font-size: .68rem; letter-spacing: .13em; text-transform: uppercase;
+  font-weight: 600; color: var(--ej-acento); margin-bottom: .5rem;
+}
+.ejercicio p { margin-bottom: .7rem; }
+
+.ej-ops { display: flex; flex-direction: column; gap: .45rem; margin: .9rem 0 .3rem; }
+.ej-op {
+  text-align: left; width: 100%; cursor: pointer;
+  border: 1px solid var(--ej-borde); border-radius: 4px;
+  background: transparent; color: var(--ej-tinta);
+  padding: .6rem .8rem; font: inherit; font-size: .95rem; line-height: 1.45;
+  transition: border-color .15s, background .15s;
+}
+.ej-op:hover:not([disabled]) { border-color: var(--ej-acento); }
+.ej-op[data-estado="bien"] { border-color: var(--ej-bien); background: var(--ej-bien-fondo); }
+.ej-op[data-estado="mal"]  { border-color: var(--ej-mal);  background: var(--ej-mal-fondo); opacity: .85; }
+.ej-op[disabled] { cursor: default; }
+.ej-op .ej-marca { float: right; font-weight: 700; margin-left: .6rem; }
+.ej-op[data-estado="bien"] .ej-marca { color: var(--ej-bien); }
+.ej-op[data-estado="mal"]  .ej-marca { color: var(--ej-mal); }
+
+.ej-num { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; margin: .9rem 0 .3rem; }
+.ej-num input {
+  border: 1px solid var(--ej-borde); border-radius: 4px; background: transparent;
+  color: var(--ej-tinta); padding: .5rem .7rem; font: inherit; font-size: .95rem; width: 11rem;
+}
+.ej-num input:focus { outline: none; border-color: var(--ej-acento); }
+.ej-num button {
+  border: 1px solid var(--ej-acento); border-radius: 4px; background: var(--ej-acento);
+  color: #fff; padding: .5rem 1rem; font: inherit; font-size: .82rem;
+  letter-spacing: .06em; cursor: pointer;
+}
+body.quarto-dark .ej-num button { color: #14111f; }
+.ej-num .ej-veredicto { font-size: .9rem; }
+.ej-num .ej-veredicto[data-estado="bien"] { color: var(--ej-bien); }
+.ej-num .ej-veredicto[data-estado="mal"]  { color: var(--ej-mal); }
+
+.explica {
+  border-top: 1px dashed var(--ej-borde);
+  margin-top: .9rem; padding-top: .8rem;
+  font-size: .93rem; color: var(--ej-tenue);
+}
+.explica > *:last-child { margin-bottom: 0; }
+.explica[hidden] { display: none !important; }
+
+/* ---------- Videos ---------- */
+.video {
+  position: relative; width: 100%; aspect-ratio: 16 / 9;
+  margin: 1.6rem 0 .6rem; border-radius: 4px; overflow: hidden;
+  border: 1px solid var(--ej-borde);
+}
+.video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.video-pie { font-size: .82rem; color: var(--ej-tenue); margin-top: -.2rem; }
+</style>
+
+<script>
+(function () {
+  function armar() {
+    document.querySelectorAll('.ejercicio').forEach(function (caja) {
+      if (caja.dataset.listo) return;
+      caja.dataset.listo = '1';
+
+      var rotulo = document.createElement('div');
+      rotulo.className = 'ej-rotulo';
+      rotulo.textContent = caja.dataset.rotulo || 'Para pensar';
+      caja.insertBefore(rotulo, caja.firstChild);
+
+      var explica = caja.querySelector('.explica');
+      if (explica) explica.hidden = true;
+
+      var lista = caja.querySelector('ul');
+      if (lista) return opcionMultiple(caja, lista, explica);
+      if (caja.dataset.respuesta !== undefined) return numerico(caja, explica);
+    });
+  }
+
+  function opcionMultiple(caja, lista, explica) {
+    var ops = document.createElement('div');
+    ops.className = 'ej-ops';
+    var botones = [];
+
+    Array.prototype.forEach.call(lista.children, function (li) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'ej-op';
+      b.innerHTML = li.innerHTML;
+      b.dataset.correcta = li.querySelector('.bien') ? '1' : '0';
+      ops.appendChild(b);
+      botones.push(b);
+    });
+    lista.parentNode.replaceChild(ops, lista);
+
+    botones.forEach(function (b) {
+      b.addEventListener('click', function () {
+        var bien = b.dataset.correcta === '1';
+        b.dataset.estado = bien ? 'bien' : 'mal';
+        if (!b.querySelector('.ej-marca')) {
+          var m = document.createElement('span');
+          m.className = 'ej-marca';
+          m.textContent = bien ? '✓' : '✕';
+          b.appendChild(m);
+        }
+        if (bien) {
+          botones.forEach(function (o) { o.disabled = true; });
+          if (explica) explica.hidden = false;
+        }
+      });
+    });
+  }
+
+  function numerico(caja, explica) {
+    var esperado = parseFloat(caja.dataset.respuesta);
+    var tol = parseFloat(caja.dataset.tol || '0');
+    var fila = document.createElement('div');
+    fila.className = 'ej-num';
+    fila.innerHTML =
+      '<input type="text" inputmode="decimal" aria-label="Tu respuesta" placeholder="tu respuesta">' +
+      '<button type="button">Comprobar</button>' +
+      '<span class="ej-veredicto"></span>';
+    caja.insertBefore(fila, explica || null);
+
+    var campo = fila.querySelector('input');
+    var boton = fila.querySelector('button');
+    var veredicto = fila.querySelector('.ej-veredicto');
+
+    function comprobar() {
+      var v = parseFloat(campo.value.replace(',', '.'));
+      if (isNaN(v)) {
+        veredicto.dataset.estado = 'mal';
+        veredicto.textContent = 'Escribí un número.';
+        return;
+      }
+      if (Math.abs(v - esperado) <= tol) {
+        veredicto.dataset.estado = 'bien';
+        veredicto.textContent = '✓ Correcto.';
+        if (explica) explica.hidden = false;
+      } else {
+        veredicto.dataset.estado = 'mal';
+        veredicto.textContent = '✕ Todavía no. Probá de nuevo.';
+      }
+    }
+    boton.addEventListener('click', comprobar);
+    campo.addEventListener('keydown', function (e) { if (e.key === 'Enter') comprobar(); });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', armar);
+  } else {
+    armar();
+  }
+})();
+</script>
+
+<style>
+/* ---------- Lienzos interactivos (gráficos con sliders) ---------- */
+.lienzo {
+  border: 1px solid var(--ej-borde);
+  border-left: 3px solid var(--ej-acento);
+  background: var(--ej-fondo);
+  border-radius: 4px;
+  padding: 1rem 1.15rem .85rem;
+  margin: 1.8rem 0;
+}
+.lienzo > .ej-rotulo {
+  font-size: .68rem; letter-spacing: .13em; text-transform: uppercase;
+  font-weight: 600; color: var(--ej-acento); margin-bottom: .55rem;
+}
+.lienzo canvas { display: block; width: 100%; height: auto; }
+.lienzo-controles {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: .5rem 1.3rem; margin-top: .85rem;
+}
+.lienzo-control { display: flex; align-items: center; gap: .55rem; }
+.lienzo-control label {
+  font-size: .85rem; color: var(--ej-tinta); min-width: 2.4rem;
+  font-variant-numeric: tabular-nums;
+}
+.lienzo-control input[type="range"] {
+  flex: 1; min-width: 0; accent-color: var(--ej-acento); height: 1.1rem;
+}
+.lienzo-control .lienzo-valor {
+  font-size: .82rem; color: var(--ej-acento); min-width: 3.1rem;
+  text-align: right; font-variant-numeric: tabular-nums;
+}
+.lienzo-pie {
+  font-size: .87rem; color: var(--ej-tenue); margin: .8rem 0 0;
+  border-top: 1px dashed var(--ej-borde); padding-top: .7rem;
+}
+.lienzo-pie > *:last-child { margin-bottom: 0; }
+</style>
+
+<script>
+/* Motor de figuras interactivas.
+   Cada página registra sus dibujos en window.LIENZO antes de que esto corra:
+
+     window.LIENZO = window.LIENZO || {};
+     window.LIENZO.miFigura = function (P, v) { ... };
+
+   y en el markdown se escribe
+
+     <div class="lienzo" data-figura="miFigura" data-alto="330"
+          data-rotulo="Probá"
+          data-sliders='[{"id":"c","min":-2,"max":2,"paso":0.1,"valor":1,"rotulo":"c"}]'>
+     </div>
+*/
+(function () {
+  window.LIENZO = window.LIENZO || {};
+
+  function leerColores(el) {
+    var s = getComputedStyle(el);
+    function c(n, alt) { return (s.getPropertyValue(n) || alt).trim() || alt; }
+    return {
+      tinta:   c('--ej-tinta',  '#1e1a2e'),
+      tenue:   c('--ej-tenue',  '#6b6080'),
+      acento:  c('--ej-acento', '#7c5cbf'),
+      borde:   c('--ej-borde',  '#ddd6ee'),
+      fondo:   c('--ej-fondo',  '#faf8fc'),
+      bien:    c('--ej-bien',   '#3f8f5f'),
+      mal:     c('--ej-mal',    '#b8564f'),
+      suave:   c('--ej-tenue',  '#a99fc0')
+    };
+  }
+
+  // ---- helpers de dibujo que recibe cada figura ----
+  function Pincel(ctx, w, h, col) {
+    this.ctx = ctx; this.w = w; this.h = h; this.col = col;
+  }
+  Pincel.prototype.marco = function (caja, dx, dy) {
+    var bx = caja[0], by = caja[1], bw = caja[2], bh = caja[3];
+    return {
+      caja: caja, dx: dx, dy: dy,
+      X: function (v) { return bx + (v - dx[0]) / (dx[1] - dx[0]) * bw; },
+      Y: function (v) { return by + bh - (v - dy[0]) / (dy[1] - dy[0]) * bh; }
+    };
+  };
+  Pincel.prototype.ejes = function (m, rx, ry, titulo) {
+    var c = this.ctx, k = m.caja, col = this.col;
+    c.save();
+    c.strokeStyle = col.suave; c.lineWidth = 1; c.globalAlpha = .9;
+    c.beginPath();
+    c.moveTo(k[0], k[1]); c.lineTo(k[0], k[1] + k[3]); c.lineTo(k[0] + k[2], k[1] + k[3]);
+    c.stroke();
+    c.globalAlpha = 1;
+    c.fillStyle = col.tenue;
+    function num(v) { return (Math.round(v * 100) / 100).toString().replace('.', ','); }
+    c.font = '10px system-ui, sans-serif';
+    c.textAlign = 'left';  c.fillText(num(m.dx[0]), k[0], k[1] + k[3] + 14);
+    c.textAlign = 'right'; c.fillText(num(m.dx[1]), k[0] + k[2], k[1] + k[3] + 14);
+    c.font = '11px system-ui, sans-serif';
+    if (rx) { c.textAlign = 'center'; c.fillText(rx, k[0] + k[2] / 2, k[1] + k[3] + 27); }
+    if (ry) { c.textAlign = 'left';   c.fillText(ry, k[0] + 5, k[1] + 12); }
+    if (titulo) {
+      c.textAlign = 'left'; c.fillStyle = col.tinta; c.font = '12px system-ui, sans-serif';
+      c.fillText(titulo, k[0], k[1] - 10);
+    }
+    c.restore();
+  };
+  Pincel.prototype.recorte = function (m, dibujar) {
+    var c = this.ctx, k = m.caja;
+    c.save(); c.beginPath(); c.rect(k[0] - .5, k[1] - .5, k[2] + 1, k[3] + 1); c.clip();
+    dibujar(); c.restore();
+  };
+  Pincel.prototype.curva = function (m, pts, color, ancho, alfa, guion) {
+    var c = this.ctx;
+    if (!pts.length) return;
+    c.save();
+    c.strokeStyle = color; c.lineWidth = ancho || 1.5;
+    c.globalAlpha = (alfa === undefined ? 1 : alfa);
+    c.lineJoin = 'round'; c.lineCap = 'round';
+    if (guion) c.setLineDash(guion);
+    c.beginPath();
+    c.moveTo(m.X(pts[0][0]), m.Y(pts[0][1]));
+    for (var i = 1; i < pts.length; i++) c.lineTo(m.X(pts[i][0]), m.Y(pts[i][1]));
+    c.stroke(); c.restore();
+  };
+  Pincel.prototype.punto = function (m, x, y, color, r) {
+    var c = this.ctx;
+    c.save(); c.fillStyle = color;
+    c.beginPath(); c.arc(m.X(x), m.Y(y), r || 4.5, 0, 6.2832); c.fill();
+    c.restore();
+  };
+  Pincel.prototype.texto = function (px, py, s, color, tam, alin) {
+    var c = this.ctx;
+    c.save();
+    c.fillStyle = color; c.font = (tam || 11) + 'px system-ui, sans-serif';
+    c.textAlign = alin || 'left';
+    c.fillText(s, px, py);
+    c.restore();
+  };
+
+  // ---- proyección 3D ortográfica, para los lienzos que la usen ----
+  Pincel.prototype.camara = function (caja, dom, azim, elev, escala) {
+    var bx = caja[0], by = caja[1], bw = caja[2], bh = caja[3];
+    var cx = bx + bw / 2, cy = by + bh / 2;
+    var sa = Math.sin(azim), ca = Math.cos(azim);
+    var se = Math.sin(elev), ce = Math.cos(elev);
+    var k = (escala || 0.44) * Math.min(bw, bh);
+    var ax = dom.ax || 1, ay = dom.ay || 1, az = dom.az || 1;
+    function nor(v, r) { return 2 * (v - r[0]) / (r[1] - r[0]) - 1; }
+    function xyz(x, y, z) {
+      return [nor(x, dom.x) * ax, nor(y, dom.y) * ay, nor(z, dom.z) * az];
+    }
+    return {
+      caja: caja, dom: dom,
+      pt: function (x, y, z) {
+        var p = xyz(x, y, z);
+        var u = -p[0] * sa + p[1] * ca;
+        var v = -(p[0] * ca + p[1] * sa) * se + p[2] * ce;
+        return [cx + k * u, cy - k * v];
+      },
+      prof: function (x, y, z) {
+        var p = xyz(x, y, z);
+        return (p[0] * ca + p[1] * sa) * ce + p[2] * se;
+      }
+    };
+  };
+
+  Pincel.prototype.curva3 = function (cam, pts, color, ancho, alfa, guion) {
+    var c = this.ctx;
+    if (!pts.length) return;
+    c.save();
+    c.strokeStyle = color; c.lineWidth = ancho || 1.4;
+    c.globalAlpha = (alfa === undefined ? 1 : alfa);
+    c.lineJoin = 'round'; c.lineCap = 'round';
+    if (guion) c.setLineDash(guion);
+    c.beginPath();
+    var p = cam.pt(pts[0][0], pts[0][1], pts[0][2]);
+    c.moveTo(p[0], p[1]);
+    for (var i = 1; i < pts.length; i++) {
+      p = cam.pt(pts[i][0], pts[i][1], pts[i][2]);
+      c.lineTo(p[0], p[1]);
+    }
+    c.stroke(); c.restore();
+  };
+
+  Pincel.prototype.punto3 = function (cam, x, y, z, color, r) {
+    var c = this.ctx, p = cam.pt(x, y, z);
+    c.save(); c.fillStyle = color;
+    c.beginPath(); c.arc(p[0], p[1], r || 4.5, 0, 6.2832); c.fill(); c.restore();
+  };
+
+  // caja de referencia: el piso, las cuatro aristas verticales y los rótulos
+  Pincel.prototype.caja3 = function (cam, rx, ry, rz) {
+    var d = cam.dom, col = this.col;
+    var x0 = d.x[0], x1 = d.x[1], y0 = d.y[0], y1 = d.y[1], z0 = d.z[0], z1 = d.z[1];
+    var piso = [[x0, y0, z0], [x1, y0, z0], [x1, y1, z0], [x0, y1, z0], [x0, y0, z0]];
+    this.curva3(cam, piso, col.borde, 1.2, 1);
+    [[x0, y0], [x1, y0], [x1, y1], [x0, y1]].forEach(function (e) {
+      this.curva3(cam, [[e[0], e[1], z0], [e[0], e[1], z1]], col.borde, 1, .55, [3, 4]);
+    }, this);
+    var t;
+    if (rx) { t = cam.pt((x0 + x1) / 2, y0, z0); this.texto(t[0], t[1] + 16, rx, col.tenue, 11, 'center'); }
+    if (ry) { t = cam.pt(x1, (y0 + y1) / 2, z0); this.texto(t[0] + 12, t[1] + 6, ry, col.tenue, 11, 'left'); }
+    if (rz) { t = cam.pt(x0, y1, z1); this.texto(t[0] - 10, t[1], rz, col.tenue, 11, 'right'); }
+  };
+
+  // ---- construcción de un lienzo ----
+  function armarLienzo(caja) {
+    if (caja.dataset.listo) return;
+    caja.dataset.listo = '1';
+
+    var dibujo = window.LIENZO[caja.dataset.figura];
+    if (typeof dibujo !== 'function') return;
+
+    var rot = document.createElement('div');
+    rot.className = 'ej-rotulo';
+    rot.textContent = caja.dataset.rotulo || 'Probá moviendo los controles';
+    caja.insertBefore(rot, caja.firstChild);
+
+    var pie = caja.querySelector('.lienzo-pie');
+
+    var lienzo = document.createElement('canvas');
+    caja.insertBefore(lienzo, pie || null);
+
+    var defs = [];
+    try { defs = JSON.parse(caja.dataset.sliders || '[]'); } catch (e) { defs = []; }
+
+    var fila = document.createElement('div');
+    fila.className = 'lienzo-controles';
+    var entradas = {};
+    var salidas = {};
+
+    defs.forEach(function (d) {
+      var cel = document.createElement('div');
+      cel.className = 'lienzo-control';
+      var et = document.createElement('label');
+      et.textContent = d.rotulo || d.id;
+      var inp = document.createElement('input');
+      inp.type = 'range';
+      inp.min = d.min; inp.max = d.max;
+      inp.step = (d.paso === undefined ? 0.01 : d.paso);
+      inp.value = (d.valor === undefined ? d.min : d.valor);
+      inp.setAttribute('aria-label', d.rotulo || d.id);
+      var val = document.createElement('span');
+      val.className = 'lienzo-valor';
+      cel.appendChild(et); cel.appendChild(inp); cel.appendChild(val);
+      fila.appendChild(cel);
+      entradas[d.id] = inp; salidas[d.id] = val;
+      inp.addEventListener('input', pintar);
+    });
+    caja.insertBefore(fila, pie || null);
+
+    var alto = parseInt(caja.dataset.alto || '330', 10);
+
+    function pintar() {
+      var ancho = lienzo.clientWidth || caja.clientWidth || 640;
+      var dpr = window.devicePixelRatio || 1;
+      lienzo.width = Math.round(ancho * dpr);
+      lienzo.height = Math.round(alto * dpr);
+      lienzo.style.height = alto + 'px';
+
+      var ctx = lienzo.getContext('2d');
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.clearRect(0, 0, ancho, alto);
+
+      var col = leerColores(caja);
+      var v = {};
+      defs.forEach(function (d) {
+        var x = parseFloat(entradas[d.id].value);
+        v[d.id] = x;
+        var dec = (d.decimales === undefined ? 2 : d.decimales);
+        salidas[d.id].textContent = (d.formato ? d.formato : '') + x.toFixed(dec) +
+                                   (d.sufijo ? d.sufijo : '');
+      });
+
+      dibujo(new Pincel(ctx, ancho, alto, col), v);
+    }
+
+    caja._pintar = pintar;
+    pintar();
+    // una segunda pasada cuando ya se aplicó el layout definitivo
+    setTimeout(pintar, 60);
+  }
+
+  function armarTodos() {
+    document.querySelectorAll('.lienzo').forEach(armarLienzo);
+  }
+  function repintarTodos() {
+    document.querySelectorAll('.lienzo').forEach(function (c) {
+      if (c._pintar) c._pintar();
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', armarTodos);
+  } else {
+    armarTodos();
+  }
+
+  var temporizador;
+  window.addEventListener('resize', function () {
+    clearTimeout(temporizador);
+    temporizador = setTimeout(repintarTodos, 120);
+  });
+
+  // el libro cambia entre claro y oscuro poniendo una clase en <body>
+  if (window.MutationObserver) {
+    new MutationObserver(repintarTodos)
+      .observe(document.body, { attributes: true, attributeFilter: ['class'] });
+  }
+})();
+</script>
+<style>
+/* ---------- Extras de la guía de campos ---------- */
+.chip {
+  display: inline-block; font-family: 'Inter', system-ui, sans-serif;
+  font-size: .7rem; letter-spacing: .06em; font-weight: 600;
+  padding: .12rem .5rem; border-radius: 3px; vertical-align: .08em;
+  white-space: nowrap;
+}
+.chip.si  { color: #2f6b48; background: #e6f3ec; border: 1px solid #bfe0cd; }
+.chip.no  { color: #9c443d; background: #f8eae8; border: 1px solid #e6c5c1; }
+.chip.ojo { color: #8a6a1f; background: #faf2df; border: 1px solid #e7d5a8; }
+body.quarto-dark .chip.si  { color: #8ed5aa; background: #1b2d23; border-color: #2f5340; }
+body.quarto-dark .chip.no  { color: #eba9a2; background: #2e1e1e; border-color: #5a3833; }
+body.quarto-dark .chip.ojo { color: #e6c98a; background: #2c2617; border-color: #56492a; }
+
+/* Caja de resultado, el equivalente del recuadro violeta del apunte */
+.resultado {
+  border: 1px solid var(--ej-borde); border-radius: 4px;
+  background: var(--ej-fondo); padding: .35rem 1rem; margin: 1.3rem 0;
+}
+.resultado .math.display { margin: .55rem 0; }
+
+/* Pasos numerados de la receta.
+   El contenido se escribe como lista ordenada de markdown, asi que en el PDF
+   sale como un enumerate normal; aca le cambiamos el numerito por un circulo. */
+.receta { margin: 1.4rem 0; }
+.receta ol { list-style: none; counter-reset: paso; padding-left: 0; margin-left: 0; }
+.receta ol > li {
+  position: relative; padding-left: 2.6rem; margin-bottom: 1.15rem;
+}
+.receta ol > li::before {
+  counter-increment: paso; content: counter(paso);
+  position: absolute; left: 0; top: .05rem;
+  width: 1.75rem; height: 1.75rem; border-radius: 50%;
+  background: var(--ej-acento); color: #fff;
+  font-family: 'Inter', system-ui, sans-serif; font-size: .85rem; font-weight: 600;
+  display: flex; align-items: center; justify-content: center;
+}
+body.quarto-dark .receta ol > li::before { color: #14111f; }
+.receta ol > li > p:first-child { margin-top: 0; }
+
+/* El lienzo rotable avisa que se puede arrastrar */
+.lienzo[data-rotable] canvas { cursor: grab; touch-action: none; }
+.lienzo[data-rotable] canvas:active { cursor: grabbing; }
+</style>
+
+<script>
+/* ------------------------------------------------------------------
+   CV — herramientas de dibujo para las figuras de campos vectoriales.
+   Se apoya en el motor .lienzo de interactivo.html: cada figura recibe
+   un Pincel P (con P.ctx, P.w, P.h, P.col) y el objeto v con los sliders.
+   ------------------------------------------------------------------ */
+(function () {
+  var CV = window.CV = window.CV || {};
+
+  // ---------- color ----------
+  function hex(c) {
+    c = c.replace('#', '');
+    if (c.length === 3) c = c[0]+c[0]+c[1]+c[1]+c[2]+c[2];
+    return [parseInt(c.slice(0,2),16), parseInt(c.slice(2,4),16), parseInt(c.slice(4,6),16)];
+  }
+  function rgb(a) { return 'rgb(' + a.map(Math.round).join(',') + ')'; }
+
+  // rampa fría → cálida, con los violetas del sitio
+  var RAMPA = ['#241f42', '#453a7e', '#6d55b5', '#9c83cf', '#c9aecb', '#e8c79c'].map(hex);
+  CV.rampa = function (t) {
+    t = Math.max(0, Math.min(1, t)) * (RAMPA.length - 1);
+    var i = Math.min(Math.floor(t), RAMPA.length - 2), s = t - i;
+    var a = RAMPA[i], b = RAMPA[i+1];
+    return rgb([a[0]+(b[0]-a[0])*s, a[1]+(b[1]-a[1])*s, a[2]+(b[2]-a[2])*s]);
+  };
+  CV.mezcla = function (c1, c2, s) {
+    var a = hex(c1), b = hex(c2);
+    return rgb([a[0]+(b[0]-a[0])*s, a[1]+(b[1]-a[1])*s, a[2]+(b[2]-a[2])*s]);
+  };
+
+  // ---------- flechas ----------
+  // en pixeles: de (x0,y0) a (x1,y1)
+  CV.flechaPx = function (P, x0, y0, x1, y1, color, ancho, cabeza) {
+    var c = P.ctx, dx = x1 - x0, dy = y1 - y0, L = Math.hypot(dx, dy);
+    if (L < 0.4) return;
+    var h = Math.min(cabeza === undefined ? 5.5 : cabeza, L * 0.55);
+    var ux = dx / L, uy = dy / L, px = -uy, py = ux;
+    c.save();
+    c.strokeStyle = color; c.fillStyle = color;
+    c.lineWidth = ancho || 1.2; c.lineCap = 'round';
+    c.beginPath(); c.moveTo(x0, y0); c.lineTo(x1 - ux*h*0.75, y1 - uy*h*0.75); c.stroke();
+    c.beginPath();
+    c.moveTo(x1, y1);
+    c.lineTo(x1 - ux*h + px*h*0.42, y1 - uy*h + py*h*0.42);
+    c.lineTo(x1 - ux*h - px*h*0.42, y1 - uy*h - py*h*0.42);
+    c.closePath(); c.fill();
+    c.restore();
+  };
+
+  // en coordenadas de datos sobre un marco m, con largo dado en pixeles
+  CV.flecha = function (P, m, x, y, u, vv, largoPx, color, ancho) {
+    var L = Math.hypot(u, vv);
+    if (L < 1e-12) return;
+    var X = m.X(x), Y = m.Y(y);
+    // el marco invierte el eje vertical: una componente v>0 va hacia arriba en pantalla
+    CV.flechaPx(P, X, Y, X + u/L*largoPx, Y - vv/L*largoPx, color, ancho);
+  };
+
+  // flecha apoyada en el plano z = z0 del mundo 3D, con largo en pixeles
+  CV.flecha3 = function (P, cam, x, y, z0, u, vv, largoPx, color, ancho) {
+    var L = Math.hypot(u, vv);
+    if (L < 1e-12) return;
+    var p0 = cam.pt(x, y, z0);
+    var e = 1e-3 * (cam.dom.x[1] - cam.dom.x[0]);
+    var p1 = cam.pt(x + u/L*e, y + vv/L*e, z0);
+    var dx = p1[0] - p0[0], dy = p1[1] - p0[1], d = Math.hypot(dx, dy);
+    if (d < 1e-9) return;
+    CV.flechaPx(P, p0[0], p0[1], p0[0] + dx/d*largoPx, p0[1] + dy/d*largoPx, color, ancho, 4.5);
+  };
+
+  /* Campo de flechas sobre el marco m.
+     F(x,y) devuelve [u,v]. opts: {n, color, largo, escala:'norma'|'fija', alfa} */
+  CV.campo = function (P, m, F, opts) {
+    opts = opts || {};
+    var n = opts.n || 15, col = opts.color || P.col.tinta;
+    var largo = opts.largo || 13, alfa = opts.alfa === undefined ? .8 : opts.alfa;
+    var dx = m.dx, dy = m.dy, i, j, x, y, f, datos = [], mx = 0;
+    for (i = 0; i < n; i++) for (j = 0; j < n; j++) {
+      x = dx[0] + (dx[1]-dx[0]) * (i+0.5)/n;
+      y = dy[0] + (dy[1]-dy[0]) * (j+0.5)/n;
+      f = F(x, y);
+      if (!f || !isFinite(f[0]) || !isFinite(f[1])) continue;
+      var nn = Math.hypot(f[0], f[1]);
+      if (nn > mx) mx = nn;
+      datos.push([x, y, f[0], f[1], nn]);
+    }
+    if (!mx) return;
+    P.ctx.save(); P.ctx.globalAlpha = alfa;
+    datos.forEach(function (d) {
+      var L = opts.escala === 'fija' ? largo
+            : largo * (0.34 + 0.66 * Math.sqrt(Math.min(1, d[4] / mx)));
+      var c = opts.porNorma ? CV.mezcla(P.col.suave, col, Math.min(1, d[4]/mx)) : col;
+      CV.flecha(P, m, d[0], d[1], d[2], d[3], L, c, opts.ancho || 1.05);
+    });
+    P.ctx.restore();
+  };
+
+  /* Marching squares: devuelve los segmentos de la curva f = nivel dentro del
+     rectángulo dom = {x:[a,b], y:[c,d]}, como pares [[x0,y0],[x1,y1]]. */
+  CV.segmentos = function (dom, f, nivel, N) {
+    N = N || 120;
+    var xs = [], ys = [], Z = [], i, j, segs = [];
+    for (i = 0; i <= N; i++) xs.push(dom.x[0] + (dom.x[1]-dom.x[0]) * i/N);
+    for (j = 0; j <= N; j++) ys.push(dom.y[0] + (dom.y[1]-dom.y[0]) * j/N);
+    for (i = 0; i <= N; i++) { Z.push([]); for (j = 0; j <= N; j++) Z[i].push(f(xs[i], ys[j])); }
+    for (i = 0; i < N; i++) for (j = 0; j < N; j++) {
+      var z = [Z[i][j], Z[i+1][j], Z[i+1][j+1], Z[i][j+1]];
+      if (!isFinite(z[0]+z[1]+z[2]+z[3])) continue;
+      var px = [xs[i], xs[i+1], xs[i+1], xs[i]], py = [ys[j], ys[j], ys[j+1], ys[j+1]];
+      var pts = [];
+      for (var k = 0; k < 4; k++) {
+        var a = z[k], b = z[(k+1)%4];
+        if ((a - nivel) * (b - nivel) < 0) {
+          var s = (nivel - a) / (b - a);
+          pts.push([px[k] + (px[(k+1)%4]-px[k])*s, py[k] + (py[(k+1)%4]-py[k])*s]);
+        }
+      }
+      for (var q = 0; q + 1 < pts.length; q += 2) segs.push([pts[q], pts[q+1]]);
+    }
+    return segs;
+  };
+
+  /* Curvas de nivel sobre un marco 2D. niveles es un array de valores. */
+  CV.contornos = function (P, m, f, niveles, color, ancho, alfa) {
+    var dom = { x: m.dx, y: m.dy }, c = P.ctx;
+    c.save();
+    c.strokeStyle = color; c.lineWidth = ancho || 1.1;
+    c.globalAlpha = alfa === undefined ? .75 : alfa;
+    c.lineCap = 'round';
+    c.beginPath();
+    niveles.forEach(function (nv) {
+      CV.segmentos(dom, f, nv, 140).forEach(function (s) {
+        c.moveTo(m.X(s[0][0]), m.Y(s[0][1]));
+        c.lineTo(m.X(s[1][0]), m.Y(s[1][1]));
+      });
+    });
+    c.stroke();
+    c.restore();
+  };
+
+  /* Los mismos contornos, pero dibujados en 3D a una altura z dada
+     (z = 'nivel' los apoya sobre la superficie, un número los apoya ahí). */
+  CV.contornos3 = function (P, cam, f, niveles, z, color, ancho, alfa) {
+    var dom = { x: cam.dom.x, y: cam.dom.y }, c = P.ctx;
+    c.save();
+    c.strokeStyle = color; c.lineWidth = ancho || 1.3;
+    c.globalAlpha = alfa === undefined ? .9 : alfa;
+    c.lineCap = 'round';
+    c.beginPath();
+    niveles.forEach(function (nv) {
+      var alt = (z === 'nivel') ? nv : z;
+      if (alt < cam.dom.z[0] || alt > cam.dom.z[1]) return;
+      CV.segmentos(dom, f, nv, 110).forEach(function (s) {
+        var p = cam.pt(s[0][0], s[0][1], alt), q = cam.pt(s[1][0], s[1][1], alt);
+        c.moveTo(p[0], p[1]); c.lineTo(q[0], q[1]);
+      });
+    });
+    c.stroke();
+    c.restore();
+  };
+
+  /* Superficie z = f(x,y) en 3D, algoritmo del pintor.
+     cam viene de P.camara(...). opts: {n, zmin, zmax, alfa, malla} */
+  CV.malla3 = function (P, cam, f, opts) {
+    opts = opts || {};
+    var n = opts.n || 26, d = cam.dom, c = P.ctx;
+    var i, j, X = [], Y = [], Z = [], zmin = Infinity, zmax = -Infinity;
+    for (i = 0; i <= n; i++) X.push(d.x[0] + (d.x[1]-d.x[0]) * i/n);
+    for (j = 0; j <= n; j++) Y.push(d.y[0] + (d.y[1]-d.y[0]) * j/n);
+    for (i = 0; i <= n; i++) {
+      Z.push([]);
+      for (j = 0; j <= n; j++) {
+        var z = f(X[i], Y[j]);
+        Z[i].push(z);
+        if (isFinite(z)) { if (z < zmin) zmin = z; if (z > zmax) zmax = z; }
+      }
+    }
+    if (opts.zmin !== undefined) zmin = opts.zmin;
+    if (opts.zmax !== undefined) zmax = opts.zmax;
+    var rec = function (z) { return Math.max(d.z[0], Math.min(d.z[1], z)); };
+
+    var caras = [];
+    for (i = 0; i < n; i++) for (j = 0; j < n; j++) {
+      var zz = [Z[i][j], Z[i+1][j], Z[i+1][j+1], Z[i][j+1]];
+      if (!isFinite(zz[0]+zz[1]+zz[2]+zz[3])) continue;
+      var xx = [X[i], X[i+1], X[i+1], X[i]], yy = [Y[j], Y[j], Y[j+1], Y[j+1]];
+      var zc = (zz[0]+zz[1]+zz[2]+zz[3])/4;
+      var xc = (xx[0]+xx[1])/2, yc = (yy[0]+yy[2])/2;
+      caras.push({ x: xx, y: yy, z: zz, prof: cam.prof(xc, yc, rec(zc)), t: (zc - zmin) / (zmax - zmin || 1) });
+    }
+    caras.sort(function (a, b) { return a.prof - b.prof; });
+
+    c.save();
+    c.globalAlpha = opts.alfa === undefined ? 1 : opts.alfa;
+    c.lineJoin = 'round';
+    caras.forEach(function (q) {
+      c.beginPath();
+      for (var k = 0; k < 4; k++) {
+        var p = cam.pt(q.x[k], q.y[k], rec(q.z[k]));
+        if (k === 0) c.moveTo(p[0], p[1]); else c.lineTo(p[0], p[1]);
+      }
+      c.closePath();
+      c.fillStyle = CV.rampa(q.t);
+      c.fill();
+      if (opts.malla !== false) {
+        c.strokeStyle = 'rgba(255,255,255,.14)'; c.lineWidth = .5; c.stroke();
+      }
+    });
+    c.restore();
+    return { zmin: zmin, zmax: zmax };
+  };
+
+  /* Superficie paramétrica: S(u,v) devuelve [x,y,z] del mundo 3D.
+     opts: {nu, nv, color: function(u,v,p){...} , alfa, malla, recortarZ} */
+  CV.superficie3 = function (P, cam, S, u0, u1, v0, v1, opts) {
+    opts = opts || {};
+    var nu = opts.nu || 40, nv = opts.nv || 24, c = P.ctx, i, j;
+    var U = [], V = [], G = [];
+    for (i = 0; i <= nu; i++) U.push(u0 + (u1-u0) * i/nu);
+    for (j = 0; j <= nv; j++) V.push(v0 + (v1-v0) * j/nv);
+    for (i = 0; i <= nu; i++) { G.push([]); for (j = 0; j <= nv; j++) G[i].push(S(U[i], V[j])); }
+
+    var caras = [];
+    for (i = 0; i < nu; i++) for (j = 0; j < nv; j++) {
+      var q = [G[i][j], G[i+1][j], G[i+1][j+1], G[i][j+1]];
+      if (q.some(function (p) { return !p || !isFinite(p[0]+p[1]+p[2]); })) continue;
+      var cx = (q[0][0]+q[1][0]+q[2][0]+q[3][0])/4;
+      var cy = (q[0][1]+q[1][1]+q[2][1]+q[3][1])/4;
+      var cz = (q[0][2]+q[1][2]+q[2][2]+q[3][2])/4;
+      caras.push({ q: q, prof: cam.prof(cx, cy, cz),
+                   col: opts.color ? opts.color((U[i]+U[i+1])/2, (V[j]+V[j+1])/2, [cx,cy,cz])
+                                   : CV.rampa(.5) });
+    }
+    caras.sort(function (a, b) { return a.prof - b.prof; });
+
+    c.save();
+    c.globalAlpha = opts.alfa === undefined ? 1 : opts.alfa;
+    caras.forEach(function (f) {
+      c.beginPath();
+      for (var k = 0; k < 4; k++) {
+        var p = cam.pt(f.q[k][0], f.q[k][1], f.q[k][2]);
+        if (k === 0) c.moveTo(p[0], p[1]); else c.lineTo(p[0], p[1]);
+      }
+      c.closePath();
+      c.fillStyle = f.col; c.fill();
+      // el borde del mismo color tapa las costuras del antialiasing
+      c.strokeStyle = opts.malla === false ? f.col : 'rgba(255,255,255,.13)';
+      c.lineWidth = opts.malla === false ? .8 : .5;
+      c.stroke();
+    });
+    c.restore();
+  };
+
+  // ---------- integración numérica de una integral de línea ----------
+  /* r(t) devuelve [x,y]; F(x,y) devuelve [u,v]; acumula ∫ F·dr en [t0,t1]. */
+  CV.trabajo = function (F, r, t0, t1, N) {
+    N = N || 400;
+    var W = 0, p = r(t0), f, q, i, t;
+    for (i = 1; i <= N; i++) {
+      t = t0 + (t1 - t0) * i / N;
+      q = r(t);
+      var mx = (p[0]+q[0])/2, my = (p[1]+q[1])/2;
+      f = F(mx, my);
+      if (isFinite(f[0]) && isFinite(f[1])) W += f[0]*(q[0]-p[0]) + f[1]*(q[1]-p[1]);
+      p = q;
+    }
+    return W;
+  };
+
+  // ---------- rotar arrastrando ----------
+  CV.vistas = {};
+  CV.vista = function (nombre) {
+    return CV.vistas[nombre] || (CV.vistas[nombre] = { azim: -0.62, elev: 0.46 });
+  };
+  CV.rotable = function (nombre, inicial) {
+    var v = CV.vista(nombre);
+    if (inicial) { v.azim = inicial.azim; v.elev = inicial.elev; }
+    function enganchar() {
+      var caja = document.querySelector('.lienzo[data-figura="' + nombre + '"]');
+      if (!caja) return;
+      caja.setAttribute('data-rotable', '1');
+      var cv = caja.querySelector('canvas');
+      if (!cv) return;
+      var arrastra = false, x0 = 0, y0 = 0, a0 = 0, e0 = 0;
+      cv.addEventListener('pointerdown', function (ev) {
+        arrastra = true; x0 = ev.clientX; y0 = ev.clientY; a0 = v.azim; e0 = v.elev;
+        cv.setPointerCapture(ev.pointerId); ev.preventDefault();
+      });
+      cv.addEventListener('pointermove', function (ev) {
+        if (!arrastra) return;
+        v.azim = a0 - (ev.clientX - x0) * 0.008;
+        v.elev = Math.max(-0.15, Math.min(1.45, e0 + (ev.clientY - y0) * 0.006));
+        if (caja._pintar) caja._pintar();
+      });
+      ['pointerup', 'pointercancel', 'pointerleave'].forEach(function (e) {
+        cv.addEventListener(e, function () { arrastra = false; });
+      });
+    }
+    // después de que el motor haya construido el lienzo
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', function () { setTimeout(enganchar, 0); });
+    } else { setTimeout(enganchar, 0); }
+  };
+})();
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copiado");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copiado");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/julietaamendola\.github\.io\/my-page\/guias\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./cc-02-ejemplo.html" class="pagination-link" aria-label="Un ejemplo, paso a paso">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Un ejemplo, paso a paso</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./cc-04-ejercicios.html" class="pagination-link" aria-label="Los ejercicios de la guía">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Los ejercicios de la guía</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Julieta Améndola · Tandil, Argentina</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p><a href="https://julietaamendola.github.io/my-page/">Volver al inicio</a></p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

@@ -1,0 +1,2595 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>4&nbsp; Los ejercicios de la guía – Guías resueltas de Análisis Matemático II</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./cc-05-resumen.html" rel="next">
+<link href="./cc-03-no-conservativos.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-891dd5176bf95b17de68806a21930ba5.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b1f6f59901d8c56d2526ac399150cbdd.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-891dd5176bf95b17de68806a21930ba5.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-4066913a89cd1e841a95a6df55b72e95.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-d1fb5515054595077617aa4c220a6d99.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-4066913a89cd1e841a95a6df55b72e95.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No se han encontrado resultados",
+    "search-matching-documents-text": "documentos encontrados",
+    "search-copy-link-title": "Copiar el enlace en la búsqueda",
+    "search-hide-matches-text": "Ocultar resultados adicionales",
+    "search-more-match-text": "resultado adicional en este documento",
+    "search-more-matches-text": "resultados adicionales en este documento",
+    "search-clear-button-title": "Borrar",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Buscar"
+  }
+}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;0,700;1,400;1,500&amp;family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./cc-01-teoria.html">Campos conservativos y función potencial</a></li><li class="breadcrumb-item"><a href="./cc-04-ejercicios.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Los ejercicios de la guía</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Buscar" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Guías resueltas de Análisis Matemático II</a> 
+        <div class="sidebar-tools-main tools-wide">
+    <a href="https://julietaamendola.github.io/my-page/" title="Volver al inicio" class="quarto-navigation-tool px-1" aria-label="Volver al inicio"><i class="bi bi-house-door"></i></a>
+    <a href="https://github.com/julietaamendola/my-page" title="Ejecutar el código" class="quarto-navigation-tool px-1" aria-label="Ejecutar el código"><i class="bi bi-github"></i></a>
+    <a href="./guias-resueltas-amii.pdf" title="Descargar PDF" class="quarto-navigation-tool px-1" aria-label="Descargar PDF"><i class="bi bi-file-pdf"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Alternar modo oscuro"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Buscar"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Presentación</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Campos conservativos y función potencial</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cc-01-teoria.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">La teoría, en cinco ideas</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cc-02-ejemplo.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Un ejemplo, paso a paso</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cc-03-no-conservativos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Cuando no es conservativo</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cc-04-ejercicios.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Los ejercicios de la guía</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cc-05-resumen.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Resumen y mapa de la guía</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Extremos de funciones de varias variables</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ex-01-criterio.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Puntos críticos y el criterio del Hessiano</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ex-02-absolutos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Extremos absolutos: casi siempre en el borde</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ex-03-lagrange.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Multiplicadores de Lagrange</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ex-04-problemas.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Problemas de optimización</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ex-05-otras-ciencias.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Los mismos métodos, en otras ciencias</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">En esta página</h2>
+   
+  <ul>
+  <li><a href="#sec-ej13" id="toc-sec-ej13" class="nav-link active" data-scroll-target="#sec-ej13"><span class="header-section-number">4.1</span> Ejercicio 13 · Campos conservativos y su potencial</a>
+  <ul class="collapse">
+  <li><a href="#a-vec-f-2xy-ey-x2-xey" id="toc-a-vec-f-2xy-ey-x2-xey" class="nav-link" data-scroll-target="#a-vec-f-2xy-ey-x2-xey">13.a) <span class="math inline">\(\vec F = (2xy + e^y,\ x^2 + xe^y)\)</span></a></li>
+  <li><a href="#b-vec-f-3x2y2---y-2x3y---x-con-f00-0" id="toc-b-vec-f-3x2y2---y-2x3y---x-con-f00-0" class="nav-link" data-scroll-target="#b-vec-f-3x2y2---y-2x3y---x-con-f00-0">13.b) <span class="math inline">\(\vec F = (3x^2y^2 - y,\ 2x^3y - x)\)</span>, con <span class="math inline">\(f(0,0) = 0\)</span></a></li>
+  <li><a href="#c-vec-f-2xyz-x2z-z-x2y-y" id="toc-c-vec-f-2xyz-x2z-z-x2y-y" class="nav-link" data-scroll-target="#c-vec-f-2xyz-x2z-z-x2y-y">13.c) <span class="math inline">\(\vec F = (2xyz,\ x^2z + z,\ x^2y + y)\)</span></a></li>
+  </ul></li>
+  <li><a href="#sec-ej18" id="toc-sec-ej18" class="nav-link" data-scroll-target="#sec-ej18"><span class="header-section-number">4.2</span> Ejercicio 18 · Hallar, de ser posible, <span class="math inline">\(f\)</span> con <span class="math inline">\(\nabla f = \vec F\)</span></a>
+  <ul class="collapse">
+  <li><a href="#a-vec-f-xex-1-cos-y" id="toc-a-vec-f-xex-1-cos-y" class="nav-link" data-scroll-target="#a-vec-f-xex-1-cos-y">18.a) <span class="math inline">\(\vec F = (xe^x,\ 1 + \cos y)\)</span></a></li>
+  <li><a href="#b-vec-f-operatornamesen-y-2xy-x-cos-y-x2" id="toc-b-vec-f-operatornamesen-y-2xy-x-cos-y-x2" class="nav-link" data-scroll-target="#b-vec-f-operatornamesen-y-2xy-x-cos-y-x2">18.b) <span class="math inline">\(\vec F = (\operatorname{sen} y + 2xy,\ x \cos y + x^2)\)</span></a></li>
+  <li><a href="#c-vec-f-left-dfrac1x-1-y2-2-right-con-f21-0" id="toc-c-vec-f-left-dfrac1x-1-y2-2-right-con-f21-0" class="nav-link" data-scroll-target="#c-vec-f-left-dfrac1x-1-y2-2-right-con-f21-0">18.c) <span class="math inline">\(\vec F = \left( \dfrac{1}{x-1},\ y^2 + 2 \right)\)</span>, con <span class="math inline">\(f(2;1) = 0\)</span></a></li>
+  <li><a href="#d-vec-f-y2-x-2xy-y-con-f1-5-3" id="toc-d-vec-f-y2-x-2xy-y-con-f1-5-3" class="nav-link" data-scroll-target="#d-vec-f-y2-x-2xy-y-con-f1-5-3">18.d) <span class="math inline">\(\vec F = (y^2 + x,\ 2xy + y)\)</span>, con <span class="math inline">\(f(1;-5) = 3\)</span></a></li>
+  </ul></li>
+  <li><a href="#sec-ej19" id="toc-sec-ej19" class="nav-link" data-scroll-target="#sec-ej19"><span class="header-section-number">4.3</span> Ejercicio 19 · Ley de Coulomb: el campo eléctrico es conservativo</a>
+  <ul class="collapse">
+  <li><a href="#planteo" id="toc-planteo" class="nav-link" data-scroll-target="#planteo">Planteo</a></li>
+  <li><a href="#paso-1-rotor-nulo" id="toc-paso-1-rotor-nulo" class="nav-link" data-scroll-target="#paso-1-rotor-nulo">Paso 1: rotor nulo</a></li>
+  <li><a href="#paso-2-hallar-el-potencial" id="toc-paso-2-hallar-el-potencial" class="nav-link" data-scroll-target="#paso-2-hallar-el-potencial">Paso 2: hallar el potencial</a></li>
+  </ul></li>
+  <li><a href="#sec-ej20" id="toc-sec-ej20" class="nav-link" data-scroll-target="#sec-ej20"><span class="header-section-number">4.4</span> Ejercicio 20 · Vehículo autónomo en una planta industrial</a>
+  <ul class="collapse">
+  <li><a href="#a-verificación" id="toc-a-verificación" class="nav-link" data-scroll-target="#a-verificación">a) Verificación</a></li>
+  <li><a href="#b-función-potencial" id="toc-b-función-potencial" class="nav-link" data-scroll-target="#b-función-potencial">b) Función potencial</a></li>
+  <li><a href="#c-interpretación-física" id="toc-c-interpretación-física" class="nav-link" data-scroll-target="#c-interpretación-física">c) Interpretación física</a></li>
+  <li><a href="#d-trabajo-de-00-a-21" id="toc-d-trabajo-de-00-a-21" class="nav-link" data-scroll-target="#d-trabajo-de-00-a-21">d) Trabajo de <span class="math inline">\((0,0)\)</span> a <span class="math inline">\((2,1)\)</span></a></li>
+  </ul></li>
+  <li><a href="#sec-ej21" id="toc-sec-ej21" class="nav-link" data-scroll-target="#sec-ej21"><span class="header-section-number">4.5</span> Ejercicio 21 · Campo gravitatorio</a>
+  <ul class="collapse">
+  <li><a href="#paso-1-rotor-nulo-1" id="toc-paso-1-rotor-nulo-1" class="nav-link" data-scroll-target="#paso-1-rotor-nulo-1">Paso 1: rotor nulo</a></li>
+  <li><a href="#paso-2-función-potencial" id="toc-paso-2-función-potencial" class="nav-link" data-scroll-target="#paso-2-función-potencial">Paso 2: función potencial</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./cc-01-teoria.html">Campos conservativos y función potencial</a></li><li class="breadcrumb-item"><a href="./cc-04-ejercicios.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Los ejercicios de la guía</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Los ejercicios de la guía</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Ejercicios 13 y 18 a 21 de la guía de la cátedra. En todos, el esquema es el mismo: dominio, test, integrar, ajustar, verificar. Lo que cambia es dónde está la dificultad.</p>
+<section id="sec-ej13" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="sec-ej13"><span class="header-section-number">4.1</span> Ejercicio 13 · Campos conservativos y su potencial</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Antes de empezar
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>Los tres campos son polinómicos o exponenciales: son <span class="math inline">\(C^1\)</span> en todo el espacio, así que el dominio nunca va a ser un problema. Alcanza con el test de derivadas cruzadas.</li>
+<li>En el ítem (a) conviene integrar <span class="math inline">\(P\)</span> respecto de <span class="math inline">\(x\)</span>, porque <span class="math inline">\(e^y\)</span> se comporta como constante. Regla práctica: <em>elegir la componente donde la variable de integración aparece menos enredada</em>.</li>
+<li>El ítem (b) dice “<span class="math inline">\(f(0,0) = 0\)</span>”: ese dato es para despejar <span class="math inline">\(C\)</span> al final, y solo tiene sentido después de haber encontrado la familia completa de potenciales.</li>
+<li>El ítem (c) es en <span class="math inline">\(\mathbb{R}^3\)</span>: hay que verificar <strong>tres</strong> pares de derivadas cruzadas y hacer <strong>dos</strong> rondas de ajuste, primero <span class="math inline">\(g(y,z)\)</span> y después <span class="math inline">\(h(z)\)</span>.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Enunciado
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>13.</strong> Determinar si los siguientes campos vectoriales son conservativos y, en caso afirmativo, hallar la función potencial:</p>
+<ol type="a">
+<li><span class="math inline">\(\vec F(x,y) = (2xy + e^y,\ x^2 + xe^y)\)</span></li>
+<li><span class="math inline">\(\vec F(x,y) = (3x^2y^2 - y,\ 2x^3y - x)\)</span>, tal que <span class="math inline">\(f(0,0) = 0\)</span></li>
+<li><span class="math inline">\(\vec F(x,y,z) = (2xyz,\ x^2z + z,\ x^2y + y)\)</span></li>
+</ol>
+</div>
+</div>
+<section id="a-vec-f-2xy-ey-x2-xey" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="a-vec-f-2xy-ey-x2-xey">13.a) <span class="math inline">\(\vec F = (2xy + e^y,\ x^2 + xe^y)\)</span></h3>
+<p><em>Test.</em> Con <span class="math inline">\(P = 2xy + e^y\)</span> y <span class="math inline">\(Q = x^2 + xe^y\)</span>:</p>
+<p><span class="math display">\[
+P_y = 2x + e^y, \qquad Q_x = 2x + e^y .
+\]</span></p>
+<p>Son iguales y <span class="math inline">\(D = \mathbb{R}^2\)</span> es simplemente conexo, entonces <span class="chip si">conservativo</span>.</p>
+<p><em>Integramos <span class="math inline">\(P\)</span> en <span class="math inline">\(x\)</span></em> (tratando <span class="math inline">\(y\)</span> como constante, así que <span class="math inline">\(e^y\)</span> es un factor constante):</p>
+<p><span class="math display">\[
+f(x,y) = \int (2xy + e^y)\, dx = x^2 y + x e^y + g(y).
+\]</span></p>
+<p><em>Derivamos en <span class="math inline">\(y\)</span> e igualamos a <span class="math inline">\(Q\)</span>:</em></p>
+<p><span class="math display">\[
+f_y = x^2 + x e^y + g'(y) \;\stackrel{!}{=}\; x^2 + x e^y
+\;\Longrightarrow\; g'(y) = 0 \;\Longrightarrow\; g(y) = C .
+\]</span></p>
+<div class="resultado">
+<p><span class="math display">\[
+f(x,y) = x^2 y + x e^y + C
+\]</span></p>
+</div>
+<p><em>Verificación:</em> <span class="math inline">\(f_x = 2xy + e^y\)</span> ✓, <span class="math inline">\(f_y = x^2 + xe^y\)</span> ✓.</p>
+</section>
+<section id="b-vec-f-3x2y2---y-2x3y---x-con-f00-0" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="b-vec-f-3x2y2---y-2x3y---x-con-f00-0">13.b) <span class="math inline">\(\vec F = (3x^2y^2 - y,\ 2x^3y - x)\)</span>, con <span class="math inline">\(f(0,0) = 0\)</span></h3>
+<p><em>Test.</em></p>
+<p><span class="math display">\[
+P_y = 6x^2y - 1, \qquad Q_x = 6x^2y - 1 \quad \text{(iguales en } \mathbb{R}^2\text{)} .
+\]</span></p>
+<p>Entonces <span class="chip si">conservativo</span>.</p>
+<p><span class="math display">\[
+f(x,y) = \int (3x^2y^2 - y)\, dx = x^3y^2 - xy + g(y),
+\]</span> <span class="math display">\[
+f_y = 2x^3y - x + g'(y) \;\stackrel{!}{=}\; 2x^3y - x
+\;\Longrightarrow\; g'(y) = 0 \;\Longrightarrow\; g(y) = C .
+\]</span></p>
+<p>Familia de potenciales: <span class="math inline">\(f(x,y) = x^3y^2 - xy + C\)</span>. Imponemos el dato:</p>
+<p><span class="math display">\[
+f(0,0) = 0 + 0 + C = 0 \;\Longrightarrow\; C = 0 .
+\]</span></p>
+<div class="resultado">
+<p><span class="math display">\[
+f(x,y) = x^3y^2 - xy
+\]</span></p>
+</div>
+</section>
+<section id="c-vec-f-2xyz-x2z-z-x2y-y" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="c-vec-f-2xyz-x2z-z-x2y-y">13.c) <span class="math inline">\(\vec F = (2xyz,\ x^2z + z,\ x^2y + y)\)</span></h3>
+<p><em>Test en <span class="math inline">\(\mathbb{R}^3\)</span>,</em> con <span class="math inline">\(P = 2xyz\)</span>, <span class="math inline">\(Q = x^2z + z\)</span>, <span class="math inline">\(R = x^2y + y\)</span>:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 22%">
+<col style="width: 28%">
+<col style="width: 28%">
+<col style="width: 22%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Par</th>
+<th>Primera derivada</th>
+<th>Segunda derivada</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(P_y\)</span> vs <span class="math inline">\(Q_x\)</span></td>
+<td><span class="math inline">\(P_y = 2xz\)</span></td>
+<td><span class="math inline">\(Q_x = 2xz\)</span></td>
+<td>iguales</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(P_z\)</span> vs <span class="math inline">\(R_x\)</span></td>
+<td><span class="math inline">\(P_z = 2xy\)</span></td>
+<td><span class="math inline">\(R_x = 2xy\)</span></td>
+<td>iguales</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(Q_z\)</span> vs <span class="math inline">\(R_y\)</span></td>
+<td><span class="math inline">\(Q_z = x^2+1\)</span></td>
+<td><span class="math inline">\(R_y = x^2+1\)</span></td>
+<td>iguales</td>
+</tr>
+</tbody>
+</table>
+<p>Entonces <span class="math inline">\(\operatorname{rot} \vec F = \vec 0\)</span> y, como <span class="math inline">\(D = \mathbb{R}^3\)</span> es simplemente conexo, <span class="chip si">conservativo</span>.</p>
+<p><em>Primera integración</em> (en <span class="math inline">\(x\)</span>; la “constante” es ahora <span class="math inline">\(g(y,z)\)</span>):</p>
+<p><span class="math display">\[
+f(x,y,z) = \int 2xyz\, dx = x^2yz + g(y,z).
+\]</span></p>
+<p><em>Ajuste con <span class="math inline">\(Q\)</span>:</em></p>
+<p><span class="math display">\[
+f_y = x^2 z + g_y(y,z) \;\stackrel{!}{=}\; x^2 z + z
+\;\Longrightarrow\; g_y = z \;\Longrightarrow\; g(y,z) = yz + h(z).
+\]</span></p>
+<p>Al integrar en <span class="math inline">\(y\)</span>, la constante es ahora una función de <span class="math inline">\(z\)</span> sola. Entonces <span class="math inline">\(f = x^2yz + yz + h(z)\)</span>.</p>
+<p><em>Ajuste con <span class="math inline">\(R\)</span>:</em></p>
+<p><span class="math display">\[
+f_z = x^2 y + y + h'(z) \;\stackrel{!}{=}\; x^2 y + y
+\;\Longrightarrow\; h'(z) = 0 \;\Longrightarrow\; h(z) = C .
+\]</span></p>
+<div class="resultado">
+<p><span class="math display">\[
+f(x,y,z) = x^2yz + yz + C = yz\,(x^2 + 1) + C
+\]</span></p>
+</div>
+<p><em>Verificación:</em> <span class="math inline">\(\nabla f = \big(2xyz,\ z(x^2+1),\ y(x^2+1)\big) = (2xyz,\ x^2z + z,\ x^2y + y)\)</span> ✓</p>
+<div class="ejercicio">
+<p>En el ítem (c), después del primer ajuste quedó <span class="math inline">\(g(y,z) = yz + h(z)\)</span>. ¿Por qué la constante de integración es <span class="math inline">\(h(z)\)</span> y no simplemente <span class="math inline">\(C\)</span>?</p>
+<ul>
+<li><span class="mal">Porque <span class="math inline">\(z\)</span> es la última variable y siempre se reserva para el final.</span></li>
+<li><span class="bien">Porque integramos respecto de <span class="math inline">\(y\)</span>, y cualquier función que no dependa de <span class="math inline">\(y\)</span> tiene derivada nula en <span class="math inline">\(y\)</span>: eso incluye a todas las funciones de <span class="math inline">\(z\)</span>.</span></li>
+<li><span class="mal">Porque el campo tiene tres componentes y hacen falta tres constantes.</span></li>
+<li><span class="mal">Es lo mismo escribir <span class="math inline">\(C\)</span>: el ajuste con <span class="math inline">\(R\)</span> lo corrige igual.</span></li>
+</ul>
+<div class="explica">
+<p><strong>La correcta es la segunda.</strong> La constante de integración es siempre “todo lo que muere al derivar respecto de la variable que estoy integrando”. Al integrar en <span class="math inline">\(x\)</span> eso es cualquier <span class="math inline">\(g(y,z)\)</span>; al integrar esa <span class="math inline">\(g\)</span> respecto de <span class="math inline">\(y\)</span>, cualquier <span class="math inline">\(h(z)\)</span>.</p>
+<p>La última opción es el error peligroso: escribir <span class="math inline">\(C\)</span> ahí adentro funciona <strong>en este ejercicio</strong>, porque casualmente <span class="math inline">\(h'(z) = 0\)</span>. En un campo donde <span class="math inline">\(R\)</span> tuviera un término suelto en <span class="math inline">\(z\)</span> —digamos <span class="math inline">\(R = x^2y + y + 3z^2\)</span>— la respuesta con <span class="math inline">\(C\)</span> sería incorrecta, y el ajuste con <span class="math inline">\(R\)</span> daría la contradicción <span class="math inline">\(0 = 3z^2\)</span> en vez de <span class="math inline">\(h(z) = z^3\)</span>.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="sec-ej18" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="sec-ej18"><span class="header-section-number">4.2</span> Ejercicio 18 · Hallar, de ser posible, <span class="math inline">\(f\)</span> con <span class="math inline">\(\nabla f = \vec F\)</span></h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Antes de empezar
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>“De ser posible” es una invitación explícita a hacer primero el test. Si fallara, la respuesta correcta sería “no existe tal campo escalar”, con la cuenta que lo justifica (ver <a href="cc-03-no-conservativos.html#sec-remolino" class="quarto-xref"><span>Sección 3.1</span></a>).</li>
+<li>En (a) hay que integrar <span class="math inline">\(xe^x\)</span>: sale por partes, <span class="math inline">\(\int xe^x dx = xe^x - e^x\)</span>. Es el único paso técnico del ejercicio.</li>
+<li>En (a) y (b) las componentes están desacopladas o casi: cuando <span class="math inline">\(P\)</span> depende solo de <span class="math inline">\(x\)</span> y <span class="math inline">\(Q\)</span> solo de <span class="math inline">\(y\)</span>, el test se cumple automáticamente (<span class="math inline">\(P_y = 0 = Q_x\)</span>) y el potencial es una simple suma de primitivas.</li>
+<li>En (c) aparece <span class="math inline">\(\tfrac{1}{x-1}\)</span>: el dominio se parte en <span class="math inline">\(x&lt;1\)</span> y <span class="math inline">\(x&gt;1\)</span>. Como el dato está en <span class="math inline">\((2;1)\)</span>, trabajamos en la mitad <span class="math inline">\(x&gt;1\)</span> y ahí podemos escribir <span class="math inline">\(\ln(x-1)\)</span> sin módulo.</li>
+<li>“<span class="math inline">\(f\)</span> tenga nivel 3 en <span class="math inline">\((1;-5)\)</span>” significa que ese punto pertenece a la curva de nivel 3, es decir <span class="math inline">\(f(1,-5) = 3\)</span>. Es lo mismo que un dato <span class="math inline">\(f(P_0) = k\)</span>.</li>
+</ul>
+<p><strong>Nota sobre la notación.</strong> El enunciado de la cátedra llama <span class="math inline">\(F\)</span> al campo escalar y <span class="math inline">\(\vec F\)</span> al vectorial. Acá el escalar se llama <span class="math inline">\(f\)</span>, para que no se pisen.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Enunciado
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>18.</strong> Para los siguientes campos vectoriales <span class="math inline">\(\vec F\)</span> determinar, de ser posible, un campo escalar <span class="math inline">\(f\)</span> tal que <span class="math inline">\(\nabla f = \vec F\)</span>.</p>
+<ol type="a">
+<li><span class="math inline">\(\vec F(x;y) = xe^x\,\vec i + (1 + \cos y)\,\vec j\)</span></li>
+<li><span class="math inline">\(\vec F(x;y) = (\operatorname{sen} y + 2xy)\,\vec i + (x \cos y + x^2)\,\vec j\)</span></li>
+<li><span class="math inline">\(\vec F(x;y) = \dfrac{1}{x-1}\,\vec i + (y^2 + 2)\,\vec j\)</span>, tal que <span class="math inline">\(f(2;1) = 0\)</span></li>
+<li><span class="math inline">\(\vec F(x;y) = (y^2 + x)\,\vec i + (2xy + y)\,\vec j\)</span>, tal que <span class="math inline">\(f\)</span> tenga nivel 3 en <span class="math inline">\((1;-5)\)</span></li>
+</ol>
+</div>
+</div>
+<section id="a-vec-f-xex-1-cos-y" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="a-vec-f-xex-1-cos-y">18.a) <span class="math inline">\(\vec F = (xe^x,\ 1 + \cos y)\)</span></h3>
+<p><em>Test.</em> <span class="math inline">\(P = xe^x\)</span> no depende de <span class="math inline">\(y\)</span> y <span class="math inline">\(Q = 1 + \cos y\)</span> no depende de <span class="math inline">\(x\)</span>:</p>
+<p><span class="math display">\[
+P_y = 0 = Q_x \quad \text{en todo } \mathbb{R}^2 .
+\]</span></p>
+<p>Entonces <span class="chip si">conservativo</span>.</p>
+<p><span class="math display">\[
+f(x,y) = \int x e^x\, dx + g(y) \;\stackrel{\text{(por partes)}}{=}\; xe^x - e^x + g(y).
+\]</span></p>
+<p>Detalle de la integral por partes: <span class="math inline">\(u = x\)</span>, <span class="math inline">\(dv = e^x dx\)</span>, luego <span class="math inline">\(du = dx\)</span>, <span class="math inline">\(v = e^x\)</span>, y</p>
+<p><span class="math display">\[
+\int xe^x\, dx = xe^x - \int e^x\, dx = xe^x - e^x .
+\]</span></p>
+<p><span class="math display">\[
+f_y = g'(y) \;\stackrel{!}{=}\; 1 + \cos y \;\Longrightarrow\; g(y) = y + \operatorname{sen} y + C .
+\]</span></p>
+<div class="resultado">
+<p><span class="math display">\[
+f(x,y) = xe^x - e^x + y + \operatorname{sen} y + C = e^x(x-1) + y + \operatorname{sen} y + C
+\]</span></p>
+</div>
+</section>
+<section id="b-vec-f-operatornamesen-y-2xy-x-cos-y-x2" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="b-vec-f-operatornamesen-y-2xy-x-cos-y-x2">18.b) <span class="math inline">\(\vec F = (\operatorname{sen} y + 2xy,\ x \cos y + x^2)\)</span></h3>
+<p><em>Test.</em></p>
+<p><span class="math display">\[
+P_y = \cos y + 2x, \qquad Q_x = \cos y + 2x \quad \text{en } \mathbb{R}^2 .
+\]</span></p>
+<p>Entonces <span class="chip si">conservativo</span>.</p>
+<p><span class="math display">\[
+f(x,y) = \int (\operatorname{sen} y + 2xy)\, dx = x \operatorname{sen} y + x^2 y + g(y),
+\]</span> <span class="math display">\[
+f_y = x \cos y + x^2 + g'(y) \;\stackrel{!}{=}\; x \cos y + x^2 \;\Longrightarrow\; g'(y) = 0 .
+\]</span></p>
+<div class="resultado">
+<p><span class="math display">\[
+f(x,y) = x \operatorname{sen} y + x^2 y + C
+\]</span></p>
+</div>
+</section>
+<section id="c-vec-f-left-dfrac1x-1-y2-2-right-con-f21-0" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="c-vec-f-left-dfrac1x-1-y2-2-right-con-f21-0">18.c) <span class="math inline">\(\vec F = \left( \dfrac{1}{x-1},\ y^2 + 2 \right)\)</span>, con <span class="math inline">\(f(2;1) = 0\)</span></h3>
+<p><em>Dominio.</em> <span class="math inline">\(P\)</span> no está definida en <span class="math inline">\(x = 1\)</span>, así que <span class="math inline">\(D = \{(x,y) : x \neq 1\}\)</span>, que son <strong>dos semiplanos abiertos disjuntos</strong>. Cada uno es simplemente conexo, y el dato está en <span class="math inline">\((2,1)\)</span>, o sea en el semiplano <span class="math inline">\(x &gt; 1\)</span>.</p>
+<p><em>Test.</em> <span class="math inline">\(P_y = 0\)</span> y <span class="math inline">\(Q_x = 0\)</span>, entonces <span class="chip si">conservativo</span> en cada semiplano.</p>
+<p><span class="math display">\[
+f(x,y) = \int \frac{dx}{x-1} = \ln|x-1| + g(y) \;\stackrel{x&gt;1}{=}\; \ln(x-1) + g(y),
+\]</span> <span class="math display">\[
+f_y = g'(y) \;\stackrel{!}{=}\; y^2 + 2 \;\Longrightarrow\; g(y) = \frac{y^3}{3} + 2y + C .
+\]</span></p>
+<p>Imponemos <span class="math inline">\(f(2,1) = 0\)</span>:</p>
+<p><span class="math display">\[
+\underbrace{\ln(1)}_{=\,0} + \frac13 + 2 + C = 0 \;\Longrightarrow\; C = -\frac73 .
+\]</span></p>
+<div class="resultado">
+<p><span class="math display">\[
+f(x,y) = \ln(x-1) + \frac{y^3}{3} + 2y - \frac73, \qquad x &gt; 1
+\]</span></p>
+</div>
+<div class="callout callout-style-simple callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Importante</span>Por qué la restricción <span class="math inline">\(x&gt;1\)</span> es parte de la respuesta
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>En el semiplano <span class="math inline">\(x &lt; 1\)</span> también hay potencial, <span class="math inline">\(\ln(1-x) + \tfrac{y^3}{3} + 2y + C'\)</span>, pero con una constante <strong>independiente</strong>: el dato del enunciado no dice nada de esa región, y ninguna curva contenida en el dominio conecta los dos semiplanos, así que no hay forma de determinar <span class="math inline">\(C'\)</span>.</p>
+<p>Esta es la versión mansa de lo que pasa en <a href="cc-03-no-conservativos.html#sec-vortice" class="quarto-xref"><span>Sección 3.2</span></a>. Acá el dominio es disconexo y el problema es que sobra libertad (una constante por componente); allá el dominio es conexo pero no simplemente conexo, y el problema es que no alcanza ninguna elección. En ambos casos el paso 1 de la receta —escribir el dominio— es el que salva el ejercicio.</p>
+</div>
+</div>
+</section>
+<section id="d-vec-f-y2-x-2xy-y-con-f1-5-3" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="d-vec-f-y2-x-2xy-y-con-f1-5-3">18.d) <span class="math inline">\(\vec F = (y^2 + x,\ 2xy + y)\)</span>, con <span class="math inline">\(f(1;-5) = 3\)</span></h3>
+<p><em>Test.</em></p>
+<p><span class="math display">\[
+P_y = 2y, \qquad Q_x = 2y \quad \text{en } \mathbb{R}^2 .
+\]</span></p>
+<p>Entonces <span class="chip si">conservativo</span>.</p>
+<p><span class="math display">\[
+f(x,y) = \int (y^2 + x)\, dx = xy^2 + \frac{x^2}{2} + g(y),
+\]</span> <span class="math display">\[
+f_y = 2xy + g'(y) \;\stackrel{!}{=}\; 2xy + y \;\Longrightarrow\; g(y) = \frac{y^2}{2} + C .
+\]</span></p>
+<p>Imponemos que <span class="math inline">\((1,-5)\)</span> esté en la curva de nivel 3:</p>
+<p><span class="math display">\[
+f(1,-5) = 1 \cdot 25 + \frac12 + \frac{25}{2} + C = 38 + C = 3 \;\Longrightarrow\; C = -35 .
+\]</span></p>
+<div class="resultado">
+<p><span class="math display">\[
+f(x,y) = xy^2 + \frac{x^2}{2} + \frac{y^2}{2} - 35
+\]</span></p>
+</div>
+<p>La curva de nivel pedida es entonces <span class="math inline">\(xy^2 + \dfrac{x^2}{2} + \dfrac{y^2}{2} = 38\)</span>.</p>
+<div class="ejercicio" data-respuesta="12" data-tol="0.001" data-rotulo="Para calcular">
+<p>Con el potencial de 18.d, calculá el trabajo de <span class="math inline">\(\vec F\)</span> a lo largo de <strong>cualquier</strong> curva que vaya de <span class="math inline">\((0,0)\)</span> a <span class="math inline">\((2,2)\)</span>.</p>
+<div class="explica">
+<p><span class="math inline">\(W = f(2,2) - f(0,0)\)</span>. Con <span class="math inline">\(f(x,y) = xy^2 + \tfrac{x^2}{2} + \tfrac{y^2}{2} - 35\)</span>:</p>
+<p><span class="math display">\[
+f(2,2) = 2 \cdot 4 + 2 + 2 - 35 = -23, \qquad f(0,0) = -35,
+\]</span></p>
+<p>y <span class="math inline">\(W = -23 - (-35) = 12\)</span>.</p>
+<p>Notá que la constante <span class="math inline">\(-35\)</span> se cancela en la resta: para calcular trabajos da igual qué constante hayas elegido. El dato del enunciado sirve para fijar <em>una</em> función potencial concreta, no para los trabajos.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="sec-ej19" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="sec-ej19"><span class="header-section-number">4.3</span> Ejercicio 19 · Ley de Coulomb: el campo eléctrico es conservativo</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Antes de empezar
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>Conviene reescribir el campo en forma compacta. Si <span class="math inline">\(\vec r = (x,y,z)\)</span> y <span class="math inline">\(r = \|\vec r\| = \sqrt{x^2+y^2+z^2}\)</span>, el campo es <span class="math inline">\(\vec F = \varepsilon Q q \dfrac{\vec r}{r^3}\)</span>: apunta en la dirección radial y su módulo decae como <span class="math inline">\(1/r^2\)</span>.</li>
+<li>Es un <strong>campo central</strong>. Todo campo de la forma <span class="math inline">\(\vec F = \gamma(r)\, \vec r\)</span> tiene rotor nulo, y su potencial se obtiene integrando <span class="math inline">\(\int \gamma(r)\, r\, dr\)</span>. Reconocer esa estructura ahorra media carilla de cuentas.</li>
+<li>Herramienta clave para derivar: <span class="math inline">\(\dfrac{\partial r}{\partial x} = \dfrac{x}{r}\)</span> (y análogas). Todas las derivadas del ejercicio salen con eso más la regla de la cadena.</li>
+<li>El dominio es <span class="math inline">\(\mathbb{R}^3 \setminus \{(0,0,0)\}\)</span> porque en el origen está la carga <span class="math inline">\(Q\)</span> y el campo explota. Sacarle un punto a <span class="math inline">\(\mathbb{R}^3\)</span> <strong>no</strong> rompe la simple conexión: toda curva cerrada se puede contraer esquivando el origen. Ojo: en <span class="math inline">\(\mathbb{R}^2\)</span> sacar un punto sí rompería todo, y ese es exactamente el <a href="cc-03-no-conservativos.html#sec-vortice" class="quarto-xref"><span>Sección 3.2</span></a>.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Enunciado
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>19.</strong> La fuerza eléctrica entre dos cargas puntuales <span class="math inline">\(Q\)</span> (en el origen) y <span class="math inline">\(q\)</span> (en el punto <span class="math inline">\((x,y,z)\)</span>) puede ser atractiva o repulsiva. Según la ley de Coulomb, la fuerza que sufre la carga <span class="math inline">\(q\)</span> debido a <span class="math inline">\(Q\)</span> es</p>
+<p><span class="math display">\[
+\vec F(x,y,z) = \varepsilon Q q \, \frac{x \vec i + y \vec j + z \vec k}{(x^2+y^2+z^2)^{3/2}} .
+\]</span></p>
+<p>Siendo <span class="math inline">\(\varepsilon\)</span> una constante. Mostrar que se trata de un campo conservativo. ¿Cuál es la función potencial?</p>
+</div>
+</div>
+<section id="planteo" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="planteo">Planteo</h3>
+<p>Llamemos <span class="math inline">\(k = \varepsilon Q q\)</span> (constante) y <span class="math inline">\(r = \sqrt{x^2+y^2+z^2}\)</span>. Las componentes son</p>
+<p><span class="math display">\[
+P = \frac{kx}{r^3}, \qquad Q^* = \frac{ky}{r^3}, \qquad R = \frac{kz}{r^3},
+\]</span></p>
+<p>donde escribimos <span class="math inline">\(Q^*\)</span> para la segunda componente y no confundirla con la carga <span class="math inline">\(Q\)</span>. Todas son <span class="math inline">\(C^1\)</span> en <span class="math inline">\(D = \mathbb{R}^3 \setminus \{\vec 0\}\)</span>.</p>
+</section>
+<section id="paso-1-rotor-nulo" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="paso-1-rotor-nulo">Paso 1: rotor nulo</h3>
+<p>Usando <span class="math inline">\(\partial r/\partial x = x/r\)</span> y la regla de la cadena sobre <span class="math inline">\(r^{-3}\)</span>:</p>
+<p><span class="math display">\[
+\frac{\partial P}{\partial y} = kx \frac{\partial}{\partial y}(r^{-3}) = kx \cdot (-3) r^{-4} \cdot \frac{y}{r} = -\frac{3kxy}{r^5},
+\qquad
+\frac{\partial Q^*}{\partial x} = ky \cdot (-3) r^{-4} \cdot \frac{x}{r} = -\frac{3kxy}{r^5} .
+\]</span></p>
+<p>Coinciden. Por la simetría total del campo en <span class="math inline">\(x, y, z\)</span>, las otras dos parejas dan lo mismo:</p>
+<p><span class="math display">\[
+\frac{\partial P}{\partial z} = -\frac{3kxz}{r^5} = \frac{\partial R}{\partial x},
+\qquad
+\frac{\partial Q^*}{\partial z} = -\frac{3kyz}{r^5} = \frac{\partial R}{\partial y} .
+\]</span></p>
+<p>Por lo tanto <span class="math inline">\(\operatorname{rot} \vec F = \vec 0\)</span> en <span class="math inline">\(D\)</span>. Como <span class="math inline">\(D = \mathbb{R}^3 \setminus \{\vec 0\}\)</span> es abierto, conexo y simplemente conexo, el campo es <span class="chip si">conservativo</span>.</p>
+</section>
+<section id="paso-2-hallar-el-potencial" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="paso-2-hallar-el-potencial">Paso 2: hallar el potencial</h3>
+<p>Integramos la primera componente respecto de <span class="math inline">\(x\)</span>, con <span class="math inline">\(y,z\)</span> fijos. Sustituyendo <span class="math inline">\(u = x^2+y^2+z^2\)</span>, <span class="math inline">\(du = 2x\,dx\)</span>:</p>
+<p><span class="math display">\[
+f = \int \frac{kx}{(x^2+y^2+z^2)^{3/2}}\, dx = \frac{k}{2} \int u^{-3/2}\, du
+= \frac{k}{2} \cdot (-2) u^{-1/2} = -\frac{k}{\sqrt{x^2+y^2+z^2}} + g(y,z).
+\]</span></p>
+<p>Ajustamos con la segunda componente:</p>
+<p><span class="math display">\[
+f_y = -k \left( -\tfrac12 \right) (x^2+y^2+z^2)^{-3/2} (2y) + g_y = \frac{ky}{r^3} + g_y
+\;\stackrel{!}{=}\; \frac{ky}{r^3} \;\Longrightarrow\; g_y = 0 .
+\]</span></p>
+<p>Entonces <span class="math inline">\(g = h(z)\)</span>, y con la tercera componente: <span class="math inline">\(f_z = \dfrac{kz}{r^3} + h'(z) \stackrel{!}{=} \dfrac{kz}{r^3} \Longrightarrow h'(z) = 0\)</span>.</p>
+<div class="resultado">
+<p><span class="math display">\[
+f(x,y,z) = -\frac{\varepsilon Q q}{\sqrt{x^2+y^2+z^2}} + C = -\frac{\varepsilon Q q}{r} + C
+\]</span></p>
+</div>
+<p><em>Verificación:</em> <span class="math inline">\(\nabla f = \varepsilon Q q \left( \dfrac{x}{r^3}, \dfrac{y}{r^3}, \dfrac{z}{r^3} \right) = \vec F\)</span> ✓</p>
+<div class="callout callout-style-simple callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Lectura física
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>La energía potencial eléctrica es <span class="math inline">\(U = -f = \dfrac{\varepsilon Q q}{r}\)</span>, que es la expresión conocida de Coulomb. Si las cargas tienen igual signo, <span class="math inline">\(Qq &gt; 0\)</span> y <span class="math inline">\(U &gt; 0\)</span> crece al acercarse (se repelen); si tienen signos opuestos, <span class="math inline">\(U &lt; 0\)</span> y hay que entregar energía para separarlas.</p>
+<p>Las superficies equipotenciales <span class="math inline">\(r = \text{cte}\)</span> son esferas centradas en <span class="math inline">\(Q\)</span>: mover la carga <span class="math inline">\(q\)</span> sobre una esfera no cuesta trabajo, y el trabajo total entre dos puntos depende solo de las distancias inicial y final al origen.</p>
+</div>
+</div>
+<div id="cell-fig-central" class="cell" data-fig-height="3.4" data-fig-width="7.4" data-execution_count="1">
+<details class="code-fold">
+<summary>Ver el código de la figura</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>VIOLETA, VIOLETA2, TINTA, GRIS <span class="op">=</span> <span class="st">"#7c5cbf"</span>, <span class="st">"#b48ec8"</span>, <span class="st">"#1e1a2e"</span>, <span class="st">"#a99fc0"</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>VERDE, AZUL <span class="op">=</span> <span class="st">"#2f6b48"</span>, <span class="st">"#3a5a9c"</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>k, r1, r2 <span class="op">=</span> <span class="fl">1.0</span>, <span class="fl">0.7</span>, <span class="fl">2.2</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>xq <span class="op">=</span> np.linspace(<span class="op">-</span><span class="fl">2.6</span>, <span class="fl">2.6</span>, <span class="dv">14</span>)          <span class="co"># par: la grilla no pisa el origen</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>XQ, YQ <span class="op">=</span> np.meshgrid(xq, xq)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>RR <span class="op">=</span> np.hypot(XQ, YQ)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>dentro <span class="op">=</span> RR <span class="op">&gt;</span> <span class="fl">.38</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>XQ, YQ, RR <span class="op">=</span> XQ[dentro], YQ[dentro], RR[dentro]</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>U, W <span class="op">=</span> k<span class="op">*</span>XQ<span class="op">/</span>RR<span class="op">**</span><span class="dv">3</span>, k<span class="op">*</span>YQ<span class="op">/</span>RR<span class="op">**</span><span class="dv">3</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>norma <span class="op">=</span> np.hypot(U, W)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co"># largo proporcional a la raiz de la norma, para que el decaimiento 1/r^2 se</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co"># note sin que las flechas de afuera desaparezcan</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>largo <span class="op">=</span> np.sqrt(norma <span class="op">/</span> norma.<span class="bu">max</span>())</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>fig, (ax, ax2) <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="fl">7.4</span>, <span class="fl">3.4</span>))</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>ax.quiver(XQ, YQ, U<span class="op">/</span>norma<span class="op">*</span>largo, W<span class="op">/</span>norma<span class="op">*</span>largo, color<span class="op">=</span>TINTA,</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>          width<span class="op">=</span><span class="fl">.005</span>, scale<span class="op">=</span><span class="dv">11</span>, alpha<span class="op">=</span><span class="fl">.6</span>)</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">2</span><span class="op">*</span>np.pi, <span class="dv">300</span>)</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> R <span class="kw">in</span> (r1, r2):</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    ax.plot(R<span class="op">*</span>np.cos(t), R<span class="op">*</span>np.sin(t), color<span class="op">=</span>VIOLETA, lw<span class="op">=</span><span class="fl">1.8</span>)</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>s <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">300</span>)</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="co"># camino radial y camino con rodeo: mismos extremos, distinta ruta</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>rad <span class="op">=</span> r1 <span class="op">+</span> (r2 <span class="op">-</span> r1)<span class="op">*</span>s</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>ax.plot(rad<span class="op">*</span>np.cos(<span class="fl">0.5</span>), rad<span class="op">*</span>np.sin(<span class="fl">0.5</span>), color<span class="op">=</span>AZUL, lw<span class="op">=</span><span class="fl">2.2</span>)</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>ang <span class="op">=</span> <span class="fl">0.5</span> <span class="op">+</span> <span class="fl">2.9</span><span class="op">*</span>np.sin(np.pi<span class="op">*</span>s)          <span class="co"># arranca y termina en el mismo angulo</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>ax.plot(rad<span class="op">*</span>np.cos(ang), rad<span class="op">*</span>np.sin(ang), color<span class="op">=</span>VERDE, lw<span class="op">=</span><span class="fl">2.2</span>)</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>ax.plot([r1<span class="op">*</span>np.cos(<span class="fl">.5</span>), r2<span class="op">*</span>np.cos(<span class="fl">.5</span>)], [r1<span class="op">*</span>np.sin(<span class="fl">.5</span>), r2<span class="op">*</span>np.sin(<span class="fl">.5</span>)], <span class="st">"o"</span>,</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>        color<span class="op">=</span>TINTA, ms<span class="op">=</span><span class="dv">4</span>)</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>ax.plot(<span class="dv">0</span>, <span class="dv">0</span>, <span class="st">"o"</span>, color<span class="op">=</span><span class="st">"#b8564f"</span>, ms<span class="op">=</span><span class="dv">6</span>)</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>ax.set_aspect(<span class="st">"equal"</span>)<span class="op">;</span> ax.set_xlabel(<span class="st">"$x$"</span>)<span class="op">;</span> ax.set_ylabel(<span class="st">"$y$"</span>)</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>ax.set_xlim(<span class="op">-</span><span class="fl">2.9</span>, <span class="fl">2.9</span>)<span class="op">;</span> ax.set_ylim(<span class="op">-</span><span class="fl">2.9</span>, <span class="fl">2.9</span>)</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>r <span class="op">=</span> np.linspace(<span class="fl">0.28</span>, <span class="fl">3.2</span>, <span class="dv">400</span>)</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>ax2.plot(r, <span class="op">-</span>k<span class="op">/</span>r, color<span class="op">=</span>VIOLETA, lw<span class="op">=</span><span class="fl">2.2</span>)</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>ax2.axhline(<span class="dv">0</span>, color<span class="op">=</span>GRIS, lw<span class="op">=</span><span class="fl">.8</span>)</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> R <span class="kw">in</span> (r1, r2):</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>    ax2.plot([<span class="dv">0</span>, R], [<span class="op">-</span>k<span class="op">/</span>R, <span class="op">-</span>k<span class="op">/</span>R], color<span class="op">=</span>GRIS, lw<span class="op">=</span><span class="fl">.8</span>, ls<span class="op">=</span><span class="st">"--"</span>)</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>    ax2.plot(R, <span class="op">-</span>k<span class="op">/</span>R, <span class="st">"o"</span>, color<span class="op">=</span>VIOLETA, ms<span class="op">=</span><span class="dv">5</span>)</span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>ax2.annotate(<span class="st">""</span>, xy<span class="op">=</span>(r2, <span class="op">-</span>k<span class="op">/</span>r2), xytext<span class="op">=</span>(r2, <span class="op">-</span>k<span class="op">/</span>r1),</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>             arrowprops<span class="op">=</span><span class="bu">dict</span>(arrowstyle<span class="op">=</span><span class="st">"&lt;-&gt;"</span>, color<span class="op">=</span>VERDE, lw<span class="op">=</span><span class="fl">1.8</span>))</span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>ax2.annotate(<span class="st">"$W = f(r_2) - f(r_1)$"</span>, (r2, <span class="op">-</span>k<span class="op">/</span>r1), textcoords<span class="op">=</span><span class="st">"offset points"</span>,</span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>             xytext<span class="op">=</span>(<span class="op">-</span><span class="dv">6</span>, <span class="op">-</span><span class="dv">14</span>), ha<span class="op">=</span><span class="st">"right"</span>, fontsize<span class="op">=</span><span class="fl">8.5</span>, color<span class="op">=</span>VERDE)</span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>ax2.set_xlabel(<span class="st">"$r$"</span>)<span class="op">;</span> ax2.set_ylabel(<span class="st">"$f(r) = -k/r$"</span>)</span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>ax2.set_ylim(<span class="op">-</span><span class="dv">3</span>, <span class="fl">.7</span>)<span class="op">;</span> ax2.set_xlim(<span class="dv">0</span>, <span class="fl">3.2</span>)</span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>ax2.spines[[<span class="st">"top"</span>, <span class="st">"right"</span>]].set_visible(<span class="va">False</span>)</span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>fig.tight_layout()</span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div id="fig-central" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-central-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="cc-04-ejercicios_files/figure-html/fig-central-output-1.png" width="689" height="317" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-central-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;4.1: Izquierda: un corte del campo central <span class="math inline">\(\vec F = k\,\vec r / r^3\)</span> con <span class="math inline">\(k&gt;0\)</span> (repulsivo, el caso de dos cargas del mismo signo) y dos superficies equipotenciales <span class="math inline">\(r = r_1\)</span> y <span class="math inline">\(r = r_2\)</span>. El camino verde y el azul llegan del mismo lugar al mismo lugar por rutas muy distintas y acumulan el mismo trabajo, porque los tramos que corren <em>sobre</em> una esfera no aportan nada: ahí la fuerza es perpendicular al movimiento. Derecha: el potencial <span class="math inline">\(f(r) = -k/r\)</span>. El trabajo es la diferencia de alturas marcada, y tiende a un valor finito cuando <span class="math inline">\(r_2 \to \infty\)</span>: esa es la energía de escape.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="lienzo" data-figura="central" data-alto="350" data-rotulo="El campo central: solo importan los radios" data-sliders="[{&quot;id&quot;:&quot;k&quot;,&quot;min&quot;:-2,&quot;max&quot;:2,&quot;paso&quot;:0.1,&quot;valor&quot;:1,&quot;rotulo&quot;:&quot;k = εQq&quot;,&quot;decimales&quot;:1},{&quot;id&quot;:&quot;r1&quot;,&quot;min&quot;:0.3,&quot;max&quot;:2.6,&quot;paso&quot;:0.05,&quot;valor&quot;:0.7,&quot;rotulo&quot;:&quot;r₁&quot;,&quot;decimales&quot;:2},{&quot;id&quot;:&quot;r2&quot;,&quot;min&quot;:0.3,&quot;max&quot;:2.6,&quot;paso&quot;:0.05,&quot;valor&quot;:2,&quot;rotulo&quot;:&quot;r₂&quot;,&quot;decimales&quot;:2}]">
+  <div class="lienzo-pie">
+    Izquierda: un corte del campo \(\vec F = k\,\vec r/r^3\) con las dos esferas equipotenciales
+    \(r=r_1\) y \(r=r_2\), y dos caminos entre los mismos dos puntos: uno radial y otro que da
+    un rodeo largo. Los dos números de arriba a la derecha son las dos integrales de línea,
+    calculadas numéricamente: dan lo mismo, y lo mismo que \(f(r_2)-f(r_1)\). Derecha: el
+    potencial \(f(r) = -k/r\); el trabajo es la diferencia de alturas marcada. Los tramos que
+    corren <i>sobre</i> una esfera no aportan nada, porque ahí la fuerza es perpendicular al
+    movimiento. Con \(k&gt;0\) las cargas se repelen; con \(k&lt;0\) —el caso de la gravedad del
+    ejercicio 21— se atraen y el potencial cambia de signo.
+  </div>
+</div>
+<script>
+window.LIENZO = window.LIENZO || {};
+window.LIENZO.central = function (P, v) {
+  var col = P.col, c = P.ctx, k = v.k;
+  var F = function (x, y) {
+    var r2 = x*x + y*y, r = Math.sqrt(r2);
+    if (r < 0.16) return [0, 0];
+    return [k*x/(r*r2), k*y/(r*r2)];
+  };
+  // el corte del campo va cuadrado, para que las esferas se vean redondas
+  var lado = Math.min(P.h - 78, P.w * 0.52 - 44);
+  var cajaI = [44, 34, lado, lado];
+  var cajaD = [44 + lado + 56, 34, P.w - (44 + lado + 56) - 18, lado];
+
+  // ---- corte del campo ----
+  var m = P.marco(cajaI, [-3, 3], [-3, 3]);
+  P.ejes(m, 'x', 'y', null);
+  P.recorte(m, function () {
+    CV.campo(P, m, F, { n: 15, color: col.tinta, largo: 12, alfa: .45, porNorma: true });
+  });
+  function circ(R) {
+    var a = [], i;
+    for (i = 0; i <= 140; i++) a.push([R*Math.cos(i/140*6.2832), R*Math.sin(i/140*6.2832)]);
+    return a;
+  }
+  P.recorte(m, function () {
+    P.curva(m, circ(v.r1), col.acento, 1.8, .9);
+    P.curva(m, circ(v.r2), col.acento, 1.8, .9);
+  });
+  // dos caminos con los mismos extremos: uno radial y otro con un rodeo
+  var AZUL = '#3a5a9c';
+  var radial = function (u) {
+    var rad = v.r1 + (v.r2 - v.r1)*u;
+    return [rad*Math.cos(0.5), rad*Math.sin(0.5)];
+  };
+  var rodeo = function (u) {
+    var rad = v.r1 + (v.r2 - v.r1)*u;
+    var ang = 0.5 + 2.9*Math.sin(Math.PI*u);   // arranca y termina en el mismo angulo
+    return [rad*Math.cos(ang), rad*Math.sin(ang)];
+  };
+  function traza(r) {
+    var a = [], i;
+    for (i = 0; i <= 160; i++) a.push(r(i/160));
+    return a;
+  }
+  P.recorte(m, function () {
+    P.curva(m, traza(radial), AZUL, 2.4, 1);
+    P.curva(m, traza(rodeo), col.bien, 2.4, 1);
+  });
+  var A = radial(0), B = radial(1);
+  P.punto(m, A[0], A[1], col.tinta, 4.5);
+  P.punto(m, B[0], B[1], col.tinta, 4.5);
+  c.save(); c.fillStyle = col.mal;
+  c.beginPath(); c.arc(m.X(0), m.Y(0), 4, 0, 6.2832); c.fill(); c.restore();
+
+  // ---- el potencial f(r) = -k/r ----
+  var tope = 4, mD = P.marco(cajaD, [0, 3], [-tope, tope]);
+  P.ejes(mD, 'r', 'f (r)', null);
+  P.curva(mD, [[0, 0], [3, 0]], col.suave, 1, .8);
+  var pts = [];
+  for (i = 1; i <= 300; i++) {
+    var r = 3*i/300, y = -k/r;
+    if (y > -tope && y < tope) pts.push([r, y]); else if (pts.length) { }
+  }
+  P.recorte(mD, function () { P.curva(mD, pts, col.acento, 2.4, 1); });
+  var f1 = -k/v.r1, f2 = -k/v.r2;
+  function marcar(r, f) {
+    if (f < -tope || f > tope) return;
+    P.curva(mD, [[0, f], [r, f]], col.suave, 1, .8, [3, 4]);
+    P.punto(mD, r, f, col.acento, 4.5);
+  }
+  marcar(v.r1, f1); marcar(v.r2, f2);
+  if (f1 > -tope && f1 < tope && f2 > -tope && f2 < tope) {
+    var X = mD.X(Math.max(v.r1, v.r2));
+    c.save(); c.strokeStyle = col.bien; c.lineWidth = 2;
+    c.beginPath(); c.moveTo(X, mD.Y(f1)); c.lineTo(X, mD.Y(f2)); c.stroke(); c.restore();
+  }
+
+  P.texto(cajaI[0] - 12, 14,
+          k >= 0 ? 'k > 0 : repulsivo' : 'k < 0 : atractivo', col.tinta, 12);
+  var Wrad = CV.trabajo(F, radial, 0, 1, 3000);
+  var Wrod = CV.trabajo(F, rodeo, 0, 1, 3000);
+  P.texto(cajaD[0] + cajaD[2], 14,
+          'W = f(r₂) − f(r₁) = ' + (f2 - f1).toFixed(3), col.acento, 12.5, 'right');
+  P.texto(cajaD[0] + cajaD[2], 30,
+          'camino recto ' + Wrad.toFixed(3) + '   ·   con rodeo ' + Wrod.toFixed(3),
+          col.bien, 11.5, 'right');
+};
+</script>
+</section>
+</section>
+<section id="sec-ej20" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="sec-ej20"><span class="header-section-number">4.4</span> Ejercicio 20 · Vehículo autónomo en una planta industrial</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Antes de empezar
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>Es el mismo mecanismo del <a href="#sec-ej13" class="quarto-xref"><span>Sección 4.1</span></a>, pero con una pregunta de interpretación en el medio. Para el ítem (c) conviene tener a mano tres ideas: trabajo = diferencia de potencial, curvas de nivel = equipotenciales, y <span class="math inline">\(U = -\varphi\)</span> es la energía almacenada.</li>
+<li>Para el ítem (d) no hace falta parametrizar ningún camino: una vez que se tiene <span class="math inline">\(\varphi\)</span>, el trabajo es <span class="math inline">\(\varphi(2,1) - \varphi(0,0)\)</span>. Ese es justamente el ahorro que da el <a href="cc-01-teoria.html#thm-tfil" class="quarto-xref">Teorema&nbsp;<span>1.1</span></a>.</li>
+<li>La constante <span class="math inline">\(C\)</span> se cancela en cualquier diferencia <span class="math inline">\(\varphi(B) - \varphi(A)\)</span>, así que para calcular trabajo se puede tomar <span class="math inline">\(C = 0\)</span> sin perder generalidad.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Enunciado
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>20.</strong> El campo vectorial <span class="math inline">\(\vec F(x,y) = (2xy + 3,\ x^2 + 4y)\)</span> representa el campo de fuerzas que actúa sobre un vehículo autónomo que transporta materiales dentro de una planta industrial.</p>
+<ol type="a">
+<li>Verificar si el campo es conservativo.</li>
+<li>En caso afirmativo, hallar una función potencial <span class="math inline">\(\varphi(x,y)\)</span>.</li>
+<li>Interpretar físicamente el significado de la función potencial en este contexto.</li>
+<li>Calcular el trabajo realizado por el campo para mover el vehículo desde <span class="math inline">\((0,0)\)</span> hasta <span class="math inline">\((2,1)\)</span>.</li>
+</ol>
+</div>
+</div>
+<section id="a-verificación" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="a-verificación">a) Verificación</h3>
+<p>Con <span class="math inline">\(P = 2xy + 3\)</span> y <span class="math inline">\(Q = x^2 + 4y\)</span>, ambas <span class="math inline">\(C^1\)</span> en <span class="math inline">\(\mathbb{R}^2\)</span>:</p>
+<p><span class="math display">\[
+\frac{\partial P}{\partial y} = 2x, \qquad \frac{\partial Q}{\partial x} = 2x .
+\]</span></p>
+<p>Son iguales y el dominio es simplemente conexo, entonces <span class="chip si">conservativo</span>.</p>
+</section>
+<section id="b-función-potencial" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="b-función-potencial">b) Función potencial</h3>
+<p><span class="math display">\[
+\varphi(x,y) = \int (2xy + 3)\, dx = x^2 y + 3x + g(y),
+\]</span> <span class="math display">\[
+\varphi_y = x^2 + g'(y) \;\stackrel{!}{=}\; x^2 + 4y \;\Longrightarrow\; g(y) = 2y^2 + C .
+\]</span></p>
+<div class="resultado">
+<p><span class="math display">\[
+\varphi(x,y) = x^2 y + 3x + 2y^2 + C
+\]</span></p>
+</div>
+<p><em>Verificación:</em> <span class="math inline">\(\nabla \varphi = (2xy + 3,\ x^2 + 4y) = \vec F\)</span> ✓</p>
+</section>
+<section id="c-interpretación-física" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="c-interpretación-física">c) Interpretación física</h3>
+<ul>
+<li><strong><span class="math inline">\(\varphi\)</span> es un “mapa de energía” de la planta.</strong> A cada posición del piso le asigna un número, y la fuerza que siente el vehículo en ese punto es la dirección y la magnitud de la máxima pendiente de ese mapa. El vehículo es empujado hacia los valores crecientes de <span class="math inline">\(\varphi\)</span>.</li>
+<li><strong>El trabajo no depende de la trayectoria.</strong> Para ir de <span class="math inline">\(A\)</span> a <span class="math inline">\(B\)</span>, el campo aporta <span class="math inline">\(\varphi(B) - \varphi(A)\)</span> cualquiera sea el recorrido. Esto es muy útil en planificación: se puede elegir la ruta por otros criterios —obstáculos, tiempo, congestión de pasillos— sabiendo que el balance energético aportado por este campo será siempre el mismo.</li>
+<li><strong>Las curvas de nivel <span class="math inline">\(\varphi = \text{cte}\)</span> son equipotenciales.</strong> Si el vehículo se mueve a lo largo de una de ellas, el campo no realiza trabajo neto: la fuerza es en todo momento perpendicular al desplazamiento.</li>
+<li><strong>Circuitos cerrados.</strong> Si el vehículo hace un ciclo de reparto y vuelve al punto de partida, el trabajo total del campo es cero. Nada de energía se “gana” dando vueltas; toda la energía consumida en un ciclo proviene de otras fuentes (motor, fricción), no de este campo.</li>
+<li><strong>Energía potencial.</strong> En la convención física, <span class="math inline">\(U(x,y) = -\varphi(x,y)\)</span> es la energía potencial del vehículo. El trabajo del campo es <span class="math inline">\(W = -\Delta U\)</span>: el vehículo gana energía cinética cuando “baja” en <span class="math inline">\(U\)</span>, y si no hay otras fuerzas, <span class="math inline">\(E_c + U\)</span> se conserva.</li>
+</ul>
+<div class="callout callout-style-simple callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Advertencia</span>Qué se rompe si el campo no fuera conservativo
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Vale la pena leer esta lista al revés. Sin potencial no hay mapa de energía, la ruta elegida <strong>sí</strong> cambia el balance, no existen equipotenciales y un ciclo cerrado deja saldo. El <a href="cc-03-no-conservativos.html#sec-planta" class="quarto-xref"><span>Sección 3.3</span></a> hace exactamente eso: le agrega a esta misma planta una cinta transportadora y mira qué conclusiones sobreviven.</p>
+</div>
+</div>
+</section>
+<section id="d-trabajo-de-00-a-21" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="d-trabajo-de-00-a-21">d) Trabajo de <span class="math inline">\((0,0)\)</span> a <span class="math inline">\((2,1)\)</span></h3>
+<p>Por el <a href="cc-01-teoria.html#thm-tfil" class="quarto-xref">Teorema&nbsp;<span>1.1</span></a>, tomando <span class="math inline">\(C = 0\)</span>:</p>
+<p><span class="math display">\[
+\varphi(2,1) = 2^2 \cdot 1 + 3 \cdot 2 + 2 \cdot 1^2 = 4 + 6 + 2 = 12, \qquad \varphi(0,0) = 0,
+\]</span></p>
+<div class="resultado">
+<p><span class="math display">\[
+W = \int_C \vec F \cdot d\vec r = \varphi(2,1) - \varphi(0,0) = 12
+\]</span></p>
+</div>
+<p>Comprobación por el camino recto <span class="math inline">\(\vec r(t) = (2t, t)\)</span>, <span class="math inline">\(t \in [0,1]\)</span>, <span class="math inline">\(d\vec r = (2,1)\,dt\)</span>:</p>
+<p><span class="math display">\[
+\int_0^1 \Big[ (4t^2 + 3)\cdot 2 + (4t^2 + 4t)\cdot 1 \Big] dt = \int_0^1 (12t^2 + 4t + 6)\, dt = 4 + 2 + 6 = 12 \quad \checkmark
+\]</span></p>
+</section>
+</section>
+<section id="sec-ej21" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="sec-ej21"><span class="header-section-number">4.5</span> Ejercicio 21 · Campo gravitatorio</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Antes de empezar
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>Es el mismo campo central del <a href="#sec-ej19" class="quarto-xref"><span>Sección 4.3</span></a> con otra constante: acá <span class="math inline">\(k = -GMm\)</span>, que es <strong>negativa</strong> (porque <span class="math inline">\(G, M, m &gt; 0\)</span>). Ese signo es el que hace que la fuerza apunte <em>hacia</em> el origen, o sea que sea siempre atractiva.</li>
+<li>Comparando: en Coulomb el signo dependía de <span class="math inline">\(Qq\)</span> y por eso podía ser atractiva o repulsiva; la gravedad no tiene esa opción.</li>
+<li>Como <span class="math inline">\(f_{19} = -k/r\)</span> con <span class="math inline">\(k = -GMm\)</span>, se puede anticipar el resultado: <span class="math inline">\(f = +GMm/r\)</span>. Igual conviene mostrar la cuenta completa, que es lo que se pide.</li>
+<li>El dominio vuelve a ser <span class="math inline">\(\mathbb{R}^3 \setminus \{\vec 0\}\)</span>: en el centro de masa <span class="math inline">\(M\)</span> el modelo puntual deja de valer.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="callout callout-style-simple callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Enunciado
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>21.</strong> Consideremos la fuerza gravitacional dada por <span class="math inline">\(\vec F(x,y,z) = -\dfrac{GMm}{\|\vec r\|^3}\, \vec r\)</span>, donde <span class="math inline">\(G\)</span> es la constante de gravitación y el vector <span class="math inline">\(\vec r = (x,y,z)\)</span> está orientado desde el origen, donde se encuentra el cuerpo de masa <span class="math inline">\(M\)</span>, hacia la posición del cuerpo de masa <span class="math inline">\(m\)</span>, de modo que</p>
+<p><span class="math display">\[
+\vec F(x,y,z) = -GMm \left( \frac{x}{(x^2+y^2+z^2)^{3/2}},\ \frac{y}{(x^2+y^2+z^2)^{3/2}},\ \frac{z}{(x^2+y^2+z^2)^{3/2}} \right).
+\]</span></p>
+<p>Demostrar que <span class="math inline">\(\vec F\)</span> es un campo conservativo. Hallar la función potencial.</p>
+</div>
+</div>
+<section id="paso-1-rotor-nulo-1" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="paso-1-rotor-nulo-1">Paso 1: rotor nulo</h3>
+<p>Con <span class="math inline">\(r = \sqrt{x^2+y^2+z^2}\)</span> y <span class="math inline">\(K = GMm &gt; 0\)</span>, las componentes son <span class="math inline">\(P = -Kx\,r^{-3}\)</span>, <span class="math inline">\(Q = -Ky\,r^{-3}\)</span>, <span class="math inline">\(R = -Kz\,r^{-3}\)</span>, de clase <span class="math inline">\(C^1\)</span> en <span class="math inline">\(D = \mathbb{R}^3 \setminus \{\vec 0\}\)</span>. Usando <span class="math inline">\(\partial r/\partial x = x/r\)</span>:</p>
+<p><span class="math display">\[
+\frac{\partial P}{\partial y} = -Kx \cdot (-3) r^{-4} \cdot \frac{y}{r} = \frac{3Kxy}{r^5},
+\qquad
+\frac{\partial Q}{\partial x} = -Ky \cdot (-3) r^{-4} \cdot \frac{x}{r} = \frac{3Kxy}{r^5} .
+\]</span></p>
+<p>Idénticamente,</p>
+<p><span class="math display">\[
+\frac{\partial P}{\partial z} = \frac{3Kxz}{r^5} = \frac{\partial R}{\partial x},
+\qquad
+\frac{\partial Q}{\partial z} = \frac{3Kyz}{r^5} = \frac{\partial R}{\partial y} .
+\]</span></p>
+<p>Por lo tanto <span class="math inline">\(\operatorname{rot} \vec F = (R_y - Q_z)\vec i + (P_z - R_x)\vec j + (Q_x - P_y)\vec k = \vec 0\)</span>. Como <span class="math inline">\(D\)</span> es abierto, conexo y simplemente conexo, <span class="math inline">\(\vec F\)</span> es <span class="chip si">conservativo</span>.</p>
+</section>
+<section id="paso-2-función-potencial" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="paso-2-función-potencial">Paso 2: función potencial</h3>
+<p>Integramos la primera componente en <span class="math inline">\(x\)</span> (sustitución <span class="math inline">\(u = x^2+y^2+z^2\)</span>, <span class="math inline">\(du = 2x\,dx\)</span>):</p>
+<p><span class="math display">\[
+f = \int \frac{-Kx}{u^{3/2}}\, dx = -\frac{K}{2} \int u^{-3/2}\, du = -\frac{K}{2} \cdot (-2) u^{-1/2} = \frac{K}{r} + g(y,z).
+\]</span></p>
+<p>Ajuste con la segunda componente:</p>
+<p><span class="math display">\[
+f_y = K \left( -\tfrac12 \right)(x^2+y^2+z^2)^{-3/2}(2y) + g_y = -\frac{Ky}{r^3} + g_y
+\;\stackrel{!}{=}\; -\frac{Ky}{r^3} \;\Longrightarrow\; g_y = 0 .
+\]</span></p>
+<p>Ajuste con la tercera: <span class="math inline">\(f_z = -\dfrac{Kz}{r^3} + h'(z) \stackrel{!}{=} -\dfrac{Kz}{r^3} \Longrightarrow h'(z) = 0\)</span>.</p>
+<div class="resultado">
+<p><span class="math display">\[
+f(x,y,z) = \frac{GMm}{\sqrt{x^2+y^2+z^2}} + C = \frac{GMm}{r} + C
+\]</span></p>
+</div>
+<p><em>Verificación:</em></p>
+<p><span class="math display">\[
+\frac{\partial}{\partial x} \left( \frac{GMm}{r} \right) = GMm \cdot \left( -\frac{1}{r^2} \right) \cdot \frac{x}{r} = -\frac{GMm\,x}{r^3} \quad \checkmark
+\]</span></p>
+<div class="callout callout-style-simple callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Lectura física
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>La energía potencial gravitatoria es <span class="math inline">\(U = -f = -\dfrac{GMm}{r}\)</span>, la expresión clásica: negativa y creciente hacia <span class="math inline">\(0\)</span> cuando <span class="math inline">\(r \to \infty\)</span>. Las superficies equipotenciales son esferas concéntricas alrededor de <span class="math inline">\(M\)</span>: por eso una órbita circular no requiere trabajo neto del campo. Y el trabajo para llevar <span class="math inline">\(m\)</span> de una distancia <span class="math inline">\(r_1\)</span> a otra <span class="math inline">\(r_2\)</span> es</p>
+<p><span class="math display">\[
+W = f(r_2) - f(r_1) = GMm \left( \frac{1}{r_2} - \frac{1}{r_1} \right),
+\]</span></p>
+<p>que solo depende de las distancias, no de la trayectoria seguida. La energía necesaria para escapar al infinito desde <span class="math inline">\(r_1\)</span> es <span class="math inline">\(GMm/r_1\)</span>, de donde sale la velocidad de escape <span class="math inline">\(v_e = \sqrt{2GM/r_1}\)</span>.</p>
+</div>
+</div>
+<div class="ejercicio">
+<p>En los ejercicios 19 y 21 el dominio es <span class="math inline">\(\mathbb{R}^3\)</span> menos un punto, y aun así concluimos que el campo es conservativo a partir del rotor nulo. En <a href="cc-03-no-conservativos.html#sec-vortice" class="quarto-xref"><span>Sección 3.2</span></a> el dominio era <span class="math inline">\(\mathbb{R}^2\)</span> menos un punto y la conclusión no valía. ¿Cuál es la diferencia?</p>
+<ul>
+<li><span class="mal">En <span class="math inline">\(\mathbb{R}^3\)</span> el rotor es un vector y en <span class="math inline">\(\mathbb{R}^2\)</span> un escalar, y el teorema solo vale para vectores.</span></li>
+<li><span class="bien"><span class="math inline">\(\mathbb{R}^3\)</span> menos un punto sigue siendo simplemente conexo —toda curva cerrada se contrae esquivando el agujero—, mientras que <span class="math inline">\(\mathbb{R}^2\)</span> menos un punto no lo es.</span></li>
+<li><span class="mal">Porque los campos de 19 y 21 son centrales y los centrales son siempre conservativos.</span></li>
+<li><span class="mal">Porque en 19 y 21 el campo tiende a cero en el infinito.</span></li>
+</ul>
+<div class="explica">
+<p><strong>La correcta es la segunda.</strong> En el espacio hay una dimensión de sobra para esquivar el punto: cualquier lazo se puede levantar y encoger sin tocarlo. En el plano no: un lazo que rodea el agujero está atrapado.</p>
+<p>La tercera opción es tentadora y casi cierta —los campos centrales tienen rotor nulo— pero no es <em>la razón</em>: el vórtice también tiene rotor nulo y no es conservativo. Lo que decide es la forma del dominio. La cuarta es irrelevante: el vórtice también tiende a cero en el infinito.</p>
+</div>
+</div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<style>
+/* ---------- Ejercicios interactivos y videos del libro ---------- */
+:root {
+  --ej-borde: #ddd6ee;  --ej-fondo: #faf8fc;  --ej-tinta: #1e1a2e;
+  --ej-tenue: #6b6080;  --ej-acento: #7c5cbf;
+  --ej-bien: #3f8f5f;   --ej-bien-fondo: #eaf5ee;
+  --ej-mal:  #b8564f;   --ej-mal-fondo:  #f9ecea;
+}
+body.quarto-dark {
+  --ej-borde: #3b3459;  --ej-fondo: #1a1630;  --ej-tinta: #ece8f5;
+  --ej-tenue: #a79fc0;  --ej-acento: #b79ce9;
+  --ej-bien: #7fc79a;   --ej-bien-fondo: #1c2d24;
+  --ej-mal:  #e09a94;   --ej-mal-fondo:  #2e1e1e;
+}
+
+.ejercicio {
+  border: 1px solid var(--ej-borde);
+  border-left: 3px solid var(--ej-acento);
+  background: var(--ej-fondo);
+  border-radius: 4px;
+  padding: 1.1rem 1.25rem .95rem;
+  margin: 1.8rem 0;
+}
+.ejercicio > .ej-rotulo {
+  font-size: .68rem; letter-spacing: .13em; text-transform: uppercase;
+  font-weight: 600; color: var(--ej-acento); margin-bottom: .5rem;
+}
+.ejercicio p { margin-bottom: .7rem; }
+
+.ej-ops { display: flex; flex-direction: column; gap: .45rem; margin: .9rem 0 .3rem; }
+.ej-op {
+  text-align: left; width: 100%; cursor: pointer;
+  border: 1px solid var(--ej-borde); border-radius: 4px;
+  background: transparent; color: var(--ej-tinta);
+  padding: .6rem .8rem; font: inherit; font-size: .95rem; line-height: 1.45;
+  transition: border-color .15s, background .15s;
+}
+.ej-op:hover:not([disabled]) { border-color: var(--ej-acento); }
+.ej-op[data-estado="bien"] { border-color: var(--ej-bien); background: var(--ej-bien-fondo); }
+.ej-op[data-estado="mal"]  { border-color: var(--ej-mal);  background: var(--ej-mal-fondo); opacity: .85; }
+.ej-op[disabled] { cursor: default; }
+.ej-op .ej-marca { float: right; font-weight: 700; margin-left: .6rem; }
+.ej-op[data-estado="bien"] .ej-marca { color: var(--ej-bien); }
+.ej-op[data-estado="mal"]  .ej-marca { color: var(--ej-mal); }
+
+.ej-num { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; margin: .9rem 0 .3rem; }
+.ej-num input {
+  border: 1px solid var(--ej-borde); border-radius: 4px; background: transparent;
+  color: var(--ej-tinta); padding: .5rem .7rem; font: inherit; font-size: .95rem; width: 11rem;
+}
+.ej-num input:focus { outline: none; border-color: var(--ej-acento); }
+.ej-num button {
+  border: 1px solid var(--ej-acento); border-radius: 4px; background: var(--ej-acento);
+  color: #fff; padding: .5rem 1rem; font: inherit; font-size: .82rem;
+  letter-spacing: .06em; cursor: pointer;
+}
+body.quarto-dark .ej-num button { color: #14111f; }
+.ej-num .ej-veredicto { font-size: .9rem; }
+.ej-num .ej-veredicto[data-estado="bien"] { color: var(--ej-bien); }
+.ej-num .ej-veredicto[data-estado="mal"]  { color: var(--ej-mal); }
+
+.explica {
+  border-top: 1px dashed var(--ej-borde);
+  margin-top: .9rem; padding-top: .8rem;
+  font-size: .93rem; color: var(--ej-tenue);
+}
+.explica > *:last-child { margin-bottom: 0; }
+.explica[hidden] { display: none !important; }
+
+/* ---------- Videos ---------- */
+.video {
+  position: relative; width: 100%; aspect-ratio: 16 / 9;
+  margin: 1.6rem 0 .6rem; border-radius: 4px; overflow: hidden;
+  border: 1px solid var(--ej-borde);
+}
+.video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.video-pie { font-size: .82rem; color: var(--ej-tenue); margin-top: -.2rem; }
+</style>
+
+<script>
+(function () {
+  function armar() {
+    document.querySelectorAll('.ejercicio').forEach(function (caja) {
+      if (caja.dataset.listo) return;
+      caja.dataset.listo = '1';
+
+      var rotulo = document.createElement('div');
+      rotulo.className = 'ej-rotulo';
+      rotulo.textContent = caja.dataset.rotulo || 'Para pensar';
+      caja.insertBefore(rotulo, caja.firstChild);
+
+      var explica = caja.querySelector('.explica');
+      if (explica) explica.hidden = true;
+
+      var lista = caja.querySelector('ul');
+      if (lista) return opcionMultiple(caja, lista, explica);
+      if (caja.dataset.respuesta !== undefined) return numerico(caja, explica);
+    });
+  }
+
+  function opcionMultiple(caja, lista, explica) {
+    var ops = document.createElement('div');
+    ops.className = 'ej-ops';
+    var botones = [];
+
+    Array.prototype.forEach.call(lista.children, function (li) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'ej-op';
+      b.innerHTML = li.innerHTML;
+      b.dataset.correcta = li.querySelector('.bien') ? '1' : '0';
+      ops.appendChild(b);
+      botones.push(b);
+    });
+    lista.parentNode.replaceChild(ops, lista);
+
+    botones.forEach(function (b) {
+      b.addEventListener('click', function () {
+        var bien = b.dataset.correcta === '1';
+        b.dataset.estado = bien ? 'bien' : 'mal';
+        if (!b.querySelector('.ej-marca')) {
+          var m = document.createElement('span');
+          m.className = 'ej-marca';
+          m.textContent = bien ? '✓' : '✕';
+          b.appendChild(m);
+        }
+        if (bien) {
+          botones.forEach(function (o) { o.disabled = true; });
+          if (explica) explica.hidden = false;
+        }
+      });
+    });
+  }
+
+  function numerico(caja, explica) {
+    var esperado = parseFloat(caja.dataset.respuesta);
+    var tol = parseFloat(caja.dataset.tol || '0');
+    var fila = document.createElement('div');
+    fila.className = 'ej-num';
+    fila.innerHTML =
+      '<input type="text" inputmode="decimal" aria-label="Tu respuesta" placeholder="tu respuesta">' +
+      '<button type="button">Comprobar</button>' +
+      '<span class="ej-veredicto"></span>';
+    caja.insertBefore(fila, explica || null);
+
+    var campo = fila.querySelector('input');
+    var boton = fila.querySelector('button');
+    var veredicto = fila.querySelector('.ej-veredicto');
+
+    function comprobar() {
+      var v = parseFloat(campo.value.replace(',', '.'));
+      if (isNaN(v)) {
+        veredicto.dataset.estado = 'mal';
+        veredicto.textContent = 'Escribí un número.';
+        return;
+      }
+      if (Math.abs(v - esperado) <= tol) {
+        veredicto.dataset.estado = 'bien';
+        veredicto.textContent = '✓ Correcto.';
+        if (explica) explica.hidden = false;
+      } else {
+        veredicto.dataset.estado = 'mal';
+        veredicto.textContent = '✕ Todavía no. Probá de nuevo.';
+      }
+    }
+    boton.addEventListener('click', comprobar);
+    campo.addEventListener('keydown', function (e) { if (e.key === 'Enter') comprobar(); });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', armar);
+  } else {
+    armar();
+  }
+})();
+</script>
+
+<style>
+/* ---------- Lienzos interactivos (gráficos con sliders) ---------- */
+.lienzo {
+  border: 1px solid var(--ej-borde);
+  border-left: 3px solid var(--ej-acento);
+  background: var(--ej-fondo);
+  border-radius: 4px;
+  padding: 1rem 1.15rem .85rem;
+  margin: 1.8rem 0;
+}
+.lienzo > .ej-rotulo {
+  font-size: .68rem; letter-spacing: .13em; text-transform: uppercase;
+  font-weight: 600; color: var(--ej-acento); margin-bottom: .55rem;
+}
+.lienzo canvas { display: block; width: 100%; height: auto; }
+.lienzo-controles {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: .5rem 1.3rem; margin-top: .85rem;
+}
+.lienzo-control { display: flex; align-items: center; gap: .55rem; }
+.lienzo-control label {
+  font-size: .85rem; color: var(--ej-tinta); min-width: 2.4rem;
+  font-variant-numeric: tabular-nums;
+}
+.lienzo-control input[type="range"] {
+  flex: 1; min-width: 0; accent-color: var(--ej-acento); height: 1.1rem;
+}
+.lienzo-control .lienzo-valor {
+  font-size: .82rem; color: var(--ej-acento); min-width: 3.1rem;
+  text-align: right; font-variant-numeric: tabular-nums;
+}
+.lienzo-pie {
+  font-size: .87rem; color: var(--ej-tenue); margin: .8rem 0 0;
+  border-top: 1px dashed var(--ej-borde); padding-top: .7rem;
+}
+.lienzo-pie > *:last-child { margin-bottom: 0; }
+</style>
+
+<script>
+/* Motor de figuras interactivas.
+   Cada página registra sus dibujos en window.LIENZO antes de que esto corra:
+
+     window.LIENZO = window.LIENZO || {};
+     window.LIENZO.miFigura = function (P, v) { ... };
+
+   y en el markdown se escribe
+
+     <div class="lienzo" data-figura="miFigura" data-alto="330"
+          data-rotulo="Probá"
+          data-sliders='[{"id":"c","min":-2,"max":2,"paso":0.1,"valor":1,"rotulo":"c"}]'>
+     </div>
+*/
+(function () {
+  window.LIENZO = window.LIENZO || {};
+
+  function leerColores(el) {
+    var s = getComputedStyle(el);
+    function c(n, alt) { return (s.getPropertyValue(n) || alt).trim() || alt; }
+    return {
+      tinta:   c('--ej-tinta',  '#1e1a2e'),
+      tenue:   c('--ej-tenue',  '#6b6080'),
+      acento:  c('--ej-acento', '#7c5cbf'),
+      borde:   c('--ej-borde',  '#ddd6ee'),
+      fondo:   c('--ej-fondo',  '#faf8fc'),
+      bien:    c('--ej-bien',   '#3f8f5f'),
+      mal:     c('--ej-mal',    '#b8564f'),
+      suave:   c('--ej-tenue',  '#a99fc0')
+    };
+  }
+
+  // ---- helpers de dibujo que recibe cada figura ----
+  function Pincel(ctx, w, h, col) {
+    this.ctx = ctx; this.w = w; this.h = h; this.col = col;
+  }
+  Pincel.prototype.marco = function (caja, dx, dy) {
+    var bx = caja[0], by = caja[1], bw = caja[2], bh = caja[3];
+    return {
+      caja: caja, dx: dx, dy: dy,
+      X: function (v) { return bx + (v - dx[0]) / (dx[1] - dx[0]) * bw; },
+      Y: function (v) { return by + bh - (v - dy[0]) / (dy[1] - dy[0]) * bh; }
+    };
+  };
+  Pincel.prototype.ejes = function (m, rx, ry, titulo) {
+    var c = this.ctx, k = m.caja, col = this.col;
+    c.save();
+    c.strokeStyle = col.suave; c.lineWidth = 1; c.globalAlpha = .9;
+    c.beginPath();
+    c.moveTo(k[0], k[1]); c.lineTo(k[0], k[1] + k[3]); c.lineTo(k[0] + k[2], k[1] + k[3]);
+    c.stroke();
+    c.globalAlpha = 1;
+    c.fillStyle = col.tenue;
+    function num(v) { return (Math.round(v * 100) / 100).toString().replace('.', ','); }
+    c.font = '10px system-ui, sans-serif';
+    c.textAlign = 'left';  c.fillText(num(m.dx[0]), k[0], k[1] + k[3] + 14);
+    c.textAlign = 'right'; c.fillText(num(m.dx[1]), k[0] + k[2], k[1] + k[3] + 14);
+    c.font = '11px system-ui, sans-serif';
+    if (rx) { c.textAlign = 'center'; c.fillText(rx, k[0] + k[2] / 2, k[1] + k[3] + 27); }
+    if (ry) { c.textAlign = 'left';   c.fillText(ry, k[0] + 5, k[1] + 12); }
+    if (titulo) {
+      c.textAlign = 'left'; c.fillStyle = col.tinta; c.font = '12px system-ui, sans-serif';
+      c.fillText(titulo, k[0], k[1] - 10);
+    }
+    c.restore();
+  };
+  Pincel.prototype.recorte = function (m, dibujar) {
+    var c = this.ctx, k = m.caja;
+    c.save(); c.beginPath(); c.rect(k[0] - .5, k[1] - .5, k[2] + 1, k[3] + 1); c.clip();
+    dibujar(); c.restore();
+  };
+  Pincel.prototype.curva = function (m, pts, color, ancho, alfa, guion) {
+    var c = this.ctx;
+    if (!pts.length) return;
+    c.save();
+    c.strokeStyle = color; c.lineWidth = ancho || 1.5;
+    c.globalAlpha = (alfa === undefined ? 1 : alfa);
+    c.lineJoin = 'round'; c.lineCap = 'round';
+    if (guion) c.setLineDash(guion);
+    c.beginPath();
+    c.moveTo(m.X(pts[0][0]), m.Y(pts[0][1]));
+    for (var i = 1; i < pts.length; i++) c.lineTo(m.X(pts[i][0]), m.Y(pts[i][1]));
+    c.stroke(); c.restore();
+  };
+  Pincel.prototype.punto = function (m, x, y, color, r) {
+    var c = this.ctx;
+    c.save(); c.fillStyle = color;
+    c.beginPath(); c.arc(m.X(x), m.Y(y), r || 4.5, 0, 6.2832); c.fill();
+    c.restore();
+  };
+  Pincel.prototype.texto = function (px, py, s, color, tam, alin) {
+    var c = this.ctx;
+    c.save();
+    c.fillStyle = color; c.font = (tam || 11) + 'px system-ui, sans-serif';
+    c.textAlign = alin || 'left';
+    c.fillText(s, px, py);
+    c.restore();
+  };
+
+  // ---- proyección 3D ortográfica, para los lienzos que la usen ----
+  Pincel.prototype.camara = function (caja, dom, azim, elev, escala) {
+    var bx = caja[0], by = caja[1], bw = caja[2], bh = caja[3];
+    var cx = bx + bw / 2, cy = by + bh / 2;
+    var sa = Math.sin(azim), ca = Math.cos(azim);
+    var se = Math.sin(elev), ce = Math.cos(elev);
+    var k = (escala || 0.44) * Math.min(bw, bh);
+    var ax = dom.ax || 1, ay = dom.ay || 1, az = dom.az || 1;
+    function nor(v, r) { return 2 * (v - r[0]) / (r[1] - r[0]) - 1; }
+    function xyz(x, y, z) {
+      return [nor(x, dom.x) * ax, nor(y, dom.y) * ay, nor(z, dom.z) * az];
+    }
+    return {
+      caja: caja, dom: dom,
+      pt: function (x, y, z) {
+        var p = xyz(x, y, z);
+        var u = -p[0] * sa + p[1] * ca;
+        var v = -(p[0] * ca + p[1] * sa) * se + p[2] * ce;
+        return [cx + k * u, cy - k * v];
+      },
+      prof: function (x, y, z) {
+        var p = xyz(x, y, z);
+        return (p[0] * ca + p[1] * sa) * ce + p[2] * se;
+      }
+    };
+  };
+
+  Pincel.prototype.curva3 = function (cam, pts, color, ancho, alfa, guion) {
+    var c = this.ctx;
+    if (!pts.length) return;
+    c.save();
+    c.strokeStyle = color; c.lineWidth = ancho || 1.4;
+    c.globalAlpha = (alfa === undefined ? 1 : alfa);
+    c.lineJoin = 'round'; c.lineCap = 'round';
+    if (guion) c.setLineDash(guion);
+    c.beginPath();
+    var p = cam.pt(pts[0][0], pts[0][1], pts[0][2]);
+    c.moveTo(p[0], p[1]);
+    for (var i = 1; i < pts.length; i++) {
+      p = cam.pt(pts[i][0], pts[i][1], pts[i][2]);
+      c.lineTo(p[0], p[1]);
+    }
+    c.stroke(); c.restore();
+  };
+
+  Pincel.prototype.punto3 = function (cam, x, y, z, color, r) {
+    var c = this.ctx, p = cam.pt(x, y, z);
+    c.save(); c.fillStyle = color;
+    c.beginPath(); c.arc(p[0], p[1], r || 4.5, 0, 6.2832); c.fill(); c.restore();
+  };
+
+  // caja de referencia: el piso, las cuatro aristas verticales y los rótulos
+  Pincel.prototype.caja3 = function (cam, rx, ry, rz) {
+    var d = cam.dom, col = this.col;
+    var x0 = d.x[0], x1 = d.x[1], y0 = d.y[0], y1 = d.y[1], z0 = d.z[0], z1 = d.z[1];
+    var piso = [[x0, y0, z0], [x1, y0, z0], [x1, y1, z0], [x0, y1, z0], [x0, y0, z0]];
+    this.curva3(cam, piso, col.borde, 1.2, 1);
+    [[x0, y0], [x1, y0], [x1, y1], [x0, y1]].forEach(function (e) {
+      this.curva3(cam, [[e[0], e[1], z0], [e[0], e[1], z1]], col.borde, 1, .55, [3, 4]);
+    }, this);
+    var t;
+    if (rx) { t = cam.pt((x0 + x1) / 2, y0, z0); this.texto(t[0], t[1] + 16, rx, col.tenue, 11, 'center'); }
+    if (ry) { t = cam.pt(x1, (y0 + y1) / 2, z0); this.texto(t[0] + 12, t[1] + 6, ry, col.tenue, 11, 'left'); }
+    if (rz) { t = cam.pt(x0, y1, z1); this.texto(t[0] - 10, t[1], rz, col.tenue, 11, 'right'); }
+  };
+
+  // ---- construcción de un lienzo ----
+  function armarLienzo(caja) {
+    if (caja.dataset.listo) return;
+    caja.dataset.listo = '1';
+
+    var dibujo = window.LIENZO[caja.dataset.figura];
+    if (typeof dibujo !== 'function') return;
+
+    var rot = document.createElement('div');
+    rot.className = 'ej-rotulo';
+    rot.textContent = caja.dataset.rotulo || 'Probá moviendo los controles';
+    caja.insertBefore(rot, caja.firstChild);
+
+    var pie = caja.querySelector('.lienzo-pie');
+
+    var lienzo = document.createElement('canvas');
+    caja.insertBefore(lienzo, pie || null);
+
+    var defs = [];
+    try { defs = JSON.parse(caja.dataset.sliders || '[]'); } catch (e) { defs = []; }
+
+    var fila = document.createElement('div');
+    fila.className = 'lienzo-controles';
+    var entradas = {};
+    var salidas = {};
+
+    defs.forEach(function (d) {
+      var cel = document.createElement('div');
+      cel.className = 'lienzo-control';
+      var et = document.createElement('label');
+      et.textContent = d.rotulo || d.id;
+      var inp = document.createElement('input');
+      inp.type = 'range';
+      inp.min = d.min; inp.max = d.max;
+      inp.step = (d.paso === undefined ? 0.01 : d.paso);
+      inp.value = (d.valor === undefined ? d.min : d.valor);
+      inp.setAttribute('aria-label', d.rotulo || d.id);
+      var val = document.createElement('span');
+      val.className = 'lienzo-valor';
+      cel.appendChild(et); cel.appendChild(inp); cel.appendChild(val);
+      fila.appendChild(cel);
+      entradas[d.id] = inp; salidas[d.id] = val;
+      inp.addEventListener('input', pintar);
+    });
+    caja.insertBefore(fila, pie || null);
+
+    var alto = parseInt(caja.dataset.alto || '330', 10);
+
+    function pintar() {
+      var ancho = lienzo.clientWidth || caja.clientWidth || 640;
+      var dpr = window.devicePixelRatio || 1;
+      lienzo.width = Math.round(ancho * dpr);
+      lienzo.height = Math.round(alto * dpr);
+      lienzo.style.height = alto + 'px';
+
+      var ctx = lienzo.getContext('2d');
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.clearRect(0, 0, ancho, alto);
+
+      var col = leerColores(caja);
+      var v = {};
+      defs.forEach(function (d) {
+        var x = parseFloat(entradas[d.id].value);
+        v[d.id] = x;
+        var dec = (d.decimales === undefined ? 2 : d.decimales);
+        salidas[d.id].textContent = (d.formato ? d.formato : '') + x.toFixed(dec) +
+                                   (d.sufijo ? d.sufijo : '');
+      });
+
+      dibujo(new Pincel(ctx, ancho, alto, col), v);
+    }
+
+    caja._pintar = pintar;
+    pintar();
+    // una segunda pasada cuando ya se aplicó el layout definitivo
+    setTimeout(pintar, 60);
+  }
+
+  function armarTodos() {
+    document.querySelectorAll('.lienzo').forEach(armarLienzo);
+  }
+  function repintarTodos() {
+    document.querySelectorAll('.lienzo').forEach(function (c) {
+      if (c._pintar) c._pintar();
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', armarTodos);
+  } else {
+    armarTodos();
+  }
+
+  var temporizador;
+  window.addEventListener('resize', function () {
+    clearTimeout(temporizador);
+    temporizador = setTimeout(repintarTodos, 120);
+  });
+
+  // el libro cambia entre claro y oscuro poniendo una clase en <body>
+  if (window.MutationObserver) {
+    new MutationObserver(repintarTodos)
+      .observe(document.body, { attributes: true, attributeFilter: ['class'] });
+  }
+})();
+</script>
+<style>
+/* ---------- Extras de la guía de campos ---------- */
+.chip {
+  display: inline-block; font-family: 'Inter', system-ui, sans-serif;
+  font-size: .7rem; letter-spacing: .06em; font-weight: 600;
+  padding: .12rem .5rem; border-radius: 3px; vertical-align: .08em;
+  white-space: nowrap;
+}
+.chip.si  { color: #2f6b48; background: #e6f3ec; border: 1px solid #bfe0cd; }
+.chip.no  { color: #9c443d; background: #f8eae8; border: 1px solid #e6c5c1; }
+.chip.ojo { color: #8a6a1f; background: #faf2df; border: 1px solid #e7d5a8; }
+body.quarto-dark .chip.si  { color: #8ed5aa; background: #1b2d23; border-color: #2f5340; }
+body.quarto-dark .chip.no  { color: #eba9a2; background: #2e1e1e; border-color: #5a3833; }
+body.quarto-dark .chip.ojo { color: #e6c98a; background: #2c2617; border-color: #56492a; }
+
+/* Caja de resultado, el equivalente del recuadro violeta del apunte */
+.resultado {
+  border: 1px solid var(--ej-borde); border-radius: 4px;
+  background: var(--ej-fondo); padding: .35rem 1rem; margin: 1.3rem 0;
+}
+.resultado .math.display { margin: .55rem 0; }
+
+/* Pasos numerados de la receta.
+   El contenido se escribe como lista ordenada de markdown, asi que en el PDF
+   sale como un enumerate normal; aca le cambiamos el numerito por un circulo. */
+.receta { margin: 1.4rem 0; }
+.receta ol { list-style: none; counter-reset: paso; padding-left: 0; margin-left: 0; }
+.receta ol > li {
+  position: relative; padding-left: 2.6rem; margin-bottom: 1.15rem;
+}
+.receta ol > li::before {
+  counter-increment: paso; content: counter(paso);
+  position: absolute; left: 0; top: .05rem;
+  width: 1.75rem; height: 1.75rem; border-radius: 50%;
+  background: var(--ej-acento); color: #fff;
+  font-family: 'Inter', system-ui, sans-serif; font-size: .85rem; font-weight: 600;
+  display: flex; align-items: center; justify-content: center;
+}
+body.quarto-dark .receta ol > li::before { color: #14111f; }
+.receta ol > li > p:first-child { margin-top: 0; }
+
+/* El lienzo rotable avisa que se puede arrastrar */
+.lienzo[data-rotable] canvas { cursor: grab; touch-action: none; }
+.lienzo[data-rotable] canvas:active { cursor: grabbing; }
+</style>
+
+<script>
+/* ------------------------------------------------------------------
+   CV — herramientas de dibujo para las figuras de campos vectoriales.
+   Se apoya en el motor .lienzo de interactivo.html: cada figura recibe
+   un Pincel P (con P.ctx, P.w, P.h, P.col) y el objeto v con los sliders.
+   ------------------------------------------------------------------ */
+(function () {
+  var CV = window.CV = window.CV || {};
+
+  // ---------- color ----------
+  function hex(c) {
+    c = c.replace('#', '');
+    if (c.length === 3) c = c[0]+c[0]+c[1]+c[1]+c[2]+c[2];
+    return [parseInt(c.slice(0,2),16), parseInt(c.slice(2,4),16), parseInt(c.slice(4,6),16)];
+  }
+  function rgb(a) { return 'rgb(' + a.map(Math.round).join(',') + ')'; }
+
+  // rampa fría → cálida, con los violetas del sitio
+  var RAMPA = ['#241f42', '#453a7e', '#6d55b5', '#9c83cf', '#c9aecb', '#e8c79c'].map(hex);
+  CV.rampa = function (t) {
+    t = Math.max(0, Math.min(1, t)) * (RAMPA.length - 1);
+    var i = Math.min(Math.floor(t), RAMPA.length - 2), s = t - i;
+    var a = RAMPA[i], b = RAMPA[i+1];
+    return rgb([a[0]+(b[0]-a[0])*s, a[1]+(b[1]-a[1])*s, a[2]+(b[2]-a[2])*s]);
+  };
+  CV.mezcla = function (c1, c2, s) {
+    var a = hex(c1), b = hex(c2);
+    return rgb([a[0]+(b[0]-a[0])*s, a[1]+(b[1]-a[1])*s, a[2]+(b[2]-a[2])*s]);
+  };
+
+  // ---------- flechas ----------
+  // en pixeles: de (x0,y0) a (x1,y1)
+  CV.flechaPx = function (P, x0, y0, x1, y1, color, ancho, cabeza) {
+    var c = P.ctx, dx = x1 - x0, dy = y1 - y0, L = Math.hypot(dx, dy);
+    if (L < 0.4) return;
+    var h = Math.min(cabeza === undefined ? 5.5 : cabeza, L * 0.55);
+    var ux = dx / L, uy = dy / L, px = -uy, py = ux;
+    c.save();
+    c.strokeStyle = color; c.fillStyle = color;
+    c.lineWidth = ancho || 1.2; c.lineCap = 'round';
+    c.beginPath(); c.moveTo(x0, y0); c.lineTo(x1 - ux*h*0.75, y1 - uy*h*0.75); c.stroke();
+    c.beginPath();
+    c.moveTo(x1, y1);
+    c.lineTo(x1 - ux*h + px*h*0.42, y1 - uy*h + py*h*0.42);
+    c.lineTo(x1 - ux*h - px*h*0.42, y1 - uy*h - py*h*0.42);
+    c.closePath(); c.fill();
+    c.restore();
+  };
+
+  // en coordenadas de datos sobre un marco m, con largo dado en pixeles
+  CV.flecha = function (P, m, x, y, u, vv, largoPx, color, ancho) {
+    var L = Math.hypot(u, vv);
+    if (L < 1e-12) return;
+    var X = m.X(x), Y = m.Y(y);
+    // el marco invierte el eje vertical: una componente v>0 va hacia arriba en pantalla
+    CV.flechaPx(P, X, Y, X + u/L*largoPx, Y - vv/L*largoPx, color, ancho);
+  };
+
+  // flecha apoyada en el plano z = z0 del mundo 3D, con largo en pixeles
+  CV.flecha3 = function (P, cam, x, y, z0, u, vv, largoPx, color, ancho) {
+    var L = Math.hypot(u, vv);
+    if (L < 1e-12) return;
+    var p0 = cam.pt(x, y, z0);
+    var e = 1e-3 * (cam.dom.x[1] - cam.dom.x[0]);
+    var p1 = cam.pt(x + u/L*e, y + vv/L*e, z0);
+    var dx = p1[0] - p0[0], dy = p1[1] - p0[1], d = Math.hypot(dx, dy);
+    if (d < 1e-9) return;
+    CV.flechaPx(P, p0[0], p0[1], p0[0] + dx/d*largoPx, p0[1] + dy/d*largoPx, color, ancho, 4.5);
+  };
+
+  /* Campo de flechas sobre el marco m.
+     F(x,y) devuelve [u,v]. opts: {n, color, largo, escala:'norma'|'fija', alfa} */
+  CV.campo = function (P, m, F, opts) {
+    opts = opts || {};
+    var n = opts.n || 15, col = opts.color || P.col.tinta;
+    var largo = opts.largo || 13, alfa = opts.alfa === undefined ? .8 : opts.alfa;
+    var dx = m.dx, dy = m.dy, i, j, x, y, f, datos = [], mx = 0;
+    for (i = 0; i < n; i++) for (j = 0; j < n; j++) {
+      x = dx[0] + (dx[1]-dx[0]) * (i+0.5)/n;
+      y = dy[0] + (dy[1]-dy[0]) * (j+0.5)/n;
+      f = F(x, y);
+      if (!f || !isFinite(f[0]) || !isFinite(f[1])) continue;
+      var nn = Math.hypot(f[0], f[1]);
+      if (nn > mx) mx = nn;
+      datos.push([x, y, f[0], f[1], nn]);
+    }
+    if (!mx) return;
+    P.ctx.save(); P.ctx.globalAlpha = alfa;
+    datos.forEach(function (d) {
+      var L = opts.escala === 'fija' ? largo
+            : largo * (0.34 + 0.66 * Math.sqrt(Math.min(1, d[4] / mx)));
+      var c = opts.porNorma ? CV.mezcla(P.col.suave, col, Math.min(1, d[4]/mx)) : col;
+      CV.flecha(P, m, d[0], d[1], d[2], d[3], L, c, opts.ancho || 1.05);
+    });
+    P.ctx.restore();
+  };
+
+  /* Marching squares: devuelve los segmentos de la curva f = nivel dentro del
+     rectángulo dom = {x:[a,b], y:[c,d]}, como pares [[x0,y0],[x1,y1]]. */
+  CV.segmentos = function (dom, f, nivel, N) {
+    N = N || 120;
+    var xs = [], ys = [], Z = [], i, j, segs = [];
+    for (i = 0; i <= N; i++) xs.push(dom.x[0] + (dom.x[1]-dom.x[0]) * i/N);
+    for (j = 0; j <= N; j++) ys.push(dom.y[0] + (dom.y[1]-dom.y[0]) * j/N);
+    for (i = 0; i <= N; i++) { Z.push([]); for (j = 0; j <= N; j++) Z[i].push(f(xs[i], ys[j])); }
+    for (i = 0; i < N; i++) for (j = 0; j < N; j++) {
+      var z = [Z[i][j], Z[i+1][j], Z[i+1][j+1], Z[i][j+1]];
+      if (!isFinite(z[0]+z[1]+z[2]+z[3])) continue;
+      var px = [xs[i], xs[i+1], xs[i+1], xs[i]], py = [ys[j], ys[j], ys[j+1], ys[j+1]];
+      var pts = [];
+      for (var k = 0; k < 4; k++) {
+        var a = z[k], b = z[(k+1)%4];
+        if ((a - nivel) * (b - nivel) < 0) {
+          var s = (nivel - a) / (b - a);
+          pts.push([px[k] + (px[(k+1)%4]-px[k])*s, py[k] + (py[(k+1)%4]-py[k])*s]);
+        }
+      }
+      for (var q = 0; q + 1 < pts.length; q += 2) segs.push([pts[q], pts[q+1]]);
+    }
+    return segs;
+  };
+
+  /* Curvas de nivel sobre un marco 2D. niveles es un array de valores. */
+  CV.contornos = function (P, m, f, niveles, color, ancho, alfa) {
+    var dom = { x: m.dx, y: m.dy }, c = P.ctx;
+    c.save();
+    c.strokeStyle = color; c.lineWidth = ancho || 1.1;
+    c.globalAlpha = alfa === undefined ? .75 : alfa;
+    c.lineCap = 'round';
+    c.beginPath();
+    niveles.forEach(function (nv) {
+      CV.segmentos(dom, f, nv, 140).forEach(function (s) {
+        c.moveTo(m.X(s[0][0]), m.Y(s[0][1]));
+        c.lineTo(m.X(s[1][0]), m.Y(s[1][1]));
+      });
+    });
+    c.stroke();
+    c.restore();
+  };
+
+  /* Los mismos contornos, pero dibujados en 3D a una altura z dada
+     (z = 'nivel' los apoya sobre la superficie, un número los apoya ahí). */
+  CV.contornos3 = function (P, cam, f, niveles, z, color, ancho, alfa) {
+    var dom = { x: cam.dom.x, y: cam.dom.y }, c = P.ctx;
+    c.save();
+    c.strokeStyle = color; c.lineWidth = ancho || 1.3;
+    c.globalAlpha = alfa === undefined ? .9 : alfa;
+    c.lineCap = 'round';
+    c.beginPath();
+    niveles.forEach(function (nv) {
+      var alt = (z === 'nivel') ? nv : z;
+      if (alt < cam.dom.z[0] || alt > cam.dom.z[1]) return;
+      CV.segmentos(dom, f, nv, 110).forEach(function (s) {
+        var p = cam.pt(s[0][0], s[0][1], alt), q = cam.pt(s[1][0], s[1][1], alt);
+        c.moveTo(p[0], p[1]); c.lineTo(q[0], q[1]);
+      });
+    });
+    c.stroke();
+    c.restore();
+  };
+
+  /* Superficie z = f(x,y) en 3D, algoritmo del pintor.
+     cam viene de P.camara(...). opts: {n, zmin, zmax, alfa, malla} */
+  CV.malla3 = function (P, cam, f, opts) {
+    opts = opts || {};
+    var n = opts.n || 26, d = cam.dom, c = P.ctx;
+    var i, j, X = [], Y = [], Z = [], zmin = Infinity, zmax = -Infinity;
+    for (i = 0; i <= n; i++) X.push(d.x[0] + (d.x[1]-d.x[0]) * i/n);
+    for (j = 0; j <= n; j++) Y.push(d.y[0] + (d.y[1]-d.y[0]) * j/n);
+    for (i = 0; i <= n; i++) {
+      Z.push([]);
+      for (j = 0; j <= n; j++) {
+        var z = f(X[i], Y[j]);
+        Z[i].push(z);
+        if (isFinite(z)) { if (z < zmin) zmin = z; if (z > zmax) zmax = z; }
+      }
+    }
+    if (opts.zmin !== undefined) zmin = opts.zmin;
+    if (opts.zmax !== undefined) zmax = opts.zmax;
+    var rec = function (z) { return Math.max(d.z[0], Math.min(d.z[1], z)); };
+
+    var caras = [];
+    for (i = 0; i < n; i++) for (j = 0; j < n; j++) {
+      var zz = [Z[i][j], Z[i+1][j], Z[i+1][j+1], Z[i][j+1]];
+      if (!isFinite(zz[0]+zz[1]+zz[2]+zz[3])) continue;
+      var xx = [X[i], X[i+1], X[i+1], X[i]], yy = [Y[j], Y[j], Y[j+1], Y[j+1]];
+      var zc = (zz[0]+zz[1]+zz[2]+zz[3])/4;
+      var xc = (xx[0]+xx[1])/2, yc = (yy[0]+yy[2])/2;
+      caras.push({ x: xx, y: yy, z: zz, prof: cam.prof(xc, yc, rec(zc)), t: (zc - zmin) / (zmax - zmin || 1) });
+    }
+    caras.sort(function (a, b) { return a.prof - b.prof; });
+
+    c.save();
+    c.globalAlpha = opts.alfa === undefined ? 1 : opts.alfa;
+    c.lineJoin = 'round';
+    caras.forEach(function (q) {
+      c.beginPath();
+      for (var k = 0; k < 4; k++) {
+        var p = cam.pt(q.x[k], q.y[k], rec(q.z[k]));
+        if (k === 0) c.moveTo(p[0], p[1]); else c.lineTo(p[0], p[1]);
+      }
+      c.closePath();
+      c.fillStyle = CV.rampa(q.t);
+      c.fill();
+      if (opts.malla !== false) {
+        c.strokeStyle = 'rgba(255,255,255,.14)'; c.lineWidth = .5; c.stroke();
+      }
+    });
+    c.restore();
+    return { zmin: zmin, zmax: zmax };
+  };
+
+  /* Superficie paramétrica: S(u,v) devuelve [x,y,z] del mundo 3D.
+     opts: {nu, nv, color: function(u,v,p){...} , alfa, malla, recortarZ} */
+  CV.superficie3 = function (P, cam, S, u0, u1, v0, v1, opts) {
+    opts = opts || {};
+    var nu = opts.nu || 40, nv = opts.nv || 24, c = P.ctx, i, j;
+    var U = [], V = [], G = [];
+    for (i = 0; i <= nu; i++) U.push(u0 + (u1-u0) * i/nu);
+    for (j = 0; j <= nv; j++) V.push(v0 + (v1-v0) * j/nv);
+    for (i = 0; i <= nu; i++) { G.push([]); for (j = 0; j <= nv; j++) G[i].push(S(U[i], V[j])); }
+
+    var caras = [];
+    for (i = 0; i < nu; i++) for (j = 0; j < nv; j++) {
+      var q = [G[i][j], G[i+1][j], G[i+1][j+1], G[i][j+1]];
+      if (q.some(function (p) { return !p || !isFinite(p[0]+p[1]+p[2]); })) continue;
+      var cx = (q[0][0]+q[1][0]+q[2][0]+q[3][0])/4;
+      var cy = (q[0][1]+q[1][1]+q[2][1]+q[3][1])/4;
+      var cz = (q[0][2]+q[1][2]+q[2][2]+q[3][2])/4;
+      caras.push({ q: q, prof: cam.prof(cx, cy, cz),
+                   col: opts.color ? opts.color((U[i]+U[i+1])/2, (V[j]+V[j+1])/2, [cx,cy,cz])
+                                   : CV.rampa(.5) });
+    }
+    caras.sort(function (a, b) { return a.prof - b.prof; });
+
+    c.save();
+    c.globalAlpha = opts.alfa === undefined ? 1 : opts.alfa;
+    caras.forEach(function (f) {
+      c.beginPath();
+      for (var k = 0; k < 4; k++) {
+        var p = cam.pt(f.q[k][0], f.q[k][1], f.q[k][2]);
+        if (k === 0) c.moveTo(p[0], p[1]); else c.lineTo(p[0], p[1]);
+      }
+      c.closePath();
+      c.fillStyle = f.col; c.fill();
+      // el borde del mismo color tapa las costuras del antialiasing
+      c.strokeStyle = opts.malla === false ? f.col : 'rgba(255,255,255,.13)';
+      c.lineWidth = opts.malla === false ? .8 : .5;
+      c.stroke();
+    });
+    c.restore();
+  };
+
+  // ---------- integración numérica de una integral de línea ----------
+  /* r(t) devuelve [x,y]; F(x,y) devuelve [u,v]; acumula ∫ F·dr en [t0,t1]. */
+  CV.trabajo = function (F, r, t0, t1, N) {
+    N = N || 400;
+    var W = 0, p = r(t0), f, q, i, t;
+    for (i = 1; i <= N; i++) {
+      t = t0 + (t1 - t0) * i / N;
+      q = r(t);
+      var mx = (p[0]+q[0])/2, my = (p[1]+q[1])/2;
+      f = F(mx, my);
+      if (isFinite(f[0]) && isFinite(f[1])) W += f[0]*(q[0]-p[0]) + f[1]*(q[1]-p[1]);
+      p = q;
+    }
+    return W;
+  };
+
+  // ---------- rotar arrastrando ----------
+  CV.vistas = {};
+  CV.vista = function (nombre) {
+    return CV.vistas[nombre] || (CV.vistas[nombre] = { azim: -0.62, elev: 0.46 });
+  };
+  CV.rotable = function (nombre, inicial) {
+    var v = CV.vista(nombre);
+    if (inicial) { v.azim = inicial.azim; v.elev = inicial.elev; }
+    function enganchar() {
+      var caja = document.querySelector('.lienzo[data-figura="' + nombre + '"]');
+      if (!caja) return;
+      caja.setAttribute('data-rotable', '1');
+      var cv = caja.querySelector('canvas');
+      if (!cv) return;
+      var arrastra = false, x0 = 0, y0 = 0, a0 = 0, e0 = 0;
+      cv.addEventListener('pointerdown', function (ev) {
+        arrastra = true; x0 = ev.clientX; y0 = ev.clientY; a0 = v.azim; e0 = v.elev;
+        cv.setPointerCapture(ev.pointerId); ev.preventDefault();
+      });
+      cv.addEventListener('pointermove', function (ev) {
+        if (!arrastra) return;
+        v.azim = a0 - (ev.clientX - x0) * 0.008;
+        v.elev = Math.max(-0.15, Math.min(1.45, e0 + (ev.clientY - y0) * 0.006));
+        if (caja._pintar) caja._pintar();
+      });
+      ['pointerup', 'pointercancel', 'pointerleave'].forEach(function (e) {
+        cv.addEventListener(e, function () { arrastra = false; });
+      });
+    }
+    // después de que el motor haya construido el lienzo
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', function () { setTimeout(enganchar, 0); });
+    } else { setTimeout(enganchar, 0); }
+  };
+})();
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copiado");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copiado");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/julietaamendola\.github\.io\/my-page\/guias\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./cc-03-no-conservativos.html" class="pagination-link" aria-label="Cuando no es conservativo">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Cuando no es conservativo</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./cc-05-resumen.html" class="pagination-link" aria-label="Resumen y mapa de la guía">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Resumen y mapa de la guía</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Julieta Améndola · Tandil, Argentina</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p><a href="https://julietaamendola.github.io/my-page/">Volver al inicio</a></p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

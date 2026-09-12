@@ -1,0 +1,641 @@
+---
+title: "Cuando no es conservativo"
+---
+
+Todos los campos de la guía de la cátedra resultan conservativos. Eso es una elección didáctica
+razonable —así se practica la receta— pero deja una impresión falsa, porque en la práctica la
+mayoría de los campos vectoriales **no** tienen potencial, y en un parcial es perfectamente
+posible que la respuesta correcta sea "no existe tal campo escalar".
+
+Este capítulo es el contrapeso. Hay dos maneras distintas de que un campo no sea conservativo, y
+conviene no mezclarlas:
+
+1. **El rotor no es nulo.** El campo falla el test. Es el caso fácil de detectar y el que aparece
+   en @sec-remolino.
+2. **El rotor es nulo pero el dominio tiene un agujero.** El campo pasa el test y aun así no tiene
+   potencial global. Es el caso traicionero, y va en @sec-vortice.
+
+## El remolino: cuando el test falla {#sec-remolino}
+
+Tomemos el campo más simple posible con rotor no nulo:
+
+$$
+\vec G(x,y) = (-y,\ x).
+$$ {#eq-remolino}
+
+Cada flecha es perpendicular al vector posición y del mismo módulo: es el campo de velocidades de
+un disco que gira como cuerpo rígido con velocidad angular $1$.
+
+**El test.** $P = -y$ y $Q = x$, así que
+
+$$
+\frac{\partial P}{\partial y} = -1, \qquad \frac{\partial Q}{\partial x} = 1,
+\qquad \operatorname{rot} \vec G = Q_x - P_y = 2 .
+$$
+
+No coinciden, y el dominio es todo $\mathbb{R}^2$. Entonces $\vec G$ es
+<span class="chip no">no conservativo</span>, y ahí se termina: **no existe** ninguna función
+potencial. Esa es la respuesta completa, y la cuenta de dos renglones que la justifica es toda la
+demostración que hace falta.
+
+### Qué pasa si uno insiste con la receta {#sec-receta-falla}
+
+Vale la pena ver el choque de frente, porque es exactamente el síntoma que hay que reconocer si
+uno se saltea el test. Integramos $P$ respecto de $x$:
+
+$$
+f(x,y) = \int (-y)\, dx = -xy + g(y).
+$$
+
+Derivamos respecto de $y$ e igualamos a $Q$:
+
+$$
+f_y = -x + g'(y) \;\stackrel{!}{=}\; x
+\quad \Longrightarrow \quad
+g'(y) = 2x .
+$$
+
+Y eso es **imposible**: el lado izquierdo es una función de $y$ sola y el derecho depende de $x$.
+No hay ningún $g$ que arregle esto.
+
+::: {.callout-important appearance="simple"}
+## La señal, en una línea
+
+Si al hacer el paso 4 te queda un $g'(y)$ que depende de $x$, hay exactamente dos posibilidades: o
+te equivocaste en la integral del paso 3, o el campo no es conservativo. El test del paso 2 es el
+que distingue una cosa de la otra, y por eso se hace **primero**.
+:::
+
+### La consecuencia que se ve: la vuelta no cierra {#sec-vuelta}
+
+Sobre la circunferencia $\vec r(t) = (\cos t, \operatorname{sen} t)$, $t \in [0, 2\pi]$, con
+$d\vec r = (-\operatorname{sen} t, \cos t)\, dt$:
+
+$$
+\oint_C \vec G \cdot d\vec r
+= \int_0^{2\pi} \big[ (-\operatorname{sen} t)(-\operatorname{sen} t) + (\cos t)(\cos t) \big] dt
+= \int_0^{2\pi} 1 \, dt = 2\pi \neq 0 .
+$$
+
+Sobre una circunferencia de radio $R$ la cuenta da $2\pi R^2$, que es lo mismo que predice Green:
+$\iint_{\Omega} 2 \, dA = 2 \pi R^2$.
+
+Dar una vuelta completa y acumular trabajo positivo es imposible si las flechas fueran la
+pendiente de un relieve: no se puede volver al punto de partida habiendo subido todo el tiempo.
+Eso es la escalera imposible de Escher, y es la razón de fondo por la que no hay potencial.
+
+```{python}
+#| label: fig-remolino
+#| fig-cap: "Arriba: dos campos y una misma circunferencia recorrida en sentido antihorario. Abajo: el trabajo acumulado a lo largo de la vuelta. El campo conservativo sube y baja, y vuelve exactamente a cero —el punto de llegada es el de partida y la altura es la misma—. El remolino empuja siempre a favor del recorrido y acumula sin parar hasta $2\\pi \\approx 6{,}283$. Esa diferencia entre volver a cero y no volver es, gráficamente, toda la definición de campo conservativo."
+#| fig-width: 7.4
+#| fig-height: 5.4
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+VIOLETA, VIOLETA2, TINTA, GRIS = "#7c5cbf", "#b48ec8", "#1e1a2e", "#a99fc0"
+
+campos = [
+    ("conservativo:  $\\vec F = (2xy+3x^2,\\ x^2+2y)$",
+     lambda x, y: (2*x*y + 3*x**2, x**2 + 2*y), VIOLETA),
+    ("remolino:  $\\vec G = (-y,\\ x)$",
+     lambda x, y: (-y, x), "#b8564f"),
+]
+
+t = np.linspace(0, 2*np.pi, 1200)
+rx, ry = np.cos(t), np.sin(t)
+dx, dy = -np.sin(t), np.cos(t)
+
+fig, axes = plt.subplots(2, 2, figsize=(7.4, 5.4),
+                         gridspec_kw={"height_ratios": [1.5, 1]})
+
+xq = np.linspace(-1.6, 1.6, 13)
+XQ, YQ = np.meshgrid(xq, xq)
+
+for k, (tit, campo, color) in enumerate(campos):
+    ax = axes[0][k]
+    U, V = campo(XQ, YQ)
+    ax.quiver(XQ, YQ, U, V, color=TINTA, width=.005, scale=34, alpha=.65)
+    ax.plot(rx, ry, color=color, lw=2.2)
+    # la flecha del sentido de recorrido
+    ax.annotate("", xy=(rx[300], ry[300]), xytext=(rx[270], ry[270]),
+                arrowprops=dict(arrowstyle="-|>", color=color, lw=2))
+    ax.set_title(tit, fontsize=8.5)
+    ax.set_aspect("equal"); ax.set_xticks([-1, 0, 1]); ax.set_yticks([-1, 0, 1])
+    ax.tick_params(labelsize=7)
+
+    P, Q = campo(rx, ry)
+    integrando = P*dx + Q*dy
+    W = np.concatenate([[0], np.cumsum((integrando[1:] + integrando[:-1])/2 * np.diff(t))])
+
+    ax2 = axes[1][k]
+    ax2.plot(t/(2*np.pi), W, color=color, lw=2)
+    ax2.axhline(0, color=GRIS, lw=.8)
+    ax2.set_xlabel("fracción de la vuelta")
+    ax2.set_ylim(-2.2, 6.9)
+    ax2.spines[["top", "right"]].set_visible(False)
+    ax2.tick_params(labelsize=7)
+    ax2.annotate(f"$\\oint = {W[-1]:.3f}$", (1, W[-1]), textcoords="offset points",
+                 xytext=(-8, 6), ha="right", fontsize=9, color=color)
+
+axes[1][0].set_ylabel("trabajo acumulado")
+fig.tight_layout()
+plt.show()
+```
+
+```{=html}
+<div class="lienzo" data-figura="remolino" data-alto="350"
+     data-rotulo="Dale la vuelta y mirá si el trabajo vuelve a cero"
+     data-sliders='[{"id":"campo","min":0,"max":1,"paso":1,"valor":1,"rotulo":"remolino","decimales":0},{"id":"R","min":0.3,"max":1.6,"paso":0.05,"valor":1,"rotulo":"radio R","decimales":2},{"id":"t","min":0,"max":1,"paso":0.01,"valor":1,"rotulo":"vuelta","decimales":2}]'>
+  <div class="lienzo-pie">
+    Con <b>remolino = 0</b> el campo es el conservativo del capítulo anterior; con
+    <b>remolino = 1</b> es \(\vec G = (-y,x)\). El trabajo se calcula numéricamente sobre el arco
+    recorrido. Fijate en dos cosas: en el campo conservativo el trabajo sube y baja pero cierra
+    en cero <b>para cualquier radio</b>; en el remolino la vuelta completa da \(2\pi R^2\), que
+    crece con el área encerrada, exactamente como dice \(\oint = \iint \operatorname{rot}\).
+  </div>
+</div>
+<script>
+window.LIENZO = window.LIENZO || {};
+window.LIENZO.remolino = function (P, v) {
+  var col = P.col;
+  var esRem = v.campo > .5;
+  var F = esRem ? function (x, y) { return [-y, x]; }
+                : function (x, y) { return [2*x*y + 3*x*x, x*x + 2*y]; };
+  var R = v.R;
+  var r = function (u) { return [R*Math.cos(2*Math.PI*u), R*Math.sin(2*Math.PI*u)]; };
+
+  // el panel del plano va cuadrado (si no, las circunferencias salen elipses)
+  // y tan grande como entre; el de la derecha se queda con lo que sobra.
+  var lado = Math.min(P.h - 84, P.w * 0.52 - 44);
+  var cajaI = [44, 40, lado, lado];
+  var cajaD = [44 + lado + 54, 40, P.w - (44 + lado + 54) - 16, lado];
+
+  // panel del plano
+  var m = P.marco(cajaI, [-1.8, 1.8], [-1.8, 1.8]);
+  P.ejes(m, 'x', 'y', null);
+  P.recorte(m, function () {
+    CV.campo(P, m, F, { n: 13, color: col.tinta, largo: 11, alfa: .42 });
+  });
+  function arco(u0, u1, n) {
+    var a = [], i;
+    for (i = 0; i <= n; i++) a.push(r(u0 + (u1-u0)*i/n));
+    return a;
+  }
+  P.curva(m, arco(0, 1, 160), col.suave, 1.3, .8, [4, 4]);
+  var color = esRem ? col.mal : col.acento;
+  if (v.t > 0.002) P.curva(m, arco(0, v.t, 160), color, 2.6, 1);
+  var B = r(v.t);
+  P.punto(m, R, 0, col.tinta, 4);
+  P.punto(m, B[0], B[1], color, 5);
+  // flecha de sentido
+  if (v.t > 0.05) {
+    var a = r(v.t - 0.02), b = r(v.t);
+    CV.flechaPx(P, m.X(a[0]), m.Y(a[1]), m.X(b[0]), m.Y(b[1]), color, 2.2, 8);
+  }
+
+  // panel del trabajo acumulado
+  var tope = esRem ? Math.max(2, 2*Math.PI*R*R*1.15) : 3.2;
+  var piso = esRem ? -tope*0.12 : -3.2;
+  var mD = P.marco(cajaD, [0, 1], [piso, tope]);
+  P.ejes(mD, 'fracción de la vuelta', 'W', null);
+  P.curva(mD, [[0, 0], [1, 0]], col.suave, 1, .9);
+
+  var pts = [[0, 0]], W = 0, N = 120, i;
+  for (i = 1; i <= N; i++) { W += CV.trabajo(F, r, (i-1)/N, i/N, 8); pts.push([i/N, W]); }
+  P.recorte(mD, function () { P.curva(mD, pts, color, 2.4, 1); });
+  var idx = Math.max(0, Math.min(N, Math.round(v.t * N)));
+  P.punto(mD, pts[idx][0], pts[idx][1], color, 5);
+
+  // lecturas
+  var teo = esRem ? 2*Math.PI*R*R : 0;
+  P.texto(cajaI[0] - 10, 14, esRem ? 'rot G = 2' : 'rot F = 0', col.tinta, 12);
+  P.texto(cajaD[0] + cajaD[2], 14,
+          'W acumulado = ' + pts[idx][1].toFixed(3), color, 12.5, 'right');
+  P.texto(cajaD[0] + cajaD[2], 30,
+          'vuelta completa: ' + pts[N][1].toFixed(3) +
+          '   (teórico ' + teo.toFixed(3) + ')', col.tenue, 11.5, 'right');
+};
+</script>
+```
+
+### Las consecuencias, una por una {#sec-consecuencias}
+
+Que un campo no sea conservativo no es solo "no se puede hacer el ejercicio". Cambia cosas
+concretas:
+
+::: {.receta}
+1. **No hay función potencial, y por lo tanto no hay energía potencial.** En física esto significa
+   que la energía mecánica $E_c + U$ **no se conserva**: no existe ningún $U$ que cumpla
+   $W = -\Delta U$. De ahí, literalmente, el nombre del tema.
+2. **El trabajo depende del camino.** No hay atajo: para calcular $\int_C \vec F \cdot d\vec r$ hay
+   que parametrizar $C$ y hacer la integral. Dos rutas entre los mismos puntos dan números
+   distintos, y la diferencia entre ellas es —por Green— el rotor integrado sobre la región que
+   encierran.
+3. **No hay curvas equipotenciales.** No existe ninguna familia de curvas a lo largo de las cuales el
+   campo no haga trabajo. En un campo conservativo esas curvas son las de nivel de $f$ y son una
+   herramienta de cálculo; acá, sencillamente, no están.
+4. **Un circuito cerrado entrega o consume energía neta.** $\oint \vec F \cdot d\vec r \neq 0$
+   significa que recorrer un ciclo y volver al punto de partida deja un saldo. En un campo de fuerzas
+   puramente posicional eso sería una máquina de movimiento perpetuo, y por eso las fuerzas
+   fundamentales estáticas —gravedad, electrostática— son conservativas.
+5. **Pero a cambio, Green se vuelve útil.** Para curvas cerradas,
+   $\oint_{\partial\Omega} \vec F \cdot d\vec r = \iint_\Omega (Q_x - P_y)\, dA$ convierte una
+   integral de línea molesta en una integral doble fácil. Cuando el rotor no es nulo, ese es el
+   camino corto.
+:::
+
+::: {.callout-warning appearance="simple"}
+## Un cuidado con el ejemplo del rozamiento
+
+Es habitual escuchar "el rozamiento es la fuerza no conservativa típica", y es cierto que no
+conserva la energía, pero **no es un contraejemplo de este tema**: el rozamiento depende de la
+velocidad, no solo de la posición, así que ni siquiera es un campo vectorial $\vec F(x,y,z)$. No
+se le puede calcular el rotor.
+
+Contraejemplos honestos, que sí son campos de posición con rotor no nulo:
+
+- **El campo eléctrico inducido.** La ley de Faraday dice
+  $\nabla \times \vec E = -\partial \vec B / \partial t$: si el campo magnético varía en el tiempo,
+  el campo eléctrico tiene rotor y no es conservativo. Su circulación sobre un circuito cerrado es
+  exactamente la fuerza electromotriz, que es lo que hace andar un generador. La "energía que se
+  gana dando vueltas" existe de verdad; la paga el campo magnético.
+- **El campo de velocidades de un fluido en rotación**, que es @eq-remolino con otras unidades.
+  Una hélice puesta en el agua gira: ese giro es el rotor.
+:::
+
+## El vórtice: cuando el test da bien y aun así no hay potencial {#sec-vortice}
+
+Este es el ejemplo importante, el que justifica toda la letra chica sobre el dominio. Sea
+
+$$
+\vec V(x,y) = \left( \frac{-y}{x^2+y^2},\ \frac{x}{x^2+y^2} \right)
+\qquad \text{en } D = \mathbb{R}^2 \setminus \{(0,0)\} .
+$$ {#eq-vortice2}
+
+**El test da bien.** Con $P = -y/(x^2+y^2)$ y $Q = x/(x^2+y^2)$:
+
+$$
+\frac{\partial P}{\partial y} = \frac{-(x^2+y^2) + y \cdot 2y}{(x^2+y^2)^2} = \frac{y^2 - x^2}{(x^2+y^2)^2},
+\qquad
+\frac{\partial Q}{\partial x} = \frac{(x^2+y^2) - x \cdot 2x}{(x^2+y^2)^2} = \frac{y^2 - x^2}{(x^2+y^2)^2} .
+$$
+
+Son iguales **en todo el dominio**. $\operatorname{rot} \vec V = 0$ en cada punto donde el campo
+está definido.
+
+**Y sin embargo no es conservativo.** Sobre la circunferencia unitaria,
+$\vec r(t) = (\cos t, \operatorname{sen} t)$, el campo vale $\vec V = (-\operatorname{sen} t, \cos t)$
+y otra vez
+
+$$
+\oint_C \vec V \cdot d\vec r = \int_0^{2\pi} 1\, dt = 2\pi \neq 0 .
+$$
+
+Si existiera $f$ con $\nabla f = \vec V$ en todo $D$, el @thm-tfil daría $0$. Entonces no existe.
+<span class="chip no">no conservativo en $D$</span>
+
+::: {.callout-important}
+## Dónde está la trampa
+
+El culpable es el agujero. $D = \mathbb{R}^2 \setminus \{(0,0)\}$ **no es simplemente conexo**: la
+circunferencia unitaria no se puede contraer a un punto sin pasar por el origen, donde el campo
+explota. El teorema que dice "rotor nulo $\Rightarrow$ conservativo" tiene esa hipótesis, y acá
+falla.
+
+Y hay más: sobre **cualquier** curva cerrada de $D$, la circulación vale $2\pi n$, donde $n$ es el
+número de vueltas que la curva da alrededor del origen. Si la curva no encierra el agujero, da
+cero y el campo se comporta como si fuera conservativo. Solo las curvas que rodean el agujero
+"ven" que el campo tiene algo raro.
+:::
+
+```{python}
+#| label: fig-vortice
+#| fig-cap: "El vórtice y dos curvas cerradas. La verde no encierra el agujero: la región que rodea está enteramente dentro del dominio, Green se aplica, y como el rotor es nulo la circulación da cero. La roja sí lo encierra: adentro hay un punto donde el campo no está definido, Green no se puede usar, y la circulación da $2\\pi$. Las flechas se dibujan más oscuras donde el campo es más intenso; cerca del agujero crece como $1/r$."
+#| fig-width: 6.4
+#| fig-height: 4.6
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+TINTA, GRIS = "#1e1a2e", "#a99fc0"
+VERDE, ROJO = "#2f6b48", "#b8564f"
+
+def V(x, y):
+    d = x**2 + y**2
+    return -y/d, x/d
+
+xq = np.linspace(-2.8, 2.8, 16)          # par: la grilla no pisa el origen
+XQ, YQ = np.meshgrid(xq, xq)
+R = np.hypot(XQ, YQ)
+dentro = R > .3                          # el campo explota en el agujero
+XQ, YQ = XQ[dentro], YQ[dentro]
+U, W = V(XQ, YQ)
+norma = np.hypot(U, W)
+
+fig, ax = plt.subplots(figsize=(6.4, 4.6))
+# largo proporcional a la raiz de la norma: se ve el decaimiento 1/r sin que
+# las flechas de afuera desaparezcan
+largo = np.sqrt(norma / norma.max())
+ax.quiver(XQ, YQ, U/norma*largo, W/norma*largo, color=TINTA,
+          width=.0045, scale=11, alpha=.7)
+
+t = np.linspace(0, 2*np.pi, 400)
+for (cx, cy, R, color, etiqueta, ancla, desp, ali) in [
+        (0, 0, 1.5, ROJO, "encierra el agujero\n$\\oint = 2\\pi$",
+         (0, -1.5), (0, -26), "center"),
+        (1.7, 1.4, 0.8, VERDE, "no lo encierra\n$\\oint = 0$",
+         (1.7, 2.2), (4, 12), "center")]:
+    ax.plot(cx + R*np.cos(t), cy + R*np.sin(t), color=color, lw=2.2)
+    ax.annotate(etiqueta, ancla, textcoords="offset points", xytext=desp,
+                ha=ali, fontsize=8.5, color=color)
+
+ax.plot(0, 0, "x", color=ROJO, ms=9, mew=2)
+ax.annotate("el agujero", (0, 0), textcoords="offset points", xytext=(9, -14),
+            fontsize=8.5, color=ROJO)
+ax.set_xlabel("$x$"); ax.set_ylabel("$y$")
+ax.set_aspect("equal"); ax.set_xlim(-3, 3.4); ax.set_ylim(-3.2, 3.4)
+fig.tight_layout()
+plt.show()
+```
+
+```{=html}
+<div class="lienzo" data-figura="vortice" data-alto="420"
+     data-rotulo="Movés el círculo: solo importa si encierra el agujero"
+     data-sliders='[{"id":"cx","min":-2,"max":2,"paso":0.05,"valor":0,"rotulo":"centro x","decimales":2},{"id":"cy","min":-2,"max":2,"paso":0.05,"valor":0,"rotulo":"centro y","decimales":2},{"id":"R","min":0.2,"max":1.8,"paso":0.05,"valor":1,"rotulo":"radio","decimales":2}]'>
+  <div class="lienzo-pie">
+    El rotor de \(\vec V\) es cero en cada punto del dominio, así que la integral sobre cualquier
+    curva cerrada <b>que no encierre el origen</b> vale cero, por Green. Pero apenas el círculo se
+    traga el agujero, la circulación salta a \(2\pi \approx 6{,}283\), y no depende del radio ni
+    de la forma: solo de cuántas vueltas le da al agujero. Ese salto es el agujero haciéndose
+    ver.
+  </div>
+</div>
+<script>
+window.LIENZO = window.LIENZO || {};
+window.LIENZO.vortice = function (P, v) {
+  var col = P.col;
+  var V = function (x, y) {
+    var d = x*x + y*y;
+    if (d < 1e-6) return [0, 0];
+    return [-y/d, x/d];
+  };
+  var r = function (u) {
+    return [v.cx + v.R*Math.cos(2*Math.PI*u), v.cy + v.R*Math.sin(2*Math.PI*u)];
+  };
+  var d0 = Math.hypot(v.cx, v.cy);
+  var encierra = d0 < v.R - 1e-9;
+  var toca = Math.abs(d0 - v.R) < 0.06;
+
+  var caja = [48, 34, P.w - 90, P.h - 86];
+  var lado = Math.min(caja[2], caja[3]);
+  caja = [caja[0] + (caja[2]-lado)/2, caja[1], lado, lado];
+  var m = P.marco(caja, [-3, 3], [-3, 3]);
+  P.ejes(m, 'x', 'y', null);
+  P.recorte(m, function () {
+    CV.campo(P, m, V, { n: 19, color: col.tinta, largo: 11, alfa: .45, porNorma: true });
+  });
+
+  // el agujero
+  var c = P.ctx;
+  c.save();
+  c.strokeStyle = col.mal; c.lineWidth = 1.6;
+  c.beginPath(); c.arc(m.X(0), m.Y(0), 5, 0, 6.2832); c.stroke();
+  c.beginPath(); c.moveTo(m.X(0)-4, m.Y(0)-4); c.lineTo(m.X(0)+4, m.Y(0)+4);
+  c.moveTo(m.X(0)-4, m.Y(0)+4); c.lineTo(m.X(0)+4, m.Y(0)-4); c.stroke();
+  c.restore();
+  P.texto(m.X(0) + 9, m.Y(0) + 16, 'agujero', col.mal, 11);
+
+  // la curva
+  var pts = [], i;
+  for (i = 0; i <= 200; i++) pts.push(r(i/200));
+  var color = encierra ? col.mal : col.bien;
+  P.recorte(m, function () { P.curva(m, pts, color, 2.4, 1); });
+  [0.12, 0.37, 0.62, 0.87].forEach(function (u) {
+    var a = r(u - 0.02), b = r(u + 0.02);
+    CV.flechaPx(P, m.X(a[0]), m.Y(a[1]), m.X(b[0]), m.Y(b[1]), color, 2.4, 9);
+  });
+
+  var W = CV.trabajo(V, r, 0, 1, 4000);
+
+  P.texto(caja[0] - 14, 16, 'rot V = 0 en todo el dominio', col.tinta, 12);
+  P.texto(caja[0] - 14, 32,
+          'circulación = ' + W.toFixed(3) +
+          (toca ? '   (el borde roza el agujero)' : ''), color, 12.5);
+  P.texto(caja[0] + caja[2] + 30, 32,
+          encierra ? 'encierra el agujero → 2π' : 'no lo encierra → 0',
+          color, 12.5, 'right');
+};
+</script>
+```
+
+### El potencial existe, pero es multivaluado {#sec-multivaluado}
+
+Que no haya potencial **global** no quiere decir que no haya nada. En cualquier disco contenido en
+$D$ —por ejemplo, todo el semiplano $x > 0$— el campo sí tiene potencial, y es el ángulo polar:
+
+$$
+\theta(x,y) = \operatorname{arctg}\!\left( \frac{y}{x} \right),
+\qquad
+\nabla \theta = \left( \frac{-y}{x^2+y^2},\ \frac{x}{x^2+y^2} \right) = \vec V .
+$$
+
+El problema es pegar esos potenciales locales en uno solo. Si uno recorre una vuelta alrededor del
+origen, el ángulo crece continuamente y al volver al punto de partida vale $\theta + 2\pi$: no es
+una función, es una **rampa en espiral**. El "relieve" de este campo existe, pero es la rampa de
+un estacionamiento, no un terreno: podés volver al mismo punto del plano un piso más arriba.
+
+```{python}
+#| label: fig-helicoide
+#| fig-cap: "El potencial del vórtice: la superficie $z = \\theta$ sobre el plano agujereado. No es el gráfico de ninguna función, porque sobre cada punto del plano hay infinitos valores separados por $2\\pi$. Dar una vuelta alrededor del agujero y volver al mismo $(x,y)$ deja la altura $2\\pi$ más arriba: esa es, exactamente, la circulación que da $2\\pi \\neq 0$. La línea violeta marca una vuelta completa."
+#| fig-width: 6.2
+#| fig-height: 4.6
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+VIOLETA, TINTA, GRIS = "#7c5cbf", "#1e1a2e", "#a99fc0"
+
+th = np.linspace(-2.6*np.pi, 2.6*np.pi, 400)
+rr = np.linspace(0.28, 1.5, 40)
+TH, RR = np.meshgrid(th, rr)
+X, Y, Z = RR*np.cos(TH), RR*np.sin(TH), TH
+
+fig = plt.figure(figsize=(6.2, 4.6))
+ax = fig.add_subplot(111, projection="3d")
+ax.plot_surface(X, Y, Z, cmap="BuPu_r", linewidth=0, rstride=1, cstride=6, alpha=.92)
+
+# una vuelta completa a radio 1
+t1 = np.linspace(0, 2*np.pi, 300)
+ax.plot(np.cos(t1), np.sin(t1), t1, color=VIOLETA, lw=2.6)
+ax.plot([1, 1], [0, 0], [0, 2*np.pi], color=TINTA, lw=1.2, ls="--")
+ax.scatter([1, 1], [0, 0], [0, 2*np.pi], color=TINTA, s=18)
+ax.text(1, 0, 2*np.pi + 1.1, "$\\theta + 2\\pi$", fontsize=9, color=TINTA)
+ax.text(1, 0, -1.9, "$\\theta$", fontsize=9, color=TINTA)
+
+ax.set_xlabel("$x$", labelpad=-6); ax.set_ylabel("$y$", labelpad=-6)
+ax.set_zlabel("$\\theta$", labelpad=-6)
+ax.tick_params(labelsize=6, pad=-2)
+ax.view_init(elev=22, azim=-62)
+fig.tight_layout()
+plt.show()
+```
+
+```{=html}
+<div class="lienzo" data-figura="helicoide" data-alto="420"
+     data-rotulo="Arrastrá para girar la rampa"
+     data-sliders='[{"id":"vueltas","min":0.25,"max":1.5,"paso":0.05,"valor":1,"rotulo":"vueltas","decimales":2}]'>
+  <div class="lienzo-pie">
+    Girala hasta mirar desde arriba: la rampa se proyecta sobre el plano agujereado y se ve el
+    campo \(\vec V\) de siempre. Girala de costado y se ve por qué no hay potencial: subiendo por
+    la curva blanca volvés al mismo \((x,y)\) a una altura \(2\pi\) mayor. El deslizador acorta
+    o alarga el recorrido; el desnivel entre las dos puntas es la circulación.
+  </div>
+</div>
+<script>
+window.LIENZO = window.LIENZO || {};
+window.LIENZO.helicoide = function (P, v) {
+  var Vv = CV.vista('helicoide'), col = P.col;
+  var caja = [26, 16, P.w - 52, P.h - 44];
+  var TMAX = 2*Math.PI*1.35;
+  var dom = { x: [-1.6, 1.6], y: [-1.6, 1.6], z: [-TMAX, TMAX], ax: 1, ay: 1, az: .92 };
+  var cam = P.camara(caja, dom, Vv.azim, Vv.elev, .40);
+
+  P.caja3(cam, 'x', 'y', 'θ');
+
+  // la rampa: (r, θ) ↦ (r cos θ, r sen θ, θ)
+  CV.superficie3(P, cam,
+    function (r, t) { return [r*Math.cos(t), r*Math.sin(t), t]; },
+    0.3, 1.5, -TMAX, TMAX,
+    { nu: 10, nv: 120, alfa: 1, malla: false,
+      color: function (r, t) { return CV.rampa((t + TMAX) / (2*TMAX)); } });
+
+  // el campo, proyectado en el piso
+  var n = 9, i, j, x, y, d;
+  for (i = 0; i < n; i++) for (j = 0; j < n; j++) {
+    x = -1.4 + 2.8*i/(n-1); y = -1.4 + 2.8*j/(n-1);
+    d = x*x + y*y;
+    if (d < 0.09 || d > 2.4) continue;
+    CV.flecha3(P, cam, x, y, dom.z[0], -y/d, x/d, 11, col.tinta, 1);
+  }
+
+  // una vuelta a radio 1
+  var tope = 2*Math.PI*v.vueltas, pts = [], N = 220;
+  for (i = 0; i <= N; i++) {
+    var t = tope * i / N;
+    pts.push([Math.cos(t), Math.sin(t), t]);
+  }
+  P.curva3(cam, pts, '#ffffff', 3.2, 1);
+  P.curva3(cam, [[1, 0, 0], [1, 0, tope]], col.tinta, 1.4, .85, [4, 4]);
+  P.punto3(cam, 1, 0, 0, col.tinta, 4.5);
+  P.punto3(cam, 1, 0, tope, col.tinta, 4.5);
+
+  P.texto(caja[0], caja[1] + 14,
+          'desnivel = circulación = ' + tope.toFixed(3), col.acento, 12.5);
+};
+window.addEventListener('load', function () { CV.rotable('helicoide', { azim: -0.7, elev: 0.34 }); });
+</script>
+```
+
+::: {.callout-note appearance="simple"}
+## Un detalle que conviene tener claro
+
+Si el dominio se achica a uno simplemente conexo —el semiplano $x>0$, o el plano sin el semieje
+negativo— el **mismo** campo @eq-vortice2 sí es conservativo, con $f = \operatorname{arctg}(y/x)$
+(más precisamente, con la rama del ángulo que corresponda). Ser conservativo no es una propiedad
+de la fórmula del campo: **es una propiedad del par campo–dominio**. Por eso el paso 1 de la
+receta es escribir el dominio, y por eso en el ejercicio 18.c del @sec-ej18 la respuesta cambia
+según el semiplano.
+:::
+
+## Una consecuencia con contexto: la planta del ejercicio 20 {#sec-planta}
+
+El @sec-ej20 modela un vehículo autónomo en una planta industrial con el campo
+$\vec F = (2xy + 3,\ x^2 + 4y)$, que es conservativo, y esa es precisamente la razón por la que el
+ejercicio pide interpretar el potencial: el trabajo del campo no depende de la ruta, así que la
+planificación de rutas puede decidirse por otros criterios.
+
+Supongamos ahora que la planta agrega una **cinta transportadora circular** alrededor del centro,
+que empuja al vehículo tangencialmente. El campo pasa a ser
+
+$$
+\vec F_c(x,y) = (2xy + 3 - c\,y,\ x^2 + 4y + c\,x),
+$$ {#eq-planta}
+
+donde $c$ mide la intensidad de la cinta. El rotor es
+
+$$
+\operatorname{rot} \vec F_c = (2x + c) - (2x - c) = 2c ,
+$$
+
+o sea que con $c \neq 0$ el campo deja de ser conservativo, y todas las conclusiones del ejercicio
+20 se caen. En números, el trabajo de $(0,0)$ a $(2,1)$:
+
+| Ruta | Trabajo |
+|---|---|
+| Pasillo quebrado: $(0,0) \to (2,0) \to (2,1)$ | $12 + 2c$ |
+| Diagonal recta: $(0,0) \to (2,1)$ | $12$ |
+
+: {tbl-colwidths="[62,38]"}
+
+La diferencia es $2c$, y no es casualidad: las dos rutas encierran un triángulo de área $1$, y por
+Green la diferencia tiene que ser $\iint \operatorname{rot} = 2c \cdot 1 = 2c$. Con la cinta
+prendida, **elegir el pasillo cambia el balance energético**, un ciclo de reparto cerrado no vuelve
+a cero, y no tiene sentido hablar de "la energía almacenada en la posición $(x,y)$".
+
+::: {.ejercicio data-respuesta="6" data-tol="0.001" data-rotulo="Para calcular"}
+Con el campo @eq-planta y $c = 3$, el vehículo hace un circuito cerrado: va de $(0,0)$ a $(2,1)$
+por la diagonal y vuelve por el pasillo quebrado. ¿Cuánto trabajo neto le entrega el campo en ese
+ciclo, en valor absoluto?
+
+::: {.explica}
+Por Green, $\left|\oint \vec F_c \cdot d\vec r\right| = \left|\iint_\Omega 2c \, dA\right| = 2c \cdot \text{área}$.
+El triángulo de vértices $(0,0)$, $(2,0)$ y $(2,1)$ tiene área $\tfrac12 \cdot 2 \cdot 1 = 1$, así
+que el resultado es $2 \cdot 3 \cdot 1 = 6$.
+
+También sale de la tabla: $(12 + 2c) - 12 = 2c = 6$.
+
+Lo importante no es el número sino qué significa: el vehículo termina donde empezó y el campo le
+entregó $6$ unidades de energía. Con $c = 0$ eso sería imposible.
+:::
+:::
+
+::: {.ejercicio}
+¿Cuál de estas afirmaciones sobre el vórtice @eq-vortice2 es **falsa**?
+
+- [Su rotor es nulo en todo punto de su dominio.]{.mal}
+- [No existe $f$ con $\nabla f = \vec V$ definida en todo $\mathbb{R}^2 \setminus \{(0,0)\}$.]{.mal}
+- [Como el rotor es nulo, la circulación sobre cualquier curva cerrada del dominio es cero.]{.bien}
+- [Restringido al semiplano $x > 0$, el campo es conservativo.]{.mal}
+
+::: {.explica}
+La falsa es la tercera, y es justamente la conclusión apresurada que el ejemplo existe para
+romper. La circulación es cero solo sobre las curvas cerradas que **no encierran el origen**; las
+que le dan $n$ vueltas dan $2\pi n$.
+
+El razonamiento correcto es: Green necesita que el campo sea $C^1$ en **toda** la región encerrada
+por la curva, y si la curva rodea el origen, el campo no está definido ahí adentro. La hipótesis
+que falla no es "rotor nulo", es "el campo vive en toda la región".
+:::
+:::
+
+::: {.ejercicio}
+Estás resolviendo un ejercicio y, al hacer el paso 4, te queda $g'(y) = 3x^2 + 2y$. ¿Qué hacés?
+
+- [Integro respecto de $y$ tratando $x$ como constante: $g = 3x^2y + y^2$.]{.mal}
+- [Vuelvo a testear $P_y$ y $Q_x$: o el campo no era conservativo, o me equivoqué en la integral del paso 3.]{.bien}
+- [Concluyo que el campo no es conservativo y termino ahí.]{.mal}
+- [Cambio el orden: integro $Q$ respecto de $y$ y empiezo de nuevo.]{.mal}
+
+::: {.explica}
+**La correcta es la segunda.** La primera opción es el error clásico y produce una $f$ que no cumple $\nabla f = \vec F$: $g$ es,
+por construcción, una función de $y$ sola.
+
+La tercera va en la dirección correcta pero se apura: si el test del paso 2 ya había dado bien, la
+contradicción **tiene** que venir de un error de cuenta. Volver a mirar el test distingue los dos
+casos en treinta segundos.
+
+La cuarta puede funcionar de rebote, pero es arreglar a ciegas: si el error era de cuenta, lo más
+probable es que se repita.
+:::
+:::

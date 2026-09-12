@@ -1,0 +1,839 @@
+---
+title: "Los ejercicios de la guía"
+---
+
+Ejercicios 13 y 18 a 21 de la guía de la cátedra. En todos, el esquema es el mismo: dominio,
+test, integrar, ajustar, verificar. Lo que cambia es dónde está la dificultad.
+
+## Ejercicio 13 · Campos conservativos y su potencial {#sec-ej13}
+
+::: {.callout-tip collapse="true"}
+## Antes de empezar
+
+- Los tres campos son polinómicos o exponenciales: son $C^1$ en todo el espacio, así que el
+  dominio nunca va a ser un problema. Alcanza con el test de derivadas cruzadas.
+- En el ítem (a) conviene integrar $P$ respecto de $x$, porque $e^y$ se comporta como constante.
+  Regla práctica: *elegir la componente donde la variable de integración aparece menos enredada*.
+- El ítem (b) dice "$f(0,0) = 0$": ese dato es para despejar $C$ al final, y solo tiene sentido
+  después de haber encontrado la familia completa de potenciales.
+- El ítem (c) es en $\mathbb{R}^3$: hay que verificar **tres** pares de derivadas cruzadas y hacer
+  **dos** rondas de ajuste, primero $g(y,z)$ y después $h(z)$.
+:::
+
+::: {.callout-note appearance="simple"}
+## Enunciado
+
+**13.** Determinar si los siguientes campos vectoriales son conservativos y, en caso afirmativo,
+hallar la función potencial:
+
+a. $\vec F(x,y) = (2xy + e^y,\ x^2 + xe^y)$
+b. $\vec F(x,y) = (3x^2y^2 - y,\ 2x^3y - x)$, tal que $f(0,0) = 0$
+c. $\vec F(x,y,z) = (2xyz,\ x^2z + z,\ x^2y + y)$
+:::
+
+### 13.a) $\vec F = (2xy + e^y,\ x^2 + xe^y)$ {.unnumbered}
+
+*Test.* Con $P = 2xy + e^y$ y $Q = x^2 + xe^y$:
+
+$$
+P_y = 2x + e^y, \qquad Q_x = 2x + e^y .
+$$
+
+Son iguales y $D = \mathbb{R}^2$ es simplemente conexo, entonces
+<span class="chip si">conservativo</span>.
+
+*Integramos $P$ en $x$* (tratando $y$ como constante, así que $e^y$ es un factor constante):
+
+$$
+f(x,y) = \int (2xy + e^y)\, dx = x^2 y + x e^y + g(y).
+$$
+
+*Derivamos en $y$ e igualamos a $Q$:*
+
+$$
+f_y = x^2 + x e^y + g'(y) \;\stackrel{!}{=}\; x^2 + x e^y
+\;\Longrightarrow\; g'(y) = 0 \;\Longrightarrow\; g(y) = C .
+$$
+
+::: {.resultado}
+$$
+f(x,y) = x^2 y + x e^y + C
+$$
+:::
+
+*Verificación:* $f_x = 2xy + e^y$ ✓, $f_y = x^2 + xe^y$ ✓.
+
+### 13.b) $\vec F = (3x^2y^2 - y,\ 2x^3y - x)$, con $f(0,0) = 0$ {.unnumbered}
+
+*Test.*
+
+$$
+P_y = 6x^2y - 1, \qquad Q_x = 6x^2y - 1 \quad \text{(iguales en } \mathbb{R}^2\text{)} .
+$$
+
+Entonces <span class="chip si">conservativo</span>.
+
+$$
+f(x,y) = \int (3x^2y^2 - y)\, dx = x^3y^2 - xy + g(y),
+$$
+$$
+f_y = 2x^3y - x + g'(y) \;\stackrel{!}{=}\; 2x^3y - x
+\;\Longrightarrow\; g'(y) = 0 \;\Longrightarrow\; g(y) = C .
+$$
+
+Familia de potenciales: $f(x,y) = x^3y^2 - xy + C$. Imponemos el dato:
+
+$$
+f(0,0) = 0 + 0 + C = 0 \;\Longrightarrow\; C = 0 .
+$$
+
+::: {.resultado}
+$$
+f(x,y) = x^3y^2 - xy
+$$
+:::
+
+### 13.c) $\vec F = (2xyz,\ x^2z + z,\ x^2y + y)$ {.unnumbered}
+
+*Test en $\mathbb{R}^3$,* con $P = 2xyz$, $Q = x^2z + z$, $R = x^2y + y$:
+
+| Par | Primera derivada | Segunda derivada | |
+|---|---|---|---|
+| $P_y$ vs $Q_x$ | $P_y = 2xz$ | $Q_x = 2xz$ | iguales |
+| $P_z$ vs $R_x$ | $P_z = 2xy$ | $R_x = 2xy$ | iguales |
+| $Q_z$ vs $R_y$ | $Q_z = x^2+1$ | $R_y = x^2+1$ | iguales |
+
+: {tbl-colwidths="[22,28,28,22]"}
+
+Entonces $\operatorname{rot} \vec F = \vec 0$ y, como $D = \mathbb{R}^3$ es simplemente conexo,
+<span class="chip si">conservativo</span>.
+
+*Primera integración* (en $x$; la "constante" es ahora $g(y,z)$):
+
+$$
+f(x,y,z) = \int 2xyz\, dx = x^2yz + g(y,z).
+$$
+
+*Ajuste con $Q$:*
+
+$$
+f_y = x^2 z + g_y(y,z) \;\stackrel{!}{=}\; x^2 z + z
+\;\Longrightarrow\; g_y = z \;\Longrightarrow\; g(y,z) = yz + h(z).
+$$
+
+Al integrar en $y$, la constante es ahora una función de $z$ sola. Entonces
+$f = x^2yz + yz + h(z)$.
+
+*Ajuste con $R$:*
+
+$$
+f_z = x^2 y + y + h'(z) \;\stackrel{!}{=}\; x^2 y + y
+\;\Longrightarrow\; h'(z) = 0 \;\Longrightarrow\; h(z) = C .
+$$
+
+::: {.resultado}
+$$
+f(x,y,z) = x^2yz + yz + C = yz\,(x^2 + 1) + C
+$$
+:::
+
+*Verificación:* $\nabla f = \big(2xyz,\ z(x^2+1),\ y(x^2+1)\big) = (2xyz,\ x^2z + z,\ x^2y + y)$ ✓
+
+::: {.ejercicio}
+En el ítem (c), después del primer ajuste quedó $g(y,z) = yz + h(z)$. ¿Por qué la constante de
+integración es $h(z)$ y no simplemente $C$?
+
+- [Porque $z$ es la última variable y siempre se reserva para el final.]{.mal}
+- [Porque integramos respecto de $y$, y cualquier función que no dependa de $y$ tiene derivada nula en $y$: eso incluye a todas las funciones de $z$.]{.bien}
+- [Porque el campo tiene tres componentes y hacen falta tres constantes.]{.mal}
+- [Es lo mismo escribir $C$: el ajuste con $R$ lo corrige igual.]{.mal}
+
+::: {.explica}
+**La correcta es la segunda.** La constante de integración es siempre "todo lo que muere al derivar respecto de la variable que
+estoy integrando". Al integrar en $x$ eso es cualquier $g(y,z)$; al integrar esa $g$ respecto de
+$y$, cualquier $h(z)$.
+
+La última opción es el error peligroso: escribir $C$ ahí adentro funciona **en este ejercicio**,
+porque casualmente $h'(z) = 0$. En un campo donde $R$ tuviera un término suelto en $z$ —digamos
+$R = x^2y + y + 3z^2$— la respuesta con $C$ sería incorrecta, y el ajuste con $R$ daría la
+contradicción $0 = 3z^2$ en vez de $h(z) = z^3$.
+:::
+:::
+
+## Ejercicio 18 · Hallar, de ser posible, $f$ con $\nabla f = \vec F$ {#sec-ej18}
+
+::: {.callout-tip collapse="true"}
+## Antes de empezar
+
+- "De ser posible" es una invitación explícita a hacer primero el test. Si fallara, la respuesta
+  correcta sería "no existe tal campo escalar", con la cuenta que lo justifica (ver @sec-remolino).
+- En (a) hay que integrar $xe^x$: sale por partes, $\int xe^x dx = xe^x - e^x$. Es el único paso
+  técnico del ejercicio.
+- En (a) y (b) las componentes están desacopladas o casi: cuando $P$ depende solo de $x$ y $Q$ solo
+  de $y$, el test se cumple automáticamente ($P_y = 0 = Q_x$) y el potencial es una simple suma de
+  primitivas.
+- En (c) aparece $\tfrac{1}{x-1}$: el dominio se parte en $x<1$ y $x>1$. Como el dato está en
+  $(2;1)$, trabajamos en la mitad $x>1$ y ahí podemos escribir $\ln(x-1)$ sin módulo.
+- "$f$ tenga nivel 3 en $(1;-5)$" significa que ese punto pertenece a la curva de nivel 3, es decir
+  $f(1,-5) = 3$. Es lo mismo que un dato $f(P_0) = k$.
+
+**Nota sobre la notación.** El enunciado de la cátedra llama $F$ al campo escalar y $\vec F$ al
+vectorial. Acá el escalar se llama $f$, para que no se pisen.
+:::
+
+::: {.callout-note appearance="simple"}
+## Enunciado
+
+**18.** Para los siguientes campos vectoriales $\vec F$ determinar, de ser posible, un campo
+escalar $f$ tal que $\nabla f = \vec F$.
+
+a. $\vec F(x;y) = xe^x\,\vec i + (1 + \cos y)\,\vec j$
+b. $\vec F(x;y) = (\operatorname{sen} y + 2xy)\,\vec i + (x \cos y + x^2)\,\vec j$
+c. $\vec F(x;y) = \dfrac{1}{x-1}\,\vec i + (y^2 + 2)\,\vec j$, tal que $f(2;1) = 0$
+d. $\vec F(x;y) = (y^2 + x)\,\vec i + (2xy + y)\,\vec j$, tal que $f$ tenga nivel 3 en $(1;-5)$
+:::
+
+### 18.a) $\vec F = (xe^x,\ 1 + \cos y)$ {.unnumbered}
+
+*Test.* $P = xe^x$ no depende de $y$ y $Q = 1 + \cos y$ no depende de $x$:
+
+$$
+P_y = 0 = Q_x \quad \text{en todo } \mathbb{R}^2 .
+$$
+
+Entonces <span class="chip si">conservativo</span>.
+
+$$
+f(x,y) = \int x e^x\, dx + g(y) \;\stackrel{\text{(por partes)}}{=}\; xe^x - e^x + g(y).
+$$
+
+Detalle de la integral por partes: $u = x$, $dv = e^x dx$, luego $du = dx$, $v = e^x$, y
+
+$$
+\int xe^x\, dx = xe^x - \int e^x\, dx = xe^x - e^x .
+$$
+
+$$
+f_y = g'(y) \;\stackrel{!}{=}\; 1 + \cos y \;\Longrightarrow\; g(y) = y + \operatorname{sen} y + C .
+$$
+
+::: {.resultado}
+$$
+f(x,y) = xe^x - e^x + y + \operatorname{sen} y + C = e^x(x-1) + y + \operatorname{sen} y + C
+$$
+:::
+
+### 18.b) $\vec F = (\operatorname{sen} y + 2xy,\ x \cos y + x^2)$ {.unnumbered}
+
+*Test.*
+
+$$
+P_y = \cos y + 2x, \qquad Q_x = \cos y + 2x \quad \text{en } \mathbb{R}^2 .
+$$
+
+Entonces <span class="chip si">conservativo</span>.
+
+$$
+f(x,y) = \int (\operatorname{sen} y + 2xy)\, dx = x \operatorname{sen} y + x^2 y + g(y),
+$$
+$$
+f_y = x \cos y + x^2 + g'(y) \;\stackrel{!}{=}\; x \cos y + x^2 \;\Longrightarrow\; g'(y) = 0 .
+$$
+
+::: {.resultado}
+$$
+f(x,y) = x \operatorname{sen} y + x^2 y + C
+$$
+:::
+
+### 18.c) $\vec F = \left( \dfrac{1}{x-1},\ y^2 + 2 \right)$, con $f(2;1) = 0$ {.unnumbered}
+
+*Dominio.* $P$ no está definida en $x = 1$, así que $D = \{(x,y) : x \neq 1\}$, que son **dos
+semiplanos abiertos disjuntos**. Cada uno es simplemente conexo, y el dato está en $(2,1)$, o sea
+en el semiplano $x > 1$.
+
+*Test.* $P_y = 0$ y $Q_x = 0$, entonces <span class="chip si">conservativo</span> en cada
+semiplano.
+
+$$
+f(x,y) = \int \frac{dx}{x-1} = \ln|x-1| + g(y) \;\stackrel{x>1}{=}\; \ln(x-1) + g(y),
+$$
+$$
+f_y = g'(y) \;\stackrel{!}{=}\; y^2 + 2 \;\Longrightarrow\; g(y) = \frac{y^3}{3} + 2y + C .
+$$
+
+Imponemos $f(2,1) = 0$:
+
+$$
+\underbrace{\ln(1)}_{=\,0} + \frac13 + 2 + C = 0 \;\Longrightarrow\; C = -\frac73 .
+$$
+
+::: {.resultado}
+$$
+f(x,y) = \ln(x-1) + \frac{y^3}{3} + 2y - \frac73, \qquad x > 1
+$$
+:::
+
+::: {.callout-important appearance="simple"}
+## Por qué la restricción $x>1$ es parte de la respuesta
+
+En el semiplano $x < 1$ también hay potencial, $\ln(1-x) + \tfrac{y^3}{3} + 2y + C'$, pero con una
+constante **independiente**: el dato del enunciado no dice nada de esa región, y ninguna curva
+contenida en el dominio conecta los dos semiplanos, así que no hay forma de determinar $C'$.
+
+Esta es la versión mansa de lo que pasa en @sec-vortice. Acá el dominio es disconexo y el problema
+es que sobra libertad (una constante por componente); allá el dominio es conexo pero no simplemente
+conexo, y el problema es que no alcanza ninguna elección. En ambos casos el paso 1 de la receta
+—escribir el dominio— es el que salva el ejercicio.
+:::
+
+### 18.d) $\vec F = (y^2 + x,\ 2xy + y)$, con $f(1;-5) = 3$ {.unnumbered}
+
+*Test.*
+
+$$
+P_y = 2y, \qquad Q_x = 2y \quad \text{en } \mathbb{R}^2 .
+$$
+
+Entonces <span class="chip si">conservativo</span>.
+
+$$
+f(x,y) = \int (y^2 + x)\, dx = xy^2 + \frac{x^2}{2} + g(y),
+$$
+$$
+f_y = 2xy + g'(y) \;\stackrel{!}{=}\; 2xy + y \;\Longrightarrow\; g(y) = \frac{y^2}{2} + C .
+$$
+
+Imponemos que $(1,-5)$ esté en la curva de nivel 3:
+
+$$
+f(1,-5) = 1 \cdot 25 + \frac12 + \frac{25}{2} + C = 38 + C = 3 \;\Longrightarrow\; C = -35 .
+$$
+
+::: {.resultado}
+$$
+f(x,y) = xy^2 + \frac{x^2}{2} + \frac{y^2}{2} - 35
+$$
+:::
+
+La curva de nivel pedida es entonces $xy^2 + \dfrac{x^2}{2} + \dfrac{y^2}{2} = 38$.
+
+::: {.ejercicio data-respuesta="12" data-tol="0.001" data-rotulo="Para calcular"}
+Con el potencial de 18.d, calculá el trabajo de $\vec F$ a lo largo de **cualquier** curva que
+vaya de $(0,0)$ a $(2,2)$.
+
+::: {.explica}
+$W = f(2,2) - f(0,0)$. Con $f(x,y) = xy^2 + \tfrac{x^2}{2} + \tfrac{y^2}{2} - 35$:
+
+$$
+f(2,2) = 2 \cdot 4 + 2 + 2 - 35 = -23, \qquad f(0,0) = -35,
+$$
+
+y $W = -23 - (-35) = 12$.
+
+Notá que la constante $-35$ se cancela en la resta: para calcular trabajos da igual qué constante
+hayas elegido. El dato del enunciado sirve para fijar *una* función potencial concreta, no para
+los trabajos.
+:::
+:::
+
+## Ejercicio 19 · Ley de Coulomb: el campo eléctrico es conservativo {#sec-ej19}
+
+::: {.callout-tip collapse="true"}
+## Antes de empezar
+
+- Conviene reescribir el campo en forma compacta. Si $\vec r = (x,y,z)$ y
+  $r = \|\vec r\| = \sqrt{x^2+y^2+z^2}$, el campo es
+  $\vec F = \varepsilon Q q \dfrac{\vec r}{r^3}$: apunta en la dirección radial y su módulo decae
+  como $1/r^2$.
+- Es un **campo central**. Todo campo de la forma $\vec F = \gamma(r)\, \vec r$ tiene rotor nulo, y
+  su potencial se obtiene integrando $\int \gamma(r)\, r\, dr$. Reconocer esa estructura ahorra
+  media carilla de cuentas.
+- Herramienta clave para derivar: $\dfrac{\partial r}{\partial x} = \dfrac{x}{r}$ (y análogas).
+  Todas las derivadas del ejercicio salen con eso más la regla de la cadena.
+- El dominio es $\mathbb{R}^3 \setminus \{(0,0,0)\}$ porque en el origen está la carga $Q$ y el
+  campo explota. Sacarle un punto a $\mathbb{R}^3$ **no** rompe la simple conexión: toda curva
+  cerrada se puede contraer esquivando el origen. Ojo: en $\mathbb{R}^2$ sacar un punto sí
+  rompería todo, y ese es exactamente el @sec-vortice.
+:::
+
+::: {.callout-note appearance="simple"}
+## Enunciado
+
+**19.** La fuerza eléctrica entre dos cargas puntuales $Q$ (en el origen) y $q$ (en el punto
+$(x,y,z)$) puede ser atractiva o repulsiva. Según la ley de Coulomb, la fuerza que sufre la carga
+$q$ debido a $Q$ es
+
+$$
+\vec F(x,y,z) = \varepsilon Q q \, \frac{x \vec i + y \vec j + z \vec k}{(x^2+y^2+z^2)^{3/2}} .
+$$
+
+Siendo $\varepsilon$ una constante. Mostrar que se trata de un campo conservativo. ¿Cuál es la
+función potencial?
+:::
+
+### Planteo {.unnumbered}
+
+Llamemos $k = \varepsilon Q q$ (constante) y $r = \sqrt{x^2+y^2+z^2}$. Las componentes son
+
+$$
+P = \frac{kx}{r^3}, \qquad Q^* = \frac{ky}{r^3}, \qquad R = \frac{kz}{r^3},
+$$
+
+donde escribimos $Q^*$ para la segunda componente y no confundirla con la carga $Q$. Todas son
+$C^1$ en $D = \mathbb{R}^3 \setminus \{\vec 0\}$.
+
+### Paso 1: rotor nulo {.unnumbered}
+
+Usando $\partial r/\partial x = x/r$ y la regla de la cadena sobre $r^{-3}$:
+
+$$
+\frac{\partial P}{\partial y} = kx \frac{\partial}{\partial y}(r^{-3}) = kx \cdot (-3) r^{-4} \cdot \frac{y}{r} = -\frac{3kxy}{r^5},
+\qquad
+\frac{\partial Q^*}{\partial x} = ky \cdot (-3) r^{-4} \cdot \frac{x}{r} = -\frac{3kxy}{r^5} .
+$$
+
+Coinciden. Por la simetría total del campo en $x, y, z$, las otras dos parejas dan lo mismo:
+
+$$
+\frac{\partial P}{\partial z} = -\frac{3kxz}{r^5} = \frac{\partial R}{\partial x},
+\qquad
+\frac{\partial Q^*}{\partial z} = -\frac{3kyz}{r^5} = \frac{\partial R}{\partial y} .
+$$
+
+Por lo tanto $\operatorname{rot} \vec F = \vec 0$ en $D$. Como $D = \mathbb{R}^3 \setminus \{\vec 0\}$
+es abierto, conexo y simplemente conexo, el campo es <span class="chip si">conservativo</span>.
+
+### Paso 2: hallar el potencial {.unnumbered}
+
+Integramos la primera componente respecto de $x$, con $y,z$ fijos. Sustituyendo
+$u = x^2+y^2+z^2$, $du = 2x\,dx$:
+
+$$
+f = \int \frac{kx}{(x^2+y^2+z^2)^{3/2}}\, dx = \frac{k}{2} \int u^{-3/2}\, du
+= \frac{k}{2} \cdot (-2) u^{-1/2} = -\frac{k}{\sqrt{x^2+y^2+z^2}} + g(y,z).
+$$
+
+Ajustamos con la segunda componente:
+
+$$
+f_y = -k \left( -\tfrac12 \right) (x^2+y^2+z^2)^{-3/2} (2y) + g_y = \frac{ky}{r^3} + g_y
+\;\stackrel{!}{=}\; \frac{ky}{r^3} \;\Longrightarrow\; g_y = 0 .
+$$
+
+Entonces $g = h(z)$, y con la tercera componente:
+$f_z = \dfrac{kz}{r^3} + h'(z) \stackrel{!}{=} \dfrac{kz}{r^3} \Longrightarrow h'(z) = 0$.
+
+::: {.resultado}
+$$
+f(x,y,z) = -\frac{\varepsilon Q q}{\sqrt{x^2+y^2+z^2}} + C = -\frac{\varepsilon Q q}{r} + C
+$$
+:::
+
+*Verificación:* $\nabla f = \varepsilon Q q \left( \dfrac{x}{r^3}, \dfrac{y}{r^3}, \dfrac{z}{r^3} \right) = \vec F$ ✓
+
+::: {.callout-tip appearance="simple"}
+## Lectura física
+
+La energía potencial eléctrica es $U = -f = \dfrac{\varepsilon Q q}{r}$, que es la expresión
+conocida de Coulomb. Si las cargas tienen igual signo, $Qq > 0$ y $U > 0$ crece al acercarse (se
+repelen); si tienen signos opuestos, $U < 0$ y hay que entregar energía para separarlas.
+
+Las superficies equipotenciales $r = \text{cte}$ son esferas centradas en $Q$: mover la carga $q$
+sobre una esfera no cuesta trabajo, y el trabajo total entre dos puntos depende solo de las
+distancias inicial y final al origen.
+:::
+
+```{python}
+#| label: fig-central
+#| fig-cap: "Izquierda: un corte del campo central $\\vec F = k\\,\\vec r / r^3$ con $k>0$ (repulsivo, el caso de dos cargas del mismo signo) y dos superficies equipotenciales $r = r_1$ y $r = r_2$. El camino verde y el azul llegan del mismo lugar al mismo lugar por rutas muy distintas y acumulan el mismo trabajo, porque los tramos que corren *sobre* una esfera no aportan nada: ahí la fuerza es perpendicular al movimiento. Derecha: el potencial $f(r) = -k/r$. El trabajo es la diferencia de alturas marcada, y tiende a un valor finito cuando $r_2 \\to \\infty$: esa es la energía de escape."
+#| fig-width: 7.4
+#| fig-height: 3.4
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+VIOLETA, VIOLETA2, TINTA, GRIS = "#7c5cbf", "#b48ec8", "#1e1a2e", "#a99fc0"
+VERDE, AZUL = "#2f6b48", "#3a5a9c"
+
+k, r1, r2 = 1.0, 0.7, 2.2
+
+xq = np.linspace(-2.6, 2.6, 14)          # par: la grilla no pisa el origen
+XQ, YQ = np.meshgrid(xq, xq)
+RR = np.hypot(XQ, YQ)
+dentro = RR > .38
+XQ, YQ, RR = XQ[dentro], YQ[dentro], RR[dentro]
+U, W = k*XQ/RR**3, k*YQ/RR**3
+norma = np.hypot(U, W)
+# largo proporcional a la raiz de la norma, para que el decaimiento 1/r^2 se
+# note sin que las flechas de afuera desaparezcan
+largo = np.sqrt(norma / norma.max())
+
+fig, (ax, ax2) = plt.subplots(1, 2, figsize=(7.4, 3.4))
+
+ax.quiver(XQ, YQ, U/norma*largo, W/norma*largo, color=TINTA,
+          width=.005, scale=11, alpha=.6)
+t = np.linspace(0, 2*np.pi, 300)
+for R in (r1, r2):
+    ax.plot(R*np.cos(t), R*np.sin(t), color=VIOLETA, lw=1.8)
+
+s = np.linspace(0, 1, 300)
+# camino radial y camino con rodeo: mismos extremos, distinta ruta
+rad = r1 + (r2 - r1)*s
+ax.plot(rad*np.cos(0.5), rad*np.sin(0.5), color=AZUL, lw=2.2)
+ang = 0.5 + 2.9*np.sin(np.pi*s)          # arranca y termina en el mismo angulo
+ax.plot(rad*np.cos(ang), rad*np.sin(ang), color=VERDE, lw=2.2)
+ax.plot([r1*np.cos(.5), r2*np.cos(.5)], [r1*np.sin(.5), r2*np.sin(.5)], "o",
+        color=TINTA, ms=4)
+ax.plot(0, 0, "o", color="#b8564f", ms=6)
+ax.set_aspect("equal"); ax.set_xlabel("$x$"); ax.set_ylabel("$y$")
+ax.set_xlim(-2.9, 2.9); ax.set_ylim(-2.9, 2.9)
+
+r = np.linspace(0.28, 3.2, 400)
+ax2.plot(r, -k/r, color=VIOLETA, lw=2.2)
+ax2.axhline(0, color=GRIS, lw=.8)
+for R in (r1, r2):
+    ax2.plot([0, R], [-k/R, -k/R], color=GRIS, lw=.8, ls="--")
+    ax2.plot(R, -k/R, "o", color=VIOLETA, ms=5)
+ax2.annotate("", xy=(r2, -k/r2), xytext=(r2, -k/r1),
+             arrowprops=dict(arrowstyle="<->", color=VERDE, lw=1.8))
+ax2.annotate("$W = f(r_2) - f(r_1)$", (r2, -k/r1), textcoords="offset points",
+             xytext=(-6, -14), ha="right", fontsize=8.5, color=VERDE)
+ax2.set_xlabel("$r$"); ax2.set_ylabel("$f(r) = -k/r$")
+ax2.set_ylim(-3, .7); ax2.set_xlim(0, 3.2)
+ax2.spines[["top", "right"]].set_visible(False)
+
+fig.tight_layout()
+plt.show()
+```
+
+```{=html}
+<div class="lienzo" data-figura="central" data-alto="350"
+     data-rotulo="El campo central: solo importan los radios"
+     data-sliders='[{"id":"k","min":-2,"max":2,"paso":0.1,"valor":1,"rotulo":"k = εQq","decimales":1},{"id":"r1","min":0.3,"max":2.6,"paso":0.05,"valor":0.7,"rotulo":"r₁","decimales":2},{"id":"r2","min":0.3,"max":2.6,"paso":0.05,"valor":2,"rotulo":"r₂","decimales":2}]'>
+  <div class="lienzo-pie">
+    Izquierda: un corte del campo \(\vec F = k\,\vec r/r^3\) con las dos esferas equipotenciales
+    \(r=r_1\) y \(r=r_2\), y dos caminos entre los mismos dos puntos: uno radial y otro que da
+    un rodeo largo. Los dos números de arriba a la derecha son las dos integrales de línea,
+    calculadas numéricamente: dan lo mismo, y lo mismo que \(f(r_2)-f(r_1)\). Derecha: el
+    potencial \(f(r) = -k/r\); el trabajo es la diferencia de alturas marcada. Los tramos que
+    corren <i>sobre</i> una esfera no aportan nada, porque ahí la fuerza es perpendicular al
+    movimiento. Con \(k>0\) las cargas se repelen; con \(k<0\) —el caso de la gravedad del
+    ejercicio 21— se atraen y el potencial cambia de signo.
+  </div>
+</div>
+<script>
+window.LIENZO = window.LIENZO || {};
+window.LIENZO.central = function (P, v) {
+  var col = P.col, c = P.ctx, k = v.k;
+  var F = function (x, y) {
+    var r2 = x*x + y*y, r = Math.sqrt(r2);
+    if (r < 0.16) return [0, 0];
+    return [k*x/(r*r2), k*y/(r*r2)];
+  };
+  // el corte del campo va cuadrado, para que las esferas se vean redondas
+  var lado = Math.min(P.h - 78, P.w * 0.52 - 44);
+  var cajaI = [44, 34, lado, lado];
+  var cajaD = [44 + lado + 56, 34, P.w - (44 + lado + 56) - 18, lado];
+
+  // ---- corte del campo ----
+  var m = P.marco(cajaI, [-3, 3], [-3, 3]);
+  P.ejes(m, 'x', 'y', null);
+  P.recorte(m, function () {
+    CV.campo(P, m, F, { n: 15, color: col.tinta, largo: 12, alfa: .45, porNorma: true });
+  });
+  function circ(R) {
+    var a = [], i;
+    for (i = 0; i <= 140; i++) a.push([R*Math.cos(i/140*6.2832), R*Math.sin(i/140*6.2832)]);
+    return a;
+  }
+  P.recorte(m, function () {
+    P.curva(m, circ(v.r1), col.acento, 1.8, .9);
+    P.curva(m, circ(v.r2), col.acento, 1.8, .9);
+  });
+  // dos caminos con los mismos extremos: uno radial y otro con un rodeo
+  var AZUL = '#3a5a9c';
+  var radial = function (u) {
+    var rad = v.r1 + (v.r2 - v.r1)*u;
+    return [rad*Math.cos(0.5), rad*Math.sin(0.5)];
+  };
+  var rodeo = function (u) {
+    var rad = v.r1 + (v.r2 - v.r1)*u;
+    var ang = 0.5 + 2.9*Math.sin(Math.PI*u);   // arranca y termina en el mismo angulo
+    return [rad*Math.cos(ang), rad*Math.sin(ang)];
+  };
+  function traza(r) {
+    var a = [], i;
+    for (i = 0; i <= 160; i++) a.push(r(i/160));
+    return a;
+  }
+  P.recorte(m, function () {
+    P.curva(m, traza(radial), AZUL, 2.4, 1);
+    P.curva(m, traza(rodeo), col.bien, 2.4, 1);
+  });
+  var A = radial(0), B = radial(1);
+  P.punto(m, A[0], A[1], col.tinta, 4.5);
+  P.punto(m, B[0], B[1], col.tinta, 4.5);
+  c.save(); c.fillStyle = col.mal;
+  c.beginPath(); c.arc(m.X(0), m.Y(0), 4, 0, 6.2832); c.fill(); c.restore();
+
+  // ---- el potencial f(r) = -k/r ----
+  var tope = 4, mD = P.marco(cajaD, [0, 3], [-tope, tope]);
+  P.ejes(mD, 'r', 'f (r)', null);
+  P.curva(mD, [[0, 0], [3, 0]], col.suave, 1, .8);
+  var pts = [];
+  for (i = 1; i <= 300; i++) {
+    var r = 3*i/300, y = -k/r;
+    if (y > -tope && y < tope) pts.push([r, y]); else if (pts.length) { }
+  }
+  P.recorte(mD, function () { P.curva(mD, pts, col.acento, 2.4, 1); });
+  var f1 = -k/v.r1, f2 = -k/v.r2;
+  function marcar(r, f) {
+    if (f < -tope || f > tope) return;
+    P.curva(mD, [[0, f], [r, f]], col.suave, 1, .8, [3, 4]);
+    P.punto(mD, r, f, col.acento, 4.5);
+  }
+  marcar(v.r1, f1); marcar(v.r2, f2);
+  if (f1 > -tope && f1 < tope && f2 > -tope && f2 < tope) {
+    var X = mD.X(Math.max(v.r1, v.r2));
+    c.save(); c.strokeStyle = col.bien; c.lineWidth = 2;
+    c.beginPath(); c.moveTo(X, mD.Y(f1)); c.lineTo(X, mD.Y(f2)); c.stroke(); c.restore();
+  }
+
+  P.texto(cajaI[0] - 12, 14,
+          k >= 0 ? 'k > 0 : repulsivo' : 'k < 0 : atractivo', col.tinta, 12);
+  var Wrad = CV.trabajo(F, radial, 0, 1, 3000);
+  var Wrod = CV.trabajo(F, rodeo, 0, 1, 3000);
+  P.texto(cajaD[0] + cajaD[2], 14,
+          'W = f(r₂) − f(r₁) = ' + (f2 - f1).toFixed(3), col.acento, 12.5, 'right');
+  P.texto(cajaD[0] + cajaD[2], 30,
+          'camino recto ' + Wrad.toFixed(3) + '   ·   con rodeo ' + Wrod.toFixed(3),
+          col.bien, 11.5, 'right');
+};
+</script>
+```
+
+## Ejercicio 20 · Vehículo autónomo en una planta industrial {#sec-ej20}
+
+::: {.callout-tip collapse="true"}
+## Antes de empezar
+
+- Es el mismo mecanismo del @sec-ej13, pero con una pregunta de interpretación en el medio. Para
+  el ítem (c) conviene tener a mano tres ideas: trabajo = diferencia de potencial, curvas de nivel
+  = equipotenciales, y $U = -\varphi$ es la energía almacenada.
+- Para el ítem (d) no hace falta parametrizar ningún camino: una vez que se tiene $\varphi$, el
+  trabajo es $\varphi(2,1) - \varphi(0,0)$. Ese es justamente el ahorro que da el @thm-tfil.
+- La constante $C$ se cancela en cualquier diferencia $\varphi(B) - \varphi(A)$, así que para
+  calcular trabajo se puede tomar $C = 0$ sin perder generalidad.
+:::
+
+::: {.callout-note appearance="simple"}
+## Enunciado
+
+**20.** El campo vectorial $\vec F(x,y) = (2xy + 3,\ x^2 + 4y)$ representa el campo de fuerzas que
+actúa sobre un vehículo autónomo que transporta materiales dentro de una planta industrial.
+
+a. Verificar si el campo es conservativo.
+b. En caso afirmativo, hallar una función potencial $\varphi(x,y)$.
+c. Interpretar físicamente el significado de la función potencial en este contexto.
+d. Calcular el trabajo realizado por el campo para mover el vehículo desde $(0,0)$ hasta $(2,1)$.
+:::
+
+### a) Verificación {.unnumbered}
+
+Con $P = 2xy + 3$ y $Q = x^2 + 4y$, ambas $C^1$ en $\mathbb{R}^2$:
+
+$$
+\frac{\partial P}{\partial y} = 2x, \qquad \frac{\partial Q}{\partial x} = 2x .
+$$
+
+Son iguales y el dominio es simplemente conexo, entonces
+<span class="chip si">conservativo</span>.
+
+### b) Función potencial {.unnumbered}
+
+$$
+\varphi(x,y) = \int (2xy + 3)\, dx = x^2 y + 3x + g(y),
+$$
+$$
+\varphi_y = x^2 + g'(y) \;\stackrel{!}{=}\; x^2 + 4y \;\Longrightarrow\; g(y) = 2y^2 + C .
+$$
+
+::: {.resultado}
+$$
+\varphi(x,y) = x^2 y + 3x + 2y^2 + C
+$$
+:::
+
+*Verificación:* $\nabla \varphi = (2xy + 3,\ x^2 + 4y) = \vec F$ ✓
+
+### c) Interpretación física {.unnumbered}
+
+- **$\varphi$ es un "mapa de energía" de la planta.** A cada posición del piso le asigna un número,
+  y la fuerza que siente el vehículo en ese punto es la dirección y la magnitud de la máxima
+  pendiente de ese mapa. El vehículo es empujado hacia los valores crecientes de $\varphi$.
+- **El trabajo no depende de la trayectoria.** Para ir de $A$ a $B$, el campo aporta
+  $\varphi(B) - \varphi(A)$ cualquiera sea el recorrido. Esto es muy útil en planificación: se
+  puede elegir la ruta por otros criterios —obstáculos, tiempo, congestión de pasillos— sabiendo
+  que el balance energético aportado por este campo será siempre el mismo.
+- **Las curvas de nivel $\varphi = \text{cte}$ son equipotenciales.** Si el vehículo se mueve a lo
+  largo de una de ellas, el campo no realiza trabajo neto: la fuerza es en todo momento
+  perpendicular al desplazamiento.
+- **Circuitos cerrados.** Si el vehículo hace un ciclo de reparto y vuelve al punto de partida, el
+  trabajo total del campo es cero. Nada de energía se "gana" dando vueltas; toda la energía
+  consumida en un ciclo proviene de otras fuentes (motor, fricción), no de este campo.
+- **Energía potencial.** En la convención física, $U(x,y) = -\varphi(x,y)$ es la energía potencial
+  del vehículo. El trabajo del campo es $W = -\Delta U$: el vehículo gana energía cinética cuando
+  "baja" en $U$, y si no hay otras fuerzas, $E_c + U$ se conserva.
+
+::: {.callout-warning appearance="simple"}
+## Qué se rompe si el campo no fuera conservativo
+
+Vale la pena leer esta lista al revés. Sin potencial no hay mapa de energía, la ruta elegida **sí**
+cambia el balance, no existen equipotenciales y un ciclo cerrado deja saldo. El @sec-planta hace
+exactamente eso: le agrega a esta misma planta una cinta transportadora y mira qué conclusiones
+sobreviven.
+:::
+
+### d) Trabajo de $(0,0)$ a $(2,1)$ {.unnumbered}
+
+Por el @thm-tfil, tomando $C = 0$:
+
+$$
+\varphi(2,1) = 2^2 \cdot 1 + 3 \cdot 2 + 2 \cdot 1^2 = 4 + 6 + 2 = 12, \qquad \varphi(0,0) = 0,
+$$
+
+::: {.resultado}
+$$
+W = \int_C \vec F \cdot d\vec r = \varphi(2,1) - \varphi(0,0) = 12
+$$
+:::
+
+Comprobación por el camino recto $\vec r(t) = (2t, t)$, $t \in [0,1]$, $d\vec r = (2,1)\,dt$:
+
+$$
+\int_0^1 \Big[ (4t^2 + 3)\cdot 2 + (4t^2 + 4t)\cdot 1 \Big] dt = \int_0^1 (12t^2 + 4t + 6)\, dt = 4 + 2 + 6 = 12 \quad \checkmark
+$$
+
+## Ejercicio 21 · Campo gravitatorio {#sec-ej21}
+
+::: {.callout-tip collapse="true"}
+## Antes de empezar
+
+- Es el mismo campo central del @sec-ej19 con otra constante: acá $k = -GMm$, que es **negativa**
+  (porque $G, M, m > 0$). Ese signo es el que hace que la fuerza apunte *hacia* el origen, o sea
+  que sea siempre atractiva.
+- Comparando: en Coulomb el signo dependía de $Qq$ y por eso podía ser atractiva o repulsiva; la
+  gravedad no tiene esa opción.
+- Como $f_{19} = -k/r$ con $k = -GMm$, se puede anticipar el resultado: $f = +GMm/r$. Igual conviene
+  mostrar la cuenta completa, que es lo que se pide.
+- El dominio vuelve a ser $\mathbb{R}^3 \setminus \{\vec 0\}$: en el centro de masa $M$ el modelo
+  puntual deja de valer.
+:::
+
+::: {.callout-note appearance="simple"}
+## Enunciado
+
+**21.** Consideremos la fuerza gravitacional dada por
+$\vec F(x,y,z) = -\dfrac{GMm}{\|\vec r\|^3}\, \vec r$, donde $G$ es la constante de gravitación y
+el vector $\vec r = (x,y,z)$ está orientado desde el origen, donde se encuentra el cuerpo de masa
+$M$, hacia la posición del cuerpo de masa $m$, de modo que
+
+$$
+\vec F(x,y,z) = -GMm \left( \frac{x}{(x^2+y^2+z^2)^{3/2}},\ \frac{y}{(x^2+y^2+z^2)^{3/2}},\ \frac{z}{(x^2+y^2+z^2)^{3/2}} \right).
+$$
+
+Demostrar que $\vec F$ es un campo conservativo. Hallar la función potencial.
+:::
+
+### Paso 1: rotor nulo {.unnumbered}
+
+Con $r = \sqrt{x^2+y^2+z^2}$ y $K = GMm > 0$, las componentes son $P = -Kx\,r^{-3}$,
+$Q = -Ky\,r^{-3}$, $R = -Kz\,r^{-3}$, de clase $C^1$ en $D = \mathbb{R}^3 \setminus \{\vec 0\}$.
+Usando $\partial r/\partial x = x/r$:
+
+$$
+\frac{\partial P}{\partial y} = -Kx \cdot (-3) r^{-4} \cdot \frac{y}{r} = \frac{3Kxy}{r^5},
+\qquad
+\frac{\partial Q}{\partial x} = -Ky \cdot (-3) r^{-4} \cdot \frac{x}{r} = \frac{3Kxy}{r^5} .
+$$
+
+Idénticamente,
+
+$$
+\frac{\partial P}{\partial z} = \frac{3Kxz}{r^5} = \frac{\partial R}{\partial x},
+\qquad
+\frac{\partial Q}{\partial z} = \frac{3Kyz}{r^5} = \frac{\partial R}{\partial y} .
+$$
+
+Por lo tanto
+$\operatorname{rot} \vec F = (R_y - Q_z)\vec i + (P_z - R_x)\vec j + (Q_x - P_y)\vec k = \vec 0$.
+Como $D$ es abierto, conexo y simplemente conexo, $\vec F$ es
+<span class="chip si">conservativo</span>.
+
+### Paso 2: función potencial {.unnumbered}
+
+Integramos la primera componente en $x$ (sustitución $u = x^2+y^2+z^2$, $du = 2x\,dx$):
+
+$$
+f = \int \frac{-Kx}{u^{3/2}}\, dx = -\frac{K}{2} \int u^{-3/2}\, du = -\frac{K}{2} \cdot (-2) u^{-1/2} = \frac{K}{r} + g(y,z).
+$$
+
+Ajuste con la segunda componente:
+
+$$
+f_y = K \left( -\tfrac12 \right)(x^2+y^2+z^2)^{-3/2}(2y) + g_y = -\frac{Ky}{r^3} + g_y
+\;\stackrel{!}{=}\; -\frac{Ky}{r^3} \;\Longrightarrow\; g_y = 0 .
+$$
+
+Ajuste con la tercera:
+$f_z = -\dfrac{Kz}{r^3} + h'(z) \stackrel{!}{=} -\dfrac{Kz}{r^3} \Longrightarrow h'(z) = 0$.
+
+::: {.resultado}
+$$
+f(x,y,z) = \frac{GMm}{\sqrt{x^2+y^2+z^2}} + C = \frac{GMm}{r} + C
+$$
+:::
+
+*Verificación:*
+
+$$
+\frac{\partial}{\partial x} \left( \frac{GMm}{r} \right) = GMm \cdot \left( -\frac{1}{r^2} \right) \cdot \frac{x}{r} = -\frac{GMm\,x}{r^3} \quad \checkmark
+$$
+
+::: {.callout-tip appearance="simple"}
+## Lectura física
+
+La energía potencial gravitatoria es $U = -f = -\dfrac{GMm}{r}$, la expresión clásica: negativa y
+creciente hacia $0$ cuando $r \to \infty$. Las superficies equipotenciales son esferas concéntricas
+alrededor de $M$: por eso una órbita circular no requiere trabajo neto del campo. Y el trabajo para
+llevar $m$ de una distancia $r_1$ a otra $r_2$ es
+
+$$
+W = f(r_2) - f(r_1) = GMm \left( \frac{1}{r_2} - \frac{1}{r_1} \right),
+$$
+
+que solo depende de las distancias, no de la trayectoria seguida. La energía necesaria para escapar
+al infinito desde $r_1$ es $GMm/r_1$, de donde sale la velocidad de escape
+$v_e = \sqrt{2GM/r_1}$.
+:::
+
+::: {.ejercicio}
+En los ejercicios 19 y 21 el dominio es $\mathbb{R}^3$ menos un punto, y aun así concluimos que el
+campo es conservativo a partir del rotor nulo. En @sec-vortice el dominio era $\mathbb{R}^2$ menos
+un punto y la conclusión no valía. ¿Cuál es la diferencia?
+
+- [En $\mathbb{R}^3$ el rotor es un vector y en $\mathbb{R}^2$ un escalar, y el teorema solo vale para vectores.]{.mal}
+- [$\mathbb{R}^3$ menos un punto sigue siendo simplemente conexo —toda curva cerrada se contrae esquivando el agujero—, mientras que $\mathbb{R}^2$ menos un punto no lo es.]{.bien}
+- [Porque los campos de 19 y 21 son centrales y los centrales son siempre conservativos.]{.mal}
+- [Porque en 19 y 21 el campo tiende a cero en el infinito.]{.mal}
+
+::: {.explica}
+**La correcta es la segunda.** En el espacio hay una dimensión de sobra para esquivar el punto: cualquier lazo se puede levantar
+y encoger sin tocarlo. En el plano no: un lazo que rodea el agujero está atrapado.
+
+La tercera opción es tentadora y casi cierta —los campos centrales tienen rotor nulo— pero no es
+*la razón*: el vórtice también tiene rotor nulo y no es conservativo. Lo que decide es la forma del
+dominio. La cuarta es irrelevante: el vórtice también tiende a cero en el infinito.
+:::
+:::

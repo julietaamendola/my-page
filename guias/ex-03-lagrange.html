@@ -1,0 +1,2183 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>8&nbsp; Multiplicadores de Lagrange – Guías resueltas de Análisis Matemático II</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./ex-04-problemas.html" rel="next">
+<link href="./ex-02-absolutos.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-891dd5176bf95b17de68806a21930ba5.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b1f6f59901d8c56d2526ac399150cbdd.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-891dd5176bf95b17de68806a21930ba5.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-4066913a89cd1e841a95a6df55b72e95.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-d1fb5515054595077617aa4c220a6d99.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-4066913a89cd1e841a95a6df55b72e95.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No se han encontrado resultados",
+    "search-matching-documents-text": "documentos encontrados",
+    "search-copy-link-title": "Copiar el enlace en la búsqueda",
+    "search-hide-matches-text": "Ocultar resultados adicionales",
+    "search-more-match-text": "resultado adicional en este documento",
+    "search-more-matches-text": "resultados adicionales en este documento",
+    "search-clear-button-title": "Borrar",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Buscar"
+  }
+}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;0,700;1,400;1,500&amp;family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ex-01-criterio.html">Extremos de funciones de varias variables</a></li><li class="breadcrumb-item"><a href="./ex-03-lagrange.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Multiplicadores de Lagrange</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Buscar" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Guías resueltas de Análisis Matemático II</a> 
+        <div class="sidebar-tools-main tools-wide">
+    <a href="https://julietaamendola.github.io/my-page/" title="Volver al inicio" class="quarto-navigation-tool px-1" aria-label="Volver al inicio"><i class="bi bi-house-door"></i></a>
+    <a href="https://github.com/julietaamendola/my-page" title="Ejecutar el código" class="quarto-navigation-tool px-1" aria-label="Ejecutar el código"><i class="bi bi-github"></i></a>
+    <a href="./guias-resueltas-amii.pdf" title="Descargar PDF" class="quarto-navigation-tool px-1" aria-label="Descargar PDF"><i class="bi bi-file-pdf"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Alternar modo oscuro"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Buscar"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Presentación</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Campos conservativos y función potencial</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cc-01-teoria.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">La teoría, en cinco ideas</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cc-02-ejemplo.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Un ejemplo, paso a paso</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cc-03-no-conservativos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Cuando no es conservativo</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cc-04-ejercicios.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Los ejercicios de la guía</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cc-05-resumen.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Resumen y mapa de la guía</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Extremos de funciones de varias variables</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ex-01-criterio.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Puntos críticos y el criterio del Hessiano</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ex-02-absolutos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Extremos absolutos: casi siempre en el borde</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ex-03-lagrange.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Multiplicadores de Lagrange</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ex-04-problemas.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Problemas de optimización</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ex-05-otras-ciencias.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Los mismos métodos, en otras ciencias</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">En esta página</h2>
+   
+  <ul>
+  <li><a href="#sec-lagrange" id="toc-sec-lagrange" class="nav-link active" data-scroll-target="#sec-lagrange"><span class="header-section-number">8.1</span> El método</a></li>
+  <li><a href="#sec-tangencia" id="toc-sec-tangencia" class="nav-link" data-scroll-target="#sec-tangencia"><span class="header-section-number">8.2</span> El dibujo que resuelve el método</a>
+  <ul class="collapse">
+  <li><a href="#sec-ej21-sust" id="toc-sec-ej21-sust" class="nav-link" data-scroll-target="#sec-ej21-sust"><span class="header-section-number">8.2.1</span> Método 1: sustituir</a></li>
+  <li><a href="#sec-ej21-lagrange" id="toc-sec-ej21-lagrange" class="nav-link" data-scroll-target="#sec-ej21-lagrange"><span class="header-section-number">8.2.2</span> Método 2: multiplicadores</a></li>
+  </ul></li>
+  <li><a href="#sec-lambda" id="toc-sec-lambda" class="nav-link" data-scroll-target="#sec-lambda"><span class="header-section-number">8.3</span> Qué significa <span class="math inline">\(\lambda\)</span></a></li>
+  <li><a href="#sec-ej15" id="toc-sec-ej15" class="nav-link" data-scroll-target="#sec-ej15"><span class="header-section-number">8.4</span> La temperatura de una esfera</a></li>
+  <li><a href="#sec-ej10" id="toc-sec-ej10" class="nav-link" data-scroll-target="#sec-ej10"><span class="header-section-number">8.5</span> La joya: formas cuadráticas y autovalores</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ex-01-criterio.html">Extremos de funciones de varias variables</a></li><li class="breadcrumb-item"><a href="./ex-03-lagrange.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Multiplicadores de Lagrange</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Multiplicadores de Lagrange</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Hasta acá, cuando el borde de una región aparecía, lo parametrizábamos. Eso funciona mientras la curva se deje parametrizar cómodamente; una circunferencia sí, una superficie de nivel cualquiera en <span class="math inline">\(\mathbb{R}^3\)</span> casi nunca. El método de los multiplicadores resuelve el problema sin parametrizar nada, y de paso explica <em>por qué</em> los extremos con restricción están donde están.</p>
+<section id="sec-lagrange" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="sec-lagrange"><span class="header-section-number">8.1</span> El método</h2>
+<div id="thm-lagrange" class="theorem">
+<p><span class="theorem-title"><strong>Teorema 8.1 (Multiplicadores de Lagrange)</strong></span> Sean <span class="math inline">\(f, g \in C^1\)</span> en un abierto de <span class="math inline">\(\mathbb{R}^n\)</span>. Si <span class="math inline">\(f\)</span> alcanza un extremo sobre el conjunto de nivel <span class="math inline">\(S = \{P : g(P) = c\}\)</span> en un punto <span class="math inline">\(P_0 \in S\)</span> con <span class="math inline">\(\nabla g(P_0) \neq \vec 0\)</span>, entonces existe <span class="math inline">\(\lambda \in \mathbb{R}\)</span> —el <strong>multiplicador de Lagrange</strong>— tal que</p>
+<p><span id="eq-lagrange"><span class="math display">\[
+\nabla f(P_0) = \lambda\, \nabla g(P_0),
+\qquad \text{junto con} \qquad g(P_0) = c .
+\tag{8.1}\]</span></span></p>
+</div>
+<p>En la práctica se resuelve el sistema de <span class="math inline">\(n+1\)</span> ecuaciones con incógnitas <span class="math inline">\(x_1, \dots, x_n, \lambda\)</span>, se obtienen los candidatos y se compara el valor de <span class="math inline">\(f\)</span> en cada uno. Si <span class="math inline">\(S\)</span> es <strong>compacto</strong>, Weierstrass garantiza que el mayor es el máximo y el menor el mínimo, y no hace falta ningún criterio extra. Con dos restricciones <span class="math inline">\(g_1 = c_1\)</span>, <span class="math inline">\(g_2 = c_2\)</span> la condición es <span class="math inline">\(\nabla f = \lambda_1 \nabla g_1 + \lambda_2 \nabla g_2\)</span>.</p>
+<div class="callout callout-style-simple callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Por qué la condición es esa, y no otra
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Sobre la curva <span class="math inline">\(g = c\)</span>, moverse un poquito cambia <span class="math inline">\(f\)</span> en <span class="math inline">\(\nabla f \cdot \vec v\)</span>, donde <span class="math inline">\(\vec v\)</span> es la dirección de avance. Pero <span class="math inline">\(\vec v\)</span> no es libre: para no salirse de la curva tiene que ser <strong>tangente</strong> a ella, es decir perpendicular a <span class="math inline">\(\nabla g\)</span>.</p>
+<p>Si <span class="math inline">\(\nabla f\)</span> tuviera alguna componente en la dirección tangente, avanzando para ese lado <span class="math inline">\(f\)</span> crecería y volviendo atrás decrecería: no habría extremo. Entonces, en un extremo, <span class="math inline">\(\nabla f\)</span> no puede tener componente tangencial: <strong>tiene que ser paralelo a <span class="math inline">\(\nabla g\)</span></strong>. Eso es exactamente <a href="#eq-lagrange" class="quarto-xref"><span>8.1</span></a>, y <span class="math inline">\(\lambda\)</span> es simplemente la proporción entre los dos.</p>
+<p>Geométricamente: en un extremo, la curva de nivel de <span class="math inline">\(f\)</span> que pasa por el punto es <strong>tangente</strong> a la restricción. Si la cortara, habría puntos de la restricción a los dos lados de esa curva de nivel, con valores mayores y menores.</p>
+</div>
+</div>
+</section>
+<section id="sec-tangencia" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="sec-tangencia"><span class="header-section-number">8.2</span> El dibujo que resuelve el método</h2>
+<p>Tomemos el último ejercicio de la práctica, que es chiquito y sirve de laboratorio:</p>
+<p><em>¿Cuál es el valor máximo que toma <span class="math inline">\(f(x,y) = 4x^2 + 2y^2 + 5\)</span> sobre la curva <span class="math inline">\(x^2 + y^2 - 2y = 0\)</span>?</em></p>
+<div class="callout callout-style-simple callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Antes de nada: la curva es una circunferencia
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Completando cuadrados,</p>
+<p><span class="math display">\[
+x^2 + y^2 - 2y = 0 \iff x^2 + (y-1)^2 = 1 ,
+\]</span></p>
+<p>la circunferencia de centro <span class="math inline">\((0,1)\)</span> y radio <span class="math inline">\(1\)</span>. Es compacta, así que el máximo y el mínimo existen.</p>
+</div>
+</div>
+<div class="lienzo" data-figura="tangencia" data-alto="330" data-rotulo="Recorré la restricción y mirá cuándo los dos gradientes se alinean" data-sliders="[{&quot;id&quot;:&quot;t&quot;,&quot;min&quot;:0,&quot;max&quot;:360,&quot;paso&quot;:1,&quot;valor&quot;:30,&quot;rotulo&quot;:&quot;posición t°&quot;,&quot;decimales&quot;:0}]">
+  <div class="lienzo-pie">
+    La circunferencia violeta es la restricción \(g=0\); las elipses grises son curvas de nivel de
+    \(f\). En el punto que elegís se dibujan \(\nabla f\) (violeta) y \(\nabla g\) (verde), y en
+    naranja la curva de nivel de \(f\) que pasa por ahí. Movelo: en casi todas las posiciones la
+    curva naranja <b>cruza</b> la circunferencia, y ahí hay puntos con \(f\) mayor y menor al
+    lado. Solo en \(t=90°\) y \(t=270°\) —los puntos \((0,2)\) y \((0,0)\)— la curva de nivel es
+    <b>tangente</b> y los dos gradientes quedan paralelos. Esos son los dos candidatos, y el
+    panel de la derecha muestra que uno es el máximo y el otro el mínimo.
+  </div>
+</div>
+<script>
+window.LIENZO = window.LIENZO || {};
+window.LIENZO.tangencia = function (P, v) {
+  var col = P.col;
+  var f  = function (x, y) { return 4*x*x + 2*y*y + 5; };
+  var gf = function (x, y) { return [8*x, 4*y]; };
+  var gg = function (x, y) { return [2*x, 2*y - 2]; };
+  var r  = function (u) { return [Math.cos(2*Math.PI*u), 1 + Math.sin(2*Math.PI*u)]; };
+
+  var lado = Math.min(P.h - 84, P.w * 0.52 - 44);
+  var cajaI = [44, 40, lado, lado];
+  var cajaD = [44 + lado + 56, 40, P.w - (44 + lado + 56) - 18, lado];
+
+  // --- el plano ---
+  var m = P.marco(cajaI, [-2.2, 2.2], [-1.1, 3.3]);
+  P.ejes(m, 'x', 'y', null);
+  P.recorte(m, function () {
+    var niv = [], q;
+    for (q = 5; q <= 30; q += 2) niv.push(q);
+    CV.contornos(P, m, f, niv, col.suave, 1, .65);
+  });
+  var circ = [], i;
+  for (i = 0; i <= 220; i++) circ.push(r(i/220));
+  P.curva(m, circ, col.acento, 2.4, 1);
+
+  var u = v.t / 360, p = r(u), fp = f(p[0], p[1]);
+  // la curva de nivel que pasa por el punto
+  P.recorte(m, function () {
+    CV.contornos(P, m, f, [fp], '#c98a3a', 2.4, 1);
+  });
+
+  var a = gf(p[0], p[1]), b = gg(p[0], p[1]);
+  CV.flecha(P, m, p[0], p[1], a[0], a[1], 44, col.acento, 2.4);
+  CV.flecha(P, m, p[0], p[1], b[0], b[1], 30, col.bien, 2.4);
+  P.punto(m, p[0], p[1], col.tinta, 5);
+  P.punto(m, 0, 2, col.bien, 4);
+  P.punto(m, 0, 0, col.bien, 4);
+
+  // ¿son paralelos? el producto cruzado dice que si
+  var cruz = Math.abs(a[0]*b[1] - a[1]*b[0]);
+  var na = Math.hypot(a[0],a[1]), nb = Math.hypot(b[0],b[1]);
+  var paralelos = (na < 1e-9 || nb < 1e-9) ? false : (cruz/(na*nb) < 0.02);
+
+  // --- f a lo largo de la restricción ---
+  var mD = P.marco(cajaD, [0, 360], [4, 14]);
+  P.ejes(mD, 't°', 'f', null);
+  var pts = [];
+  for (i = 0; i <= 240; i++) {
+    var q = r(i/240);
+    pts.push([360*i/240, f(q[0], q[1])]);
+  }
+  P.recorte(mD, function () { P.curva(mD, pts, col.acento, 2.4, 1); });
+  P.curva(mD, [[0, 13], [360, 13]], col.suave, 1, .8, [4,4]);
+  P.curva(mD, [[0, 5], [360, 5]], col.suave, 1, .8, [4,4]);
+  P.punto(mD, v.t, fp, col.tinta, 5);
+  P.texto(mD.X(4), mD.Y(13) - 5, '13', col.tenue, 10);
+  P.texto(mD.X(4), mD.Y(5) - 5, '5', col.tenue, 10);
+
+  P.texto(cajaI[0] - 12, 16, 'f = ' + fp.toFixed(3), col.tinta, 12.5);
+  P.texto(cajaD[0] + cajaD[2], 16,
+          paralelos ? '∇f ∥ ∇g : candidato' : '∇f y ∇g no son paralelos',
+          paralelos ? col.bien : col.tenue, 12.5, 'right');
+};
+</script>
+<section id="sec-ej21-sust" class="level3" data-number="8.2.1">
+<h3 data-number="8.2.1" class="anchored" data-anchor-id="sec-ej21-sust"><span class="header-section-number">8.2.1</span> Método 1: sustituir</h3>
+<p>De la restricción, <span class="math inline">\(x^2 = 2y - y^2\)</span>. Para que exista <span class="math inline">\(x\)</span> real hace falta <span class="math inline">\(2y - y^2 \ge 0\)</span>, o sea <span class="math inline">\(y \in [0,2]\)</span>. Reemplazando:</p>
+<p><span class="math display">\[
+F(y) = 4(2y - y^2) + 2y^2 + 5 = -2y^2 + 8y + 5 , \qquad y \in [0,2].
+\]</span></p>
+<p>Es una parábola hacia abajo con vértice en <span class="math inline">\(y = \tfrac{8}{4} = 2\)</span>, justo en el extremo derecho del intervalo. Como <span class="math inline">\(F\)</span> es creciente en todo <span class="math inline">\([0,2]\)</span>, el máximo está en <span class="math inline">\(y = 2\)</span>:</p>
+<p><span class="math display">\[
+F(2) = -8 + 16 + 5 = 13, \qquad \text{y ahí } x^2 = 2\cdot2 - 4 = 0 \Rightarrow x = 0 .
+\]</span></p>
+<p>El mínimo es <span class="math inline">\(F(0) = 5\)</span>, en <span class="math inline">\((0,0)\)</span>.</p>
+</section>
+<section id="sec-ej21-lagrange" class="level3" data-number="8.2.2">
+<h3 data-number="8.2.2" class="anchored" data-anchor-id="sec-ej21-lagrange"><span class="header-section-number">8.2.2</span> Método 2: multiplicadores</h3>
+<p>Con <span class="math inline">\(g(x,y) = x^2 + y^2 - 2y\)</span>:</p>
+<p><span class="math display">\[
+\begin{cases}
+8x = \lambda\, 2x &amp; (1)\\
+4y = \lambda\,(2y - 2) &amp; (2)\\
+x^2 + y^2 - 2y = 0 &amp; (3)
+\end{cases}
+\]</span></p>
+<p>De (1): <span class="math inline">\(2x(4 - \lambda) = 0\)</span>, así que <span class="math inline">\(x = 0\)</span> <strong>o</strong> <span class="math inline">\(\lambda = 4\)</span>.</p>
+<ul>
+<li><strong>Si <span class="math inline">\(x = 0\)</span>:</strong> de (3), <span class="math inline">\(y^2 - 2y = 0 \Rightarrow y = 0\)</span> o <span class="math inline">\(y = 2\)</span>. Candidatos <span class="math inline">\((0,0)\)</span> y <span class="math inline">\((0,2)\)</span>.</li>
+<li><strong>Si <span class="math inline">\(\lambda = 4\)</span>:</strong> de (2), <span class="math inline">\(4y = 8y - 8 \Rightarrow y = 2\)</span>; de (3), <span class="math inline">\(x^2 = 4 - 4 = 0\)</span>, o sea <span class="math inline">\(x = 0\)</span>: es el mismo punto <span class="math inline">\((0,2)\)</span>.</li>
+</ul>
+<p>Evaluamos: <span class="math inline">\(f(0,0) = 5\)</span> y <span class="math inline">\(f(0,2) = 0 + 8 + 5 = 13\)</span>.</p>
+<div class="resultado">
+<p>El valor máximo es <span class="math inline">\(f(0,2) = 13\)</span>, alcanzado en <span class="math inline">\((0,2)\)</span>. El mínimo sobre la curva es <span class="math inline">\(f(0,0) = 5\)</span>.</p>
+</div>
+<div class="callout callout-style-simple callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Advertencia</span>El error más frecuente con Lagrange
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>En (1) la tentación es dividir por <span class="math inline">\(x\)</span> y escribir <span class="math inline">\(\lambda = 4\)</span> directo. Eso <strong>pierde los candidatos con <span class="math inline">\(x = 0\)</span></strong>, que en este ejercicio son justamente los dos que importan.</p>
+<p>Cada vez que en el sistema aparezca un producto igualado a cero, hay que <strong>separar en casos</strong>, no dividir. Lo mismo pasa cuando queda <span class="math inline">\(\lambda = 0\)</span> como posibilidad: es un caso legítimo que hay que mirar aparte, y es donde se esconden las respuestas en los ejercicios con simetría.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="sec-lambda" class="level2" data-number="8.3">
+<h2 data-number="8.3" class="anchored" data-anchor-id="sec-lambda"><span class="header-section-number">8.3</span> Qué significa <span class="math inline">\(\lambda\)</span></h2>
+<p>El multiplicador no es un artefacto de la cuenta que se tira al terminar: tiene una lectura, y es la que hace que este método se use en economía, en física estadística y en optimización numérica.</p>
+<p>Si llamamos <span class="math inline">\(M(c)\)</span> al valor máximo de <span class="math inline">\(f\)</span> sobre la restricción <span class="math inline">\(g = c\)</span>, entonces —bajo hipótesis razonables de regularidad—</p>
+<p><span id="eq-lambda"><span class="math display">\[
+\frac{dM}{dc} = \lambda .
+\tag{8.2}\]</span></span></p>
+<p>Es decir: <strong><span class="math inline">\(\lambda\)</span> mide cuánto mejora el óptimo si se afloja un poquito la restricción</strong>. En un problema de producción con presupuesto <span class="math inline">\(c\)</span>, <span class="math inline">\(\lambda\)</span> es lo que rinde el próximo peso; por eso en economía se lo llama <em>precio sombra</em>. En termodinámica, los multiplicadores que aparecen al maximizar la entropía con energía fija resultan ser la temperatura inversa.</p>
+<p>Un <span class="math inline">\(\lambda\)</span> grande dice que la restricción está apretando fuerte; un <span class="math inline">\(\lambda \approx 0\)</span> dice que la restricción casi no molesta y el óptimo restringido está cerca del libre.</p>
+</section>
+<section id="sec-ej15" class="level2" data-number="8.4">
+<h2 data-number="8.4" class="anchored" data-anchor-id="sec-ej15"><span class="header-section-number">8.4</span> La temperatura de una esfera</h2>
+<p><em>Suponiendo que <span class="math inline">\(T(x,y,z) = 100\,x y^2 z\)</span> representa, en grados, la temperatura en cualquier punto de la superficie esférica <span class="math inline">\(x^2+y^2+z^2 = 4\)</span>, determinar los puntos más fríos y más calientes y la temperatura en cada uno.</em></p>
+<p>La esfera es compacta y <span class="math inline">\(T\)</span> continua: los extremos existen. Con <span class="math inline">\(g = x^2+y^2+z^2\)</span>:</p>
+<p><span class="math display">\[
+\begin{cases}
+T_x = 100y^2z = 2\lambda x &amp; (1)\\
+T_y = 200xyz = 2\lambda y &amp; (2)\\
+T_z = 100xy^2 = 2\lambda z &amp; (3)\\
+x^2+y^2+z^2 = 4 &amp; (4)
+\end{cases}
+\]</span></p>
+<p><strong>El truco: multiplicar cada ecuación por su variable.</strong> Llamando <span class="math inline">\(K = 100xy^2z\)</span> —que es justamente <span class="math inline">\(T\)</span>—:</p>
+<p><span class="math display">\[
+x \cdot (1): \ K = 2\lambda x^2, \qquad
+y \cdot (2): \ 2K = 2\lambda y^2, \qquad
+z \cdot (3): \ K = 2\lambda z^2 .
+\]</span></p>
+<p><strong>Candidatos con <span class="math inline">\(T \neq 0\)</span>.</strong> Si <span class="math inline">\(K \neq 0\)</span> entonces <span class="math inline">\(\lambda \neq 0\)</span> y, dividiendo,</p>
+<p><span class="math display">\[
+y^2 = 2x^2, \qquad z^2 = x^2 .
+\]</span></p>
+<p>Sustituyendo en (4): <span class="math inline">\(x^2 + 2x^2 + x^2 = 4x^2 = 4\)</span>, o sea <span class="math inline">\(x = \pm 1\)</span>, <span class="math inline">\(y = \pm\sqrt2\)</span>, <span class="math inline">\(z = \pm 1\)</span> (ocho combinaciones de signos). En esos puntos <span class="math inline">\(y^2 = 2\)</span>, y entonces</p>
+<p><span class="math display">\[
+T = 100\,x\,y^2 z = 100 \cdot 2 \cdot xz = 200\,xz .
+\]</span></p>
+<p>Como <span class="math inline">\(x, z \in \{1,-1\}\)</span>: si tienen <strong>igual</strong> signo, <span class="math inline">\(T = 200\)</span>; si tienen signos <strong>opuestos</strong>, <span class="math inline">\(T = -200\)</span>.</p>
+<p><strong>Candidatos con <span class="math inline">\(T = 0\)</span>.</strong> Si <span class="math inline">\(x = 0\)</span>, <span class="math inline">\(y = 0\)</span> o <span class="math inline">\(z = 0\)</span> entonces <span class="math inline">\(T = 0\)</span>, que queda entre <span class="math inline">\(-200\)</span> y <span class="math inline">\(200\)</span>.</p>
+<div class="resultado">
+<p><strong>Puntos más calientes</strong> (<span class="math inline">\(T = 200°\)</span>): los que tienen <span class="math inline">\(x\)</span> y <span class="math inline">\(z\)</span> del mismo signo,</p>
+<p><span class="math display">\[
+(1,\sqrt2,1), \quad (1,-\sqrt2,1), \quad (-1,\sqrt2,-1), \quad (-1,-\sqrt2,-1).
+\]</span></p>
+<p><strong>Puntos más fríos</strong> (<span class="math inline">\(T = -200°\)</span>): los que tienen <span class="math inline">\(x\)</span> y <span class="math inline">\(z\)</span> de signos opuestos,</p>
+<p><span class="math display">\[
+(1,\sqrt2,-1), \quad (1,-\sqrt2,-1), \quad (-1,\sqrt2,1), \quad (-1,-\sqrt2,1).
+\]</span></p>
+</div>
+<div class="lienzo" data-figura="esfera" data-alto="420" data-rotulo="Arrastrá para girar la esfera" data-sliders="[{&quot;id&quot;:&quot;corte&quot;,&quot;min&quot;:-200,&quot;max&quot;:200,&quot;paso&quot;:5,&quot;valor&quot;:-220,&quot;rotulo&quot;:&quot;resaltar T ≥&quot;,&quot;decimales&quot;:0}]">
+  <div class="lienzo-pie">
+    La esfera está pintada por su temperatura: violeta oscuro lo más frío, dorado lo más
+    caliente. Los puntos marcados son los ocho extremos. Fijate en la simetría: la temperatura
+    depende de \(y\) solo a través de \(y^2\), así que los hemisferios \(y&gt;0\) e \(y&lt;0\) son
+    idénticos — por eso los extremos vienen de a pares. El deslizador apaga todo lo que esté por
+    debajo del corte, para ver dónde quedan las zonas calientes.
+  </div>
+</div>
+<script>
+window.LIENZO = window.LIENZO || {};
+window.LIENZO.esfera = function (P, v) {
+  var V = CV.vista('esfera'), col = P.col;
+  var caja = [26, 34, P.w - 52, P.h - 62];
+  var R = 2;
+  var dom = { x: [-R, R], y: [-R, R], z: [-R, R], ax: 1, ay: 1, az: 1 };
+  var cam = P.camara(caja, dom, V.azim, V.elev, .42);
+  var T = function (x, y, z) { return 100*x*y*y*z; };
+
+  // la esfera, parametrizada por (phi, theta)
+  CV.superficie3(P, cam,
+    function (ph, th) {
+      return [R*Math.sin(ph)*Math.cos(th), R*Math.sin(ph)*Math.sin(th), R*Math.cos(ph)];
+    },
+    0.001, Math.PI - 0.001, 0, 2*Math.PI,
+    { nu: 46, nv: 92, alfa: 1, malla: false,
+      color: function (ph, th, p) {
+        var t = T(p[0], p[1], p[2]);
+        if (t < v.corte) return CV.mezcla('#2a2545', '#3a3560', 0.5);
+        return CV.rampa((t + 200) / 400);
+      } });
+
+  // los ocho extremos
+  var s2 = Math.SQRT2;
+  [[1,s2,1],[1,-s2,1],[-1,s2,-1],[-1,-s2,-1]].forEach(function (p) {
+    if (cam.prof(p[0],p[1],p[2]) > 0.06) P.punto3(cam, p[0], p[1], p[2], col.bien, 5.5);
+  });
+  [[1,s2,-1],[1,-s2,-1],[-1,s2,1],[-1,-s2,1]].forEach(function (p) {
+    if (cam.prof(p[0],p[1],p[2]) > 0.06) P.punto3(cam, p[0], p[1], p[2], col.mal, 5.5);
+  });
+
+  P.texto(caja[0], 16, 'T = 100 x y² z   sobre  x²+y²+z² = 4', col.tinta, 12.5);
+  P.texto(caja[0] + caja[2], 16, 'máx 200°   ·   mín −200°', col.tenue, 12.5, 'right');
+  P.texto(caja[0], caja[1] + caja[3] + 22,
+          v.corte <= -200 ? 'sin corte' : 'apagado todo lo que tiene T < ' + v.corte,
+          col.tenue, 11.5);
+};
+window.addEventListener('load', function () { CV.rotable('esfera', { azim: -0.9, elev: 0.35 }); });
+</script>
+</section>
+<section id="sec-ej10" class="level2" data-number="8.5">
+<h2 data-number="8.5" class="anchored" data-anchor-id="sec-ej10"><span class="header-section-number">8.5</span> La joya: formas cuadráticas y autovalores</h2>
+<p><em>Calcular el máximo valor de <span class="math inline">\(f(x,y,z) = x^2 + xy + y^2 + xz + z^2\)</span> sobre la superficie esférica de radio <span class="math inline">\(1\)</span> centrada en el origen.</em></p>
+<p>Se puede atacar a mano, pero conviene reconocer la estructura primero, porque el resultado vale para cualquier problema de esta forma.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Importante</span>El atajo que conviene memorizar
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Si <span class="math inline">\(f\)</span> es una <strong>forma cuadrática</strong> <span class="math inline">\(f(X) = X^t A X\)</span> con <span class="math inline">\(A\)</span> simétrica, y la restricción es <span class="math inline">\(\|X\|^2 = 1\)</span>, entonces <span class="math inline">\(\nabla f = 2AX\)</span> y <span class="math inline">\(\nabla g = 2X\)</span>, de modo que el sistema de Lagrange</p>
+<p><span class="math display">\[
+2AX = \lambda\, 2X \qquad \text{es exactamente} \qquad AX = \lambda X .
+\]</span></p>
+<p>O sea: <strong>los candidatos son los autovectores unitarios de <span class="math inline">\(A\)</span></strong>, y en cada uno</p>
+<p><span class="math display">\[
+f(X) = X^t A X = X^t(\lambda X) = \lambda \|X\|^2 = \lambda .
+\]</span></p>
+<p>Por lo tanto: <em>el máximo de <span class="math inline">\(f\)</span> sobre la esfera unidad es el mayor autovalor de <span class="math inline">\(A\)</span>, y el mínimo es el menor</em>. El multiplicador de Lagrange <strong>es</strong> el autovalor, y el valor de la función también.</p>
+</div>
+</div>
+<p>Acá la matriz es</p>
+<p><span class="math display">\[
+A = \begin{pmatrix} 1 &amp; \tfrac12 &amp; \tfrac12 \\[2pt] \tfrac12 &amp; 1 &amp; 0 \\[2pt] \tfrac12 &amp; 0 &amp; 1 \end{pmatrix},
+\]</span></p>
+<p>donde los términos cruzados se reparten mitad y mitad para que <span class="math inline">\(A\)</span> quede simétrica: <span class="math inline">\(xy\)</span> aporta <span class="math inline">\(\tfrac12\)</span> en las posiciones <span class="math inline">\((1,2)\)</span> y <span class="math inline">\((2,1)\)</span>, y lo mismo <span class="math inline">\(xz\)</span>.</p>
+<p><strong>Resolviendo el sistema.</strong> Restando (2) <span class="math inline">\(-\)</span> (3) del sistema <span class="math inline">\(AX = \lambda X\)</span>:</p>
+<p><span class="math display">\[
+2y - 2z = 2\lambda(y-z) \implies (y-z)(2 - 2\lambda) = 0 \implies y = z \ \text{ o } \ \lambda = 1 .
+\]</span></p>
+<ul>
+<li><strong>Caso <span class="math inline">\(\lambda = 1\)</span>:</strong> queda <span class="math inline">\(x = 0\)</span> y <span class="math inline">\(z = -y\)</span>; con la restricción, <span class="math inline">\(2y^2 = 1\)</span>. Ahí <span class="math inline">\(f = 1\)</span>.</li>
+<li><strong>Caso <span class="math inline">\(y = z\)</span>:</strong> las dos primeras ecuaciones dan <span class="math inline">\(x = (2\lambda - 2)y\)</span>, y sustituyendo, <span class="math inline">\(2\lambda^2 - 4\lambda + 1 = 0\)</span>, o sea</li>
+</ul>
+<p><span class="math display">\[
+\lambda = \frac{4 \pm \sqrt{16-8}}{4} = 1 \pm \frac{\sqrt2}{2} .
+\]</span></p>
+<p>Los tres autovalores son entonces</p>
+<p><span class="math display">\[
+\lambda_1 = 1 - \frac{\sqrt2}{2} \approx 0{,}293, \qquad
+\lambda_2 = 1, \qquad
+\lambda_3 = 1 + \frac{\sqrt2}{2} \approx 1{,}707 .
+\]</span></p>
+<p><strong>El punto donde se alcanza el máximo.</strong> Para <span class="math inline">\(\lambda_3 = 1 + \tfrac{\sqrt2}{2}\)</span> es <span class="math inline">\(y = z\)</span> y <span class="math inline">\(x = (2\lambda-2)y = \sqrt2\, y\)</span>, de donde <span class="math inline">\(x^2 = 2y^2\)</span>. Con <span class="math inline">\(x^2+y^2+z^2 = 2y^2+y^2+y^2 = 4y^2 = 1\)</span>:</p>
+<p><span class="math display">\[
+y = z = \pm\tfrac12, \qquad x = \pm\tfrac{\sqrt2}{2}.
+\]</span></p>
+<p>Verificación: <span class="math inline">\(f\!\left(\tfrac{\sqrt2}{2}, \tfrac12, \tfrac12\right)
+= \tfrac12 + \tfrac{\sqrt2}{2}\cdot\tfrac12 + \tfrac14 + \tfrac{\sqrt2}{2}\cdot\tfrac12 + \tfrac14
+= 1 + \tfrac{\sqrt2}{2}\)</span> ✓</p>
+<div class="resultado">
+<p><span class="math display">\[
+\max f = 1 + \frac{\sqrt2}{2} = \frac{2+\sqrt2}{2} \approx 1{,}707,
+\]</span></p>
+<p>alcanzado en <span class="math inline">\(\pm\left(\tfrac{\sqrt2}{2}, \tfrac12, \tfrac12\right)\)</span>. El mínimo sobre la esfera es <span class="math inline">\(1 - \tfrac{\sqrt2}{2} \approx 0{,}293\)</span>.</p>
+</div>
+<p>El caso de dos variables se puede mirar entero en un dibujo, y es el mismo zoológico del <a href="ex-01-criterio.html#sec-zoo" class="quarto-xref"><span>Sección 6.3</span></a> visto desde otro ángulo: los autovalores de la Hessiana que clasificaban el punto crítico son, ahora, los valores extremos de la forma sobre la circunferencia unidad.</p>
+<div class="lienzo" data-figura="autovalores" data-alto="330" data-rotulo="Armá tu matriz simétrica y mirá dónde están los autovalores" data-sliders="[{&quot;id&quot;:&quot;a&quot;,&quot;min&quot;:-3,&quot;max&quot;:3,&quot;paso&quot;:0.1,&quot;valor&quot;:2,&quot;rotulo&quot;:&quot;a&quot;,&quot;decimales&quot;:1},{&quot;id&quot;:&quot;b&quot;,&quot;min&quot;:-3,&quot;max&quot;:3,&quot;paso&quot;:0.1,&quot;valor&quot;:1,&quot;rotulo&quot;:&quot;b&quot;,&quot;decimales&quot;:1},{&quot;id&quot;:&quot;c&quot;,&quot;min&quot;:-3,&quot;max&quot;:3,&quot;paso&quot;:0.1,&quot;valor&quot;:1,&quot;rotulo&quot;:&quot;c&quot;,&quot;decimales&quot;:1},{&quot;id&quot;:&quot;t&quot;,&quot;min&quot;:0,&quot;max&quot;:360,&quot;paso&quot;:1,&quot;valor&quot;:20,&quot;rotulo&quot;:&quot;θ°&quot;,&quot;decimales&quot;:0}]">
+  <div class="lienzo-pie">
+    Con \(A=\begin{pmatrix}a&amp;b\\b&amp;c\end{pmatrix}\), la función es
+    \(f(x,y)=ax^2+2bxy+cy^2\) y la restricción es la circunferencia unidad. El panel derecho es
+    \(f\) a lo largo de la circunferencia: sus dos máximos y sus dos mínimos ocurren en las
+    direcciones de los <b>autovectores</b> (las rectas verdes de la izquierda), y sus valores son
+    los <b>autovalores</b> de \(A\). Movés \(a\), \(b\), \(c\) y las rectas giran solas,
+    manteniéndose siempre perpendiculares entre sí, porque \(A\) es simétrica.
+  </div>
+</div>
+<script>
+window.LIENZO = window.LIENZO || {};
+window.LIENZO.autovalores = function (P, v) {
+  var col = P.col;
+  var a = v.a, b = v.b, c = v.c;
+  var f = function (x, y) { return a*x*x + 2*b*x*y + c*y*y; };
+
+  // autovalores y autovectores de [[a,b],[b,c]]
+  var tr = a + c, dt = a*c - b*b;
+  var dis = Math.sqrt(Math.max(0, tr*tr/4 - dt));
+  var l1 = tr/2 + dis, l2 = tr/2 - dis;
+  function autovec(l) {
+    var vx = b, vy = l - a;
+    if (Math.hypot(vx, vy) < 1e-9) { vx = l - c; vy = b; }
+    if (Math.hypot(vx, vy) < 1e-9) { vx = 1; vy = 0; }
+    var n = Math.hypot(vx, vy);
+    return [vx/n, vy/n];
+  }
+  var e1 = autovec(l1), e2 = autovec(l2);
+
+  var lado = Math.min(P.h - 84, P.w * 0.52 - 44);
+  var cajaI = [44, 40, lado, lado];
+  var cajaD = [44 + lado + 56, 40, P.w - (44 + lado + 56) - 18, lado];
+
+  // --- el plano ---
+  var m = P.marco(cajaI, [-1.6, 1.6], [-1.6, 1.6]);
+  P.ejes(m, 'x', 'y', null);
+  P.recorte(m, function () {
+    var niv = [], q, M = Math.max(Math.abs(l1), Math.abs(l2), 0.5);
+    for (q = -2.2*M; q <= 2.2*M; q += M/3) niv.push(q);
+    CV.contornos(P, m, f, niv, col.suave, 1, .6);
+  });
+  var circ = [], i, t;
+  for (i = 0; i <= 220; i++) { t = 2*Math.PI*i/220; circ.push([Math.cos(t), Math.sin(t)]); }
+  P.curva(m, circ, col.acento, 2.2, 1);
+  // las direcciones propias
+  [[e1, l1], [e2, l2]].forEach(function (e) {
+    P.curva(m, [[-1.5*e[0][0], -1.5*e[0][1]], [1.5*e[0][0], 1.5*e[0][1]]], col.bien, 1.8, .9);
+    P.punto(m, e[0][0], e[0][1], col.bien, 4.5);
+    P.punto(m, -e[0][0], -e[0][1], col.bien, 4.5);
+  });
+  var th = v.t * Math.PI/180, px = Math.cos(th), py = Math.sin(th);
+  P.punto(m, px, py, col.tinta, 5.5);
+
+  // --- f sobre la circunferencia ---
+  var M = Math.max(Math.abs(l1), Math.abs(l2), 0.5) * 1.25;
+  var mD = P.marco(cajaD, [0, 360], [-M, M]);
+  P.ejes(mD, 'θ°', 'f', null);
+  P.curva(mD, [[0, 0], [360, 0]], col.suave, 1, .8);
+  P.curva(mD, [[0, l1], [360, l1]], col.bien, 1, .85, [4,4]);
+  P.curva(mD, [[0, l2], [360, l2]], col.bien, 1, .85, [4,4]);
+  var pts = [];
+  for (i = 0; i <= 240; i++) {
+    var u = 2*Math.PI*i/240;
+    pts.push([360*i/240, f(Math.cos(u), Math.sin(u))]);
+  }
+  P.recorte(mD, function () { P.curva(mD, pts, col.acento, 2.4, 1); });
+  P.punto(mD, v.t, f(px, py), col.tinta, 5);
+  P.texto(mD.X(6), mD.Y(l1) - 5, 'λ₁ = ' + l1.toFixed(3), col.bien, 10.5);
+  P.texto(mD.X(354), mD.Y(l2) + 13, 'λ₂ = ' + l2.toFixed(3), col.bien, 10.5, 'right');
+
+  P.texto(cajaI[0] - 12, 16, 'f = ' + f(px, py).toFixed(3), col.tinta, 12.5);
+  P.texto(cajaD[0] + cajaD[2], 16,
+          'traza = ' + tr.toFixed(2) + '  ·  det = ' + dt.toFixed(2), col.tenue, 12, 'right');
+};
+</script>
+<div class="ejercicio">
+<p>En la figura de arriba, ¿por qué las dos rectas verdes son siempre perpendiculares?</p>
+<ul>
+<li><span class="mal">Porque están dibujadas así por conveniencia del gráfico.</span></li>
+<li><span class="bien">Porque <span class="math inline">\(A\)</span> es simétrica, y los autovectores de una matriz simétrica correspondientes a autovalores distintos son ortogonales.</span></li>
+<li><span class="mal">Porque la restricción es una circunferencia.</span></li>
+<li><span class="mal">Porque los autovalores son reales.</span></li>
+</ul>
+<div class="explica">
+<p><strong>La correcta es la segunda.</strong> Si <span class="math inline">\(Av_1 = \lambda_1 v_1\)</span> y <span class="math inline">\(Av_2 = \lambda_2 v_2\)</span> con <span class="math inline">\(\lambda_1 \neq \lambda_2\)</span>, entonces</p>
+<p><span class="math display">\[
+\lambda_1 (v_1 \cdot v_2) = (Av_1)\cdot v_2 = v_1 \cdot (Av_2) = \lambda_2 (v_1 \cdot v_2),
+\]</span></p>
+<p>donde el paso del medio usa que <span class="math inline">\(A\)</span> es simétrica. Restando, <span class="math inline">\((\lambda_1 - \lambda_2)(v_1\cdot v_2) = 0\)</span>, y como los autovalores son distintos, <span class="math inline">\(v_1 \cdot v_2 = 0\)</span>.</p>
+<p>Y las Hessianas <strong>siempre</strong> son simétricas, por el teorema de Schwarz. Por eso el zoológico del <a href="ex-01-criterio.html#sec-zoo" class="quarto-xref"><span>Sección 6.3</span></a> se ve siempre como un par de direcciones perpendiculares, una en la que la función sube más rápido y otra en la que sube más despacio (o baja).</p>
+</div>
+</div>
+<div class="ejercicio" data-respuesta="5" data-tol="0.001" data-rotulo="Para calcular">
+<p>¿Cuál es el máximo de <span class="math inline">\(f(x,y) = 3x^2 + 4xy + 3y^2\)</span> sobre la circunferencia <span class="math inline">\(x^2+y^2 = 1\)</span>?</p>
+<div class="explica">
+<p>Es una forma cuadrática con <span class="math inline">\(A = \begin{pmatrix} 3 &amp; 2 \\ 2 &amp; 3\end{pmatrix}\)</span>: los términos cruzados <span class="math inline">\(4xy\)</span> se reparten como <span class="math inline">\(2\)</span> y <span class="math inline">\(2\)</span>. Sus autovalores salen de <span class="math inline">\(\det(A - \lambda I) = (3-\lambda)^2 - 4 = 0\)</span>, o sea <span class="math inline">\(3 - \lambda = \pm 2\)</span>:</p>
+<p><span class="math display">\[
+\lambda_1 = 5, \qquad \lambda_2 = 1 .
+\]</span></p>
+<p>El máximo es <span class="math inline">\(5\)</span>, alcanzado en la dirección del autovector de <span class="math inline">\(\lambda_1\)</span>, que es <span class="math inline">\(\left(\tfrac{\sqrt2}{2}, \tfrac{\sqrt2}{2}\right)\)</span>; el mínimo es <span class="math inline">\(1\)</span>, en la dirección perpendicular.</p>
+<p>Sin el atajo habría que armar el sistema de Lagrange y resolverlo; con el atajo son dos renglones.</p>
+</div>
+</div>
+<div class="ejercicio">
+<p>Estás maximizando <span class="math inline">\(f\)</span> sobre <span class="math inline">\(g = c\)</span> y el sistema de Lagrange te da un candidato con <span class="math inline">\(\lambda = 0\)</span>. ¿Qué significa?</p>
+<ul>
+<li><span class="mal">Que el candidato no sirve y hay que descartarlo.</span></li>
+<li><span class="bien">Que en ese punto <span class="math inline">\(\nabla f = \vec 0\)</span>: es un punto crítico de <span class="math inline">\(f\)</span> sin restricción que, por casualidad, cae sobre la restricción.</span></li>
+<li><span class="mal">Que la restricción es redundante.</span></li>
+</ul>
+<div class="explica">
+<p><strong>La correcta es la segunda.</strong> <span class="math inline">\(\nabla f = 0 \cdot \nabla g\)</span> quiere decir <span class="math inline">\(\nabla f = \vec 0\)</span>. El punto es un candidato perfectamente legítimo: hay que evaluarlo y compararlo como a cualquier otro.</p>
+<p>Leído con <a href="#eq-lambda" class="quarto-xref"><span>8.2</span></a>, <span class="math inline">\(\lambda = 0\)</span> dice que aflojar la restricción <strong>no mejora nada</strong>, y tiene sentido: el óptimo restringido coincide con un punto crítico libre, así que moverse no ayuda.</p>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<style>
+/* ---------- Ejercicios interactivos y videos del libro ---------- */
+:root {
+  --ej-borde: #ddd6ee;  --ej-fondo: #faf8fc;  --ej-tinta: #1e1a2e;
+  --ej-tenue: #6b6080;  --ej-acento: #7c5cbf;
+  --ej-bien: #3f8f5f;   --ej-bien-fondo: #eaf5ee;
+  --ej-mal:  #b8564f;   --ej-mal-fondo:  #f9ecea;
+}
+body.quarto-dark {
+  --ej-borde: #3b3459;  --ej-fondo: #1a1630;  --ej-tinta: #ece8f5;
+  --ej-tenue: #a79fc0;  --ej-acento: #b79ce9;
+  --ej-bien: #7fc79a;   --ej-bien-fondo: #1c2d24;
+  --ej-mal:  #e09a94;   --ej-mal-fondo:  #2e1e1e;
+}
+
+.ejercicio {
+  border: 1px solid var(--ej-borde);
+  border-left: 3px solid var(--ej-acento);
+  background: var(--ej-fondo);
+  border-radius: 4px;
+  padding: 1.1rem 1.25rem .95rem;
+  margin: 1.8rem 0;
+}
+.ejercicio > .ej-rotulo {
+  font-size: .68rem; letter-spacing: .13em; text-transform: uppercase;
+  font-weight: 600; color: var(--ej-acento); margin-bottom: .5rem;
+}
+.ejercicio p { margin-bottom: .7rem; }
+
+.ej-ops { display: flex; flex-direction: column; gap: .45rem; margin: .9rem 0 .3rem; }
+.ej-op {
+  text-align: left; width: 100%; cursor: pointer;
+  border: 1px solid var(--ej-borde); border-radius: 4px;
+  background: transparent; color: var(--ej-tinta);
+  padding: .6rem .8rem; font: inherit; font-size: .95rem; line-height: 1.45;
+  transition: border-color .15s, background .15s;
+}
+.ej-op:hover:not([disabled]) { border-color: var(--ej-acento); }
+.ej-op[data-estado="bien"] { border-color: var(--ej-bien); background: var(--ej-bien-fondo); }
+.ej-op[data-estado="mal"]  { border-color: var(--ej-mal);  background: var(--ej-mal-fondo); opacity: .85; }
+.ej-op[disabled] { cursor: default; }
+.ej-op .ej-marca { float: right; font-weight: 700; margin-left: .6rem; }
+.ej-op[data-estado="bien"] .ej-marca { color: var(--ej-bien); }
+.ej-op[data-estado="mal"]  .ej-marca { color: var(--ej-mal); }
+
+.ej-num { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; margin: .9rem 0 .3rem; }
+.ej-num input {
+  border: 1px solid var(--ej-borde); border-radius: 4px; background: transparent;
+  color: var(--ej-tinta); padding: .5rem .7rem; font: inherit; font-size: .95rem; width: 11rem;
+}
+.ej-num input:focus { outline: none; border-color: var(--ej-acento); }
+.ej-num button {
+  border: 1px solid var(--ej-acento); border-radius: 4px; background: var(--ej-acento);
+  color: #fff; padding: .5rem 1rem; font: inherit; font-size: .82rem;
+  letter-spacing: .06em; cursor: pointer;
+}
+body.quarto-dark .ej-num button { color: #14111f; }
+.ej-num .ej-veredicto { font-size: .9rem; }
+.ej-num .ej-veredicto[data-estado="bien"] { color: var(--ej-bien); }
+.ej-num .ej-veredicto[data-estado="mal"]  { color: var(--ej-mal); }
+
+.explica {
+  border-top: 1px dashed var(--ej-borde);
+  margin-top: .9rem; padding-top: .8rem;
+  font-size: .93rem; color: var(--ej-tenue);
+}
+.explica > *:last-child { margin-bottom: 0; }
+.explica[hidden] { display: none !important; }
+
+/* ---------- Videos ---------- */
+.video {
+  position: relative; width: 100%; aspect-ratio: 16 / 9;
+  margin: 1.6rem 0 .6rem; border-radius: 4px; overflow: hidden;
+  border: 1px solid var(--ej-borde);
+}
+.video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.video-pie { font-size: .82rem; color: var(--ej-tenue); margin-top: -.2rem; }
+</style>
+
+<script>
+(function () {
+  function armar() {
+    document.querySelectorAll('.ejercicio').forEach(function (caja) {
+      if (caja.dataset.listo) return;
+      caja.dataset.listo = '1';
+
+      var rotulo = document.createElement('div');
+      rotulo.className = 'ej-rotulo';
+      rotulo.textContent = caja.dataset.rotulo || 'Para pensar';
+      caja.insertBefore(rotulo, caja.firstChild);
+
+      var explica = caja.querySelector('.explica');
+      if (explica) explica.hidden = true;
+
+      var lista = caja.querySelector('ul');
+      if (lista) return opcionMultiple(caja, lista, explica);
+      if (caja.dataset.respuesta !== undefined) return numerico(caja, explica);
+    });
+  }
+
+  function opcionMultiple(caja, lista, explica) {
+    var ops = document.createElement('div');
+    ops.className = 'ej-ops';
+    var botones = [];
+
+    Array.prototype.forEach.call(lista.children, function (li) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'ej-op';
+      b.innerHTML = li.innerHTML;
+      b.dataset.correcta = li.querySelector('.bien') ? '1' : '0';
+      ops.appendChild(b);
+      botones.push(b);
+    });
+    lista.parentNode.replaceChild(ops, lista);
+
+    botones.forEach(function (b) {
+      b.addEventListener('click', function () {
+        var bien = b.dataset.correcta === '1';
+        b.dataset.estado = bien ? 'bien' : 'mal';
+        if (!b.querySelector('.ej-marca')) {
+          var m = document.createElement('span');
+          m.className = 'ej-marca';
+          m.textContent = bien ? '✓' : '✕';
+          b.appendChild(m);
+        }
+        if (bien) {
+          botones.forEach(function (o) { o.disabled = true; });
+          if (explica) explica.hidden = false;
+        }
+      });
+    });
+  }
+
+  function numerico(caja, explica) {
+    var esperado = parseFloat(caja.dataset.respuesta);
+    var tol = parseFloat(caja.dataset.tol || '0');
+    var fila = document.createElement('div');
+    fila.className = 'ej-num';
+    fila.innerHTML =
+      '<input type="text" inputmode="decimal" aria-label="Tu respuesta" placeholder="tu respuesta">' +
+      '<button type="button">Comprobar</button>' +
+      '<span class="ej-veredicto"></span>';
+    caja.insertBefore(fila, explica || null);
+
+    var campo = fila.querySelector('input');
+    var boton = fila.querySelector('button');
+    var veredicto = fila.querySelector('.ej-veredicto');
+
+    function comprobar() {
+      var v = parseFloat(campo.value.replace(',', '.'));
+      if (isNaN(v)) {
+        veredicto.dataset.estado = 'mal';
+        veredicto.textContent = 'Escribí un número.';
+        return;
+      }
+      if (Math.abs(v - esperado) <= tol) {
+        veredicto.dataset.estado = 'bien';
+        veredicto.textContent = '✓ Correcto.';
+        if (explica) explica.hidden = false;
+      } else {
+        veredicto.dataset.estado = 'mal';
+        veredicto.textContent = '✕ Todavía no. Probá de nuevo.';
+      }
+    }
+    boton.addEventListener('click', comprobar);
+    campo.addEventListener('keydown', function (e) { if (e.key === 'Enter') comprobar(); });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', armar);
+  } else {
+    armar();
+  }
+})();
+</script>
+
+<style>
+/* ---------- Lienzos interactivos (gráficos con sliders) ---------- */
+.lienzo {
+  border: 1px solid var(--ej-borde);
+  border-left: 3px solid var(--ej-acento);
+  background: var(--ej-fondo);
+  border-radius: 4px;
+  padding: 1rem 1.15rem .85rem;
+  margin: 1.8rem 0;
+}
+.lienzo > .ej-rotulo {
+  font-size: .68rem; letter-spacing: .13em; text-transform: uppercase;
+  font-weight: 600; color: var(--ej-acento); margin-bottom: .55rem;
+}
+.lienzo canvas { display: block; width: 100%; height: auto; }
+.lienzo-controles {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: .5rem 1.3rem; margin-top: .85rem;
+}
+.lienzo-control { display: flex; align-items: center; gap: .55rem; }
+.lienzo-control label {
+  font-size: .85rem; color: var(--ej-tinta); min-width: 2.4rem;
+  font-variant-numeric: tabular-nums;
+}
+.lienzo-control input[type="range"] {
+  flex: 1; min-width: 0; accent-color: var(--ej-acento); height: 1.1rem;
+}
+.lienzo-control .lienzo-valor {
+  font-size: .82rem; color: var(--ej-acento); min-width: 3.1rem;
+  text-align: right; font-variant-numeric: tabular-nums;
+}
+.lienzo-pie {
+  font-size: .87rem; color: var(--ej-tenue); margin: .8rem 0 0;
+  border-top: 1px dashed var(--ej-borde); padding-top: .7rem;
+}
+.lienzo-pie > *:last-child { margin-bottom: 0; }
+</style>
+
+<script>
+/* Motor de figuras interactivas.
+   Cada página registra sus dibujos en window.LIENZO antes de que esto corra:
+
+     window.LIENZO = window.LIENZO || {};
+     window.LIENZO.miFigura = function (P, v) { ... };
+
+   y en el markdown se escribe
+
+     <div class="lienzo" data-figura="miFigura" data-alto="330"
+          data-rotulo="Probá"
+          data-sliders='[{"id":"c","min":-2,"max":2,"paso":0.1,"valor":1,"rotulo":"c"}]'>
+     </div>
+*/
+(function () {
+  window.LIENZO = window.LIENZO || {};
+
+  function leerColores(el) {
+    var s = getComputedStyle(el);
+    function c(n, alt) { return (s.getPropertyValue(n) || alt).trim() || alt; }
+    return {
+      tinta:   c('--ej-tinta',  '#1e1a2e'),
+      tenue:   c('--ej-tenue',  '#6b6080'),
+      acento:  c('--ej-acento', '#7c5cbf'),
+      borde:   c('--ej-borde',  '#ddd6ee'),
+      fondo:   c('--ej-fondo',  '#faf8fc'),
+      bien:    c('--ej-bien',   '#3f8f5f'),
+      mal:     c('--ej-mal',    '#b8564f'),
+      suave:   c('--ej-tenue',  '#a99fc0')
+    };
+  }
+
+  // ---- helpers de dibujo que recibe cada figura ----
+  function Pincel(ctx, w, h, col) {
+    this.ctx = ctx; this.w = w; this.h = h; this.col = col;
+  }
+  Pincel.prototype.marco = function (caja, dx, dy) {
+    var bx = caja[0], by = caja[1], bw = caja[2], bh = caja[3];
+    return {
+      caja: caja, dx: dx, dy: dy,
+      X: function (v) { return bx + (v - dx[0]) / (dx[1] - dx[0]) * bw; },
+      Y: function (v) { return by + bh - (v - dy[0]) / (dy[1] - dy[0]) * bh; }
+    };
+  };
+  Pincel.prototype.ejes = function (m, rx, ry, titulo) {
+    var c = this.ctx, k = m.caja, col = this.col;
+    c.save();
+    c.strokeStyle = col.suave; c.lineWidth = 1; c.globalAlpha = .9;
+    c.beginPath();
+    c.moveTo(k[0], k[1]); c.lineTo(k[0], k[1] + k[3]); c.lineTo(k[0] + k[2], k[1] + k[3]);
+    c.stroke();
+    c.globalAlpha = 1;
+    c.fillStyle = col.tenue;
+    function num(v) { return (Math.round(v * 100) / 100).toString().replace('.', ','); }
+    c.font = '10px system-ui, sans-serif';
+    c.textAlign = 'left';  c.fillText(num(m.dx[0]), k[0], k[1] + k[3] + 14);
+    c.textAlign = 'right'; c.fillText(num(m.dx[1]), k[0] + k[2], k[1] + k[3] + 14);
+    c.font = '11px system-ui, sans-serif';
+    if (rx) { c.textAlign = 'center'; c.fillText(rx, k[0] + k[2] / 2, k[1] + k[3] + 27); }
+    if (ry) { c.textAlign = 'left';   c.fillText(ry, k[0] + 5, k[1] + 12); }
+    if (titulo) {
+      c.textAlign = 'left'; c.fillStyle = col.tinta; c.font = '12px system-ui, sans-serif';
+      c.fillText(titulo, k[0], k[1] - 10);
+    }
+    c.restore();
+  };
+  Pincel.prototype.recorte = function (m, dibujar) {
+    var c = this.ctx, k = m.caja;
+    c.save(); c.beginPath(); c.rect(k[0] - .5, k[1] - .5, k[2] + 1, k[3] + 1); c.clip();
+    dibujar(); c.restore();
+  };
+  Pincel.prototype.curva = function (m, pts, color, ancho, alfa, guion) {
+    var c = this.ctx;
+    if (!pts.length) return;
+    c.save();
+    c.strokeStyle = color; c.lineWidth = ancho || 1.5;
+    c.globalAlpha = (alfa === undefined ? 1 : alfa);
+    c.lineJoin = 'round'; c.lineCap = 'round';
+    if (guion) c.setLineDash(guion);
+    c.beginPath();
+    c.moveTo(m.X(pts[0][0]), m.Y(pts[0][1]));
+    for (var i = 1; i < pts.length; i++) c.lineTo(m.X(pts[i][0]), m.Y(pts[i][1]));
+    c.stroke(); c.restore();
+  };
+  Pincel.prototype.punto = function (m, x, y, color, r) {
+    var c = this.ctx;
+    c.save(); c.fillStyle = color;
+    c.beginPath(); c.arc(m.X(x), m.Y(y), r || 4.5, 0, 6.2832); c.fill();
+    c.restore();
+  };
+  Pincel.prototype.texto = function (px, py, s, color, tam, alin) {
+    var c = this.ctx;
+    c.save();
+    c.fillStyle = color; c.font = (tam || 11) + 'px system-ui, sans-serif';
+    c.textAlign = alin || 'left';
+    c.fillText(s, px, py);
+    c.restore();
+  };
+
+  // ---- proyección 3D ortográfica, para los lienzos que la usen ----
+  Pincel.prototype.camara = function (caja, dom, azim, elev, escala) {
+    var bx = caja[0], by = caja[1], bw = caja[2], bh = caja[3];
+    var cx = bx + bw / 2, cy = by + bh / 2;
+    var sa = Math.sin(azim), ca = Math.cos(azim);
+    var se = Math.sin(elev), ce = Math.cos(elev);
+    var k = (escala || 0.44) * Math.min(bw, bh);
+    var ax = dom.ax || 1, ay = dom.ay || 1, az = dom.az || 1;
+    function nor(v, r) { return 2 * (v - r[0]) / (r[1] - r[0]) - 1; }
+    function xyz(x, y, z) {
+      return [nor(x, dom.x) * ax, nor(y, dom.y) * ay, nor(z, dom.z) * az];
+    }
+    return {
+      caja: caja, dom: dom,
+      pt: function (x, y, z) {
+        var p = xyz(x, y, z);
+        var u = -p[0] * sa + p[1] * ca;
+        var v = -(p[0] * ca + p[1] * sa) * se + p[2] * ce;
+        return [cx + k * u, cy - k * v];
+      },
+      prof: function (x, y, z) {
+        var p = xyz(x, y, z);
+        return (p[0] * ca + p[1] * sa) * ce + p[2] * se;
+      }
+    };
+  };
+
+  Pincel.prototype.curva3 = function (cam, pts, color, ancho, alfa, guion) {
+    var c = this.ctx;
+    if (!pts.length) return;
+    c.save();
+    c.strokeStyle = color; c.lineWidth = ancho || 1.4;
+    c.globalAlpha = (alfa === undefined ? 1 : alfa);
+    c.lineJoin = 'round'; c.lineCap = 'round';
+    if (guion) c.setLineDash(guion);
+    c.beginPath();
+    var p = cam.pt(pts[0][0], pts[0][1], pts[0][2]);
+    c.moveTo(p[0], p[1]);
+    for (var i = 1; i < pts.length; i++) {
+      p = cam.pt(pts[i][0], pts[i][1], pts[i][2]);
+      c.lineTo(p[0], p[1]);
+    }
+    c.stroke(); c.restore();
+  };
+
+  Pincel.prototype.punto3 = function (cam, x, y, z, color, r) {
+    var c = this.ctx, p = cam.pt(x, y, z);
+    c.save(); c.fillStyle = color;
+    c.beginPath(); c.arc(p[0], p[1], r || 4.5, 0, 6.2832); c.fill(); c.restore();
+  };
+
+  // caja de referencia: el piso, las cuatro aristas verticales y los rótulos
+  Pincel.prototype.caja3 = function (cam, rx, ry, rz) {
+    var d = cam.dom, col = this.col;
+    var x0 = d.x[0], x1 = d.x[1], y0 = d.y[0], y1 = d.y[1], z0 = d.z[0], z1 = d.z[1];
+    var piso = [[x0, y0, z0], [x1, y0, z0], [x1, y1, z0], [x0, y1, z0], [x0, y0, z0]];
+    this.curva3(cam, piso, col.borde, 1.2, 1);
+    [[x0, y0], [x1, y0], [x1, y1], [x0, y1]].forEach(function (e) {
+      this.curva3(cam, [[e[0], e[1], z0], [e[0], e[1], z1]], col.borde, 1, .55, [3, 4]);
+    }, this);
+    var t;
+    if (rx) { t = cam.pt((x0 + x1) / 2, y0, z0); this.texto(t[0], t[1] + 16, rx, col.tenue, 11, 'center'); }
+    if (ry) { t = cam.pt(x1, (y0 + y1) / 2, z0); this.texto(t[0] + 12, t[1] + 6, ry, col.tenue, 11, 'left'); }
+    if (rz) { t = cam.pt(x0, y1, z1); this.texto(t[0] - 10, t[1], rz, col.tenue, 11, 'right'); }
+  };
+
+  // ---- construcción de un lienzo ----
+  function armarLienzo(caja) {
+    if (caja.dataset.listo) return;
+    caja.dataset.listo = '1';
+
+    var dibujo = window.LIENZO[caja.dataset.figura];
+    if (typeof dibujo !== 'function') return;
+
+    var rot = document.createElement('div');
+    rot.className = 'ej-rotulo';
+    rot.textContent = caja.dataset.rotulo || 'Probá moviendo los controles';
+    caja.insertBefore(rot, caja.firstChild);
+
+    var pie = caja.querySelector('.lienzo-pie');
+
+    var lienzo = document.createElement('canvas');
+    caja.insertBefore(lienzo, pie || null);
+
+    var defs = [];
+    try { defs = JSON.parse(caja.dataset.sliders || '[]'); } catch (e) { defs = []; }
+
+    var fila = document.createElement('div');
+    fila.className = 'lienzo-controles';
+    var entradas = {};
+    var salidas = {};
+
+    defs.forEach(function (d) {
+      var cel = document.createElement('div');
+      cel.className = 'lienzo-control';
+      var et = document.createElement('label');
+      et.textContent = d.rotulo || d.id;
+      var inp = document.createElement('input');
+      inp.type = 'range';
+      inp.min = d.min; inp.max = d.max;
+      inp.step = (d.paso === undefined ? 0.01 : d.paso);
+      inp.value = (d.valor === undefined ? d.min : d.valor);
+      inp.setAttribute('aria-label', d.rotulo || d.id);
+      var val = document.createElement('span');
+      val.className = 'lienzo-valor';
+      cel.appendChild(et); cel.appendChild(inp); cel.appendChild(val);
+      fila.appendChild(cel);
+      entradas[d.id] = inp; salidas[d.id] = val;
+      inp.addEventListener('input', pintar);
+    });
+    caja.insertBefore(fila, pie || null);
+
+    var alto = parseInt(caja.dataset.alto || '330', 10);
+
+    function pintar() {
+      var ancho = lienzo.clientWidth || caja.clientWidth || 640;
+      var dpr = window.devicePixelRatio || 1;
+      lienzo.width = Math.round(ancho * dpr);
+      lienzo.height = Math.round(alto * dpr);
+      lienzo.style.height = alto + 'px';
+
+      var ctx = lienzo.getContext('2d');
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.clearRect(0, 0, ancho, alto);
+
+      var col = leerColores(caja);
+      var v = {};
+      defs.forEach(function (d) {
+        var x = parseFloat(entradas[d.id].value);
+        v[d.id] = x;
+        var dec = (d.decimales === undefined ? 2 : d.decimales);
+        salidas[d.id].textContent = (d.formato ? d.formato : '') + x.toFixed(dec) +
+                                   (d.sufijo ? d.sufijo : '');
+      });
+
+      dibujo(new Pincel(ctx, ancho, alto, col), v);
+    }
+
+    caja._pintar = pintar;
+    pintar();
+    // una segunda pasada cuando ya se aplicó el layout definitivo
+    setTimeout(pintar, 60);
+  }
+
+  function armarTodos() {
+    document.querySelectorAll('.lienzo').forEach(armarLienzo);
+  }
+  function repintarTodos() {
+    document.querySelectorAll('.lienzo').forEach(function (c) {
+      if (c._pintar) c._pintar();
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', armarTodos);
+  } else {
+    armarTodos();
+  }
+
+  var temporizador;
+  window.addEventListener('resize', function () {
+    clearTimeout(temporizador);
+    temporizador = setTimeout(repintarTodos, 120);
+  });
+
+  // el libro cambia entre claro y oscuro poniendo una clase en <body>
+  if (window.MutationObserver) {
+    new MutationObserver(repintarTodos)
+      .observe(document.body, { attributes: true, attributeFilter: ['class'] });
+  }
+})();
+</script>
+<style>
+/* ---------- Extras de la guía de campos ---------- */
+.chip {
+  display: inline-block; font-family: 'Inter', system-ui, sans-serif;
+  font-size: .7rem; letter-spacing: .06em; font-weight: 600;
+  padding: .12rem .5rem; border-radius: 3px; vertical-align: .08em;
+  white-space: nowrap;
+}
+.chip.si  { color: #2f6b48; background: #e6f3ec; border: 1px solid #bfe0cd; }
+.chip.no  { color: #9c443d; background: #f8eae8; border: 1px solid #e6c5c1; }
+.chip.ojo { color: #8a6a1f; background: #faf2df; border: 1px solid #e7d5a8; }
+body.quarto-dark .chip.si  { color: #8ed5aa; background: #1b2d23; border-color: #2f5340; }
+body.quarto-dark .chip.no  { color: #eba9a2; background: #2e1e1e; border-color: #5a3833; }
+body.quarto-dark .chip.ojo { color: #e6c98a; background: #2c2617; border-color: #56492a; }
+
+/* Caja de resultado, el equivalente del recuadro violeta del apunte */
+.resultado {
+  border: 1px solid var(--ej-borde); border-radius: 4px;
+  background: var(--ej-fondo); padding: .35rem 1rem; margin: 1.3rem 0;
+}
+.resultado .math.display { margin: .55rem 0; }
+
+/* Pasos numerados de la receta.
+   El contenido se escribe como lista ordenada de markdown, asi que en el PDF
+   sale como un enumerate normal; aca le cambiamos el numerito por un circulo. */
+.receta { margin: 1.4rem 0; }
+.receta ol { list-style: none; counter-reset: paso; padding-left: 0; margin-left: 0; }
+.receta ol > li {
+  position: relative; padding-left: 2.6rem; margin-bottom: 1.15rem;
+}
+.receta ol > li::before {
+  counter-increment: paso; content: counter(paso);
+  position: absolute; left: 0; top: .05rem;
+  width: 1.75rem; height: 1.75rem; border-radius: 50%;
+  background: var(--ej-acento); color: #fff;
+  font-family: 'Inter', system-ui, sans-serif; font-size: .85rem; font-weight: 600;
+  display: flex; align-items: center; justify-content: center;
+}
+body.quarto-dark .receta ol > li::before { color: #14111f; }
+.receta ol > li > p:first-child { margin-top: 0; }
+
+/* El lienzo rotable avisa que se puede arrastrar */
+.lienzo[data-rotable] canvas { cursor: grab; touch-action: none; }
+.lienzo[data-rotable] canvas:active { cursor: grabbing; }
+</style>
+
+<script>
+/* ------------------------------------------------------------------
+   CV — herramientas de dibujo para las figuras de campos vectoriales.
+   Se apoya en el motor .lienzo de interactivo.html: cada figura recibe
+   un Pincel P (con P.ctx, P.w, P.h, P.col) y el objeto v con los sliders.
+   ------------------------------------------------------------------ */
+(function () {
+  var CV = window.CV = window.CV || {};
+
+  // ---------- color ----------
+  function hex(c) {
+    c = c.replace('#', '');
+    if (c.length === 3) c = c[0]+c[0]+c[1]+c[1]+c[2]+c[2];
+    return [parseInt(c.slice(0,2),16), parseInt(c.slice(2,4),16), parseInt(c.slice(4,6),16)];
+  }
+  function rgb(a) { return 'rgb(' + a.map(Math.round).join(',') + ')'; }
+
+  // rampa fría → cálida, con los violetas del sitio
+  var RAMPA = ['#241f42', '#453a7e', '#6d55b5', '#9c83cf', '#c9aecb', '#e8c79c'].map(hex);
+  CV.rampa = function (t) {
+    t = Math.max(0, Math.min(1, t)) * (RAMPA.length - 1);
+    var i = Math.min(Math.floor(t), RAMPA.length - 2), s = t - i;
+    var a = RAMPA[i], b = RAMPA[i+1];
+    return rgb([a[0]+(b[0]-a[0])*s, a[1]+(b[1]-a[1])*s, a[2]+(b[2]-a[2])*s]);
+  };
+  CV.mezcla = function (c1, c2, s) {
+    var a = hex(c1), b = hex(c2);
+    return rgb([a[0]+(b[0]-a[0])*s, a[1]+(b[1]-a[1])*s, a[2]+(b[2]-a[2])*s]);
+  };
+
+  // ---------- flechas ----------
+  // en pixeles: de (x0,y0) a (x1,y1)
+  CV.flechaPx = function (P, x0, y0, x1, y1, color, ancho, cabeza) {
+    var c = P.ctx, dx = x1 - x0, dy = y1 - y0, L = Math.hypot(dx, dy);
+    if (L < 0.4) return;
+    var h = Math.min(cabeza === undefined ? 5.5 : cabeza, L * 0.55);
+    var ux = dx / L, uy = dy / L, px = -uy, py = ux;
+    c.save();
+    c.strokeStyle = color; c.fillStyle = color;
+    c.lineWidth = ancho || 1.2; c.lineCap = 'round';
+    c.beginPath(); c.moveTo(x0, y0); c.lineTo(x1 - ux*h*0.75, y1 - uy*h*0.75); c.stroke();
+    c.beginPath();
+    c.moveTo(x1, y1);
+    c.lineTo(x1 - ux*h + px*h*0.42, y1 - uy*h + py*h*0.42);
+    c.lineTo(x1 - ux*h - px*h*0.42, y1 - uy*h - py*h*0.42);
+    c.closePath(); c.fill();
+    c.restore();
+  };
+
+  // en coordenadas de datos sobre un marco m, con largo dado en pixeles
+  CV.flecha = function (P, m, x, y, u, vv, largoPx, color, ancho) {
+    var L = Math.hypot(u, vv);
+    if (L < 1e-12) return;
+    var X = m.X(x), Y = m.Y(y);
+    // el marco invierte el eje vertical: una componente v>0 va hacia arriba en pantalla
+    CV.flechaPx(P, X, Y, X + u/L*largoPx, Y - vv/L*largoPx, color, ancho);
+  };
+
+  // flecha apoyada en el plano z = z0 del mundo 3D, con largo en pixeles
+  CV.flecha3 = function (P, cam, x, y, z0, u, vv, largoPx, color, ancho) {
+    var L = Math.hypot(u, vv);
+    if (L < 1e-12) return;
+    var p0 = cam.pt(x, y, z0);
+    var e = 1e-3 * (cam.dom.x[1] - cam.dom.x[0]);
+    var p1 = cam.pt(x + u/L*e, y + vv/L*e, z0);
+    var dx = p1[0] - p0[0], dy = p1[1] - p0[1], d = Math.hypot(dx, dy);
+    if (d < 1e-9) return;
+    CV.flechaPx(P, p0[0], p0[1], p0[0] + dx/d*largoPx, p0[1] + dy/d*largoPx, color, ancho, 4.5);
+  };
+
+  /* Campo de flechas sobre el marco m.
+     F(x,y) devuelve [u,v]. opts: {n, color, largo, escala:'norma'|'fija', alfa} */
+  CV.campo = function (P, m, F, opts) {
+    opts = opts || {};
+    var n = opts.n || 15, col = opts.color || P.col.tinta;
+    var largo = opts.largo || 13, alfa = opts.alfa === undefined ? .8 : opts.alfa;
+    var dx = m.dx, dy = m.dy, i, j, x, y, f, datos = [], mx = 0;
+    for (i = 0; i < n; i++) for (j = 0; j < n; j++) {
+      x = dx[0] + (dx[1]-dx[0]) * (i+0.5)/n;
+      y = dy[0] + (dy[1]-dy[0]) * (j+0.5)/n;
+      f = F(x, y);
+      if (!f || !isFinite(f[0]) || !isFinite(f[1])) continue;
+      var nn = Math.hypot(f[0], f[1]);
+      if (nn > mx) mx = nn;
+      datos.push([x, y, f[0], f[1], nn]);
+    }
+    if (!mx) return;
+    P.ctx.save(); P.ctx.globalAlpha = alfa;
+    datos.forEach(function (d) {
+      var L = opts.escala === 'fija' ? largo
+            : largo * (0.34 + 0.66 * Math.sqrt(Math.min(1, d[4] / mx)));
+      var c = opts.porNorma ? CV.mezcla(P.col.suave, col, Math.min(1, d[4]/mx)) : col;
+      CV.flecha(P, m, d[0], d[1], d[2], d[3], L, c, opts.ancho || 1.05);
+    });
+    P.ctx.restore();
+  };
+
+  /* Marching squares: devuelve los segmentos de la curva f = nivel dentro del
+     rectángulo dom = {x:[a,b], y:[c,d]}, como pares [[x0,y0],[x1,y1]]. */
+  CV.segmentos = function (dom, f, nivel, N) {
+    N = N || 120;
+    var xs = [], ys = [], Z = [], i, j, segs = [];
+    for (i = 0; i <= N; i++) xs.push(dom.x[0] + (dom.x[1]-dom.x[0]) * i/N);
+    for (j = 0; j <= N; j++) ys.push(dom.y[0] + (dom.y[1]-dom.y[0]) * j/N);
+    for (i = 0; i <= N; i++) { Z.push([]); for (j = 0; j <= N; j++) Z[i].push(f(xs[i], ys[j])); }
+    for (i = 0; i < N; i++) for (j = 0; j < N; j++) {
+      var z = [Z[i][j], Z[i+1][j], Z[i+1][j+1], Z[i][j+1]];
+      if (!isFinite(z[0]+z[1]+z[2]+z[3])) continue;
+      var px = [xs[i], xs[i+1], xs[i+1], xs[i]], py = [ys[j], ys[j], ys[j+1], ys[j+1]];
+      var pts = [];
+      for (var k = 0; k < 4; k++) {
+        var a = z[k], b = z[(k+1)%4];
+        if ((a - nivel) * (b - nivel) < 0) {
+          var s = (nivel - a) / (b - a);
+          pts.push([px[k] + (px[(k+1)%4]-px[k])*s, py[k] + (py[(k+1)%4]-py[k])*s]);
+        }
+      }
+      for (var q = 0; q + 1 < pts.length; q += 2) segs.push([pts[q], pts[q+1]]);
+    }
+    return segs;
+  };
+
+  /* Curvas de nivel sobre un marco 2D. niveles es un array de valores. */
+  CV.contornos = function (P, m, f, niveles, color, ancho, alfa) {
+    var dom = { x: m.dx, y: m.dy }, c = P.ctx;
+    c.save();
+    c.strokeStyle = color; c.lineWidth = ancho || 1.1;
+    c.globalAlpha = alfa === undefined ? .75 : alfa;
+    c.lineCap = 'round';
+    c.beginPath();
+    niveles.forEach(function (nv) {
+      CV.segmentos(dom, f, nv, 140).forEach(function (s) {
+        c.moveTo(m.X(s[0][0]), m.Y(s[0][1]));
+        c.lineTo(m.X(s[1][0]), m.Y(s[1][1]));
+      });
+    });
+    c.stroke();
+    c.restore();
+  };
+
+  /* Los mismos contornos, pero dibujados en 3D a una altura z dada
+     (z = 'nivel' los apoya sobre la superficie, un número los apoya ahí). */
+  CV.contornos3 = function (P, cam, f, niveles, z, color, ancho, alfa) {
+    var dom = { x: cam.dom.x, y: cam.dom.y }, c = P.ctx;
+    c.save();
+    c.strokeStyle = color; c.lineWidth = ancho || 1.3;
+    c.globalAlpha = alfa === undefined ? .9 : alfa;
+    c.lineCap = 'round';
+    c.beginPath();
+    niveles.forEach(function (nv) {
+      var alt = (z === 'nivel') ? nv : z;
+      if (alt < cam.dom.z[0] || alt > cam.dom.z[1]) return;
+      CV.segmentos(dom, f, nv, 110).forEach(function (s) {
+        var p = cam.pt(s[0][0], s[0][1], alt), q = cam.pt(s[1][0], s[1][1], alt);
+        c.moveTo(p[0], p[1]); c.lineTo(q[0], q[1]);
+      });
+    });
+    c.stroke();
+    c.restore();
+  };
+
+  /* Superficie z = f(x,y) en 3D, algoritmo del pintor.
+     cam viene de P.camara(...). opts: {n, zmin, zmax, alfa, malla} */
+  CV.malla3 = function (P, cam, f, opts) {
+    opts = opts || {};
+    var n = opts.n || 26, d = cam.dom, c = P.ctx;
+    var i, j, X = [], Y = [], Z = [], zmin = Infinity, zmax = -Infinity;
+    for (i = 0; i <= n; i++) X.push(d.x[0] + (d.x[1]-d.x[0]) * i/n);
+    for (j = 0; j <= n; j++) Y.push(d.y[0] + (d.y[1]-d.y[0]) * j/n);
+    for (i = 0; i <= n; i++) {
+      Z.push([]);
+      for (j = 0; j <= n; j++) {
+        var z = f(X[i], Y[j]);
+        Z[i].push(z);
+        if (isFinite(z)) { if (z < zmin) zmin = z; if (z > zmax) zmax = z; }
+      }
+    }
+    if (opts.zmin !== undefined) zmin = opts.zmin;
+    if (opts.zmax !== undefined) zmax = opts.zmax;
+    var rec = function (z) { return Math.max(d.z[0], Math.min(d.z[1], z)); };
+
+    var caras = [];
+    for (i = 0; i < n; i++) for (j = 0; j < n; j++) {
+      var zz = [Z[i][j], Z[i+1][j], Z[i+1][j+1], Z[i][j+1]];
+      if (!isFinite(zz[0]+zz[1]+zz[2]+zz[3])) continue;
+      var xx = [X[i], X[i+1], X[i+1], X[i]], yy = [Y[j], Y[j], Y[j+1], Y[j+1]];
+      var zc = (zz[0]+zz[1]+zz[2]+zz[3])/4;
+      var xc = (xx[0]+xx[1])/2, yc = (yy[0]+yy[2])/2;
+      caras.push({ x: xx, y: yy, z: zz, prof: cam.prof(xc, yc, rec(zc)), t: (zc - zmin) / (zmax - zmin || 1) });
+    }
+    caras.sort(function (a, b) { return a.prof - b.prof; });
+
+    c.save();
+    c.globalAlpha = opts.alfa === undefined ? 1 : opts.alfa;
+    c.lineJoin = 'round';
+    caras.forEach(function (q) {
+      c.beginPath();
+      for (var k = 0; k < 4; k++) {
+        var p = cam.pt(q.x[k], q.y[k], rec(q.z[k]));
+        if (k === 0) c.moveTo(p[0], p[1]); else c.lineTo(p[0], p[1]);
+      }
+      c.closePath();
+      c.fillStyle = CV.rampa(q.t);
+      c.fill();
+      if (opts.malla !== false) {
+        c.strokeStyle = 'rgba(255,255,255,.14)'; c.lineWidth = .5; c.stroke();
+      }
+    });
+    c.restore();
+    return { zmin: zmin, zmax: zmax };
+  };
+
+  /* Superficie paramétrica: S(u,v) devuelve [x,y,z] del mundo 3D.
+     opts: {nu, nv, color: function(u,v,p){...} , alfa, malla, recortarZ} */
+  CV.superficie3 = function (P, cam, S, u0, u1, v0, v1, opts) {
+    opts = opts || {};
+    var nu = opts.nu || 40, nv = opts.nv || 24, c = P.ctx, i, j;
+    var U = [], V = [], G = [];
+    for (i = 0; i <= nu; i++) U.push(u0 + (u1-u0) * i/nu);
+    for (j = 0; j <= nv; j++) V.push(v0 + (v1-v0) * j/nv);
+    for (i = 0; i <= nu; i++) { G.push([]); for (j = 0; j <= nv; j++) G[i].push(S(U[i], V[j])); }
+
+    var caras = [];
+    for (i = 0; i < nu; i++) for (j = 0; j < nv; j++) {
+      var q = [G[i][j], G[i+1][j], G[i+1][j+1], G[i][j+1]];
+      if (q.some(function (p) { return !p || !isFinite(p[0]+p[1]+p[2]); })) continue;
+      var cx = (q[0][0]+q[1][0]+q[2][0]+q[3][0])/4;
+      var cy = (q[0][1]+q[1][1]+q[2][1]+q[3][1])/4;
+      var cz = (q[0][2]+q[1][2]+q[2][2]+q[3][2])/4;
+      caras.push({ q: q, prof: cam.prof(cx, cy, cz),
+                   col: opts.color ? opts.color((U[i]+U[i+1])/2, (V[j]+V[j+1])/2, [cx,cy,cz])
+                                   : CV.rampa(.5) });
+    }
+    caras.sort(function (a, b) { return a.prof - b.prof; });
+
+    c.save();
+    c.globalAlpha = opts.alfa === undefined ? 1 : opts.alfa;
+    caras.forEach(function (f) {
+      c.beginPath();
+      for (var k = 0; k < 4; k++) {
+        var p = cam.pt(f.q[k][0], f.q[k][1], f.q[k][2]);
+        if (k === 0) c.moveTo(p[0], p[1]); else c.lineTo(p[0], p[1]);
+      }
+      c.closePath();
+      c.fillStyle = f.col; c.fill();
+      // el borde del mismo color tapa las costuras del antialiasing
+      c.strokeStyle = opts.malla === false ? f.col : 'rgba(255,255,255,.13)';
+      c.lineWidth = opts.malla === false ? .8 : .5;
+      c.stroke();
+    });
+    c.restore();
+  };
+
+  // ---------- integración numérica de una integral de línea ----------
+  /* r(t) devuelve [x,y]; F(x,y) devuelve [u,v]; acumula ∫ F·dr en [t0,t1]. */
+  CV.trabajo = function (F, r, t0, t1, N) {
+    N = N || 400;
+    var W = 0, p = r(t0), f, q, i, t;
+    for (i = 1; i <= N; i++) {
+      t = t0 + (t1 - t0) * i / N;
+      q = r(t);
+      var mx = (p[0]+q[0])/2, my = (p[1]+q[1])/2;
+      f = F(mx, my);
+      if (isFinite(f[0]) && isFinite(f[1])) W += f[0]*(q[0]-p[0]) + f[1]*(q[1]-p[1]);
+      p = q;
+    }
+    return W;
+  };
+
+  // ---------- rotar arrastrando ----------
+  CV.vistas = {};
+  CV.vista = function (nombre) {
+    return CV.vistas[nombre] || (CV.vistas[nombre] = { azim: -0.62, elev: 0.46 });
+  };
+  CV.rotable = function (nombre, inicial) {
+    var v = CV.vista(nombre);
+    if (inicial) { v.azim = inicial.azim; v.elev = inicial.elev; }
+    function enganchar() {
+      var caja = document.querySelector('.lienzo[data-figura="' + nombre + '"]');
+      if (!caja) return;
+      caja.setAttribute('data-rotable', '1');
+      var cv = caja.querySelector('canvas');
+      if (!cv) return;
+      var arrastra = false, x0 = 0, y0 = 0, a0 = 0, e0 = 0;
+      cv.addEventListener('pointerdown', function (ev) {
+        arrastra = true; x0 = ev.clientX; y0 = ev.clientY; a0 = v.azim; e0 = v.elev;
+        cv.setPointerCapture(ev.pointerId); ev.preventDefault();
+      });
+      cv.addEventListener('pointermove', function (ev) {
+        if (!arrastra) return;
+        v.azim = a0 - (ev.clientX - x0) * 0.008;
+        v.elev = Math.max(-0.15, Math.min(1.45, e0 + (ev.clientY - y0) * 0.006));
+        if (caja._pintar) caja._pintar();
+      });
+      ['pointerup', 'pointercancel', 'pointerleave'].forEach(function (e) {
+        cv.addEventListener(e, function () { arrastra = false; });
+      });
+    }
+    // después de que el motor haya construido el lienzo
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', function () { setTimeout(enganchar, 0); });
+    } else { setTimeout(enganchar, 0); }
+  };
+})();
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copiado");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copiado");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/julietaamendola\.github\.io\/my-page\/guias\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./ex-02-absolutos.html" class="pagination-link" aria-label="Extremos absolutos: casi siempre en el borde">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Extremos absolutos: casi siempre en el borde</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./ex-04-problemas.html" class="pagination-link" aria-label="Problemas de optimización">
+        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Problemas de optimización</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Julieta Améndola · Tandil, Argentina</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p><a href="https://julietaamendola.github.io/my-page/">Volver al inicio</a></p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

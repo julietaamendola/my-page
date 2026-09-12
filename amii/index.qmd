@@ -1,0 +1,86 @@
+# Presentación {.unnumbered}
+
+Esto es una colección de guías resueltas de **Análisis Matemático II**: los ejercicios de la
+cátedra, sí, pero resueltos con el razonamiento adelante y la cuenta atrás, y con figuras que
+se pueden mover para ver de dónde sale cada cosa.
+
+No es un formulario ni un solucionario. La idea es que quede claro *por qué* funciona cada
+método, qué hipótesis está usando sin decirlo, y qué pasa cuando esas hipótesis fallan. Por eso
+casi todas las guías terminan con un contraejemplo: entender una herramienta es, sobre todo,
+saber cuándo no se puede usar.
+
+::: {.callout-tip appearance="simple"}
+## Cómo leerla
+
+Las figuras con el rótulo violeta **se tocan**: tienen deslizadores abajo, y las de tres
+dimensiones se giran arrastrando con el mouse o el dedo. Las preguntas en recuadro son para
+frenar y contestar antes de seguir; la explicación aparece cuando acertás.
+
+Nada de eso sobrevive al papel, así que la versión en PDF trae en su lugar figuras fijas
+equivalentes. Si estás leyendo en pantalla, conviene quedarse acá.
+:::
+
+::: {.content-visible when-format="pdf"}
+::: {.callout-note appearance="simple"}
+## Leyendo en papel
+
+En el PDF las preguntas de opción múltiple van sin marcar cuál es la correcta, y la explicación
+que sigue —que en la web aparece recién al acertar— la nombra en la primera línea. Si querés
+usarlas como autoevaluación de verdad, tapá el párrafo de abajo antes de elegir.
+:::
+:::
+
+## Qué hay hasta ahora {.unnumbered}
+
+**Campos conservativos y función potencial.** El problema inverso de derivar: dadas las
+derivadas parciales, reconstruir la función. Toda la guía gira alrededor de una sola ecuación,
+
+$$
+\nabla f = \vec F,
+$$
+
+encontrar la "altura" $f$ cuya pendiente es el campo $\vec F$. Están el resumen teórico con la
+receta, un ejemplo guiado con la independencia del camino vista en el dibujo, un capítulo entero
+dedicado a los campos que **no** son conservativos y sus consecuencias, los ejercicios 13 y 18 a
+21 de la guía de la cátedra, y un resumen final con el mapa de equivalencias.
+
+**Extremos de funciones de varias variables.** Máximos, mínimos y sillas: el criterio del Hessiano
+y —sobre todo— los tres casos en que **no decide**, que son los que aparecen en los parciales;
+extremos absolutos sobre regiones compactas, donde casi todo pasa en el borde; multiplicadores de
+Lagrange, con el dibujo de la tangencia que explica de dónde sale el método; y problemas de
+optimización con enunciado.
+
+Termina con un capítulo que no sale de ninguna práctica: los mismos métodos aplicados a la recta
+de mínimos cuadrados, a los puntos de Lagrange del problema de tres cuerpos —donde hay máximos de
+energía potencial que resultan ser posiciones estables— y al punto de Fermat, que es cómo se
+diseña una red con la menor cantidad de cable posible.
+
+## Convenciones {.unnumbered}
+
+Para que no se pisen los nombres:
+
+| Símbolo | Qué es |
+|---|---|
+| $\vec F,\ \vec G$ | campos **vectoriales**, $\mathbb{R}^n \to \mathbb{R}^n$ |
+| $f,\ \varphi$ | campos **escalares**: la función potencial, $\mathbb{R}^n \to \mathbb{R}$ |
+| $P, Q, R$ | las componentes de $\vec F$ |
+| $U$ | la energía potencial de la física, $U = -f$ |
+| $D$ | el dominio donde el campo está definido y es $C^1$ |
+
+: {tbl-colwidths="[22,78]"}
+
+El enunciado de la cátedra usa $F$ para el campo escalar del ejercicio 18 y $\vec F$ para el
+vectorial. Acá el escalar se llama siempre $f$ (o $\varphi$ cuando el enunciado lo pide así),
+porque dos objetos distintos con la misma letra son el origen de la mitad de los errores en este
+tema.
+
+Las figuras están hechas con Python y con un motor de dibujo propio, y el código de cada una se
+puede abrir con el "Ver el código de la figura". Los colores son los mismos del resto del sitio.
+
+---
+
+::: {.callout-note appearance="simple"}
+## Sobre los errores
+Si encontrás algo mal —una cuenta, un signo, una figura que miente— escribime. Lo corrijo y lo
+agradezco.
+:::

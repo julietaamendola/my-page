@@ -1,0 +1,476 @@
+---
+title: "Problemas de optimización"
+---
+
+Los problemas con enunciado tienen una dificultad que no está en las cuentas: traducir. Una vez
+que uno escribió *qué* hay que optimizar y *qué* liga las variables, lo que queda es el mecanismo
+de los capítulos anteriores.
+
+::: {.callout-tip}
+## La estrategia, siempre la misma
+
+1. **Nombrar las variables** y hacer un dibujo si ayuda.
+2. Escribir la **función objetivo** —lo que hay que maximizar o minimizar— y la **restricción**
+   —el dato que liga las variables—.
+3. Elegir un método: *(i)* despejar de la restricción y sustituir, para quedarse con una función
+   libre de menos variables; o *(ii)* multiplicadores de Lagrange.
+4. Hallar los puntos críticos y **justificar** que son el extremo pedido: criterio del Hessiano,
+   análisis del comportamiento en el borde o en el infinito, o argumento geométrico.
+5. **Volver al problema original** y dar las magnitudes pedidas, con sus unidades.
+:::
+
+El paso 4 es el que más se saltea y el que más puntos cuesta. Encontrar un único punto crítico no
+prueba que sea un máximo: hay que decir por qué.
+
+## La lata: por qué las latas son más altas que anchas {#sec-lata}
+
+*Un envase cilíndrico debe tener 1 litro de capacidad. El material para las tapas cuesta
+$0{,}02$ \$/cm² mientras que el de la cara lateral cuesta $0{,}01$ \$/cm². Calcular las
+dimensiones del envase para que el costo sea mínimo.*
+
+**Paso 0: unidades.** $1$ litro $= 1000$ cm³. Trabajamos en centímetros.
+
+**Paso 1: el modelo.** Radio $r > 0$, altura $h > 0$.
+
+- Tapas (superior e inferior): área $2\pi r^2$, a $0{,}02$ \$/cm².
+- Cara lateral: área $2\pi r h$, a $0{,}01$ \$/cm².
+
+$$
+C = 0{,}02 \cdot 2\pi r^2 + 0{,}01 \cdot 2\pi r h = 0{,}04\pi r^2 + 0{,}02 \pi r h,
+\qquad \text{con } \pi r^2 h = 1000 .
+$$
+
+**Paso 2: sustituimos.** De la restricción, $h = \dfrac{1000}{\pi r^2}$, y entonces
+
+$$
+C(r) = 0{,}04\pi r^2 + 0{,}02\pi r \cdot \frac{1000}{\pi r^2} = 0{,}04 \pi r^2 + \frac{20}{r},
+\qquad r > 0 .
+$$
+
+Quedó un problema de **una** variable.
+
+**Paso 3: derivamos.**
+
+$$
+C'(r) = 0{,}08\pi r - \frac{20}{r^2} = 0
+\implies 0{,}08\pi r^3 = 20
+\implies r^3 = \frac{250}{\pi}
+\implies r = \sqrt[3]{\frac{250}{\pi}} \approx 4{,}301 \text{ cm}.
+$$
+
+**Paso 4: justificamos que es mínimo.** $C''(r) = 0{,}08\pi + \dfrac{40}{r^3} > 0$ para todo
+$r > 0$: $C$ es convexa en todo el dominio, así que el único punto crítico es el mínimo absoluto.
+(También se ve porque $C \to +\infty$ tanto cuando $r \to 0^+$ como cuando $r \to \infty$.)
+
+**Paso 5: la altura y el costo.**
+
+$$
+h = \frac{1000}{\pi r^2} = \frac{1000}{\pi r^3}\, r = \frac{1000}{\pi \cdot \tfrac{250}{\pi}}\, r = 4r \approx 17{,}20 \text{ cm},
+$$
+
+$$
+C \approx 0{,}04\pi (4{,}301)^2 + \frac{20}{4{,}301} \approx 2{,}325 + 4{,}650 \approx 6{,}97 \ \$ .
+$$
+
+::: {.resultado}
+El envase de costo mínimo tiene
+
+$$
+r = \sqrt[3]{\frac{250}{\pi}} \approx 4{,}30 \text{ cm}, \qquad h = 4r \approx 17{,}20 \text{ cm},
+$$
+
+con un costo aproximado de $\$\,6{,}97$.
+:::
+
+::: {.callout-important}
+## El resultado general, que es más lindo que el número
+
+Rehagamos la cuenta con costos genéricos: $c_t$ por cm² de tapa y $c_l$ por cm² de lateral, con
+volumen $V$ fijo. Entonces $C = 2\pi r^2 c_t + 2\pi r h\, c_l$ y $h = V/(\pi r^2)$, de donde
+
+$$
+C(r) = 2\pi c_t\, r^2 + \frac{2 c_l V}{r},
+\qquad
+C'(r) = 4\pi c_t\, r - \frac{2c_l V}{r^2} = 0
+\implies V = \frac{2\pi c_t\, r^3}{c_l}.
+$$
+
+Y como $h = V/(\pi r^2)$:
+
+$$
+\boxed{\ \frac{h}{r} = \frac{2\,c_t}{c_l}\ }
+$$
+
+**La proporción óptima depende solo de la razón de costos, no del volumen.** Con $c_t = c_l$ da
+$h = 2r$: la altura igual al diámetro, la "lata cuadrada" que minimiza material. Acá las tapas
+cuestan el doble, así que conviene achicarlas y estirar el envase: $h = 4r$.
+
+Es la razón por la que las latas de conserva —chapa pareja arriba y a los costados— son casi
+cuadradas, y por la que un envase con tapa cara y lateral barato (una botella con tapa a rosca) se
+estira.
+:::
+
+```{=html}
+<div class="lienzo" data-figura="lata" data-alto="300"
+     data-rotulo="Movés la razón de costos y mirás cómo cambia la lata"
+     data-sliders='[{"id":"p","min":0.2,"max":4,"paso":0.05,"valor":2,"rotulo":"cₜ / c_l","decimales":2},{"id":"r","min":2,"max":9,"paso":0.05,"valor":4.3,"rotulo":"radio r","decimales":2}]'>
+  <div class="lienzo-pie">
+    Izquierda: la lata de 1 litro con el radio que elegís, dibujada a escala, y en línea punteada
+    la forma óptima para esa razón de costos. Derecha: la curva de costo \(C(r)\), con su mínimo
+    marcado. Movés el radio y ves que el costo baja hasta el óptimo y vuelve a subir; movés la
+    razón de costos y el óptimo se corre entero, siempre cumpliendo \(h/r = 2c_t/c_l\).
+  </div>
+</div>
+<script>
+window.LIENZO = window.LIENZO || {};
+window.LIENZO.lata = function (P, v) {
+  var col = P.col, c = P.ctx;
+  var V = 1000, cl = 0.01, ct = v.p * cl;
+  var costo = function (r) { return 2*Math.PI*ct*r*r + 2*cl*V/r; };
+  var ropt = Math.pow(cl*V/(2*Math.PI*ct), 1/3);
+  var hopt = V/(Math.PI*ropt*ropt);
+  var h = V/(Math.PI*v.r*v.r);
+
+  var lado = Math.min(P.h - 80, P.w * 0.46 - 44);
+  var cajaI = [44, 36, lado, lado];
+  var cajaD = [44 + lado + 62, 36, P.w - (44 + lado + 62) - 18, lado];
+
+  // --- la lata, a escala ---
+  var m = P.marco(cajaI, [-14, 14], [0, 28]);
+  P.ejes(m, null, null, null);
+  function lata(r, hh, color, ancho, guion) {
+    var k = 0.30;                    // achatamiento de las elipses de las tapas
+    var pts = [], i, t;
+    // cuerpo
+    P.curva(m, [[-r, 0], [-r, hh]], color, ancho, 1, guion);
+    P.curva(m, [[ r, 0], [ r, hh]], color, ancho, 1, guion);
+    // tapa de arriba (elipse completa) y base (solo el frente)
+    pts = [];
+    for (i = 0; i <= 90; i++) { t = 2*Math.PI*i/90; pts.push([r*Math.cos(t), hh + k*r*Math.sin(t)]); }
+    P.curva(m, pts, color, ancho, 1, guion);
+    pts = [];
+    for (i = 0; i <= 45; i++) { t = Math.PI + Math.PI*i/45; pts.push([r*Math.cos(t), k*r*Math.sin(t)]); }
+    P.curva(m, pts, color, ancho, 1, guion);
+  }
+  lata(ropt, hopt, col.suave, 1.4, [4, 4]);
+  lata(v.r, h, col.acento, 2.4, null);
+  P.texto(m.X(0), m.Y(h) - 14, 'h = ' + h.toFixed(2) + ' cm', col.acento, 11.5, 'center');
+  P.texto(m.X(-13), m.Y(2), 'r = ' + v.r.toFixed(2) + ' cm', col.acento, 11.5, 'left');
+
+  // --- la curva de costo ---
+  var cmin = costo(ropt), tope = Math.max(costo(2), costo(9)) * 1.05;
+  var mD = P.marco(cajaD, [2, 9], [0, tope]);
+  P.ejes(mD, 'radio r (cm)', 'costo ($)', null);
+  var pts = [], i, r;
+  for (i = 0; i <= 240; i++) { r = 2 + 7*i/240; pts.push([r, costo(r)]); }
+  P.recorte(mD, function () { P.curva(mD, pts, col.acento, 2.4, 1); });
+  P.curva(mD, [[2, cmin], [ropt, cmin]], col.suave, 1, .8, [3, 4]);
+  P.curva(mD, [[ropt, 0], [ropt, cmin]], col.suave, 1, .8, [3, 4]);
+  P.punto(mD, ropt, cmin, col.bien, 5.5);
+  P.punto(mD, v.r, costo(v.r), col.tinta, 5);
+
+  P.texto(cajaI[0] - 12, 16, 'h/r = ' + (h/v.r).toFixed(2) +
+          '   ·   óptimo 2cₜ/c_l = ' + (2*v.p).toFixed(2), col.tinta, 12);
+  P.texto(cajaD[0] + cajaD[2], 16,
+          'costo = $' + costo(v.r).toFixed(3) + '   ·   mínimo $' + cmin.toFixed(3),
+          Math.abs(v.r - ropt) < 0.06 ? col.bien : col.tenue, 12, 'right');
+};
+</script>
+```
+
+## Dos problemas que son el mismo {#sec-dual}
+
+En la práctica aparecen estos dos, separados por varias páginas:
+
+::: {.callout-note appearance="simple"}
+## Enunciados
+
+**A.** Un tanque de metal rectangular, **sin tapa**, debe contener $256\ \text{m}^3$ de líquido.
+¿Cuáles son las dimensiones que requieren **menor cantidad de material**?
+
+**B.** Una caja rectangular **sin tapa** debe tener un área de $16\ \text{m}^2$. Hallar las
+dimensiones que **maximicen su volumen**.
+:::
+
+**El primero.** Con $x, y$ los lados de la base y $z$ la altura, la superficie es
+
+$$
+S = \underbrace{xy}_{\text{base}} + \underbrace{2xz + 2yz}_{\text{4 paredes}},
+\qquad \text{con } V = xyz = 256 .
+$$
+
+Sustituyendo $z = \dfrac{256}{xy}$:
+
+$$
+S(x,y) = xy + \frac{512}{y} + \frac{512}{x}, \qquad x, y > 0 .
+$$
+
+$$
+S_x = y - \frac{512}{x^2} = 0, \qquad S_y = x - \frac{512}{y^2} = 0 .
+$$
+
+De la primera $y = 512/x^2$; reemplazando en la segunda,
+$x = \dfrac{512}{(512/x^2)^2} = \dfrac{x^4}{512}$, o sea $x^3 = 512$ y $x = 8$. Entonces $y = 8$ y
+$z = \dfrac{256}{64} = 4$.
+
+**Es mínimo:** $S_{xx} = \dfrac{1024}{x^3} = 2$, $S_{yy} = 2$, $S_{xy} = 1$ en $(8,8)$, así que
+$D = 4 - 1 = 3 > 0$ con $S_{xx} > 0$. Y como $S \to +\infty$ en todo el borde del dominio (cuando
+$x$ o $y$ tienden a $0$ o a $\infty$), ese mínimo relativo es el absoluto.
+
+::: {.resultado}
+Base cuadrada de $8 \times 8$ metros y altura $4$ metros —la altura es la mitad del lado de la
+base—, con $S(8,8) = 64 + 64 + 64 = 192\ \text{m}^2$ de material.
+:::
+
+**El segundo**, resuelto con Lagrange: maximizar $V = xyz$ sujeto a $xy + 2xz + 2yz = 16$. El
+sistema $\nabla V = \lambda \nabla g$ da $yz = \lambda(y+2z)$, $xz = \lambda(x+2z)$,
+$xy = \lambda(2x+2y)$. Restando las dos primeras, $z(y-x) = \lambda(y-x)$, y como $\lambda = z$
+llevaría a $z = 0$, tiene que ser $x = y$. Con eso, la tercera da $\lambda = x/4$, y la segunda
+$xz = \tfrac{x}{4}(x+2z) \Rightarrow 2z = x$. Del área, $16 = x^2 + 2x^2 = 3x^2$:
+
+$$
+x = y = \frac{4}{\sqrt3} = \frac{4\sqrt3}{3} \approx 2{,}31 \text{ m},
+\qquad z = \frac{x}{2} = \frac{2\sqrt3}{3} \approx 1{,}15 \text{ m},
+$$
+
+$$
+V = x^2 z = \frac{16}{3}\cdot\frac{2}{\sqrt3} = \frac{32\sqrt3}{9} \approx 6{,}16\ \text{m}^3 .
+$$
+
+::: {.callout-important}
+## Son el mismo problema, dado vuelta
+
+Mirá las dos respuestas:
+
+| | forma óptima |
+|---|---|
+| A: volumen fijo, área mínima | base cuadrada, $z = \tfrac{x}{2}$ |
+| B: área fija, volumen máximo | base cuadrada, $z = \tfrac{x}{2}$ |
+
+: {tbl-colwidths="[46,54]"}
+
+**La misma forma.** No es casualidad: los dos problemas son duales. Si la caja de área $16$ que
+maximiza el volumen tuviera una forma distinta de la que minimiza el área a volumen fijo, se
+podría deformar una en la otra y obtener, a la vez, más volumen con la misma superficie — una
+contradicción.
+
+Formalmente: la condición de Lagrange $\nabla V = \lambda \nabla S$ y la condición
+$\nabla S = \mu \nabla V$ son **la misma ecuación** con $\mu = 1/\lambda$. Los dos problemas tienen
+exactamente el mismo conjunto de candidatos; lo único que cambia es cuál de los dos números se fija
+y cuál se optimiza.
+
+Conviene tenerlo presente: cuando un enunciado parece nuevo, a veces es uno viejo leído al revés y
+la respuesta ya está hecha.
+:::
+
+## El punto más cercano de una superficie {#sec-distancia}
+
+*Encontrar el punto del paraboloide $z = x^2+y^2$ más cercano al punto $(5,5,0)$.*
+
+::: {.callout-tip appearance="simple"}
+## Minimizar distancias: minimizar el cuadrado
+
+La distancia de $(x,y,z)$ a $(a,b,c)$ es $d = \sqrt{(x-a)^2+(y-b)^2+(z-c)^2}$. Como
+$t \mapsto \sqrt t$ es estrictamente creciente en $[0,\infty)$, **$d$ y $d^2$ alcanzan su mínimo en
+los mismos puntos**. Siempre conviene minimizar
+
+$$
+D = d^2 ,
+$$
+
+que evita derivar raíces, y recién al final tomar $d = \sqrt{D_{\min}}$.
+:::
+
+**Paso 1.** Un punto genérico del paraboloide es $(x, y, x^2+y^2)$, y su distancia al cuadrado a
+$(5,5,0)$ es
+
+$$
+D(x,y) = (x-5)^2 + (y-5)^2 + \left(x^2+y^2\right)^2 .
+$$
+
+**Paso 2: puntos críticos.**
+
+$$
+D_x = 2(x-5) + 4x\left(x^2+y^2\right) = 0 \quad (1), \qquad
+D_y = 2(y-5) + 4y\left(x^2+y^2\right) = 0 \quad (2).
+$$
+
+**Paso 3: el truco.** Restando (1) $-$ (2):
+
+$$
+2(x - y) + 4(x-y)\left(x^2+y^2\right) = 0
+\implies (x-y)\underbrace{\left[2 + 4\left(x^2+y^2\right)\right]}_{\ \ge\, 2\, >\, 0} = 0
+\implies x = y .
+$$
+
+El corchete nunca se anula, así que **necesariamente** $x = y$ — algo previsible por la simetría
+del problema respecto del plano $y = x$, ya que el punto $(5,5,0)$ está sobre él.
+
+**Paso 4.** Con $x = y$ en (1): $2(x-5) + 4x \cdot 2x^2 = 0$, o sea
+
+$$
+8x^3 + 2x - 10 = 0 \iff 4x^3 + x - 5 = 0 .
+$$
+
+Probamos $x = 1$: $4 + 1 - 5 = 0$ ✓. Factorizando por Ruffini,
+$4x^3 + x - 5 = (x-1)\left(4x^2+4x+5\right)$, y el segundo factor tiene discriminante
+$16 - 80 = -64 < 0$: no tiene raíces reales. Entonces $x = 1$ es la **única** solución, y el punto
+del paraboloide es $(1, 1, 2)$.
+
+**Paso 5: es el mínimo.** $D$ es continua, $D \to +\infty$ cuando $\|(x,y)\| \to \infty$ —domina el
+término $(x^2+y^2)^2$— y tiene un único punto crítico: por lo tanto ese punto es el mínimo
+absoluto.
+
+**Paso 6.** $D(1,1) = (1-5)^2 + (1-5)^2 + 2^2 = 16 + 16 + 4 = 36$, así que $d = 6$.
+
+::: {.resultado}
+El punto del paraboloide más cercano a $(5,5,0)$ es $(1,1,2)$, y la distancia mínima es $d = 6$.
+:::
+
+```{python}
+#| label: fig-paraboloide
+#| fig-cap: "El paraboloide $z = x^2+y^2$, el punto $(5,5,0)$ y el segmento más corto entre ambos. El segmento llega a la superficie **perpendicularmente**: esa es la lectura geométrica de la condición de Lagrange, porque en el punto más cercano el gradiente de la distancia tiene que ser paralelo al gradiente de la restricción, es decir a la normal de la superficie."
+#| fig-width: 6.4
+#| fig-height: 4.6
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+VIOLETA, VIOLETA2, TINTA, GRIS = "#7c5cbf", "#b48ec8", "#1e1a2e", "#a99fc0"
+VERDE = "#2f6b48"
+
+r = np.linspace(0, 2.9, 40)
+th = np.linspace(0, 2*np.pi, 90)
+RR, TH = np.meshgrid(r, th)
+X, Y = RR*np.cos(TH), RR*np.sin(TH)
+Z = X**2 + Y**2
+
+fig = plt.figure(figsize=(6.4, 4.6))
+ax = fig.add_subplot(111, projection="3d")
+ax.plot_surface(X, Y, Z, cmap="BuPu_r", linewidth=0, rstride=2, cstride=3, alpha=.85)
+
+A, B = np.array([5., 5., 0.]), np.array([1., 1., 2.])
+ax.plot(*zip(A, B), color=VERDE, lw=2.4)
+ax.scatter(*A, color=TINTA, s=34, depthshade=False)
+ax.scatter(*B, color=VERDE, s=34, depthshade=False)
+ax.text(*(A + np.array([.2, .2, .6])), "$(5,5,0)$", fontsize=8.5, color=TINTA)
+ax.text(*(B + np.array([-1.6, -1.6, 1.2])), "$(1,1,2)$\n$d=6$", fontsize=8.5, color=VERDE)
+
+ax.set_xlabel("$x$", labelpad=-6); ax.set_ylabel("$y$", labelpad=-6)
+ax.set_zlabel("$z$", labelpad=-6)
+ax.tick_params(labelsize=6, pad=-2)
+ax.set_box_aspect((1, 1, .7))
+ax.view_init(elev=20, azim=-64)
+fig.tight_layout()
+plt.show()
+```
+
+## El paralelepípedo en el elipsoide {#sec-elipsoide}
+
+*Calcular el máximo volumen de un paralelepípedo rectangular con aristas paralelas a los ejes
+coordenados inscripto en el elipsoide $2x^2 + 3y^2 + z^2 = 18$.*
+
+**Paso 1: el modelo.** Por la simetría del elipsoide respecto de los tres planos coordenados, si
+$(x,y,z)$ con $x,y,z>0$ es el vértice del primer octante, los ocho vértices son
+$(\pm x, \pm y, \pm z)$ y las aristas miden $2x$, $2y$, $2z$. Entonces
+
+$$
+V = 8xyz \quad \text{a maximizar}, \qquad g(x,y,z) = 2x^2+3y^2+z^2 = 18 .
+$$
+
+**Paso 2: Lagrange.**
+
+$$
+\begin{cases}
+8yz = 4\lambda x & (1) \\ 8xz = 6\lambda y & (2) \\ 8xy = 2\lambda z & (3)
+\end{cases}
+$$
+
+Multiplicando (1) por $x$, (2) por $y$ y (3) por $z$, el miembro izquierdo queda $8xyz$ en los
+tres casos:
+
+$$
+8xyz = 4\lambda x^2 = 6\lambda y^2 = 2\lambda z^2 .
+$$
+
+Como $x,y,z>0$ es $V>0$, luego $\lambda \neq 0$ y podemos dividir:
+
+$$
+4x^2 = 6y^2 = 2z^2, \qquad \text{es decir} \qquad 2x^2 = 3y^2 = z^2 .
+$$
+
+**Paso 3: usamos la restricción.** Llamando $s = 2x^2 = 3y^2 = z^2$:
+
+$$
+2x^2 + 3y^2 + z^2 = s + s + s = 3s = 18 \implies s = 6 .
+$$
+
+Entonces $x^2 = 3$, $y^2 = 2$, $z^2 = 6$, o sea $x = \sqrt3$, $y = \sqrt2$, $z = \sqrt6$.
+
+**Paso 4: el volumen.**
+
+$$
+V = 8\sqrt3\sqrt2\sqrt6 = 8\sqrt{36} = 48 .
+$$
+
+Es un máximo: $V = 8xyz$ es continua sobre el trozo **compacto** del elipsoide con
+$x,y,z \ge 0$, vale $0$ en todo el borde de ese trozo (donde alguna coordenada se anula) y es
+positiva en el interior, así que el único candidato interior es el máximo.
+
+::: {.resultado}
+$V_{\max} = 48$, con aristas $2x = 2\sqrt3 \approx 3{,}46$, $2y = 2\sqrt2 \approx 2{,}83$ y
+$2z = 2\sqrt6 \approx 4{,}90$.
+:::
+
+::: {.callout-tip appearance="simple"}
+## La regla general que conviene recordar
+
+Lo que apareció en el paso 3 no es propio de este elipsoide. En
+$\dfrac{x^2}{a^2}+\dfrac{y^2}{b^2}+\dfrac{z^2}{c^2}=1$, el paralelepípedo inscripto de volumen
+máximo se obtiene cuando **cada término aporta un tercio**:
+
+$$
+\frac{x^2}{a^2} = \frac{y^2}{b^2} = \frac{z^2}{c^2} = \frac13
+\implies x = \frac{a}{\sqrt3},\ y = \frac{b}{\sqrt3},\ z = \frac{c}{\sqrt3},
+\qquad V_{\max} = \frac{8abc}{3\sqrt3}.
+$$
+
+Acá $a^2 = 9$, $b^2 = 6$, $c^2 = 18$, y en efecto
+$V = \dfrac{8 \cdot 3 \cdot \sqrt6 \cdot 3\sqrt2}{3\sqrt3} = 48$ ✓.
+
+La misma estructura aparece cada vez que se maximiza un producto con una suma fija: es la
+desigualdad entre las medias aritmética y geométrica, que se hace igualdad cuando todos los
+términos son iguales. En $n$ dimensiones, cada término aporta $1/n$.
+:::
+
+::: {.ejercicio data-respuesta="1" data-tol="0.001" data-rotulo="Para calcular"}
+Una lata cilíndrica **sin tapa** —solo base y cara lateral— de volumen fijo, con el mismo material
+en todas partes. ¿Cuánto vale la razón óptima $h/r$?
+
+::: {.explica}
+El área es $A = \pi r^2 + 2\pi r h$ (una sola tapa) con $V = \pi r^2 h$ fijo. Sustituyendo
+$h = V/(\pi r^2)$:
+
+$$
+A(r) = \pi r^2 + \frac{2V}{r}, \qquad
+A'(r) = 2\pi r - \frac{2V}{r^2} = 0 \implies V = \pi r^3 ,
+$$
+
+y entonces $h = \dfrac{V}{\pi r^2} = \dfrac{\pi r^3}{\pi r^2} = r$. La altura es igual al radio:
+$h/r = 1$.
+
+Vale la pena compararlo con los otros dos casos, que salen todos de la misma fórmula
+$h/r = 2c_t/c_l$ leyendo "tapa" como el área que no es lateral:
+
+| Lata | Área de tapas | $h/r$ óptimo |
+|---|---|:--:|
+| con dos tapas, material parejo | $2\pi r^2$ | $2$ |
+| **sin tapa** | $\pi r^2$ | $1$ |
+| con dos tapas al doble de precio | $2\pi r^2$, a $2c_l$ | $4$ |
+
+: {tbl-colwidths="[44,30,26]"}
+
+Sacar una tapa abarata la parte de arriba y la lata se achata; encarecerla la estira. La
+proporción óptima siempre es el doble de lo que "pesa" la tapa frente al lateral.
+:::
+:::

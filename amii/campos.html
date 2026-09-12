@@ -1,0 +1,351 @@
+<style>
+/* ---------- Extras de la guía de campos ---------- */
+.chip {
+  display: inline-block; font-family: 'Inter', system-ui, sans-serif;
+  font-size: .7rem; letter-spacing: .06em; font-weight: 600;
+  padding: .12rem .5rem; border-radius: 3px; vertical-align: .08em;
+  white-space: nowrap;
+}
+.chip.si  { color: #2f6b48; background: #e6f3ec; border: 1px solid #bfe0cd; }
+.chip.no  { color: #9c443d; background: #f8eae8; border: 1px solid #e6c5c1; }
+.chip.ojo { color: #8a6a1f; background: #faf2df; border: 1px solid #e7d5a8; }
+body.quarto-dark .chip.si  { color: #8ed5aa; background: #1b2d23; border-color: #2f5340; }
+body.quarto-dark .chip.no  { color: #eba9a2; background: #2e1e1e; border-color: #5a3833; }
+body.quarto-dark .chip.ojo { color: #e6c98a; background: #2c2617; border-color: #56492a; }
+
+/* Caja de resultado, el equivalente del recuadro violeta del apunte */
+.resultado {
+  border: 1px solid var(--ej-borde); border-radius: 4px;
+  background: var(--ej-fondo); padding: .35rem 1rem; margin: 1.3rem 0;
+}
+.resultado .math.display { margin: .55rem 0; }
+
+/* Pasos numerados de la receta.
+   El contenido se escribe como lista ordenada de markdown, asi que en el PDF
+   sale como un enumerate normal; aca le cambiamos el numerito por un circulo. */
+.receta { margin: 1.4rem 0; }
+.receta ol { list-style: none; counter-reset: paso; padding-left: 0; margin-left: 0; }
+.receta ol > li {
+  position: relative; padding-left: 2.6rem; margin-bottom: 1.15rem;
+}
+.receta ol > li::before {
+  counter-increment: paso; content: counter(paso);
+  position: absolute; left: 0; top: .05rem;
+  width: 1.75rem; height: 1.75rem; border-radius: 50%;
+  background: var(--ej-acento); color: #fff;
+  font-family: 'Inter', system-ui, sans-serif; font-size: .85rem; font-weight: 600;
+  display: flex; align-items: center; justify-content: center;
+}
+body.quarto-dark .receta ol > li::before { color: #14111f; }
+.receta ol > li > p:first-child { margin-top: 0; }
+
+/* El lienzo rotable avisa que se puede arrastrar */
+.lienzo[data-rotable] canvas { cursor: grab; touch-action: none; }
+.lienzo[data-rotable] canvas:active { cursor: grabbing; }
+</style>
+
+<script>
+/* ------------------------------------------------------------------
+   CV — herramientas de dibujo para las figuras de campos vectoriales.
+   Se apoya en el motor .lienzo de interactivo.html: cada figura recibe
+   un Pincel P (con P.ctx, P.w, P.h, P.col) y el objeto v con los sliders.
+   ------------------------------------------------------------------ */
+(function () {
+  var CV = window.CV = window.CV || {};
+
+  // ---------- color ----------
+  function hex(c) {
+    c = c.replace('#', '');
+    if (c.length === 3) c = c[0]+c[0]+c[1]+c[1]+c[2]+c[2];
+    return [parseInt(c.slice(0,2),16), parseInt(c.slice(2,4),16), parseInt(c.slice(4,6),16)];
+  }
+  function rgb(a) { return 'rgb(' + a.map(Math.round).join(',') + ')'; }
+
+  // rampa fría → cálida, con los violetas del sitio
+  var RAMPA = ['#241f42', '#453a7e', '#6d55b5', '#9c83cf', '#c9aecb', '#e8c79c'].map(hex);
+  CV.rampa = function (t) {
+    t = Math.max(0, Math.min(1, t)) * (RAMPA.length - 1);
+    var i = Math.min(Math.floor(t), RAMPA.length - 2), s = t - i;
+    var a = RAMPA[i], b = RAMPA[i+1];
+    return rgb([a[0]+(b[0]-a[0])*s, a[1]+(b[1]-a[1])*s, a[2]+(b[2]-a[2])*s]);
+  };
+  CV.mezcla = function (c1, c2, s) {
+    var a = hex(c1), b = hex(c2);
+    return rgb([a[0]+(b[0]-a[0])*s, a[1]+(b[1]-a[1])*s, a[2]+(b[2]-a[2])*s]);
+  };
+
+  // ---------- flechas ----------
+  // en pixeles: de (x0,y0) a (x1,y1)
+  CV.flechaPx = function (P, x0, y0, x1, y1, color, ancho, cabeza) {
+    var c = P.ctx, dx = x1 - x0, dy = y1 - y0, L = Math.hypot(dx, dy);
+    if (L < 0.4) return;
+    var h = Math.min(cabeza === undefined ? 5.5 : cabeza, L * 0.55);
+    var ux = dx / L, uy = dy / L, px = -uy, py = ux;
+    c.save();
+    c.strokeStyle = color; c.fillStyle = color;
+    c.lineWidth = ancho || 1.2; c.lineCap = 'round';
+    c.beginPath(); c.moveTo(x0, y0); c.lineTo(x1 - ux*h*0.75, y1 - uy*h*0.75); c.stroke();
+    c.beginPath();
+    c.moveTo(x1, y1);
+    c.lineTo(x1 - ux*h + px*h*0.42, y1 - uy*h + py*h*0.42);
+    c.lineTo(x1 - ux*h - px*h*0.42, y1 - uy*h - py*h*0.42);
+    c.closePath(); c.fill();
+    c.restore();
+  };
+
+  // en coordenadas de datos sobre un marco m, con largo dado en pixeles
+  CV.flecha = function (P, m, x, y, u, vv, largoPx, color, ancho) {
+    var L = Math.hypot(u, vv);
+    if (L < 1e-12) return;
+    var X = m.X(x), Y = m.Y(y);
+    // el marco invierte el eje vertical: una componente v>0 va hacia arriba en pantalla
+    CV.flechaPx(P, X, Y, X + u/L*largoPx, Y - vv/L*largoPx, color, ancho);
+  };
+
+  // flecha apoyada en el plano z = z0 del mundo 3D, con largo en pixeles
+  CV.flecha3 = function (P, cam, x, y, z0, u, vv, largoPx, color, ancho) {
+    var L = Math.hypot(u, vv);
+    if (L < 1e-12) return;
+    var p0 = cam.pt(x, y, z0);
+    var e = 1e-3 * (cam.dom.x[1] - cam.dom.x[0]);
+    var p1 = cam.pt(x + u/L*e, y + vv/L*e, z0);
+    var dx = p1[0] - p0[0], dy = p1[1] - p0[1], d = Math.hypot(dx, dy);
+    if (d < 1e-9) return;
+    CV.flechaPx(P, p0[0], p0[1], p0[0] + dx/d*largoPx, p0[1] + dy/d*largoPx, color, ancho, 4.5);
+  };
+
+  /* Campo de flechas sobre el marco m.
+     F(x,y) devuelve [u,v]. opts: {n, color, largo, escala:'norma'|'fija', alfa} */
+  CV.campo = function (P, m, F, opts) {
+    opts = opts || {};
+    var n = opts.n || 15, col = opts.color || P.col.tinta;
+    var largo = opts.largo || 13, alfa = opts.alfa === undefined ? .8 : opts.alfa;
+    var dx = m.dx, dy = m.dy, i, j, x, y, f, datos = [], mx = 0;
+    for (i = 0; i < n; i++) for (j = 0; j < n; j++) {
+      x = dx[0] + (dx[1]-dx[0]) * (i+0.5)/n;
+      y = dy[0] + (dy[1]-dy[0]) * (j+0.5)/n;
+      f = F(x, y);
+      if (!f || !isFinite(f[0]) || !isFinite(f[1])) continue;
+      var nn = Math.hypot(f[0], f[1]);
+      if (nn > mx) mx = nn;
+      datos.push([x, y, f[0], f[1], nn]);
+    }
+    if (!mx) return;
+    P.ctx.save(); P.ctx.globalAlpha = alfa;
+    datos.forEach(function (d) {
+      var L = opts.escala === 'fija' ? largo
+            : largo * (0.34 + 0.66 * Math.sqrt(Math.min(1, d[4] / mx)));
+      var c = opts.porNorma ? CV.mezcla(P.col.suave, col, Math.min(1, d[4]/mx)) : col;
+      CV.flecha(P, m, d[0], d[1], d[2], d[3], L, c, opts.ancho || 1.05);
+    });
+    P.ctx.restore();
+  };
+
+  /* Marching squares: devuelve los segmentos de la curva f = nivel dentro del
+     rectángulo dom = {x:[a,b], y:[c,d]}, como pares [[x0,y0],[x1,y1]]. */
+  CV.segmentos = function (dom, f, nivel, N) {
+    N = N || 120;
+    var xs = [], ys = [], Z = [], i, j, segs = [];
+    for (i = 0; i <= N; i++) xs.push(dom.x[0] + (dom.x[1]-dom.x[0]) * i/N);
+    for (j = 0; j <= N; j++) ys.push(dom.y[0] + (dom.y[1]-dom.y[0]) * j/N);
+    for (i = 0; i <= N; i++) { Z.push([]); for (j = 0; j <= N; j++) Z[i].push(f(xs[i], ys[j])); }
+    for (i = 0; i < N; i++) for (j = 0; j < N; j++) {
+      var z = [Z[i][j], Z[i+1][j], Z[i+1][j+1], Z[i][j+1]];
+      if (!isFinite(z[0]+z[1]+z[2]+z[3])) continue;
+      var px = [xs[i], xs[i+1], xs[i+1], xs[i]], py = [ys[j], ys[j], ys[j+1], ys[j+1]];
+      var pts = [];
+      for (var k = 0; k < 4; k++) {
+        var a = z[k], b = z[(k+1)%4];
+        if ((a - nivel) * (b - nivel) < 0) {
+          var s = (nivel - a) / (b - a);
+          pts.push([px[k] + (px[(k+1)%4]-px[k])*s, py[k] + (py[(k+1)%4]-py[k])*s]);
+        }
+      }
+      for (var q = 0; q + 1 < pts.length; q += 2) segs.push([pts[q], pts[q+1]]);
+    }
+    return segs;
+  };
+
+  /* Curvas de nivel sobre un marco 2D. niveles es un array de valores. */
+  CV.contornos = function (P, m, f, niveles, color, ancho, alfa) {
+    var dom = { x: m.dx, y: m.dy }, c = P.ctx;
+    c.save();
+    c.strokeStyle = color; c.lineWidth = ancho || 1.1;
+    c.globalAlpha = alfa === undefined ? .75 : alfa;
+    c.lineCap = 'round';
+    c.beginPath();
+    niveles.forEach(function (nv) {
+      CV.segmentos(dom, f, nv, 140).forEach(function (s) {
+        c.moveTo(m.X(s[0][0]), m.Y(s[0][1]));
+        c.lineTo(m.X(s[1][0]), m.Y(s[1][1]));
+      });
+    });
+    c.stroke();
+    c.restore();
+  };
+
+  /* Los mismos contornos, pero dibujados en 3D a una altura z dada
+     (z = 'nivel' los apoya sobre la superficie, un número los apoya ahí). */
+  CV.contornos3 = function (P, cam, f, niveles, z, color, ancho, alfa) {
+    var dom = { x: cam.dom.x, y: cam.dom.y }, c = P.ctx;
+    c.save();
+    c.strokeStyle = color; c.lineWidth = ancho || 1.3;
+    c.globalAlpha = alfa === undefined ? .9 : alfa;
+    c.lineCap = 'round';
+    c.beginPath();
+    niveles.forEach(function (nv) {
+      var alt = (z === 'nivel') ? nv : z;
+      if (alt < cam.dom.z[0] || alt > cam.dom.z[1]) return;
+      CV.segmentos(dom, f, nv, 110).forEach(function (s) {
+        var p = cam.pt(s[0][0], s[0][1], alt), q = cam.pt(s[1][0], s[1][1], alt);
+        c.moveTo(p[0], p[1]); c.lineTo(q[0], q[1]);
+      });
+    });
+    c.stroke();
+    c.restore();
+  };
+
+  /* Superficie z = f(x,y) en 3D, algoritmo del pintor.
+     cam viene de P.camara(...). opts: {n, zmin, zmax, alfa, malla} */
+  CV.malla3 = function (P, cam, f, opts) {
+    opts = opts || {};
+    var n = opts.n || 26, d = cam.dom, c = P.ctx;
+    var i, j, X = [], Y = [], Z = [], zmin = Infinity, zmax = -Infinity;
+    for (i = 0; i <= n; i++) X.push(d.x[0] + (d.x[1]-d.x[0]) * i/n);
+    for (j = 0; j <= n; j++) Y.push(d.y[0] + (d.y[1]-d.y[0]) * j/n);
+    for (i = 0; i <= n; i++) {
+      Z.push([]);
+      for (j = 0; j <= n; j++) {
+        var z = f(X[i], Y[j]);
+        Z[i].push(z);
+        if (isFinite(z)) { if (z < zmin) zmin = z; if (z > zmax) zmax = z; }
+      }
+    }
+    if (opts.zmin !== undefined) zmin = opts.zmin;
+    if (opts.zmax !== undefined) zmax = opts.zmax;
+    var rec = function (z) { return Math.max(d.z[0], Math.min(d.z[1], z)); };
+
+    var caras = [];
+    for (i = 0; i < n; i++) for (j = 0; j < n; j++) {
+      var zz = [Z[i][j], Z[i+1][j], Z[i+1][j+1], Z[i][j+1]];
+      if (!isFinite(zz[0]+zz[1]+zz[2]+zz[3])) continue;
+      var xx = [X[i], X[i+1], X[i+1], X[i]], yy = [Y[j], Y[j], Y[j+1], Y[j+1]];
+      var zc = (zz[0]+zz[1]+zz[2]+zz[3])/4;
+      var xc = (xx[0]+xx[1])/2, yc = (yy[0]+yy[2])/2;
+      caras.push({ x: xx, y: yy, z: zz, prof: cam.prof(xc, yc, rec(zc)), t: (zc - zmin) / (zmax - zmin || 1) });
+    }
+    caras.sort(function (a, b) { return a.prof - b.prof; });
+
+    c.save();
+    c.globalAlpha = opts.alfa === undefined ? 1 : opts.alfa;
+    c.lineJoin = 'round';
+    caras.forEach(function (q) {
+      c.beginPath();
+      for (var k = 0; k < 4; k++) {
+        var p = cam.pt(q.x[k], q.y[k], rec(q.z[k]));
+        if (k === 0) c.moveTo(p[0], p[1]); else c.lineTo(p[0], p[1]);
+      }
+      c.closePath();
+      c.fillStyle = CV.rampa(q.t);
+      c.fill();
+      if (opts.malla !== false) {
+        c.strokeStyle = 'rgba(255,255,255,.14)'; c.lineWidth = .5; c.stroke();
+      }
+    });
+    c.restore();
+    return { zmin: zmin, zmax: zmax };
+  };
+
+  /* Superficie paramétrica: S(u,v) devuelve [x,y,z] del mundo 3D.
+     opts: {nu, nv, color: function(u,v,p){...} , alfa, malla, recortarZ} */
+  CV.superficie3 = function (P, cam, S, u0, u1, v0, v1, opts) {
+    opts = opts || {};
+    var nu = opts.nu || 40, nv = opts.nv || 24, c = P.ctx, i, j;
+    var U = [], V = [], G = [];
+    for (i = 0; i <= nu; i++) U.push(u0 + (u1-u0) * i/nu);
+    for (j = 0; j <= nv; j++) V.push(v0 + (v1-v0) * j/nv);
+    for (i = 0; i <= nu; i++) { G.push([]); for (j = 0; j <= nv; j++) G[i].push(S(U[i], V[j])); }
+
+    var caras = [];
+    for (i = 0; i < nu; i++) for (j = 0; j < nv; j++) {
+      var q = [G[i][j], G[i+1][j], G[i+1][j+1], G[i][j+1]];
+      if (q.some(function (p) { return !p || !isFinite(p[0]+p[1]+p[2]); })) continue;
+      var cx = (q[0][0]+q[1][0]+q[2][0]+q[3][0])/4;
+      var cy = (q[0][1]+q[1][1]+q[2][1]+q[3][1])/4;
+      var cz = (q[0][2]+q[1][2]+q[2][2]+q[3][2])/4;
+      caras.push({ q: q, prof: cam.prof(cx, cy, cz),
+                   col: opts.color ? opts.color((U[i]+U[i+1])/2, (V[j]+V[j+1])/2, [cx,cy,cz])
+                                   : CV.rampa(.5) });
+    }
+    caras.sort(function (a, b) { return a.prof - b.prof; });
+
+    c.save();
+    c.globalAlpha = opts.alfa === undefined ? 1 : opts.alfa;
+    caras.forEach(function (f) {
+      c.beginPath();
+      for (var k = 0; k < 4; k++) {
+        var p = cam.pt(f.q[k][0], f.q[k][1], f.q[k][2]);
+        if (k === 0) c.moveTo(p[0], p[1]); else c.lineTo(p[0], p[1]);
+      }
+      c.closePath();
+      c.fillStyle = f.col; c.fill();
+      // el borde del mismo color tapa las costuras del antialiasing
+      c.strokeStyle = opts.malla === false ? f.col : 'rgba(255,255,255,.13)';
+      c.lineWidth = opts.malla === false ? .8 : .5;
+      c.stroke();
+    });
+    c.restore();
+  };
+
+  // ---------- integración numérica de una integral de línea ----------
+  /* r(t) devuelve [x,y]; F(x,y) devuelve [u,v]; acumula ∫ F·dr en [t0,t1]. */
+  CV.trabajo = function (F, r, t0, t1, N) {
+    N = N || 400;
+    var W = 0, p = r(t0), f, q, i, t;
+    for (i = 1; i <= N; i++) {
+      t = t0 + (t1 - t0) * i / N;
+      q = r(t);
+      var mx = (p[0]+q[0])/2, my = (p[1]+q[1])/2;
+      f = F(mx, my);
+      if (isFinite(f[0]) && isFinite(f[1])) W += f[0]*(q[0]-p[0]) + f[1]*(q[1]-p[1]);
+      p = q;
+    }
+    return W;
+  };
+
+  // ---------- rotar arrastrando ----------
+  CV.vistas = {};
+  CV.vista = function (nombre) {
+    return CV.vistas[nombre] || (CV.vistas[nombre] = { azim: -0.62, elev: 0.46 });
+  };
+  CV.rotable = function (nombre, inicial) {
+    var v = CV.vista(nombre);
+    if (inicial) { v.azim = inicial.azim; v.elev = inicial.elev; }
+    function enganchar() {
+      var caja = document.querySelector('.lienzo[data-figura="' + nombre + '"]');
+      if (!caja) return;
+      caja.setAttribute('data-rotable', '1');
+      var cv = caja.querySelector('canvas');
+      if (!cv) return;
+      var arrastra = false, x0 = 0, y0 = 0, a0 = 0, e0 = 0;
+      cv.addEventListener('pointerdown', function (ev) {
+        arrastra = true; x0 = ev.clientX; y0 = ev.clientY; a0 = v.azim; e0 = v.elev;
+        cv.setPointerCapture(ev.pointerId); ev.preventDefault();
+      });
+      cv.addEventListener('pointermove', function (ev) {
+        if (!arrastra) return;
+        v.azim = a0 - (ev.clientX - x0) * 0.008;
+        v.elev = Math.max(-0.15, Math.min(1.45, e0 + (ev.clientY - y0) * 0.006));
+        if (caja._pintar) caja._pintar();
+      });
+      ['pointerup', 'pointercancel', 'pointerleave'].forEach(function (e) {
+        cv.addEventListener(e, function () { arrastra = false; });
+      });
+    }
+    // después de que el motor haya construido el lienzo
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', function () { setTimeout(enganchar, 0); });
+    } else { setTimeout(enganchar, 0); }
+  };
+})();
+</script>

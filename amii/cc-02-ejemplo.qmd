@@ -1,0 +1,359 @@
+---
+title: "Un ejemplo, paso a paso"
+---
+
+Antes de los ejercicios de la guía, hagamos uno completo mostrando qué está pasando
+geométricamente. Tomemos
+
+$$
+\vec F(x,y) = (2xy + 3x^2)\,\vec i + (x^2 + 2y)\,\vec j .
+$$ {#eq-ejemplo}
+
+## Pasos 1 y 2: dominio y test {#sec-ej-test}
+
+$P = 2xy + 3x^2$ y $Q = x^2 + 2y$ son polinomios, así que son $C^1$ en todo $\mathbb{R}^2$, que es
+abierto y simplemente conexo. Calculamos:
+
+$$
+\frac{\partial P}{\partial y} = 2x, \qquad \frac{\partial Q}{\partial x} = 2x .
+$$
+
+Coinciden, y el dominio no tiene agujeros, así que el campo es <span class="chip si">conservativo</span>
+y el potencial existe.
+
+## Paso 3: integramos $P$ respecto de $x$ {#sec-ej-p3}
+
+$$
+f(x,y) = \int (2xy + 3x^2)\, dx = x^2 y + x^3 + g(y).
+$$
+
+Al integrar en $x$, la variable $y$ se trata como una constante; por eso lo que queda "libre" es
+una función arbitraria $g(y)$, no un número.
+
+## Paso 4: derivamos respecto de $y$ e igualamos a $Q$ {#sec-ej-p4}
+
+$$
+f_y = x^2 + g'(y) \;\stackrel{!}{=}\; x^2 + 2y
+\;\Longrightarrow\; g'(y) = 2y
+\;\Longrightarrow\; g(y) = y^2 + C .
+$$
+
+Notar cómo el $x^2$ se canceló solo: **esa cancelación es exactamente lo que garantiza el test del
+paso 2**. Si hubiera sobrado un término con $x$, el campo no sería conservativo y la ecuación para
+$g'(y)$ no tendría sentido.
+
+::: {.resultado}
+$$
+f(x,y) = x^2 y + x^3 + y^2 + C
+$$
+:::
+
+## Paso 5: verificación {#sec-ej-p5}
+
+$$
+\nabla f = (2xy + 3x^2,\ x^2 + 2y) = \vec F \quad \checkmark
+$$
+
+## Qué se ve en el dibujo {#sec-ej-dibujo}
+
+La @fig-campo-nivel muestra el relieve $f$ como un mapa de colores, sus curvas de nivel, y encima
+las flechas del campo $\vec F$.
+
+```{python}
+#| label: fig-campo-nivel
+#| fig-cap: "Las flechas negras son el campo $\\vec F = \\nabla f$; las curvas violetas son las curvas de nivel de $f$. Las flechas cruzan las curvas de nivel **perpendicularmente** y apuntan hacia la zona más cálida, es decir hacia donde $f$ crece. Donde las curvas se aprietan, el relieve es empinado y las flechas se hacen largas. En el origen hay un punto crítico: ahí $\\nabla f = \\vec 0$ y las flechas se achican hasta desaparecer."
+#| fig-width: 6.6
+#| fig-height: 5.2
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+VIOLETA, VIOLETA2, TINTA, GRIS = "#7c5cbf", "#b48ec8", "#1e1a2e", "#a99fc0"
+
+f  = lambda x, y: x**2*y + x**3 + y**2
+Fx = lambda x, y: 2*x*y + 3*x**2
+Fy = lambda x, y: x**2 + 2*y
+
+xs = np.linspace(-2.2, 2.2, 300)
+ys = np.linspace(-2.2, 2.2, 300)
+X, Y = np.meshgrid(xs, ys)
+Z = f(X, Y)
+
+fig, ax = plt.subplots(figsize=(6.6, 5.2))
+ax.contourf(X, Y, Z, levels=30, cmap="BuPu_r", alpha=.9)
+ax.contour(X, Y, Z, levels=16, colors=VIOLETA, linewidths=.8, alpha=.75)
+
+xq = np.linspace(-2.05, 2.05, 15)
+XQ, YQ = np.meshgrid(xq, xq)
+ax.quiver(XQ, YQ, Fx(XQ, YQ), Fy(XQ, YQ), color=TINTA, width=.004, scale=110, alpha=.9)
+
+ax.plot(0, 0, "o", color=TINTA, ms=5)
+ax.annotate("punto crítico", (0, 0), textcoords="offset points", xytext=(8, -14),
+            fontsize=8, color=TINTA)
+ax.set_xlabel("$x$"); ax.set_ylabel("$y$")
+ax.set_aspect("equal")
+fig.tight_layout()
+plt.show()
+```
+
+::: {.callout-note appearance="simple"}
+## Una corrección sobre el punto del origen
+
+Es tentador llamarlo "punto de ensilladura", pero no lo es. El hessiano de $f$ es
+
+$$
+H = \begin{pmatrix} 6x + 2y & 2x \\ 2x & 2 \end{pmatrix},
+\qquad H(0,0) = \begin{pmatrix} 0 & 0 \\ 0 & 2 \end{pmatrix},
+$$
+
+con determinante $0$: el criterio no decide, el punto es **degenerado**. Y mirando el relieve se
+ve por qué: sobre el eje $y$ la función vale $f(0,y) = y^2$, un mínimo; sobre el eje $x$ vale
+$f(x,0) = x^3$, que en el origen tiene un punto de inflexión, ni máximo ni mínimo.
+
+La ensilladura de verdad de este campo está afuera del dibujo. Resolviendo $\nabla f = \vec 0$:
+de $x(2y + 3x) = 0$ y $x^2 + 2y = 0$ salen los puntos $(0,0)$ y $(3, -\tfrac92)$, y en el segundo
+$\det H = 9 \cdot 2 - 6^2 = -18 < 0$, ahí sí, ensilladura.
+:::
+
+::: {.callout-tip appearance="simple"}
+## Cómo leer un campo y sospechar si es conservativo
+
+- Si las flechas parecen "bajar de una loma y subir a otra" sin girar, hay relieve detrás:
+  probablemente conservativo.
+- Si las flechas **giran** alrededor de un punto formando remolinos, hay rotor: no puede venir de
+  ninguna altura.
+- Si cruzan perpendicularmente a una familia de curvas que se cierran sobre sí mismas, esas curvas
+  son candidatas a curvas de nivel.
+- **El dibujo sugiere, pero no demuestra.** La cuenta $P_y = Q_x$ es la que decide.
+:::
+
+## Independencia del camino {#sec-independencia}
+
+Calculemos el trabajo de $\vec F$ desde $A = (0,0)$ hasta $B = (2,1)$ por tres caminos distintos.
+
+**Camino 1 (quebrado).** Primero $(0,0) \to (2,0)$ con $y = 0$, $dy = 0$; después
+$(2,0) \to (2,1)$ con $x = 2$, $dx = 0$:
+
+$$
+\int_0^2 3x^2\, dx + \int_0^1 (4 + 2y)\, dy = 8 + 5 = 13 .
+$$
+
+**Camino 2 (recto).** $\vec r(t) = (2t,\ t)$, $t \in [0,1]$, $d\vec r = (2,1)\,dt$:
+
+$$
+\int_0^1 \Big[ (4t^2 + 12t^2)\cdot 2 + (4t^2 + 2t)\cdot 1 \Big] dt
+= \int_0^1 (36t^2 + 2t)\, dt = 12 + 1 = 13 .
+$$
+
+**Camino 3 (parábola).** $\vec r(t) = (2t,\ t^2)$, $t \in [0,1]$, $d\vec r = (2,\ 2t)\, dt$.
+Acá $P = 4t^3 + 12t^2$ y $Q = 6t^2$:
+
+$$
+\int_0^1 \Big[ (4t^3 + 12t^2)\cdot 2 + 6t^2 \cdot 2t \Big] dt
+= \int_0^1 (20t^3 + 24t^2)\, dt = 5 + 8 = 13 .
+$$
+
+**Con el potencial (una línea):**
+
+$$
+W = f(2,1) - f(0,0) = (4 + 8 + 1) - 0 = 13 .
+$$
+
+Tres parametrizaciones, tres integrales distintas, un solo resultado. Ese es todo el negocio del
+@thm-tfil.
+
+```{python}
+#| label: fig-caminos
+#| fig-cap: "Izquierda: los tres caminos de $A$ a $B$ sobre las curvas de nivel de $f$. Los tres atraviesan exactamente las mismas curvas de nivel entre $A$ y $B$, por eso acumulan el mismo trabajo. Derecha: el trabajo acumulado a medida que se recorre cada camino. Los recorridos son distintos —el quebrado se queda plano un rato y después sube de golpe— pero los tres llegan a $13$."
+#| fig-width: 7.6
+#| fig-height: 3.6
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+VIOLETA, VIOLETA2, TINTA, GRIS = "#7c5cbf", "#b48ec8", "#1e1a2e", "#a99fc0"
+f = lambda x, y: x**2*y + x**3 + y**2
+
+xs = np.linspace(-0.35, 2.45, 300)
+ys = np.linspace(-0.35, 1.55, 300)
+X, Y = np.meshgrid(xs, ys)
+
+# los tres caminos, parametrizados en u de 0 a 1
+def quebrado(u):
+    u = np.atleast_1d(u)
+    x = np.where(u < .5, 4*u, 2.0)
+    y = np.where(u < .5, 0.0, 2*u - 1)
+    return x, y
+
+caminos = [
+    ("quebrado", quebrado,                                TINTA),
+    ("recto",    lambda u: (2*u, u),                      VIOLETA),
+    ("parábola", lambda u: (2*u, u**2),                   VIOLETA2),
+]
+
+fig, (ax, ax2) = plt.subplots(1, 2, figsize=(7.6, 3.6))
+
+ax.contour(X, Y, f(X, Y), levels=np.arange(0, 18, 1.5), colors=GRIS, linewidths=.7, alpha=.8)
+for nombre, r, c in caminos:
+    u = np.linspace(0, 1, 400)
+    x, y = r(u)
+    ax.plot(x, y, color=c, lw=2, label=nombre)
+ax.plot([0, 2], [0, 1], "o", color=TINTA, ms=5)
+ax.annotate("$A\\,(0,0)$\n$f=0$", (0, 0), textcoords="offset points", xytext=(6, -26), fontsize=8)
+ax.annotate("$B\\,(2,1)$\n$f=13$", (2, 1), textcoords="offset points", xytext=(-16, 8), fontsize=8)
+ax.set_xlabel("$x$"); ax.set_ylabel("$y$")
+ax.legend(fontsize=8, frameon=False, loc="upper left")
+ax.set_aspect("equal")
+
+u = np.linspace(0, 1, 400)
+for nombre, r, c in caminos:
+    x, y = r(u)
+    ax2.plot(u, f(x, y) - f(0, 0), color=c, lw=2, label=nombre)
+ax2.axhline(13, color=GRIS, lw=.8, ls="--")
+ax2.annotate("$13$", (0.02, 13), textcoords="offset points", xytext=(0, 5),
+             fontsize=8, color=GRIS)
+ax2.set_xlabel("fracción del camino recorrida")
+ax2.set_ylabel("trabajo acumulado")
+ax2.spines[["top", "right"]].set_visible(False)
+
+fig.tight_layout()
+plt.show()
+```
+
+::: {.content-visible when-format="html"}
+En pantalla se puede deformar el camino con continuidad y ver que el número final no se mueve.
+:::
+
+```{=html}
+<div class="lienzo" data-figura="caminos" data-alto="340"
+     data-rotulo="Deformá el camino y mirá el total"
+     data-sliders='[{"id":"k","min":-3,"max":3,"paso":0.05,"valor":0,"rotulo":"forma","decimales":2},{"id":"t","min":0,"max":1,"paso":0.01,"valor":1,"rotulo":"recorrido","decimales":2}]'>
+  <div class="lienzo-pie">
+    La familia de caminos es \(y = (x/2)^{\,p}\) con \(p = 2^{\text{forma}}\), que va de
+    \(A=(0,0)\) a \(B=(2,1)\) para cualquier \(p>0\). Con <b>forma</b> muy negativa el camino sube
+    primero y cruza después; con <b>forma</b> muy positiva se pega al eje \(x\) y sube al final:
+    son, aproximadamente, los dos caminos quebrados. El deslizador <b>recorrido</b> avanza sobre la
+    curva y el panel de la derecha va acumulando \(\int \vec F \cdot d\vec r\), calculado
+    numéricamente sobre la curva —sin usar el potencial—. Las curvas grises son el mismo cálculo
+    para otras formas. Todas terminan en 13.
+  </div>
+</div>
+<script>
+window.LIENZO = window.LIENZO || {};
+window.LIENZO.caminos = function (P, v) {
+  var col = P.col, c = P.ctx;
+  var f = function (x, y) { return x*x*y + x*x*x + y*y; };
+  var F = function (x, y) { return [2*x*y + 3*x*x, x*x + 2*y]; };
+  var p = Math.pow(2, v.k);
+  var camino = function (pp) {
+    return function (u) { var x = 2*u; return [x, Math.pow(u, pp)]; };
+  };
+
+  var margen = 46;
+  var alto = P.h - 86;
+  // el plano se dibuja a escala: 2,8 de ancho por 2,0 de alto
+  var anchoI = Math.min(P.w * 0.54 - margen, alto * 1.4);
+  var cajaI = [margen, 42, anchoI, anchoI / 1.4];
+  var cajaD = [margen + anchoI + 58, 42, P.w - (margen + anchoI + 58) - 18, anchoI / 1.4];
+
+  // ---------- panel izquierdo: el plano ----------
+  var m = P.marco(cajaI, [-0.35, 2.45], [-0.4, 1.6]);
+  P.ejes(m, 'x', 'y', null);
+  P.recorte(m, function () {
+    var niveles = [];
+    for (var q = -3; q <= 20; q += 1.5) niveles.push(q);
+    CV.contornos(P, m, f, niveles, col.suave, .8, .7);
+    CV.campo(P, m, F, { n: 13, color: col.tinta, largo: 10, alfa: .32 });
+  });
+
+  function puntos(r, u0, u1, n) {
+    var a = [], i;
+    for (i = 0; i <= n; i++) a.push(r(u0 + (u1 - u0) * i / n));
+    return a;
+  }
+  var r = camino(p);
+  P.recorte(m, function () {
+    P.curva(m, puntos(r, 0, 1, 200), col.suave, 1.4, .8, [4, 4]);
+    P.curva(m, puntos(r, 0, Math.max(v.t, 1e-4), 200), col.acento, 2.6, 1);
+  });
+
+  var B = r(v.t);
+  P.punto(m, 0, 0, col.tinta, 4.5);
+  P.punto(m, 2, 1, col.tinta, 4.5);
+  P.punto(m, B[0], B[1], col.acento, 5);
+  P.texto(m.X(0) + 7, m.Y(0) + 16, 'A  f = 0', col.tenue, 11);
+  P.texto(m.X(2) - 6, m.Y(1) - 9, 'B  f = 13', col.tenue, 11, 'right');
+
+  // ---------- panel derecho: el trabajo acumulado ----------
+  var mD = P.marco(cajaD, [0, 1], [-1, 15]);
+  P.ejes(mD, 'fracción recorrida', 'W', null);
+  // la referencia en 13
+  P.curva(mD, [[0, 13], [1, 13]], col.suave, 1, .8, [4, 4]);
+  P.texto(mD.X(0) + 4, mD.Y(13) - 5, '13', col.tenue, 10);
+
+  function acumulada(pp, n) {
+    var rr = camino(pp), pts = [[0, 0]], W = 0, i, u0, u1;
+    for (i = 1; i <= n; i++) {
+      u0 = (i-1)/n; u1 = i/n;
+      W += CV.trabajo(F, rr, u0, u1, 6);
+      pts.push([u1, W]);
+    }
+    return pts;
+  }
+  // algunas formas de referencia, en gris
+  [-3, -1.5, 1.5, 3].forEach(function (kk) {
+    P.recorte(mD, function () {
+      P.curva(mD, acumulada(Math.pow(2, kk), 80), col.suave, 1, .55);
+    });
+  });
+  var acum = acumulada(p, 140);
+  P.recorte(mD, function () {
+    P.curva(mD, acum, col.acento, 2.4, 1);
+  });
+  // el punto correspondiente al recorrido actual
+  var idx = Math.round(v.t * 140), Wt = acum[Math.max(0, Math.min(140, idx))][1];
+  P.punto(mD, v.t, Wt, col.acento, 5);
+
+  // ---------- lecturas ----------
+  P.texto(cajaI[0] - 12, 16, 'p = ' + p.toFixed(2), col.tenue, 12);
+  var exacto = f(B[0], B[1]) - f(0, 0);
+  var ok = Math.abs(Wt - exacto) < .02;
+  P.texto(cajaD[0] + cajaD[2], 16, 'W = ' + Wt.toFixed(3), ok ? col.bien : col.tenue, 12.5, 'right');
+  P.texto(cajaD[0] + cajaD[2], 32,
+          'f(B) − f(A) = ' + exacto.toFixed(3), col.tenue, 11.5, 'right');
+};
+</script>
+```
+
+::: {.ejercicio}
+En la figura de arriba, ¿por qué la curva gris del trabajo acumulado que corresponde a la forma
+más negativa arranca casi plana y sube de golpe al final?
+
+- [Porque ese camino es más largo y tarda más en acumular.]{.mal}
+- [Porque ese camino sube casi verticalmente primero, por una zona donde $\vec F$ es casi perpendicular al movimiento, y recién al final avanza en $x$ cruzando las curvas de nivel.]{.bien}
+- [Porque el campo es más débil cerca del eje $y$ y más fuerte cerca de $B$.]{.mal}
+- [Por un error de la integración numérica.]{.mal}
+
+::: {.explica}
+**La correcta es la segunda.** Con $p$ chico el camino sube casi pegado al eje $y$. Ahí $\vec F(0,y) = (0,\ 2y)$, que sí tiene
+componente vertical, pero el ascenso ocurre a lo largo de curvas de nivel casi paralelas: se
+recorre poca diferencia de altura. Toda la diferencia de $f$ se acumula en el tramo horizontal
+final, donde el camino corta las curvas de nivel casi perpendicularmente.
+
+La lectura correcta es la de las curvas de nivel: **el trabajo acumulado es cuántas curvas de
+nivel llevás cruzadas**, no cuánto caminaste. Un tramo que corre *a lo largo* de una curva de
+nivel no aporta nada, por más largo que sea.
+:::
+:::
+
+::: {.ejercicio data-respuesta="0" data-tol="0.0001" data-rotulo="Para calcular"}
+Con el mismo campo @eq-ejemplo, ¿cuánto vale $\oint_C \vec F \cdot d\vec r$ si $C$ es el camino
+que va de $A$ a $B$ por la recta y vuelve de $B$ a $A$ por la parábola?
+
+::: {.explica}
+Cero. Es una curva cerrada y el campo es conservativo: $13 - 13 = 0$. No hace falta calcular nada.
+
+Este es el atajo que más se desaprovecha en los parciales: cuando la curva es cerrada y el campo
+pasó el test, la respuesta es $0$ y se escribe sin integrar.
+:::
+:::

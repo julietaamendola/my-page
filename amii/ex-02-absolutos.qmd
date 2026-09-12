@@ -1,0 +1,467 @@
+---
+title: "Extremos absolutos: casi siempre en el borde"
+---
+
+Hasta acá buscamos extremos **relativos**: puntos que ganan en su vecindario. Ahora el problema
+cambia: dada una región $K$, ¿dónde alcanza $f$ su valor más grande y su valor más chico **de
+todos**? La diferencia no es de grado. Un máximo absoluto puede estar en un punto donde el
+gradiente no se anula, y de hecho casi siempre está ahí.
+
+## Weierstrass: por qué los extremos existen {#sec-absolutos}
+
+::: {#thm-weierstrass}
+## Teorema de Weierstrass
+
+Si $K \subseteq \mathbb{R}^n$ es **compacto** (cerrado y acotado) y $f : K \to \mathbb{R}$ es
+**continua**, entonces $f$ alcanza en $K$ un máximo absoluto y un mínimo absoluto.
+:::
+
+El teorema no dice **dónde** están, solo garantiza que existen. Esa garantía es lo que permite el
+método: si uno arma una lista finita de candidatos y sabe que el extremo está en la lista,
+alcanza con comparar valores.
+
+::: {.callout-tip}
+## El método, en tres pasos
+
+1. **Puntos críticos en el interior de $K$.** Resolver $\nabla f = \vec 0$ y quedarse solo con las
+   soluciones que efectivamente caen adentro.
+2. **Estudiar $f$ restringida al borde $\partial K$**, parametrizando cada trozo y sustituyendo —
+   con lo cual queda un problema de una variable— o usando multiplicadores de Lagrange. **Sin
+   olvidar los vértices** o puntos donde se unen dos trozos: ahí la parametrización se corta y los
+   extremos de cada trozo son candidatos.
+3. **Comparar** los valores de $f$ en todos los candidatos. El mayor es el máximo absoluto y el
+   menor, el mínimo.
+
+No hace falta clasificar los puntos críticos interiores con el Hessiano: lo único que importa es
+el **valor** de $f$, no si el punto es máximo local o silla.
+:::
+
+::: {.callout-warning appearance="simple"}
+## Los tres errores de este método
+
+- **Olvidarse del borde.** Es el más común y el más caro: en muchos problemas el extremo está
+  *solo* ahí.
+- **Olvidarse de los vértices.** Cada trozo del borde es un intervalo cerrado, así que sus dos
+  puntas también son candidatos, aunque la derivada no se anule ahí.
+- **Clasificar de más.** Gastar media carilla en el Hessiano de un punto interior que después
+  pierde la comparación es trabajo tirado.
+:::
+
+## Cuando todo pasa en el borde {#sec-disco}
+
+*Hallar los extremos absolutos de $f(x,y) = 2xy$ en el disco $x^2 + y^2 \le 9$.*
+
+**Paso 1: el interior.** $f_x = 2y = 0$ y $f_y = 2x = 0$ dan el único punto crítico $(0,0)$, con
+$f(0,0) = 0$. (Es una silla, porque $D = \det\begin{pmatrix} 0 & 2 \\ 2 & 0\end{pmatrix} = -4 < 0$,
+pero para lo que buscamos alcanza con anotar el valor $0$.)
+
+**Paso 2: el borde** $x^2 + y^2 = 9$. Parametrizamos $x = 3\cos t$, $y = 3\operatorname{sen} t$
+con $t \in [0, 2\pi]$:
+
+$$
+F(t) = 2 \cdot 3\cos t \cdot 3 \operatorname{sen} t = 18 \operatorname{sen} t \cos t
+= 9 \operatorname{sen}(2t),
+$$
+
+usando $\operatorname{sen}(2t) = 2\operatorname{sen} t \cos t$. Como
+$\operatorname{sen}(2t) \in [-1,1]$:
+
+$$
+\max_{\partial K} f = 9 \ \text{ en } 2t = \tfrac{\pi}{2}, \tfrac{5\pi}{2}
+\ \Rightarrow\ t = \tfrac{\pi}{4}, \tfrac{5\pi}{4},
+\qquad
+\min_{\partial K} f = -9 \ \text{ en } t = \tfrac{3\pi}{4}, \tfrac{7\pi}{4}.
+$$
+
+**Paso 3: comparar** con $f(0,0) = 0$. Los extremos están en el borde.
+
+::: {.resultado}
+**Máximo absoluto:** $f = 9$ en $\left(\tfrac{3\sqrt2}{2}, \tfrac{3\sqrt2}{2}\right)$ y
+$\left(-\tfrac{3\sqrt2}{2}, -\tfrac{3\sqrt2}{2}\right)$.
+
+**Mínimo absoluto:** $f = -9$ en $\left(\tfrac{3\sqrt2}{2}, -\tfrac{3\sqrt2}{2}\right)$ y
+$\left(-\tfrac{3\sqrt2}{2}, \tfrac{3\sqrt2}{2}\right)$.
+:::
+
+::: {.callout-note appearance="simple"}
+## El mismo resultado con Lagrange, para comparar
+
+En el borde, $\nabla f = \lambda \nabla g$ con $g = x^2+y^2$ da $2y = 2\lambda x$ y
+$2x = 2\lambda y$. Multiplicando cruzado, $y^2 = x^2$, o sea $y = \pm x$; con $x^2+y^2 = 9$
+resulta $x^2 = \tfrac92$, $|x| = |y| = \tfrac{3}{\sqrt2} = \tfrac{3\sqrt2}{2}$, y
+$f = 2xy = \pm 9$: los mismos cuatro puntos.
+
+Cuál conviene depende del borde. Acá la parametrización fue más corta porque apareció una
+identidad trigonométrica que resolvió todo; en el @sec-lagrange hay casos donde parametrizar es
+imposible y Lagrange es el único camino.
+:::
+
+En tres dimensiones se ve por qué tenía que pasar esto: la superficie $z = 2xy$ es una silla, y lo
+único que hacemos es recortarle un disco y mirar el borde del recorte.
+
+```{python}
+#| label: fig-disco
+#| fig-cap: "La silla $z = 2xy$ recortada sobre el disco de radio 3, con el borde del recorte dibujado encima. El centro de la silla es el punto crítico interior, y no gana nada: el valor $0$ queda entre el máximo y el mínimo. El borde, en cambio, es una curva que sube y baja dos veces, y ahí están los cuatro extremos."
+#| fig-width: 6.6
+#| fig-height: 4.4
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+VIOLETA, VIOLETA2, TINTA, GRIS = "#7c5cbf", "#b48ec8", "#1e1a2e", "#a99fc0"
+VERDE, ROJO = "#2f6b48", "#b8564f"
+
+R = 3.0
+r = np.linspace(0, R, 40)
+th = np.linspace(0, 2*np.pi, 120)
+RR, TH = np.meshgrid(r, th)
+X, Y = RR*np.cos(TH), RR*np.sin(TH)
+Z = 2*X*Y
+
+fig = plt.figure(figsize=(6.6, 4.4))
+ax = fig.add_subplot(111, projection="3d")
+ax.plot_surface(X, Y, Z, cmap="BuPu_r", linewidth=0, rstride=3, cstride=2, alpha=.9)
+
+t = np.linspace(0, 2*np.pi, 400)
+bx, by = R*np.cos(t), R*np.sin(t)
+ax.plot(bx, by, 2*bx*by, color=TINTA, lw=2.2)
+
+for ang, col, lab in [(np.pi/4, VERDE, "$+9$"), (5*np.pi/4, VERDE, None),
+                      (3*np.pi/4, ROJO, "$-9$"), (7*np.pi/4, ROJO, None)]:
+    px, py = R*np.cos(ang), R*np.sin(ang)
+    ax.scatter([px], [py], [2*px*py], color=col, s=32, depthshade=False)
+    if lab:
+        ax.text(px, py, 2*px*py + 2.5, lab, fontsize=9, color=col)
+ax.scatter([0], [0], [0], color=TINTA, s=26, depthshade=False)
+
+ax.set_xlabel("$x$", labelpad=-6); ax.set_ylabel("$y$", labelpad=-6)
+ax.set_zlabel("$z = 2xy$", labelpad=-4)
+ax.tick_params(labelsize=6, pad=-2)
+ax.view_init(elev=24, azim=-58)
+fig.tight_layout()
+plt.show()
+```
+
+```{=html}
+<div class="lienzo" data-figura="silla" data-alto="420"
+     data-rotulo="Arrastrá para girar · el deslizador recorre el borde"
+     data-sliders='[{"id":"R","min":1,"max":3.4,"paso":0.05,"valor":3,"rotulo":"radio","decimales":2},{"id":"t","min":0,"max":360,"paso":2,"valor":45,"rotulo":"t°","decimales":0}]'>
+  <div class="lienzo-pie">
+    El punto naranja recorre el borde del disco y sube y baja por la silla. Fijate que da
+    <b>dos vueltas completas de altura por cada vuelta al disco</b>: eso es el \(2t\) de
+    \(F(t)=R^2\operatorname{sen}(2t)\), y es la razón de que haya dos máximos y dos mínimos y no
+    uno de cada uno. Al achicar el radio, los extremos bajan como \(R^2\) pero siguen estando en
+    las mismas cuatro direcciones: las diagonales.
+  </div>
+</div>
+<script>
+window.LIENZO = window.LIENZO || {};
+window.LIENZO.silla = function (P, v) {
+  var V = CV.vista('silla'), col = P.col;
+  var caja = [26, 32, P.w - 52, P.h - 60];
+  var dom = { x: [-3.4, 3.4], y: [-3.4, 3.4], z: [-11.6, 11.6], ax: 1, ay: 1, az: .85 };
+  var cam = P.camara(caja, dom, V.azim, V.elev, .40);
+  var f = function (x, y) { return 2*x*y; };
+
+  P.caja3(cam, 'x', 'y', 'z');
+  // la silla, dibujada solo sobre el disco: es el recorte del que habla el ejercicio
+  var R = v.R;
+  CV.superficie3(P, cam,
+    function (rr, tt) {
+      var x = rr*Math.cos(tt), y = rr*Math.sin(tt);
+      return [x, y, f(x, y)];
+    },
+    0, R, 0, 2*Math.PI,
+    { nu: 16, nv: 64, alfa: 1, malla: false,
+      color: function (rr, tt, p) { return CV.rampa((p[2] + 11.6) / 23.2); } });
+
+  var pts = [], i, a;
+  for (i = 0; i <= 220; i++) {
+    a = 2*Math.PI*i/220;
+    pts.push([R*Math.cos(a), R*Math.sin(a), f(R*Math.cos(a), R*Math.sin(a))]);
+  }
+  P.curva3(cam, pts, '#ffffff', 3, 1);
+  P.curva3(cam, pts.map(function (p) { return [p[0], p[1], dom.z[0]]; }),
+           col.suave, 1.2, .7, [4, 4]);
+
+  // los cuatro extremos
+  [[Math.PI/4, col.bien], [5*Math.PI/4, col.bien],
+   [3*Math.PI/4, col.mal], [7*Math.PI/4, col.mal]].forEach(function (e) {
+    var x = R*Math.cos(e[0]), y = R*Math.sin(e[0]);
+    P.punto3(cam, x, y, f(x, y), e[1], 5);
+  });
+
+  // el punto que recorre el borde
+  var t = v.t * Math.PI/180, px = R*Math.cos(t), py = R*Math.sin(t), pz = f(px, py);
+  P.curva3(cam, [[px, py, dom.z[0]], [px, py, pz]], col.acento, 1.4, .8, [3, 4]);
+  P.punto3(cam, px, py, pz, col.acento, 6);
+  P.punto3(cam, 0, 0, 0, col.tinta, 4.5);
+
+  P.texto(caja[0], 16, 'f = R² sen(2t) = ' + pz.toFixed(2), col.acento, 12.5);
+  P.texto(caja[0] + caja[2], 16,
+          'extremos en ±R² = ±' + (R*R).toFixed(2), col.tenue, 12.5, 'right');
+};
+window.addEventListener('load', function () { CV.rotable('silla', { azim: -0.62, elev: 0.4 }); });
+</script>
+```
+
+## Cuando el borde es una curva de nivel {#sec-corona}
+
+Este es el ejercicio más lindo de la práctica, porque la respuesta parece una casualidad y no lo
+es.
+
+*Calcular el mínimo y el máximo absolutos de $f(x,y) = \ln\left(1 + 9x^2 + 4y^2\right)$ en la
+región $1 \le \dfrac{x^2}{4} + \dfrac{y^2}{9} \le 4$.*
+
+**Paso 0: simplificar.** La región $R$ es la **corona elíptica** entre la elipse
+$\tfrac{x^2}{4} + \tfrac{y^2}{9} = 1$ (semiejes $2$ y $3$) y la elipse
+$\tfrac{x^2}{4} + \tfrac{y^2}{9} = 4$, es decir $\tfrac{x^2}{16} + \tfrac{y^2}{36} = 1$ (semiejes
+$4$ y $6$). Es cerrada y acotada.
+
+Como $t \mapsto \ln(1+t)$ es **estrictamente creciente**, $f$ y $u$ alcanzan sus extremos en los
+mismos puntos, con
+
+$$
+u(x,y) = 9x^2 + 4y^2 ,
+$$
+
+y al final se aplica el logaritmo a los valores extremos de $u$. Esto ahorra derivar el
+logaritmo entero.
+
+**Paso 1: el interior.** $\nabla u = (18x, 8y) = (0,0)$ solo en el origen, que **no pertenece** a
+$R$ (ahí $\tfrac{0}{4} + \tfrac{0}{9} = 0 < 1$). No hay candidatos interiores: todo pasa en el
+borde.
+
+**Paso 2: el borde interior** $\tfrac{x^2}{4} + \tfrac{y^2}{9} = 1$. Parametrizamos
+$x = 2\cos t$, $y = 3\operatorname{sen} t$:
+
+$$
+u = 9 \cdot 4\cos^2 t + 4 \cdot 9 \operatorname{sen}^2 t
+= 36\left(\cos^2 t + \operatorname{sen}^2 t\right) = 36 .
+$$
+
+**$u$ es constante e igual a $36$ sobre toda esa elipse.**
+
+**Paso 3: el borde exterior** $\tfrac{x^2}{16} + \tfrac{y^2}{36} = 1$. Con $x = 4\cos t$,
+$y = 6\operatorname{sen} t$:
+
+$$
+u = 9 \cdot 16 \cos^2 t + 4 \cdot 36 \operatorname{sen}^2 t = 144 .
+$$
+
+También constante.
+
+::: {.resultado}
+**Mínimo absoluto:** $f = \ln 37$, alcanzado en *todos* los puntos de la elipse interior
+$\tfrac{x^2}{4} + \tfrac{y^2}{9} = 1$.
+
+**Máximo absoluto:** $f = \ln 145$, alcanzado en *todos* los puntos de la elipse exterior
+$\tfrac{x^2}{4} + \tfrac{y^2}{9} = 4$.
+:::
+
+::: {.callout-important}
+## Por qué no es una casualidad
+
+Las curvas de nivel de $u$ son $9x^2 + 4y^2 = k$, que se reescriben
+
+$$
+\frac{x^2}{k/9} + \frac{y^2}{k/4} = 1 :
+$$
+
+elipses de semiejes $\tfrac{\sqrt k}{3}$ y $\tfrac{\sqrt k}{2}$, o sea con relación de semiejes
+
+$$
+\frac{\sqrt k / 3}{\sqrt k / 2} = \frac{2}{3} ,
+$$
+
+**independiente de $k$**. Y las elipses del borde tienen semiejes $2$ y $3$, y $4$ y $6$: la misma
+relación $2 : 3$.
+
+Es decir: **los dos bordes de la región son, ellos mismos, curvas de nivel de $u$**. Por eso $u$
+es constante ahí, y por eso los extremos no se alcanzan en puntos aislados sino en curvas enteras.
+
+La cuenta directa lo confirma: sobre $\tfrac{x^2}{4} + \tfrac{y^2}{9} = c$ vale
+$x^2 = 4c - \tfrac{4y^2}{9}$, y entonces
+
+$$
+u = 9\left(4c - \frac{4y^2}{9}\right) + 4y^2 = 36c - 4y^2 + 4y^2 = 36c .
+$$
+
+Con $c = 1$ da $36$ y con $c = 4$ da $144$. La región está "peinada" por las curvas de nivel de la
+función: es un anillo entre dos de ellas.
+:::
+
+```{=html}
+<div class="lienzo" data-figura="corona" data-alto="400"
+     data-rotulo="Movés el nivel y buscás cuándo coincide con un borde"
+     data-sliders='[{"id":"k","min":10,"max":200,"paso":1,"valor":80,"rotulo":"nivel k","decimales":0}]'>
+  <div class="lienzo-pie">
+    La corona está en violeta claro; las dos curvas gruesas son sus bordes. La curva naranja es
+    la curva de nivel \(9x^2+4y^2=k\). Movela: <b>en \(k=36\) se apoya exactamente sobre el borde
+    interior y en \(k=144\) sobre el exterior</b>, porque las tres familias de elipses son la
+    misma. Entre medio, la curva de nivel corta la corona sin tocar los bordes, y sus puntos son
+    todos intermedios. Eso es toda la resolución del ejercicio, en un dibujo.
+  </div>
+</div>
+<script>
+window.LIENZO = window.LIENZO || {};
+window.LIENZO.corona = function (P, v) {
+  var col = P.col, c = P.ctx;
+  var caja = [48, 34, P.w - 90, P.h - 86];
+  var lado = Math.min(caja[2], caja[3]);
+  caja = [caja[0] + (caja[2]-lado)/2, caja[1], lado, lado];
+  var m = P.marco(caja, [-7, 7], [-7, 7]);
+  P.ejes(m, 'x', 'y', null);
+
+  function elipse(a, b) {
+    var pts = [], i, t;
+    for (i = 0; i <= 240; i++) { t = 2*Math.PI*i/240; pts.push([a*Math.cos(t), b*Math.sin(t)]); }
+    return pts;
+  }
+
+  // la corona pintada: exterior menos interior
+  var ext = elipse(4, 6), inte = elipse(2, 3);
+  c.save();
+  c.fillStyle = col.acento; c.globalAlpha = .13;
+  c.beginPath();
+  ext.forEach(function (p, i) { var X=m.X(p[0]), Y=m.Y(p[1]); i ? c.lineTo(X,Y) : c.moveTo(X,Y); });
+  c.closePath();
+  inte.slice().reverse().forEach(function (p, i) {
+    var X=m.X(p[0]), Y=m.Y(p[1]); i ? c.lineTo(X,Y) : c.moveTo(X,Y);
+  });
+  c.closePath();
+  c.fill('evenodd');
+  c.restore();
+
+  // algunas curvas de nivel de u, en gris
+  P.recorte(m, function () {
+    [16, 36, 64, 100, 144, 196].forEach(function (k) {
+      P.curva(m, elipse(Math.sqrt(k)/3, Math.sqrt(k)/2), col.suave, 1, .55);
+    });
+  });
+
+  P.curva(m, inte, col.acento, 2.4, 1);
+  P.curva(m, ext, col.acento, 2.4, 1);
+
+  // la curva de nivel elegida
+  var k = v.k;
+  var color = (Math.abs(k-36) < 1.5 || Math.abs(k-144) < 1.5) ? col.bien : '#c98a3a';
+  P.recorte(m, function () {
+    P.curva(m, elipse(Math.sqrt(k)/3, Math.sqrt(k)/2), color, 2.8, 1);
+  });
+
+  P.texto(caja[0] - 14, 16, 'u = 9x² + 4y² = ' + k, color, 12.5);
+  var msg = Math.abs(k-36) < 1.5 ? 'es el borde interior : mínimo, f = ln 37'
+          : (Math.abs(k-144) < 1.5 ? 'es el borde exterior : máximo, f = ln 145'
+          : (k < 36 ? 'queda adentro del agujero' : (k > 144 ? 'queda afuera de la corona'
+          : 'corta la corona sin tocar los bordes')));
+  P.texto(caja[0] + caja[2] + 14, 16, msg, color, 12, 'right');
+};
+</script>
+```
+
+## Cuando hay vértices: la placa rectangular {#sec-placa}
+
+*Hallar los extremos absolutos de $f(x,y) = x^2 + xy + y^2 - 6x$ en la placa
+$0 \le x \le 5$, $-3 \le y \le 3$.*
+
+Este es el caso en que el borde viene en cuatro trozos y hay que no olvidarse de las esquinas.
+
+**Paso 1: el interior.** $f_x = 2x + y - 6 = 0$ y $f_y = x + 2y = 0$. De la segunda $x = -2y$;
+reemplazando, $-4y + y - 6 = 0 \Rightarrow y = -2$, $x = 4$. El punto $(4,-2)$ está adentro, y
+
+$$
+f(4,-2) = 16 - 8 + 4 - 24 = -12 .
+$$
+
+**Paso 2: los cuatro lados.** En cada uno se fija una variable y queda una parábola de una
+variable; se miran el vértice —si cae dentro del intervalo— y las dos puntas.
+
+| Lado | Función | Vértice | Valores |
+|---|---|---|---|
+| $x=0$, $y \in [-3,3]$ | $y^2$ | $y = 0$: $0$ | $9$ en $y = \pm3$ |
+| $x=5$, $y \in [-3,3]$ | $y^2 + 5y - 5$ | $y = -\tfrac52$: $-\tfrac{45}{4}$ | $19$ en $y=3$; $-11$ en $y=-3$ |
+| $y=-3$, $x \in [0,5]$ | $x^2 - 9x + 9$ | $x = \tfrac92$: $-\tfrac{45}{4}$ | $9$ en $x=0$; $-11$ en $x=5$ |
+| $y=3$, $x \in [0,5]$ | $x^2 - 3x + 9$ | $x = \tfrac32$: $\tfrac{27}{4}$ | $9$ en $x=0$; $19$ en $x=5$ |
+
+: {tbl-colwidths="[22,24,24,30]"}
+
+**Paso 3: comparar.** El menor de todos es $-12$ (el punto interior) y el mayor es $19$, alcanzado
+en el vértice $(5,3)$.
+
+::: {.resultado}
+**Mínimo absoluto:** $f(4,-2) = -12$.  **Máximo absoluto:** $f(5,3) = 19$.
+:::
+
+::: {.callout-tip appearance="simple"}
+## Una observación que ahorra trabajo
+
+La Hessiana es $\mathbf{H}f = \begin{pmatrix} 2 & 1 \\ 1 & 2\end{pmatrix}$, **constante y definida
+positiva** ($D = 3 > 0$, $f_{xx} > 0$). Una función con Hessiana definida positiva en todo el
+plano es convexa, y una función convexa **no puede tener máximos en el interior**: su máximo sobre
+un compacto está siempre en el borde, y de hecho en un vértice si la región es un polígono.
+
+O sea que, antes de calcular nada, ya se sabía que el mínimo iba a ser el punto crítico interior y
+que el máximo había que buscarlo entre las cuatro esquinas. Eso reduce el paso 2 a evaluar $f$ en
+$(0,\pm3)$ y $(5,\pm3)$.
+:::
+
+::: {.ejercicio data-respuesta="4" data-tol="0.0001" data-rotulo="Para calcular"}
+Sea $f(x,y) = x^2 - y^2$ en el disco $x^2 + y^2 \le 4$. ¿Cuánto vale el máximo absoluto?
+
+::: {.explica}
+El punto crítico interior es $(0,0)$ con $f = 0$. En el borde, con $x = 2\cos t$,
+$y = 2\operatorname{sen} t$:
+
+$$
+F(t) = 4\cos^2 t - 4\operatorname{sen}^2 t = 4\cos(2t) \in [-4, 4].
+$$
+
+Máximo $4$ en $(\pm 2, 0)$ y mínimo $-4$ en $(0, \pm 2)$. El valor interior $0$ queda en el medio.
+
+Es el mismo fenómeno del @sec-disco con la silla girada $45°$: $x^2-y^2$ y $2xy$ son la misma
+superficie vista desde otro ángulo, y por eso los extremos sobre un disco valen $\pm R^2$ en los
+dos casos.
+:::
+:::
+
+::: {.ejercicio}
+Querés los extremos absolutos de una función continua sobre el cuadrado $[0,1] \times [0,1]$ y
+encontrás que **no hay ningún punto crítico en el interior**. ¿Qué conclusión sacás?
+
+- [Que la función no tiene extremos absolutos en el cuadrado.]{.mal}
+- [Que los extremos absolutos existen igual, por Weierstrass, y están los dos en el borde.]{.bien}
+- [Que hay que revisar las cuentas: siempre hay al menos un punto crítico interior.]{.mal}
+- [Que la función es monótona.]{.mal}
+
+::: {.explica}
+**La correcta es la segunda.** El cuadrado es compacto y $f$ continua, así que Weierstrass
+garantiza que los dos extremos existen. Si no hay candidatos interiores, el único lugar donde
+pueden estar es el borde.
+
+Eso es exactamente lo que pasa en el @sec-corona: ahí el único punto crítico de $u$ caía en el
+agujero de la corona, fuera de la región, y los dos extremos resultaron estar en los bordes.
+
+La primera opción confunde "no hay puntos críticos" con "no hay extremos": el gradiente no tiene
+por qué anularse en un extremo que está sobre el borde, porque el @thm-fermat pide que el punto
+sea interior.
+:::
+:::
+
+::: {.ejercicio}
+En el ejercicio de la placa, ¿por qué no hizo falta clasificar $(4,-2)$ con el criterio del
+Hessiano?
+
+- [Porque ya sabíamos que era un mínimo.]{.mal}
+- [Porque para extremos absolutos solo importa el valor de $f$ en cada candidato, y el criterio no aporta a la comparación.]{.bien}
+- [Porque el criterio no se puede aplicar en una región cerrada.]{.mal}
+
+::: {.explica}
+**La correcta es la segunda.** El método es: juntar candidatos, evaluar, comparar. Un punto
+interior que resultara ser una silla igual entra en la lista con su valor, y simplemente pierde la
+comparación; clasificarlo no cambia nada.
+
+Distinto es el caso de la observación de arriba, donde la Hessiana sirvió para **descartar** de
+antemano que el máximo estuviera adentro. Ahí el criterio se usó como atajo, no como clasificación.
+:::
+:::

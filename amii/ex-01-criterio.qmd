@@ -1,0 +1,590 @@
+---
+title: "Puntos críticos y el criterio del Hessiano"
+---
+
+Buscar un máximo o un mínimo de una función de varias variables se hace en dos tiempos: primero
+se encuentran los candidatos —los puntos donde el gradiente se anula— y después se decide qué es
+cada uno. El primer paso es resolver un sistema; el segundo es el criterio del Hessiano.
+
+Este capítulo va por los dos, pero se detiene sobre todo en el lugar donde el criterio **no
+contesta**, que es donde están todos los ejercicios interesantes.
+
+## Los candidatos: la condición necesaria {#sec-fermat}
+
+::: {#def-extremos}
+## Extremos relativos y absolutos
+
+Sea $f : A \subseteq \mathbb{R}^n \to \mathbb{R}$ y $P_0 \in A$.
+
+- $f$ tiene un **máximo relativo** (local) en $P_0$ si existe un entorno $B(P_0, r) \subseteq A$
+  tal que $f(P) \le f(P_0)$ para todo $P \in B(P_0, r)$. Si vale $f(P) < f(P_0)$ para
+  $P \neq P_0$, el máximo es **estricto**.
+- $f$ tiene un **mínimo relativo** si vale la desigualdad al revés.
+- $f$ tiene un **máximo (mínimo) absoluto** en $P_0$ sobre $A$ si la desigualdad vale para
+  **todo** $P \in A$, sin entorno que valga.
+:::
+
+::: {#thm-fermat}
+## Condición necesaria de extremo (Fermat)
+
+Sea $f : A \to \mathbb{R}$ con $A$ **abierto**. Si $f$ tiene un extremo relativo en $P_0 \in A$ y
+$f$ es diferenciable en $P_0$, entonces
+
+$$
+\nabla f(P_0) = \vec 0 .
+$$ {#eq-fermat}
+
+Un punto donde el gradiente se anula se llama **punto crítico** o **estacionario**.
+:::
+
+Las dos hipótesis están ahí por algo, y las dos se olvidan:
+
+::: {.callout-warning appearance="simple"}
+## La condición es necesaria, no suficiente, y pide un abierto
+
+- **No es suficiente.** $f(x,y) = x^2 - y^2$ tiene $\nabla f(0,0) = \vec 0$ y no tiene extremo en
+  el origen: sube en una dirección y baja en la otra.
+- **El dominio tiene que ser abierto.** Sobre un conjunto que incluye su borde, los extremos
+  pueden estar justo ahí, donde el gradiente no tiene por qué anularse. De eso se ocupa el
+  @sec-absolutos.
+- **La función tiene que ser diferenciable.** $f(x,y) = \sqrt{x^2+y^2}$ tiene un mínimo absoluto
+  en el origen y ahí no hay gradiente: es la punta del cono.
+:::
+
+## El criterio: la Hessiana {#sec-hessiano}
+
+::: {#def-hessiana}
+## Matriz Hessiana
+
+Si $f$ es de clase $C^2$ en un entorno de $P_0 \in \mathbb{R}^n$, la **matriz Hessiana** es la
+matriz de las derivadas parciales segundas,
+
+$$
+\mathbf{H}f(P_0) = \big( f_{x_i x_j}(P_0) \big)_{i,j=1}^{n} .
+$$
+
+Por el teorema de Schwarz, si $f \in C^2$ entonces $f_{x_i x_j} = f_{x_j x_i}$: la Hessiana es
+**simétrica**.
+:::
+
+::: {#thm-criterio2}
+## Criterio del Hessiano en $\mathbb{R}^2$
+
+Sea $f \in C^2(A)$ con $A \subseteq \mathbb{R}^2$ abierto y sea $(a,b) \in A$ un **punto crítico**.
+Llamemos
+
+$$
+D = \det \mathbf{H}f(a,b) = f_{xx}f_{yy} - \big(f_{xy}\big)^2 \quad \text{evaluado en } (a,b).
+$$ {#eq-D}
+
+Entonces:
+
+i. $D > 0$ y $f_{xx} > 0$ $\Rightarrow$ **mínimo relativo estricto**.
+ii. $D > 0$ y $f_{xx} < 0$ $\Rightarrow$ **máximo relativo estricto**.
+iii. $D < 0$ $\Rightarrow$ **punto silla** (no hay extremo).
+iv. $D = 0$ $\Rightarrow$ **el criterio no decide**.
+:::
+
+::: {.callout-tip appearance="simple"}
+## De dónde sale, en una línea
+
+Cerca de un punto crítico, Taylor de orden dos dice
+$f(P_0 + \vec h) - f(P_0) \approx \tfrac12\, \vec h^{\,t}\, \mathbf{H}f(P_0)\, \vec h$: el
+comportamiento local de $f$ es el de una **forma cuadrática**. Si esa forma es siempre positiva
+hay mínimo, si es siempre negativa hay máximo, y si cambia de signo hay silla. El criterio es
+simplemente la manera de leer el signo de una forma cuadrática de $2 \times 2$ mirando $D$ y
+$f_{xx}$, y el caso $D = 0$ es exactamente aquel en el que la forma **se anula en alguna
+dirección** y el término cuadrático deja de decidir: hay que ir a mirar los órdenes siguientes.
+:::
+
+En $\mathbb{R}^n$ el criterio es el mismo con más letras:
+
+::: {#thm-sylvester}
+## Criterio general: menores principales (Sylvester)
+
+Sea $P_0$ un punto crítico de $f \in C^2$, sea $H = \mathbf{H}f(P_0)$ y sean
+$\Delta_1, \dots, \Delta_n$ sus **menores principales dominantes** (los determinantes de las
+submatrices formadas por las primeras $k$ filas y columnas). Entonces:
+
+- $\Delta_k > 0$ para todo $k$ ($H$ definida positiva) $\Rightarrow$ **mínimo relativo estricto**.
+- Los signos alternan empezando con $\Delta_1 < 0$, es decir $(-1)^k \Delta_k > 0$ ($H$ definida
+  negativa) $\Rightarrow$ **máximo relativo estricto**.
+- $\det H \neq 0$ pero no se da ninguno de los dos patrones ($H$ indefinida) $\Rightarrow$
+  **punto silla**.
+- $\det H = 0$ $\Rightarrow$ el criterio no decide.
+
+En términos de los autovalores $\lambda_1, \dots, \lambda_n$ de $H$ (reales, porque $H$ es
+simétrica): todos $> 0$ $\Rightarrow$ mínimo; todos $< 0$ $\Rightarrow$ máximo; signos mixtos
+$\Rightarrow$ silla.
+:::
+
+## El zoológico, en una figura {#sec-zoo}
+
+Toda la clasificación cabe en la familia $f(x,y) = a x^2 + 2b\,xy + c\,y^2$, que tiene un único
+punto crítico en el origen y Hessiana constante $\begin{pmatrix} 2a & 2b \\ 2b & 2c\end{pmatrix}$,
+con $D = 4(ac - b^2)$.
+
+```{python}
+#| label: fig-zoo
+#| fig-cap: "Los cuatro comportamientos posibles de una forma cuadrática cerca del origen. Abajo, el mismo objeto visto desde arriba: la zona coloreada es donde $f < 0$. Un mínimo no tiene ninguna; una silla tiene dos cuñas opuestas; el caso degenerado tiene una recta entera donde $f = 0$, y ahí el criterio se queda sin información."
+#| fig-width: 7.8
+#| fig-height: 4.6
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+VIOLETA, VIOLETA2, TINTA, GRIS = "#7c5cbf", "#b48ec8", "#1e1a2e", "#a99fc0"
+ROJO = "#b8564f"
+
+casos = [
+    ("mínimo\n$D>0,\\ f_{xx}>0$",  1.0,  0.0,  1.0),
+    ("máximo\n$D>0,\\ f_{xx}<0$", -1.0,  0.0, -1.0),
+    ("silla\n$D<0$",               1.0,  0.0, -1.0),
+    ("degenerado\n$D=0$",          1.0,  1.0,  1.0),
+]
+
+xs = np.linspace(-1.5, 1.5, 120)
+X, Y = np.meshgrid(xs, xs)
+
+fig = plt.figure(figsize=(7.8, 4.6))
+for k, (tit, a, b, c) in enumerate(casos):
+    Z = a*X**2 + 2*b*X*Y + c*Y**2
+
+    ax = fig.add_subplot(2, 4, k+1, projection="3d")
+    ax.plot_surface(X, Y, Z, cmap="BuPu_r", linewidth=0, rstride=4, cstride=4, alpha=.95)
+    ax.set_title(tit, fontsize=8, pad=-2)
+    ax.set_xticks([]); ax.set_yticks([]); ax.set_zticks([])
+    ax.view_init(elev=24, azim=-58)
+
+    ax2 = fig.add_subplot(2, 4, k+5)
+    ax2.contourf(X, Y, Z, levels=[-1e9, 0], colors=[ROJO], alpha=.22)
+    ax2.contour(X, Y, Z, levels=np.linspace(Z.min(), Z.max(), 13),
+                colors=GRIS, linewidths=.6)
+    ax2.contour(X, Y, Z, levels=[0], colors=[ROJO], linewidths=1.4)
+    ax2.plot(0, 0, "o", color=TINTA, ms=4)
+    ax2.set_aspect("equal"); ax2.set_xticks([]); ax2.set_yticks([])
+    ax2.set_xlabel(f"$D = {4*(a*c-b*b):.0f}$", fontsize=8)
+
+fig.tight_layout()
+plt.show()
+```
+
+```{=html}
+<div class="lienzo" data-figura="zoo" data-alto="400"
+     data-rotulo="Arrastrá para girar · movés a, b, c y mirás qué pasa"
+     data-sliders='[{"id":"a","min":-3,"max":3,"paso":0.1,"valor":1,"rotulo":"a","decimales":1},{"id":"b","min":-3,"max":3,"paso":0.1,"valor":0,"rotulo":"b","decimales":1},{"id":"c","min":-3,"max":3,"paso":0.1,"valor":1,"rotulo":"c","decimales":1}]'>
+  <div class="lienzo-pie">
+    La superficie es \(f(x,y) = ax^2 + 2bxy + cy^2\) y en el piso está pintada en rojo la zona
+    donde \(f&lt;0\). Mirá qué pasa al cruzar \(D=0\): la zona roja no aparece de golpe, entra
+    como una recta que después se abre en dos cuñas. <b>Ese instante es el caso que el criterio
+    no decide</b>, y es también el enunciado del ejercicio 3 de la práctica: con \(a=1\),
+    \(c=4\), el parámetro \(k=2b\) hace mínimo mientras \(-4&lt;k&lt;4\), y silla si \(|k|&gt;4\).
+    Poné \(a=1\), \(c=4\) y movés \(b\) entre \(-2\) y \(2\) para verlo.
+  </div>
+</div>
+<script>
+window.LIENZO = window.LIENZO || {};
+window.LIENZO.zoo = function (P, v) {
+  var V = CV.vista('zoo'), col = P.col;
+  var f = function (x, y) { return v.a*x*x + 2*v.b*x*y + v.c*y*y; };
+  var caja = [26, 34, P.w - 52, P.h - 62];
+  // el tope es el maximo exacto de |f| sobre el cuadrado, asi la superficie
+  // nunca queda cortada al mover los deslizadores
+  var TOPE = Math.max(1, 1.96 * (Math.abs(v.a) + 2*Math.abs(v.b) + Math.abs(v.c)));
+  var dom = { x: [-1.4, 1.4], y: [-1.4, 1.4], z: [-TOPE, TOPE], ax: 1, ay: 1, az: .8 };
+  var cam = P.camara(caja, dom, V.azim, V.elev, .40);
+  var piso = dom.z[0];
+
+  P.caja3(cam, 'x', 'y', 'f');
+
+  // la zona f < 0, pintada en el piso
+  var c = P.ctx, i, j, n = 46, paso = 2.8/n;
+  c.save(); c.globalAlpha = .3; c.fillStyle = col.mal;
+  for (i = 0; i < n; i++) for (j = 0; j < n; j++) {
+    var x = -1.4 + paso*(i+0.5), y = -1.4 + paso*(j+0.5);
+    if (f(x, y) >= 0) continue;
+    var p0 = cam.pt(-1.4 + paso*i, -1.4 + paso*j, piso);
+    var p1 = cam.pt(-1.4 + paso*(i+1), -1.4 + paso*j, piso);
+    var p2 = cam.pt(-1.4 + paso*(i+1), -1.4 + paso*(j+1), piso);
+    var p3 = cam.pt(-1.4 + paso*i, -1.4 + paso*(j+1), piso);
+    c.beginPath(); c.moveTo(p0[0],p0[1]); c.lineTo(p1[0],p1[1]);
+    c.lineTo(p2[0],p2[1]); c.lineTo(p3[0],p3[1]); c.closePath(); c.fill();
+  }
+  c.restore();
+  CV.contornos3(P, cam, f, [0], piso, col.mal, 1.8, .95);
+
+  CV.malla3(P, cam, f, { n: 28, zmin: -TOPE, zmax: TOPE, alfa: 1 });
+  P.punto3(cam, 0, 0, 0, col.tinta, 4.5);
+
+  var D = 4*(v.a*v.c - v.b*v.b);
+  var tipo, color;
+  if (Math.abs(D) < 1e-9)      { tipo = 'D = 0 : el criterio no decide'; color = col.mal; }
+  else if (D < 0)              { tipo = 'D < 0 : punto silla';           color = col.tenue; }
+  else if (v.a > 0)            { tipo = 'D > 0, a > 0 : mínimo';         color = col.bien; }
+  else                         { tipo = 'D > 0, a < 0 : máximo';         color = col.bien; }
+  P.texto(caja[0], 16, 'D = 4(ac − b²) = ' + D.toFixed(2), col.tinta, 12.5);
+  P.texto(caja[0] + caja[2], 16, tipo, color, 12.5, 'right');
+};
+window.addEventListener('load', function () { CV.rotable('zoo', { azim: -0.62, elev: 0.44 }); });
+</script>
+```
+
+::: {.callout-note appearance="simple"}
+## El ejercicio 3, leído en la figura
+
+*¿Para qué valores de $k$ la función $f(x,y) = x^2 + kxy + 4y^2$ tiene un mínimo relativo en el
+origen?*
+
+El origen es punto crítico para todo $k$, porque $f_x = 2x + ky$ y $f_y = kx + 8y$ se anulan
+ambos ahí. La Hessiana es constante,
+$\mathbf{H}f = \begin{pmatrix} 2 & k \\ k & 8 \end{pmatrix}$, con $D = 16 - k^2$. Como
+$f_{xx} = 2 > 0$ siempre, alcanza con pedir $D > 0$:
+
+$$
+16 - k^2 > 0 \iff -4 < k < 4 .
+$$
+
+Si $|k| > 4$ el origen es punto silla. Y en los bordes $k = \pm 4$ el criterio no decide, pero
+completar cuadrados lo resuelve en un renglón:
+
+$$
+k = 4: \quad f = x^2 + 4xy + 4y^2 = (x + 2y)^2 \ \ge 0,
+\qquad
+k = -4: \quad f = (x - 2y)^2 \ \ge 0 .
+$$
+
+En ambos casos hay mínimo, pero **no estricto**: la función vale $0$ sobre toda la recta
+$x \pm 2y = 0$. La respuesta depende de qué se entienda por mínimo: $-4 < k < 4$ si se pide
+estricto, $-4 \le k \le 4$ si se admiten no estrictos.
+:::
+
+## Los tres fracasos del criterio {#sec-fracasos}
+
+Cuando $D = 0$ el criterio no dice *nada*: ni que hay extremo, ni que no lo hay. Hay que ir a
+mirar la función. Los tres ejemplos que siguen son los tres finales posibles, y conviene tenerlos
+como referencia porque en un parcial el caso $D = 0$ aparece justamente para ver si uno sabe qué
+hacer.
+
+### Fracaso 1: hay silla, pero hay que descubrirla a mano {#sec-fracaso-1}
+
+$$
+f(x,y) = x^4 + y^4 - 2x^2 + 4xy - 2y^2 .
+$$ {#eq-fracaso1}
+
+**Puntos críticos.**
+
+$$
+\begin{cases} f_x = 4x^3 - 4x + 4y = 0 &\implies x^3 - x + y = 0 \quad (1) \\
+f_y = 4y^3 + 4x - 4y = 0 &\implies y^3 - y + x = 0 \quad (2) \end{cases}
+$$
+
+Sumando (1) y (2) se cancela todo lo cruzado: $x^3 + y^3 = 0 \implies y = -x$. Reemplazando en
+(1): $x^3 - 2x = 0$, o sea $x(x^2-2) = 0$. Los puntos críticos son
+
+$$
+(0,0), \qquad (\sqrt2, -\sqrt2), \qquad (-\sqrt2, \sqrt2).
+$$
+
+**Hessiana.** $f_{xx} = 12x^2 - 4$, $f_{xy} = 4$, $f_{yy} = 12y^2 - 4$.
+
+En $(\pm\sqrt2, \mp\sqrt2)$ las dos diagonales valen $12\cdot 2 - 4 = 20$, así que
+$D = 400 - 16 = 384 > 0$ con $f_{xx} = 20 > 0$: **mínimos relativos**, ambos de valor
+
+$$
+f(\sqrt2, -\sqrt2) = 4 + 4 - 4 + 4\sqrt2(-\sqrt2) - 4 = -8 .
+$$
+
+En $(0,0)$, en cambio, $\mathbf{H}f(0,0) = \begin{pmatrix} -4 & 4 \\ 4 & -4\end{pmatrix}$ y
+$D = 16 - 16 = 0$: **el criterio no decide**. Hay que estudiar el signo de $f(x,y) - f(0,0) = f(x,y)$
+cerca del origen, y para eso conviene acercarse por rectas:
+
+- Sobre $y = x$: $f(x,x) = x^4 + x^4 - 2x^2 + 4x^2 - 2x^2 = 2x^4 > 0$ para $x \neq 0$.
+- Sobre $y = -x$: $f(x,-x) = 2x^4 - 2x^2 - 4x^2 - 2x^2 = 2x^4 - 8x^2 = 2x^2(x^2 - 4) < 0$ para
+  $0 < |x| < 2$.
+
+En cualquier entorno del origen $f$ toma valores positivos y negativos, mientras que $f(0,0) = 0$.
+
+::: {.resultado}
+$f$ tiene **mínimos relativos** en $(\sqrt2,-\sqrt2)$ y $(-\sqrt2,\sqrt2)$, ambos de valor $-8$.
+En $(0,0)$ **no hay extremo**: se comporta como una silla, aunque el criterio no lo detecte.
+:::
+
+En pantalla se ve de dónde sale: la superficie tiene dos pozos y, entre ellos, un cuello que sube
+en una dirección y baja en la perpendicular.
+
+```{=html}
+<div class="lienzo" data-figura="fracaso1" data-alto="330"
+     data-rotulo="Elegí una dirección y mirá cómo sale f del origen"
+     data-sliders='[{"id":"th","min":0,"max":180,"paso":1,"valor":45,"rotulo":"dirección θ°","decimales":0}]'>
+  <div class="lienzo-pie">
+    El panel de la derecha es \(t \mapsto f(t\cos\theta,\ t\operatorname{sen}\theta)\): el perfil
+    de la superficie al salir del origen en la dirección \(\theta\). En \(\theta=45°\) (la recta
+    \(y=x\)) el perfil arranca hacia arriba; en \(\theta=135°\) (la recta \(y=-x\)) arranca hacia
+    abajo. Como hay direcciones de las dos clases, el origen no puede ser ni máximo ni mínimo.
+    Los dos pozos de la izquierda son los mínimos de valor \(-8\).
+  </div>
+</div>
+<script>
+window.LIENZO = window.LIENZO || {};
+window.LIENZO.fracaso1 = function (P, v) {
+  var col = P.col;
+  var f = function (x, y) { return x*x*x*x + y*y*y*y - 2*x*x + 4*x*y - 2*y*y; };
+  var th = v.th * Math.PI / 180;
+
+  var lado = Math.min(P.h - 84, P.w * 0.52 - 44);
+  var cajaI = [44, 40, lado, lado];
+  var cajaD = [44 + lado + 56, 40, P.w - (44 + lado + 56) - 18, lado];
+
+  // --- mapa de f con sus curvas de nivel ---
+  var m = P.marco(cajaI, [-2.2, 2.2], [-2.2, 2.2]);
+  P.ejes(m, 'x', 'y', null);
+  P.recorte(m, function () {
+    var niv = [], q;
+    for (q = -8; q <= 24; q += 2) niv.push(q);
+    CV.contornos(P, m, f, niv, col.suave, .9, .75);
+    CV.contornos(P, m, f, [0], col.mal, 1.6, .9);
+  });
+  P.punto(m, 0, 0, col.tinta, 5);
+  P.punto(m, Math.SQRT2, -Math.SQRT2, col.bien, 5);
+  P.punto(m, -Math.SQRT2, Math.SQRT2, col.bien, 5);
+  // la direccion elegida
+  var R = 2.1;
+  P.curva(m, [[-R*Math.cos(th), -R*Math.sin(th)], [R*Math.cos(th), R*Math.sin(th)]],
+          col.acento, 2.2, 1);
+  CV.flechaPx(P, m.X(0), m.Y(0), m.X(0.9*Math.cos(th)), m.Y(0.9*Math.sin(th)),
+              col.acento, 2.2, 9);
+
+  // --- perfil radial ---
+  var mD = P.marco(cajaD, [-2.2, 2.2], [-10, 14]);
+  P.ejes(mD, 't', 'f', null);
+  P.curva(mD, [[-2.2, 0], [2.2, 0]], col.suave, 1, .9);
+  var pts = [], i, t;
+  for (i = 0; i <= 300; i++) {
+    t = -2.2 + 4.4*i/300;
+    pts.push([t, f(t*Math.cos(th), t*Math.sin(th))]);
+  }
+  P.recorte(mD, function () { P.curva(mD, pts, col.acento, 2.4, 1); });
+  P.punto(mD, 0, 0, col.tinta, 5);
+
+  // lectura: signo de f para t chico
+  var e = 0.35, val = f(e*Math.cos(th), e*Math.sin(th));
+  P.texto(cajaI[0] - 10, 16, 'θ = ' + v.th + '°', col.tinta, 12.5);
+  P.texto(cajaD[0] + cajaD[2], 16,
+          val > 1e-9 ? 'saliendo del origen, f sube' :
+          (val < -1e-9 ? 'saliendo del origen, f baja' : 'f se queda en cero'),
+          val > 0 ? col.bien : (val < 0 ? col.mal : col.tenue), 12.5, 'right');
+};
+</script>
+```
+
+### Fracaso 2: los puntos críticos son una recta entera {#sec-fracaso-2}
+
+$$
+f(x,y) = (2x - 3y + 4)^2 .
+$$ {#eq-fracaso2}
+
+Con $u = 2x - 3y + 4$, las derivadas son $f_x = 4u$ y $f_y = -6u$: **se anulan las dos a la vez
+exactamente cuando $u = 0$**. Los puntos críticos no forman un conjunto aislado sino toda la
+recta $r: 2x - 3y + 4 = 0$.
+
+El criterio del Hessiano no sirve acá:
+$\mathbf{H}f = \begin{pmatrix} 8 & -12 \\ -12 & 18 \end{pmatrix}$ y $D = 144 - 144 = 0$.
+
+Pero el análisis directo es mucho más simple que cualquier criterio. Como $f$ es un cuadrado,
+
+$$
+f(x,y) = (2x - 3y + 4)^2 \ \ge\ 0 \quad \text{para todo } (x,y),
+$$
+
+y $f = 0$ exactamente sobre $r$. Entonces en cada punto de $r$ la función alcanza su valor más
+chico posible.
+
+::: {.resultado}
+$f$ alcanza un **mínimo (relativo y absoluto, no estricto)** de valor $0$ en **todos** los puntos
+de la recta $2x - 3y + 4 = 0$. No tiene máximos: $f \to +\infty$ al alejarse de la recta.
+:::
+
+::: {.callout-tip appearance="simple"}
+## La lección
+
+Que la Hessiana sea singular en un punto crítico suele ser señal de que el punto **no está
+aislado**: la función es constante en alguna dirección. El criterio está pensado para puntos
+críticos aislados, y acá no hay ninguno.
+
+Es la misma situación del ejercicio 3 con $k = \pm 4$: ahí también $f$ era un cuadrado perfecto y
+el "mínimo" era todo un eje. La forma de reconocerlo rápido es mirar si $f$ se puede escribir
+como una función de una sola combinación lineal de $x$ e $y$.
+:::
+
+### Fracaso 3: la Hessiana es toda cero y no hay extremo {#sec-fracaso-3}
+
+$$
+f(x,y) = (x+2)^4 + (y-1)^3 .
+$$ {#eq-fracaso3}
+
+$f_x = 4(x+2)^3 = 0 \Rightarrow x = -2$, y $f_y = 3(y-1)^2 = 0 \Rightarrow y = 1$. Único punto
+crítico: $(-2, 1)$, con $f(-2,1) = 0$.
+
+Las segundas son $f_{xx} = 12(x+2)^2$, $f_{xy} = 0$, $f_{yy} = 6(y-1)$, y en el punto
+
+$$
+\mathbf{H}f(-2,1) = \begin{pmatrix} 0 & 0 \\ 0 & 0\end{pmatrix},
+\qquad D = 0 .
+$$
+
+La Hessiana no es solo singular: es **la matriz nula**. El término cuadrático de Taylor no existe
+y toda la información está en los órdenes superiores. Basta con mirar $f$ sobre la recta vertical
+$x = -2$:
+
+$$
+f(-2,\ 1+t) = 0 + t^3 = t^3 ,
+$$
+
+que es positivo para $t > 0$ y negativo para $t < 0$, por chico que sea $t$.
+
+::: {.resultado}
+$f$ **no tiene extremos relativos**: su único punto crítico $(-2,1)$ no es máximo ni mínimo. El
+culpable es el término cúbico $(y-1)^3$, que cambia de signo a los dos lados.
+:::
+
+```{python}
+#| label: fig-fracasos
+#| fig-cap: "Los tres fracasos, vistos desde arriba. Izquierda: $x^4+y^4-2x^2+4xy-2y^2$, con sus dos pozos (verde) y el punto degenerado del origen (negro); la curva roja es $f=0$ y pasa por el origen separando zonas positivas de negativas. Centro: $(2x-3y+4)^2$, cuyos puntos críticos son una recta entera y cuyas curvas de nivel son rectas paralelas a ella. Derecha: $(x+2)^4+(y-1)^3$, donde la curva de nivel $f=0$ atraviesa el punto crítico y lo deja con valores mayores de un lado y menores del otro."
+#| fig-width: 7.8
+#| fig-height: 2.9
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+VIOLETA, VIOLETA2, TINTA, GRIS = "#7c5cbf", "#b48ec8", "#1e1a2e", "#a99fc0"
+ROJO, VERDE = "#b8564f", "#2f6b48"
+
+fig, axes = plt.subplots(1, 3, figsize=(7.8, 2.9))
+
+# (1)
+xs = np.linspace(-2.2, 2.2, 400); X, Y = np.meshgrid(xs, xs)
+Z = X**4 + Y**4 - 2*X**2 + 4*X*Y - 2*Y**2
+ax = axes[0]
+ax.contourf(X, Y, Z, levels=24, cmap="BuPu_r", alpha=.85)
+ax.contour(X, Y, Z, levels=np.arange(-8, 26, 2), colors=GRIS, linewidths=.5)
+ax.contour(X, Y, Z, levels=[0], colors=[ROJO], linewidths=1.5)
+ax.plot([np.sqrt(2), -np.sqrt(2)], [-np.sqrt(2), np.sqrt(2)], "o", color=VERDE, ms=6)
+ax.plot(0, 0, "o", color=TINTA, ms=6)
+ax.set_title("$x^4+y^4-2x^2+4xy-2y^2$", fontsize=8)
+
+# (2)
+xs = np.linspace(-4, 3, 400); ys = np.linspace(-2, 4, 400)
+X, Y = np.meshgrid(xs, ys)
+Z = (2*X - 3*Y + 4)**2
+ax = axes[1]
+ax.contourf(X, Y, Z, levels=24, cmap="BuPu_r", alpha=.85)
+ax.contour(X, Y, Z, levels=np.linspace(0, Z.max(), 14), colors=GRIS, linewidths=.5)
+ax.plot(xs, (2*xs + 4)/3, color=VERDE, lw=2.2)
+ax.set_ylim(-2, 4)
+ax.set_title("$(2x-3y+4)^2$", fontsize=8)
+
+# (3)
+xs = np.linspace(-3.4, -0.6, 400); ys = np.linspace(-0.4, 2.4, 400)
+X, Y = np.meshgrid(xs, ys)
+Z = (X+2)**4 + (Y-1)**3
+ax = axes[2]
+ax.contourf(X, Y, Z, levels=24, cmap="BuPu_r", alpha=.85)
+ax.contour(X, Y, Z, levels=14, colors=GRIS, linewidths=.5)
+ax.contour(X, Y, Z, levels=[0], colors=[ROJO], linewidths=1.5)
+ax.plot(-2, 1, "o", color=TINTA, ms=6)
+ax.set_title("$(x+2)^4+(y-1)^3$", fontsize=8)
+
+for ax in axes:
+    ax.set_aspect("equal"); ax.tick_params(labelsize=7)
+fig.tight_layout()
+plt.show()
+```
+
+## Un extra conceptual: el máximo vale menos que el mínimo {#sec-max-menor}
+
+Este ejercicio de la práctica parece un error de imprenta y no lo es:
+
+$$
+f(x,y) = x^3 + y^3 + \frac{48}{x} + \frac{48}{y},
+\qquad D = \{(x,y) : x \neq 0,\ y \neq 0\} .
+$$ {#eq-desconexo}
+
+El sistema se desacopla: $f_x = 3x^2 - 48/x^2 = 0 \implies x^4 = 16 \implies x = \pm 2$, y lo
+mismo para $y$. Hay cuatro puntos críticos, uno en cada cuadrante. Con
+$f_{xx} = 6x + 96/x^3$, $f_{xy} = 0$, $f_{yy} = 6y + 96/y^3$ —que valen $24$ en $\pm 2$ con el
+signo de la variable— sale:
+
+| Punto | $f_{xx}$ | $f_{yy}$ | $D$ | Conclusión |
+|---|:--:|:--:|:--:|---|
+| $(2,2)$ | $24$ | $24$ | $576 > 0$ | mínimo relativo, $f = 64$ |
+| $(-2,-2)$ | $-24$ | $-24$ | $576 > 0$ | máximo relativo, $f = -64$ |
+| $(2,-2)$ | $24$ | $-24$ | $-576 < 0$ | punto silla |
+| $(-2,2)$ | $-24$ | $24$ | $-576 < 0$ | punto silla |
+
+: {tbl-colwidths="[20,14,14,18,34]"}
+
+::: {.callout-important appearance="simple"}
+## Por qué no hay contradicción
+
+El "máximo" vale $-64$ y el "mínimo" vale $64$. No hay ningún error: son extremos **relativos**, y
+el dominio **no es conexo** —los ejes lo parten en cuatro cuadrantes separados—. Cada extremo
+compite solamente con los puntos de su entorno, nunca con los del cuadrante de al lado, porque no
+hay forma de ir de uno a otro sin salirse del dominio.
+
+Es el mismo fenómeno del ejercicio 18.c de la @sec-ej18, donde el potencial de cada semiplano
+llevaba su propia constante: cuando el dominio viene partido, cada pedazo vive su vida.
+:::
+
+::: {.ejercicio}
+$f(x,y) = x^3 + 3xy^2 - 12y - 15x$ tiene cuatro puntos críticos: $(1,2)$, $(-1,-2)$, $(2,1)$ y
+$(-2,-1)$. Sabiendo que $\mathbf{H}f = \begin{pmatrix} 6x & 6y \\ 6y & 6x \end{pmatrix}$, ¿cuál es
+el máximo relativo?
+
+- [$(1,2)$, porque es el de coordenadas positivas más chicas.]{.mal}
+- [$(-2,-1)$, porque ahí $D = 36(x^2-y^2) = 108 > 0$ y $f_{xx} = -12 < 0$.]{.bien}
+- [$(2,1)$, porque ahí $D > 0$.]{.mal}
+- [No hay máximo: los cuatro son sillas.]{.mal}
+
+::: {.explica}
+**La correcta es la segunda.** Con $D = 36(x^2 - y^2)$, en $(1,2)$ y $(-1,-2)$ da
+$36(1-4) = -108 < 0$: sillas. En $(2,1)$ y $(-2,-1)$ da $36(4-1) = 108 > 0$, y ahí decide el
+signo de $f_{xx} = 6x$: positivo en $(2,1)$ (mínimo, $f = -28$) y negativo en $(-2,-1)$ (máximo,
+$f = 28$).
+
+La tercera opción es el error de quedarse en $D > 0$ sin mirar $f_{xx}$: eso distingue máximo de
+mínimo, y saltearlo es perder la mitad de la respuesta.
+:::
+:::
+
+::: {.ejercicio data-respuesta="0" data-tol="0.0001" data-rotulo="Para calcular"}
+Sea $f(x,y) = (3x - y + 7)^4$. ¿Cuánto vale $\det \mathbf{H}f$ en sus puntos críticos?
+
+::: {.explica}
+Cero. Con $u = 3x - y + 7$ es $f = u^4$, así que $f_x = 12u^3$ y $f_y = -4u^3$: los puntos
+críticos son toda la recta $u = 0$. Las segundas son $f_{xx} = 108u^2$, $f_{xy} = -36u^2$,
+$f_{yy} = 12u^2$, que **se anulan todas** sobre esa recta: la Hessiana es la matriz nula y
+$D = 0$.
+
+Como en @eq-fracaso2, el análisis directo lo resuelve sin criterio: $u^4 \ge 0$ y vale $0$ sobre
+la recta, así que hay mínimo absoluto no estricto en todos esos puntos.
+:::
+:::
+
+::: {.ejercicio}
+Estás clasificando un punto crítico en $\mathbb{R}^3$ y la Hessiana tiene autovalores
+$\lambda_1 = 5$, $\lambda_2 = 2$, $\lambda_3 = -0{,}001$. ¿Qué es el punto?
+
+- [Mínimo relativo, porque casi todos los autovalores son positivos.]{.mal}
+- [Punto silla.]{.bien}
+- [El criterio no decide, porque un autovalor está muy cerca de cero.]{.mal}
+
+::: {.explica}
+**La correcta es la segunda.** Que los signos sean mixtos alcanza: existe una dirección —la del
+autovector de $\lambda_3$— en la que la función **baja**, y dos en las que sube. Eso es una silla,
+sin importar lo chiquito que sea el autovalor negativo.
+
+La tercera opción confunde "chico" con "nulo". El criterio solo se queda mudo cuando algún
+autovalor es exactamente $0$; mientras no lo sea, el término cuadrático decide, aunque el pozo en
+esa dirección sea poco profundo.
+:::
+:::

@@ -8,13 +8,24 @@
 // Acá va solo lo que se ve en la portada.
 //
 //   activo: true   → se ve normal y lleva a su pagina
-//   activo: true  → se ve como "proximamente" y no se puede abrir
+//   activo: false  → se ve como "proximamente" y no se puede abrir
 //
 // Los primeros 4 con activo: true aparecen en el inicio; el resto,
 // solo en el listado del blog. El orden del array es el orden en
 // que se ven. Ver GUIA.md, secciones 3 y 10.
 
 var POSTS = [
+  {
+    fecha_es: 'Sep 2026',
+    fecha_en: 'Sep 2026',
+    categoria: 'stem',
+    titulo_es: 'Navier-Stokes, OpenAI y el futuro de la Matemática',
+    titulo_en: 'Navier-Stokes, OpenAI and the future of Mathematics',
+    tag: 'STEM',
+    destacado: true,
+    activo: true,
+    link: 'blog/posts/navier-stokes-openai.html'
+  },
   {
     fecha_es: 'Ago 2026',
     fecha_en: 'Aug 2026',
@@ -23,7 +34,7 @@ var POSTS = [
     titulo_en: 'How far apart are the stars?',
     tag: 'STEM',
     destacado: true,
-    activo: true,
+    activo: false,
     link: 'blog/posts/esfera-celeste.html'
   },
   {
@@ -34,7 +45,7 @@ var POSTS = [
     titulo_en: 'How do you write an equation for something that bounces thousands of times?',
     tag: 'STEM',
     destacado: true,
-    activo: true,
+    activo: false,
     link: 'blog/posts/tf-lic-02-rte-difusion.html'
   },
   {
@@ -45,7 +56,7 @@ var POSTS = [
     titulo_en: 'You cannot see inside. All you have is the light coming out.',
     tag: 'STEM',
     destacado: true,
-    activo: true,
+    activo: false,
     link: 'blog/posts/tf-lic-01-vaso-de-leche.html'
   },
   {
@@ -56,7 +67,7 @@ var POSTS = [
     titulo_en: 'How I ended up studying mathematics',
     tag: 'Personal',
     destacado: true,
-    activo: true,
+    activo: false,
     link: 'blog/posts/como-termine-estudiando-matematica.html'
   },
   {
@@ -67,7 +78,7 @@ var POSTS = [
     titulo_en: 'My favourite olympiad problem',
     tag: 'STEM',
     destacado: true,
-    activo: true,
+    activo: false,
     link: 'blog/posts/mi-problema-favorito.html'
   },
 ];
@@ -317,8 +328,8 @@ var MATERIAL = [
     tipo_en: 'Book',
     titulo_es: 'Métodos Matemáticos para la Física',
     titulo_en: 'Mathematical Methods for Physics',
-    desc_es: 'Un curso completo, de la ecuación de transporte a las ecuaciones integrales, escrito para que cada herramienta aparezca después del problema físico que la justifica. Teoría, ejemplos, gráficos generados con código y ejercicios. Catorce capítulos con su temario; el 8 escrito entero y adelantos en el 3 y el 10.',
-    desc_en: 'A full course, from the transport equation to integral equations, written so that each tool appears after the physical problem that justifies it. Theory, worked examples, code-generated figures and exercises. Fourteen chapters with their syllabus; chapter 8 written in full, previews in 3 and 10.',
+    desc_es: 'Catorce capítulos, de la ecuación de transporte a las ecuaciones integrales.',
+    desc_en: 'Fourteen chapters, from the transport equation to integral equations.',
     meta_es: 'Borrador · capítulo 8 completo y adelantos en 3 y 10',
     meta_en: 'Draft · chapter 8 complete, previews in 3 and 10',
     link: 'metodos/index.html',
@@ -329,8 +340,8 @@ var MATERIAL = [
     tipo_en: 'Worked guides',
     titulo_es: 'Guías resueltas de Análisis Matemático II',
     titulo_en: 'Worked guides for Calculus II',
-    desc_es: 'Los ejercicios de la cátedra resueltos con el razonamiento adelante y la cuenta atrás, con figuras que se pueden mover: relieves que se giran, caminos que se deforman, campos y superficies con deslizadores, y preguntas que se contestan en la página. Dos guías hasta ahora: campos conservativos y función potencial, y extremos de funciones de varias variables, esta última con un capítulo final que lleva los mismos métodos a la estadística, la mecánica celeste y el diseño de redes.',
-    desc_en: 'The course exercises, solved with the reasoning first and the algebra second, illustrated with figures you can move: surfaces you rotate, paths you deform, fields and surfaces with sliders, and questions you answer on the page. Two guides so far: conservative fields and potential functions, and extrema of functions of several variables, the latter closing with a chapter that takes the same methods to statistics, celestial mechanics and network design.',
+    desc_es: 'Campos conservativos y función potencial; extremos de funciones de varias variables: criterio del Hessiano, extremos absolutos sobre compactos y multiplicadores de Lagrange.',
+    desc_en: 'Conservative fields and potential functions; extrema of functions of several variables: the Hessian test, absolute extrema on compact sets and Lagrange multipliers.',
     meta_es: '2 guías · web interactiva y PDF',
     meta_en: '2 guides · interactive web and PDF',
     link: 'guias/index.html',

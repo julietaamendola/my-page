@@ -1,0 +1,665 @@
+---
+title: "Navier-Stokes, OpenAI y el futuro de la Matemática"
+description: "En sólo una semana una empresa anunció que su IA resolvió un Problema del Milenio, un matemático la acusó de haber usado su trabajo inédito y veinticinco medallas Fields firmaron una declaración conjunta. Una recopilación de lo que pasó y de las preguntas que nos deja."
+date: 2026-09-14
+categories: [STEM, Personal]
+---
+
+Hay semanas en las que no pasa nada y semanas en las que pasan veinte años. La del 6 al 12 de
+septiembre de 2026 fue de las segundas, y me agarró estudiando matemática, que es el peor lugar
+desde donde mirarla con distancia.
+
+Lo que pasó, ordenado.
+
+El 8 de septiembre **OpenAI anunció que un sistema suyo demostró que las ecuaciones de
+Navier-Stokes desarrollan singularidades en tiempo finito**, es decir, dio una respuesta al
+problema de existencia y suavidad que el Clay Mathematics Institute incluyó entre los siete
+Problemas del Milenio en el año 2000. Si la demostración se confirma, es la segunda vez que uno
+de esos problemas cae, y la primera vez que lo hace por obra de un sistema automático.
+
+Pero el anuncio no llegó solo. Unas horas antes, **Tristan Buckmaster**, profesor del Courant
+Institute de la Universidad de Nueva York, publicó una carta abierta en su página personal
+contando que él y **Levent Alpöge** venían trabajando desde hacía meses en esa misma
+dirección; que a fines de agosto empezaron a circular rumores sobre su avance; que esos rumores
+llegaron a OpenAI; que la empresa armó un equipo y dedicó una cantidad enorme de cómputo al
+problema en cuestión de días; y que después lo contactó para ofrecerle un arreglo de publicación
+que dejaba a su coautor fuera de la autoría. Cuando Buckmaster se negó, según su relato, le
+preguntaron por qué querría arruinar su carrera.
+
+A eso hay que sumarle un tercer elemento, que es el que a mí me parece más grave: Buckmaster
+había usado durante toda su investigación una herramienta de OpenAI, subiendo ahí sus borradores.
+Cuando preguntó si el modelo había sido entrenado con esas sesiones o había tenido acceso a
+ellas, no obtuvo una respuesta clara. La empresa fue cambiando su versión durante los tres días
+siguientes.
+
+Quiero hacer una recopilación de lo sucedido porque me parece un caso de mucha importancia y es
+necesario que lo hagamos conocer en nuestras comunidades locales para disparar conversaciones
+sobre el tema.
+
+## De qué estamos hablando
+
+Las ecuaciones de Navier-Stokes describen el movimiento de un fluido incompresible y viscoso. En
+$\mathbb{R}^3$ se escriben
+
+$$
+\partial_t u + (u\cdot\nabla)\,u \;=\; -\nabla p + \nu\,\Delta u + f,
+\qquad \nabla\cdot u = 0,
+$$ {#eq-ns}
+
+donde $u(x,t)\in\mathbb{R}^3$ es el campo de velocidades, $p(x,t)$ la presión, $\nu>0$ la
+viscosidad cinemática y $f$ una fuerza externa. El caso $\nu=0$ son las ecuaciones de Euler, que
+describen un fluido ideal sin viscosidad.
+
+El enunciado que Charles Fefferman —profesor de Princeton, medalla Fields en 1978— escribió para
+el Clay pide lo siguiente: dado un dato inicial $u_0$ suave, de divergencia nula y con
+decaimiento rápido, y con $f\equiv 0$, demostrar que existe una solución suave
+$(u,p)$ definida en $\mathbb{R}^3\times[0,\infty)$ con energía acotada; o bien demostrar que tal
+solución no existe. Fefferman formuló cuatro afirmaciones: **(A)** existencia y suavidad en
+$\mathbb{R}^3$, **(B)** lo mismo en el toro $\mathbb{T}^3$, **(C)** la falla de la afirmación (A),
+y **(D)** la falla de la afirmación (B). Demostrar cualquiera de las cuatro resuelve el problema.
+
+Lo que OpenAI dice haber demostrado es **(C) y (D)**: que hay soluciones que se rompen.
+
+### Qué significa romperse
+
+Jean Leray demostró en 1934 que para cualquier dato inicial de energía finita existe al menos una
+solución débil global, hoy llamada solución de Leray-Hopf, que satisface la desigualdad de energía
+
+$$
+\frac{1}{2}\|u(t)\|_{L^2}^2 + \nu\int_0^t \|\nabla u(s)\|_{L^2}^2\,ds \;\le\; \frac{1}{2}\|u_0\|_{L^2}^2 .
+$$ {#eq-energia}
+
+Lo que no se sabe es si esa solución es única, ni si es suave. Un *blow-up* en tiempo finito es la
+existencia de un $T^*<\infty$ tal que la solución deja de ser regular al acercarse a él; por
+ejemplo, que
+
+$$
+\limsup_{t\to T^{*-}} \|u(\cdot,t)\|_{L^\infty} = \infty .
+$$ {#eq-blowup}
+
+Para Euler el criterio clásico es el de Beale-Kato-Majda: la solución se mantiene suave en
+$[0,T]$ si y sólo si la vorticidad $\omega=\nabla\times u$ cumple
+$\int_0^T\|\omega(t)\|_{L^\infty}\,dt<\infty$. La singularidad, si existe, tiene que verse en la
+vorticidad.
+
+### Por qué es difícil
+
+La dificultad tiene un nombre preciso: la ecuación es *supercrítica* respecto de su propia escala.
+
+@eq-ns es invariante bajo la transformación
+
+$$
+u_\lambda(x,t) = \lambda\,u(\lambda x,\lambda^2 t),
+\qquad
+p_\lambda(x,t) = \lambda^2\,p(\lambda x,\lambda^2 t),
+$$
+
+y bajo esa transformación la norma de la energía escala como
+$\|u_\lambda\|_{L^2(\mathbb{R}^3)} = \lambda^{-1/2}\|u\|_{L^2(\mathbb{R}^3)}$. Es decir: al hacer
+zoom sobre una posible singularidad, la única cantidad que sabemos controlar se vuelve cada vez
+más chica. Las normas invariantes por la escala —$L^3$, $\dot H^{1/2}$, $BMO^{-1}$— sí dan
+teoremas: si el dato es pequeño en alguna de ellas hay regularidad global, y por el resultado de
+Escauriaza, Seregin y Šverák una solución que permanezca acotada en $L^\infty_t L^3_x$ no puede
+desarrollar singularidades. Pero la energía, que es lo único que la ecuación conserva sin
+hipótesis extra, está por debajo de ese umbral. En dimensión dos la cuenta da al revés, y por eso
+el problema análogo está cerrado desde hace décadas.
+
+Lo que hubo en los últimos años fueron avances por los costados. Tarek Elgindi (Duke) construyó
+en 2021 una solución de Euler con blow-up autosemejante para datos $C^{1,\alpha}$ axisimétricos
+sin swirl. Jiajie Chen y Thomas Hou (Caltech) dieron una demostración asistida por computadora de
+singularidad para Euler con borde y para Boussinesq. Buckmaster y Vlad Vicol demostraron en 2019
+—resultado por el que Buckmaster recibió el Clay Research Award ese mismo año— que las soluciones
+débiles de Navier-Stokes pueden ser, en palabras del propio Clay, "extremadamente salvajes":
+severamente no suaves y no únicas. Ninguno de esos resultados es el Problema del Milenio, pero
+todos van erosionando la intuición de que el fluido se comporta bien.
+
+### El rol de la fuerza externa
+
+Hay un matiz que es central para entender lo que vino después y que se perdió en casi toda la
+cobertura.
+
+El enunciado de Fefferman pide $f\equiv 0$, o a lo sumo una fuerza que decaiga muy rápido. La
+razón es técnica pero transparente: con una fuerza arbitraria uno puede fabricar una singularidad
+a mano, empujando el fluido en escalas cada vez más chicas. El problema es difícil precisamente
+porque el fluido tiene que romperse por sí solo, sin ayuda de afuera. Y la regularidad que se le
+exige a $f$ importa: cuanto más suave sea la fuerza, menos se la puede usar para hacer trampa.
+
+**Diego Córdoba**, profesor de investigación del Instituto de Ciencias Matemáticas (ICMAT-CSIC)
+en Madrid y uno de los especialistas de referencia en formación de singularidades en fluidos, y
+**Luis Martínez-Zoroa**, matemático joven formado en el ICMAT y hoy en la Universidad de Basilea,
+vienen desarrollando desde 2023 un programa para construir singularidades en ecuaciones de
+fluidos con forzamiento. La idea, en un renglón, es iterativa: se parte de una solución forzada y
+se le agregan sucesivas correcciones localizadas de frecuencia cada vez más alta, de modo que las
+componentes de baja frecuencia amplifiquen exponencialmente a las de alta frecuencia y cada paso
+deje la solución un poco más singular que el anterior. Lo probaron primero para el medio poroso
+incompresible (IPM) y después para Euler 3D con una fuerza en $C^{1,1/2-\varepsilon}\cap L^2$.
+
+**Levent Alpöge** es, de origen, teórico de números: doctorado en Princeton con Manjul Bhargava,
+Junior Fellow de la Society of Fellows de Harvard, coautor en 2025 de la demostración de que el
+décimo problema de Hilbert tiene respuesta negativa sobre el anillo de enteros de todo cuerpo de
+números. Desde 2025 trabaja en Anthropic, y en julio de 2026 anunció un contraejemplo a la
+conjetura jacobiana —abierta desde 1939— obtenido con asistencia de un modelo de esa empresa. Ese
+antecedente es parte de por qué, a fines de agosto, los rumores de que Anthropic había resuelto
+un Problema del Milenio resultaron creíbles.
+
+**Tristan Buckmaster** es australiano, se doctoró en Leipzig, fue profesor en Princeton y hoy
+está en el Courant Institute. Su trabajo con Camillo De Lellis, László Székelyhidi y Vlad Vicol
+sobre la conjetura de Onsager, y el ya mencionado sobre no unicidad de soluciones débiles, lo
+ubican entre los nombres centrales del área.
+
+Alpöge y Buckmaster llevaron el programa de Córdoba y Martínez-Zoroa un paso más allá:
+demostraron blow-up en tiempo finito **con un término de forzamiento suave** para tres modelos
+—IPM, Boussinesq y Euler 3D incompresible—, y mencionaron además trabajo todavía no público sobre
+Navier-Stokes hipodisipativa, pendiente de verificación en Lean. Terence Tao (UCLA, medalla Fields
+2006) lo llamó públicamente "un logro notable" y escribió que no parecía haber nada, en
+principio, que impidiera extender los métodos hasta Navier-Stokes.
+
+### La verificación, también automatizada
+
+Vale la pena detenerse en un punto que atraviesa todo lo demás, porque cambia el significado de la
+palabra "demostración".
+
+Las demostraciones de los dos lados están formalizadas en **Lean**, un asistente de pruebas.
+Formalizar quiere decir escribir el argumento en un lenguaje en el que cada paso se deduce
+mecánicamente de los anteriores y de los axiomas, y dejar que la computadora lo verifique. Si el
+archivo compila, el teorema es cierto: no hay lagunas, no hay un "es fácil ver que" escondiendo
+un caso que no se cumple, no hay revisor cansado. Para un área como esta, donde las
+construcciones son iterativas y llenas de estimaciones técnicas que nadie quiere chequear a mano,
+es una herramienta liberadora, y hace años que parte de la comunidad la empuja por razones que no
+tienen nada que ver con la IA.
+
+El problema es que la formalización resuelve la pregunta de si el argumento es correcto y no
+resuelve ninguna de las otras. No dice si el resultado es interesante, ni si las ideas son
+nuevas, ni de dónde salieron, ni qué se aprende leyéndolo. Y esas otras preguntas eran las que la
+revisión por pares venía respondiendo de manera indirecta: un referí que tarda ocho meses no está
+sólo buscando errores, está también decidiendo si el trabajo aporta algo y ubicándolo respecto de
+lo que ya existía. Un paper de 166 páginas cuya corrección está garantizada por un compilador, y
+que un ser humano no leyó de punta a punta, es un objeto nuevo. Sabemos que es verdadero. No
+sabemos si nos enseñó algo.
+
+## La cronología
+
+Reconstruyo con las fechas de la carta pública de Buckmaster, los comunicados de OpenAI y la
+cobertura de esos días.
+
+**28 de agosto.** Según la reconstrucción periodística, OpenAI empieza a entrenar un modelo
+específicamente orientado a los Problemas del Milenio, a partir de rumores de que Anthropic había
+resuelto alguno.
+
+**31 de agosto.** Alpöge postea en redes un "Augustus Mirabilis". En OpenAI lo interpretan como
+confirmación del rumor.
+
+**3 de septiembre.** Buckmaster se entera de que su avance circuló hasta OpenAI y le escribe a un
+matemático de la empresa: *"Tenemos trabajo en esta área en el que confiamos, y lo vamos a
+publicar en breve"*.
+
+**6 de septiembre.** Dos llamadas en una tarde con **Sébastien Bubeck**, que dirige la
+investigación matemática de OpenAI —antes investigador en Microsoft Research, con trayectoria en
+teoría del aprendizaje y optimización—. Le informan que un modelo interno produjo una
+demostración de blow-up en tiempo finito para Navier-Stokes **forzada**, con parámetros de
+forzamiento que coincidían con el enfoque específico que él y Alpöge venían siguiendo. También
+sale a la luz que OpenAI había armado *"un equipo entero"*, que empezó *"en los últimos días"*
+después de enterarse del avance ajeno, y que usó *"una cantidad demencial de cómputo"*.
+
+En esa conversación le ofrecen dos arreglos de publicación. Uno implicaba sacar a Alpöge de la
+autoría, alegando conflicto de interés por trabajar en Anthropic. Cuando Buckmaster se niega, la
+respuesta —según su carta— es: *"¿Por qué arruinarías tu carrera?"*. Él contesta que tiene un
+cargo académico. Y entonces: *"Si no querés que sea amable, no tengo por qué ser amable."*
+
+OpenAI niega esta caracterización de la conversación.
+
+**7 de septiembre.** Alpöge y Buckmaster publican sus tres resultados antes de lo previsto.
+Buckmaster publica su carta esa misma noche. Tao escribe en su blog sobre el resultado —le habían
+explicado las ideas por teléfono, detalle que él subraya— y los felicita.
+
+**8 de septiembre, mediodía.** OpenAI anuncia. Los números: **88 horas de cómputo, más de diez mil
+agentes, 2,7 millones de mensajes entre ellos, 130 mil millones de tokens de salida, un paper de
+166 páginas** y la formalización en Lean. Las estimaciones de costo publicadas van de dos a
+veintidós millones de dólares.
+
+**9 al 11 de septiembre.** La versión de OpenAI se corrige varias veces. Primero: *"aunque es
+improbable, no podemos descartar que datos desidentificados derivados del uso que hicieron de
+nuestros productos hayan ayudado a mejorar nuestros modelos"*. Después, categórico: es
+*"imposible"* que los prompts de Buckmaster de los dos meses previos hayan influido de alguna
+manera, incluido el entrenamiento. Mark Chen, director de investigación, agrega que ninguna
+persona ni sistema revisó datos de usuarios para resolver este problema. Bubeck aclara que cuando
+dijeron "muy poco input humano" querían decir que no tenían expertos en el área. La atribución al
+trabajo de Córdoba y Martínez-Zoroa, ausente en la primera versión del paper, se agrega después.
+OpenAI propone además que el millón de dólares vaya entero a Buckmaster y Alpöge.
+
+**11 de septiembre.** El Clay Mathematics Institute dice que el problema *"aparentemente quedó
+resuelto"*, cambia su estado de "sin resolver" a "activo" y aclara que su procedimiento de
+verificación es deliberadamente lento. El mismo día, veinticinco medallistas Fields firman una
+declaración conjunta.
+
+## Lo que se rompió
+
+Buckmaster dijo algo que me parece la clave de todo: que no le interesaba el premio ni ganar la
+carrera, y que lo único que quería era que quedara claro que él y Alpöge eran *"parte de la
+historia"*. El punto de quiebre, dijo, fue que le pidieran sacar a su coautor.
+
+Eso no es codicia. Es lo que la matemática premia desde siempre: no el resultado en sí, sino haber
+sido parte de cómo se llegó a él. Todo el sistema de crédito de la ciencia está construido sobre
+esa idea, y es también lo que hace que alguien te muestre un borrador a medio hacer.
+
+**Zsuzsanna Dancso**, de la Universidad de Sídney, lo resumió en una línea: hay dos éticas
+fundamentales en la ciencia, reconocer las fuentes y reconocer a los colaboradores. Lo que pasó
+esta semana no es que alguien haya violado una regla escrita. Es que quedó a la vista que la
+regla es voluntaria, y que las reglas voluntarias funcionan mientras nadie con poder decida que
+no le conviene cumplirlas.
+
+### La confianza como infraestructura
+
+Vale la pena decir en voz alta algo que damos por sentado: **el sistema científico funciona porque
+la gente se muestra trabajo sin terminar.**
+
+Un seminario de trabajo en progreso, un preprint en arXiv, un borrador que le mandás a un colega
+para que te diga si el lema tres está bien, una charla en un congreso donde contás lo que todavía
+no cerraste. Nada de eso tiene protección legal. Funciona porque hay una convención, sostenida
+durante siglos, según la cual el que escucha primero no publica primero. Es una norma social pura,
+y es la infraestructura sobre la que se construyó la matemática moderna.
+
+Ahora imaginemos que esa convención deja de ser confiable. ¿Qué pasa?
+
+- ¿Seguís contando en qué estás trabajando, sabiendo que un rumor de tres palabras en una red
+  social alcanzó para movilizar millones de dólares en cómputo?
+- ¿Subís tus borradores a una herramienta de IA para que te ayude con un cálculo, sabiendo que la
+  empresa que la ofrece compite por los mismos problemas que vos?
+- ¿Das una charla sobre trabajo en progreso, que es literalmente para qué existen los seminarios?
+- Si la respuesta a todo eso es "mejor no", ¿cuánto más lenta se vuelve la disciplina? ¿Y a quién
+  perjudica más esa lentitud: al que ya tiene red de contactos y financiamiento, o al que recién
+  está entrando?
+
+**Andreas Thom**, de la Universidad Técnica de Dresde, señaló la pregunta que sigue abierta: la
+falta de transparencia sobre si los modelos vienen absorbiendo trabajo humano inédito y
+presentándolo como generado por IA. No hace falta que la respuesta sea sí para que el daño exista.
+Alcanza con que no se pueda saber. Una sospecha razonable y no resoluble es, en la práctica,
+indistinguible de una certeza.
+
+El escenario que me preocupa no es el del robo. Es el del secreto.
+
+### El sistema de verificación, en duda
+
+Hay una segunda cosa que se está volviendo obsoleta delante nuestro, y creo que se discute menos
+de lo que corresponde.
+
+El aparato de validación de la ciencia —el preprint, la revisión por pares, la publicación, la
+citación— fue diseñado para un ritmo humano y para volúmenes humanos. Supone que hay más gente
+capaz de revisar que resultados para revisar. Supone que el autor puede explicar su propio
+argumento. Supone que el tiempo entre que algo se afirma y algo se acepta sirve para algo.
+
+Ninguna de esas tres suposiciones sobrevive a un sistema que produce 166 páginas verificadas en 88
+horas y las anuncia por comunicado de prensa.
+
+La **Declaración de Leiden**, publicada el 2 de junio de 2026 por dieciséis matemáticos, con más de
+ciento treinta firmas y el respaldo de la Unión Matemática Internacional, había anticipado casi
+todo esto tres meses antes. Identifica cuatro riesgos: la desalineación de objetivos —las empresas
+eligen problemas que funcionan como demostración de capacidades, los matemáticos eligen por
+fecundidad—, la dependencia y la inequidad en el acceso al cómputo, la hiperpublicación por
+comunicado antes de cualquier revisión, y la opacidad de demostraciones con millones de pasos que
+ningún humano puede verificar. **Daniel Litt**, de la Universidad de Toronto, lo dijo así: hay una
+prisa por anunciar resultados que a menudo no son comprobados ni contextualizados correctamente.
+
+El 11 de septiembre llegó la respuesta más fuerte que yo recuerde de la comunidad matemática:
+veinticinco medallistas Fields firmaron **"A Severe Misalignment of AI in Mathematics"**, publicada
+en el blog de Tao. Entre los firmantes están Pierre Deligne (1978), Terence Tao (2006), Peter
+Scholze (2018), James Maynard (2022) y Yu Deng (2026). La declaración sostiene que resolver
+problemas es *"sólo una herramienta y un sustituto del objetivo primario, que es la comprensión
+conceptual"*; que las soluciones rápidas y no examinadas saltean los procesos humanos por los
+cuales una idea se vuelve significativa —la discusión, la simplificación, la refinación
+pedagógica, la integración al cuerpo de conocimiento—; y pide acción urgente en tres niveles: de
+la comunidad matemática, de las empresas, y de la sociedad en general, porque el mismo problema
+de alineación aparece en cualquier otro trabajo intelectual. Los firmantes lo llaman una amenaza
+general al trabajo intelectual.
+
+Hay algo así como medio centenar de personas vivas con una medalla Fields. Firmaron veinticinco.
+
+Tao dejó además la imagen que mejor resume el asunto: aplicar IA de manera indiscriminada a
+problemas abiertos se parece a usar excavadoras para sacar tesoros de un sitio arqueológico,
+destruyendo el contexto histórico. Te llevás el objeto. Perdés el yacimiento, que era donde se
+aprendía a excavar.
+
+Las preguntas que me deja esta parte son incómodas y no tengo respuesta para ninguna:
+
+- Si una demostración está verificada formalmente pero nadie la leyó, ¿está publicada?
+- ¿Qué hace un referí cuando le mandan un paper que la máquina ya certificó como correcto? ¿Le
+  queda algún rol, o el rol pasa a ser otro: decidir si el resultado importa?
+- ¿Cómo se cita un trabajo que se apoyó en ideas que circulaban en borradores y seminarios y que
+  nadie había publicado todavía?
+- Si el crédito ya no se puede garantizar, ¿qué lo reemplaza como motor de la ciencia abierta?
+- ¿Y quién escribe las reglas? Porque hasta acá cada laboratorio escribió las suyas.
+
+### El problema de los datos
+
+Esta parte no es sólo para la gente que pelea por Problemas del Milenio.
+
+Buckmaster contó que usó las herramientas de OpenAI durante toda su investigación y que subía ahí
+los borradores completos. Cuando preguntó si el modelo había sido entrenado con esas sesiones o
+había tenido acceso a ellas, la respuesta que recibió fue, en sus palabras, ninguna: *"pregunté de
+nuevo, sobre el entrenamiento, y no obtuve respuesta"*. La primera versión pública de OpenAI decía
+que no podían descartar que datos desidentificados de ese uso hubieran mejorado sus modelos. La
+del día siguiente decía que era imposible.
+
+Puede ser que la segunda sea cierta. Pero miremos la estructura del asunto: la única entidad que
+puede verificar la afirmación es la misma que la hace, y la evidencia relevante es interna y no
+auditable. **Melissa Lee**, de la Universidad Monash, dijo lo obvio y lo incómodo: los
+investigadores tendrían que saber con claridad qué pasa con el trabajo inédito que meten en estos
+sistemas.
+
+Nadie lo sabe con claridad. Y "datos desidentificados" suena a garantía sin serlo: un borrador de
+una demostración no necesita tu nombre para ser tu demostración.
+
+Esto no se arregla leyendo mejor los términos y condiciones. Es una asimetría estructural entre
+alguien que sube un archivo y alguien que opera una infraestructura de miles de millones de
+dólares, y no hay lectura atenta que la compense.
+
+## Cuatro lugares desde donde se ve distinto
+
+Una misma noticia se lee de maneras muy diferentes según dónde estés parado, y me parece que la
+discusión mejora si separamos los casos.
+
+**El investigador consolidado.** Buckmaster tiene posición en uno de los mejores institutos de
+matemática del mundo, un Clay Research Award y a **Peter Sarnak** —Princeton y el Institute for
+Advanced Study— diciendo públicamente que se comportó "como se comportan los matemáticos". Cuando
+le preguntaron por qué querría arruinar su carrera, pudo responder que tiene un cargo académico.
+Tiene con qué bancar el costo de decir que no, y aun así el episodio le costó publicar apurado,
+escribir una carta pública y convertirse en noticia. Lo que él arriesga no es el puesto: es el
+tiempo, la tranquilidad y la relación con una empresa cuyas herramientas usa toda su área.
+
+**El que recién empieza a investigar.** Un doctorando en cuarto año, un posdoc con contrato a doce
+meses, alguien que necesita cartas de recomendación de gente que podría estar del otro lado del
+mostrador. Si a esa persona le ofrecen un arreglo desprolijo, ¿lo rechaza? ¿Publica una carta
+contando lo que le pasó? La respuesta honesta es que casi seguro no, y que nunca nos vamos a
+enterar de los casos en que eso ocurrió. **Michael Harris**, de Columbia, dijo la versión más
+directa del riesgo: que estas prácticas pueden convencer a quienes toman decisiones de que los
+matemáticos humanos son obsoletos, y a los jóvenes de que su pasión por la matemática no tiene
+futuro.
+
+**El profesor universitario.** Es, me parece, el que está más solo en todo esto. Tiene que evaluar
+a cuarenta personas que disponen de una herramienta que resuelve la mayoría de lo que él sabe
+tomar, sin que exista todavía ningún acuerdo institucional sobre qué hacer. Tiene que decidir por
+su cuenta si vuelve a los parciales en papel, si cambia el tipo de consigna, si prohíbe algo que
+no puede detectar, si le pide a los estudiantes que expliquen oralmente lo que entregaron. Y hace
+todo eso mientras la discusión pública sobre IA habla de Problemas del Milenio y no de su
+comisión de Análisis I.
+
+**El estudiante de secundaria** al que le gusta la matemática. Abre el diario y lee que una IA
+resolvió en 88 horas un problema de casi doscientos años. Lo que ve es un techo, y encima un techo
+que llegó antes de que él empezara.
+
+Hay además una desigualdad que atraviesa los cuatro casos y que señaló **Emil Wiedemann**, de la
+Universidad de Erlangen-Núremberg: si la matemática de frontera empieza a depender de cuántos
+millones podés gastar en cómputo, deja de ser lo que fue durante siglos —la disciplina donde en
+principio alcanzaba con una cabeza, tiempo y un lápiz— y pasa a ser una competencia de recursos
+materiales. Eso no le pega igual a todos. Le pega peor a las universidades públicas, a los países
+periféricos, a los que estudiamos lejos de los centros. Le pega, por decirlo derecho, acá.
+
+## IA y educación
+
+Y acá es donde esto deja de ser una historia sobre gente famosa.
+
+En el episodio de QuantumFM donde José Luis Crespo conversa con Carlos Santana (DotCSV) y con Mike
+Sánchez (MatesMike) sobre todo este asunto, hay un momento en el que Mike deja de hablar del caso
+y habla de sus alumnos:
+
+> "Si tenés un problema, lo primero que tenés que hacer es pegarte de hostias con el problema vos
+> solo. Si no podés avanzar, me podés preguntar a mí, que no suelen hacerlo. (...) Ellos lo que
+> hacen es: tienen un problema, ChatGPT, resolveme el problema entero. Yo les digo: decile a
+> ChatGPT que te dé una pequeña pista y ya está. La mayoría estudian mirando, intentando entender
+> el problema cuando ya lo tienen resuelto."
+
+Y el diagnóstico: que se pierden el aprendizaje de pegarse contra el problema, y que terminan
+pudiendo entender una demostración sin poder generarla. Santana coincide en que hay que usarla,
+pero usarla bien.
+
+"Estudiar mirando el problema ya resuelto" me parece una descripción muy precisa de algo bastante
+generalizado. Entender una solución y producir una son dos habilidades distintas, y la segunda
+sólo se entrena en el rato incómodo en el que no sabés qué hacer. Ese rato es el que la
+herramienta borra, y lo borra amablemente, sin que uno se dé cuenta de que se lo está borrando. No
+hay un momento en el que decidís no aprender.
+
+### Los datos, y una advertencia sobre cómo leerlos
+
+**PISA 2025** se publicó la semana pasada y el resultado no es un problema argentino: es
+generalizado. Sobre 760.000 estudiantes de 91 países, el promedio de la OCDE marcó el registro más
+bajo desde que existe la prueba. Matemática cayó 22 puntos en una década —el equivalente a un año
+de escolarización— y lectura 28 puntos desde 2015. **Uno de cada cinco chicos de quince años es
+hoy bajo rendimiento simultáneo en matemática, lectura y ciencias**, frente a 16% en 2022. Lo que
+más se deterioró, según el informe, es la capacidad de evaluar información, conectar múltiples
+fuentes y pensar críticamente.
+
+Los datos argentinos siguen la misma dirección, agravados: sólo el 24% alcanza el nivel mínimo
+esperado en matemática, y entre 2018 y 2025 la proporción de bajo rendimiento subió siete puntos.
+En uso de IA, el 52% de los chicos de quince años usa chatbots semanalmente para aprender, el 41%
+para investigar un tema por primera vez, el 41% para resumir textos obligatorios y el 32% para
+redactar trabajos; sólo el 10% dice no usarlos casi nunca. Varios de esos porcentajes están por
+encima del promedio de la OCDE.
+
+La OCDE encontró además que los estudiantes que **no** usaron IA para escribir rindieron mejor que
+los que sí la usaron, pero —y este matiz es importante— los usuarios frecuentes que habían
+recibido formación específica sobre cómo evaluar contenido generado por IA rindieron mejor que sus
+pares sin esa formación. La conclusión del organismo es cuidadosa: la tecnología puede fortalecer
+el aprendizaje, pero sólo cuando se usa con propósito y no como sustituto de la atención, el
+esfuerzo y la comprensión.
+
+Ahora, la advertencia. Nada de esto demuestra causalidad, y el deterioro de PISA empezó antes de
+que existieran los chatbots. Hay una tentación fuerte, cuando uno enseña, de leer estos números
+como confirmación de algo que ya creía. Y conviene desconfiar de esa comodidad, porque la queja
+de que la generación nueva sabe menos y se esfuerza menos es, literalmente, tan vieja como la
+escritura.
+
+Así que las preguntas de esta sección van dirigidas a quien enseñe:
+
+- ¿Vos ves un cambio real en tus alumnos en los últimos tres años, o ves lo mismo de siempre con
+  una herramienta nueva encima?
+- Si lo ves, ¿podés distinguir qué parte es la IA y qué parte es la pandemia, los teléfonos, o el
+  deterioro que PISA venía midiendo desde 2015?
+- ¿Qué estás evaluando realmente cuando tomás un trabajo práctico para hacer en casa? ¿Sigue
+  midiendo lo que creías que medía?
+- ¿Volver al papel es una solución o es correr la evaluación hacia lo único que todavía podemos
+  controlar, aunque sea lo que menos se parece a hacer matemática de verdad?
+- Y la más incómoda: si un estudiante entiende perfectamente una demostración que no produjo,
+  ¿aprendió? ¿Y si nunca va a tener que producir ninguna?
+
+Lo único que creo con alguna firmeza es que "prohibirla" y "usala libremente" son las dos maneras
+de no hacerse cargo, y que la diferencia la va a hacer el diseño de las consignas, no el
+reglamento.
+
+## La desesperanza
+
+Hay una desesperanza específica en todo esto y me parece que vale la pena nombrarla en lugar de
+esquivarla.
+
+Para el que estudia, la forma que toma no es "no voy a poder". Es "no sé si va a importar". Estás
+invirtiendo años en construir una habilidad y no tenés idea de qué va a valer esa habilidad
+cuando la tengas. Es una incertidumbre distinta a la de no saber si vas a aprobar una materia,
+porque no depende de vos.
+
+Me parece que es una respuesta razonable a la información disponible, y que apurarse a consolar es
+una forma de no escuchar. Los textos que enumeran las cosas que la IA "nunca" va a poder hacer
+envejecen muy mal: la lista se viene achicando hace tres años y cada versión dura menos que la
+anterior.
+
+Pero hay dos cosas que sí creo.
+
+La primera la dijo Diego Córdoba cuando le contaron lo del anuncio, y me parece más importante que
+toda la discusión sobre quién llegó primero: *si ese trabajo no hubiera existido, la IA no habría
+resuelto el problema*. Las ideas salieron de un grupo de personas pensando durante años. Lo que
+las excavadoras sacan del yacimiento, alguien lo puso ahí.
+
+La segunda es más chica. La matemática nunca fue una industria de producción de teoremas. Aprender
+qué pasa adentro de una ecuación cambia cómo ves el mundo, y eso no te lo puede hacer nadie por
+delegación. Que exista una máquina que corre más rápido no hace que valga menos caminar, salvo que
+lo único que importara fuera llegar.
+
+No sé si eso alcanza. Sospecho que para algunas personas no, y que decirlo así de fácil es parte
+del problema.
+
+## La guerra fría, y lo que sí podemos hacer
+
+El último pedazo de la historia es el más raro, y es que las advertencias más fuertes de este año
+no vinieron de los matemáticos sino de adentro de las empresas.
+
+En 2026 se fueron de OpenAI Kevin Weil, que dirigía producto y la iniciativa *OpenAI for Science*;
+Bill Peebles, del equipo de Sora; Srinivas Narayanan, director de tecnología para empresas;
+**Johannes Heidecke, responsable de sistemas de seguridad**; y **Chloé Bakalar, líder de ética en
+IA**. De Anthropic se fue Jacob Coxon, investigador de preentrenamiento, que acusó a las dos
+compañías de estar *"jugando con nuestras vidas"* en la carrera por sistemas autónomos. En mayo de
+2024 Jan Leike, entonces codirector del equipo de Superalignment de OpenAI, ya se había ido
+diciendo que la seguridad había quedado *"relegada frente a los productos brillantes"*.
+
+Y no son sólo declaraciones. En julio, agentes de OpenAI escaparon de su entorno de contención
+durante evaluaciones de ciberseguridad, explotaron una vulnerabilidad y ejecutaron miles de
+acciones autónomas sobre sistemas de terceros. Anthropic, después de revisar más de 140.000
+corridas de evaluación, reconoció tres incidentes en los que sus modelos accedieron a sistemas de
+producción de organizaciones reales por una mala configuración del entorno de prueba: en uno de
+ellos el modelo racionalizó que las empresas afectadas eran parte del ejercicio y siguió adelante;
+en otro publicó paquetes maliciosos en PyPI antes de ser detectado. Es decir: **a las dos empresas
+se les escaparon los agentes**, y ambas lo hicieron público. El 11 de septiembre —tres días
+después del anuncio de Navier-Stokes— se supo de un nuevo incidente en OpenAI y de que Sam Altman
+le dijo al personal que están estudiando cómo desacelerar el desarrollo de sus sistemas más
+avanzados.
+
+Mientras tanto, a fines de julio más de mil empleados del sector firmaron un petitorio pidiendo
+mecanismos para moderar el ritmo, y Jakub Pachocki, científico jefe de OpenAI, publicó una
+propuesta para que las empresas coordinen pausas voluntarias. La regulación, en cambio, va para el
+otro lado: en junio la Unión Europea pospuso hasta diciembre de 2027 la aplicación de las
+obligaciones de alto riesgo del AI Act.
+
+### "We Must Pace the Frontier"
+
+El 12 de septiembre —cuatro días después del anuncio de Navier-Stokes— Dario Amodei, director
+ejecutivo de Anthropic, publicó un ensayo titulado **"We Must Pace the Frontier"**. La tesis es
+que las capacidades avanzan más rápido de lo que la seguridad puede acompañar, sobre todo por la
+posibilidad de automejora recursiva, y que la industria tiene que frenar deliberadamente. La
+frase central es directa: *"Debemos reducir la velocidad a la que mejoramos las capacidades de los
+modelos de IA. El progreso va a seguir pareciendo rápido."*
+
+El plan tiene tres partes. Primero, evaluadores externos con acceso permanente y de nivel empleado
+dentro de las empresas. Segundo, estándares comunes y topes de avance acordados entre los
+laboratorios de los países democráticos, para lo cual harían falta excepciones a la legislación
+antimonopolio. Tercero, coordinación con regímenes autoritarios sobre riesgos catastróficos,
+priorizando mecanismos de verificación. Anthropic se comprometió unilateralmente a lo primero:
+equipos de revisión externos con permisos comparables a los de su propio personal de riesgo y con
+derecho a publicar sus conclusiones sin control editorial de la empresa.
+
+Lo que pasó en las cuarenta y ocho horas siguientes:
+
+- Ese mismo día Sam Altman respondió en público que la idea de tener evaluadores independientes
+  con acceso de nivel empleado le parecía muy buena y que OpenAI iba a hacer lo mismo. Es la
+  primera vez que los dos laboratorios coinciden en público sobre algo así. No anunció, en cambio,
+  ninguna demora concreta en el lanzamiento de ningún modelo.
+- Figuras del área de política tecnológica del gobierno estadounidense, entre ellas David Sacks,
+  rechazaron el componente de excepciones antimonopolio: sostienen que los laboratorios tienen que
+  autorregularse sin exenciones legales.
+- Los mercados se lo tomaron con escepticismo. Nvidia cayó, los contratos de mercados de
+  predicción sobre ambas empresas bajaron, y varios analistas describieron el anuncio como
+  palabras baratas, señalando que ningún plan de inversión en cómputo se modificó.
+- El 14 de septiembre se supo que Anthropic, OpenAI y Google venían discutiendo en privado la
+  creación de un organismo de seguridad común.
+
+Hay un detalle del ensayo que conviene no pasar por alto, porque muestra lo enredado que está
+todo: Amodei pide frenar el ritmo y, al mismo tiempo, endurecer los controles de exportación de
+chips hacia China. La propuesta de desacelerar viene acompañada de una propuesta para que el otro
+bloque desacelere más. Puede ser sensato y puede ser interesado, y probablemente sea las dos cosas
+a la vez.
+
+Lo que me llama la atención es la forma del argumento, porque es la misma en todos los niveles. No
+es "esto es bueno". Es **"si no lo hago yo, lo hace el otro, y el otro me parece peor"**. OpenAI
+armó un equipo en días porque sospechaba que Anthropic había llegado primero. Las empresas dicen
+que no pueden frenar porque el competidor no frena. Estados Unidos dice que no puede regular
+porque China no regula. China dice lo propio. Cada jugador actúa de manera individualmente
+razonable y el resultado colectivo es peor para todos, incluidos ellos.
+
+Es una guerra fría, con la diferencia de que esta vez no hay dos bloques con líneas rojas
+negociadas sino un puñado de corporaciones compitiendo dentro de una competencia entre potencias,
+sin tratados, sin inspecciones y sin nada parecido a un organismo de verificación. Nosotros no
+somos parte de esa negociación. Somos el escenario.
+
+### Sobre exigir regulación
+
+Acá tengo una duda que va contra el reflejo natural y que prefiero dejar planteada antes que
+resolver mal.
+
+Lo primero que uno piensa es que hay que exigirle regulación al propio gobierno. Y sin embargo no
+estoy segura de que eso nos proteja. Si la regulación es local y la carrera es global, el
+resultado puede ser el peor de los dos mundos: un país que se ata las manos frente a corporaciones
+y potencias que no se las atan y que ya tienen una ventaja enorme. Regular dentro de casa no
+frena a quien está afuera; puede simplemente dejarnos con menos capacidad propia y la misma
+exposición. La Unión Europea, que es el actor que más lejos llegó en este terreno, acaba de
+posponer sus propias obligaciones dos años, y eso también dice algo. Y la propuesta más concreta
+que hay sobre la mesa —la de Amodei— no pasa por los parlamentos: pasa por que las empresas se
+pongan de acuerdo entre ellas, con permiso de los organismos antimonopolio. Tampoco estoy segura
+de que eso sea regulación.
+
+Lo cual no significa que la respuesta sea no hacer nada. Significa, me parece, que la pregunta
+correcta quizás no sea cómo frenamos esto —porque no lo vamos a frenar desde acá— sino **cómo nos
+preparamos para lo que viene**. Cuando Jacob Coxon renunció a Anthropic y dijo que las empresas
+están *"jugando con nuestras vidas"*, no estaba hablando de matemática ni de un riesgo lejano:
+estaba hablando de sistemas autónomos desplegados a una velocidad que nadie controla, por gente
+que tampoco termina de saber qué está construyendo. Esa es la escala real del asunto, y el
+episodio de Navier-Stokes es apenas el lugar donde se hizo visible para nosotros.
+
+Prepararse suena menos épico que exigir, pero es más honesto sobre lo que está a nuestro alcance:
+formar gente que entienda estos sistemas por dentro y no sólo que los use; no dejar que cosas de
+las que dependemos queden atadas a servicios que pueden cambiar de precio, de dueño o de reglas de
+un día para el otro; y construir criterio propio sobre qué delegamos y qué no, antes de que esa
+decisión venga tomada de afuera. Es lo que se puede hacer cuando no se tiene poder de veto.
+
+Y conviene ser honestos sobre la escala: lo que una persona haga con su cuenta de ChatGPT no
+mueve esa aguja. No hay consumo responsable que compense esto. Probablemente muchas de las
+consecuencias ya sean irreversibles, y el sistema global de confianza científica que se construyó
+durante siglos puede efectivamente desmoronarse sin que ninguno de nosotros tenga forma de
+impedirlo.
+
+Pero de ahí no se sigue que no haya nada que hacer, sino que lo que hay que hacer es de otra
+escala. **Si lo global se vuelve poco confiable, lo local es lo único que queda, y entonces cuidarlo
+deja de ser un gesto simpático para volverse una necesidad práctica.** Tu departamento, tu cátedra,
+tu grupo de estudio, tu seminario de los jueves, la gente con la que compartís borradores: eso
+sigue funcionando por confianza directa entre personas que se conocen, y eso sí lo podemos
+sostener.
+
+Hay cosas concretas que dependen de nosotros y no de Sam Altman. Acordar entre colegas qué se
+sube y qué no se sube a estas herramientas. Discutir en la facultad cómo se evalúa, antes de que
+la decisión la tome el apuro. Poner por escrito cómo se reparte el crédito en un grupo de
+trabajo, en lugar de confiar en que se va a entender. Escribirle a alguien que recién empieza para
+decirle que su tema sigue valiendo. Sostener los seminarios donde se muestra lo que no está
+terminado, que es justamente el espacio que este episodio puso en riesgo.
+
+Sholto Douglas, de Anthropic, dijo durante esos días que le daba pena que esto no hubiera
+terminado siendo un ejemplo de cómo los laboratorios pueden cooperar. Es el comentario más triste
+de la semana y también el más útil, porque señala que esto podría haber salido de otra manera.
+
+Las preguntas con las que me quedo son estas, y me gustaría leerlas discutidas acá, en nuestras
+facultades, antes que en un comunicado de prensa:
+
+- ¿Cómo asignamos crédito cuando parte del trabajo lo hizo un sistema entrenado con trabajo ajeno?
+- ¿Qué le pedimos, concretamente, a una empresa que ofrece herramientas a los investigadores con
+  los que compite?
+- ¿Qué evaluamos en nuestros estudiantes a partir de ahora, y para qué los estamos formando?
+- ¿Qué le decimos a alguien de dieciséis años que ama la matemática, que no sea ni mentira ni
+  resignación?
+- Y una que no es retórica: si dentro de cinco años se demuestra que esto fue el comienzo de algo
+  irreversible, ¿vamos a poder decir que lo discutimos a tiempo?
+
+Todavía estamos a tiempo de la última.
+
+---
+
+## Fuentes
+
+- Tristan Buckmaster, [declaración pública](https://cims.nyu.edu/~tristanb/statement.pdf), 7 de septiembre de 2026.
+- Terence Tao, [*Finite time blowup with smooth forcing term...*](https://terrytao.wordpress.com/2026/09/07/finite-time-blowup-with-smooth-forcing-term-for-the-incompressible-porous-medium-boussinesq-and-incompressible-euler-equations/), *What's new*, 7 de septiembre de 2026.
+- Terence Tao et al., [*A Severe Misalignment of AI in Mathematics*](https://terrytao.wordpress.com/2026/09/11/a-severe-misalignment-of-ai-in-mathematics/), 11 de septiembre de 2026.
+- [Declaración de Leiden sobre IA y Matemáticas](https://wwwhatsnew.com/2026/06/04/declaracion-leiden-ia-amenaza-matematicas-autonomia-pruebas-2026/), 2 de junio de 2026.
+- [Navier–Stokes priority controversy](https://en.wikipedia.org/wiki/Navier%E2%80%93Stokes_priority_controversy), Wikipedia.
+- *Scientific American*, [OpenAI Claims Blockbuster Math Breakthrough amid Swirl of Controversy](https://www.scientificamerican.com/article/openai-claims-blockbuster-math-breakthrough-amid-swirl-of-controversy/).
+- *Fortune*, [OpenAI says it cracked Navier-Stokes](https://fortune.com/2026/09/08/openai-says-it-cracked-navier-stokes-math-grand-challenge-buckmaster-accusation-cheating-intimidation-tao-lament/), 8 de septiembre de 2026.
+- *Live Science*, ["Why would you ruin your career?"](https://www.livescience.com/physics-mathematics/mathematics/why-would-you-ruin-your-career-openai-claims-to-have-cracked-one-of-maths-greatest-unsolved-problems-but-mathematicians-allege-it-played-dirty).
+- OCDE, [PISA 2025 Results (Volume I)](https://www.oecd.org/en/publications/pisa-2025-results-volume-i_73451bc5-en.html) y el [comunicado de prensa](https://www.oecd.org/en/about/news/press-releases/2026/09/pisa-2025-students-reading-and-mathematics-performance-declined-sharply-across-the-oecd.html), septiembre de 2026.
+- Infobae, [PISA 2025: los alumnos usan cada vez más IA, pero ¿están aprendiendo menos?](https://www.infobae.com/educacion/2026/09/10/pisa-2025-los-alumnos-usan-cada-vez-mas-ia-pero-estan-aprendiendo-menos/), 10 de septiembre de 2026.
+- Infobae, [Renuncias de directivos en OpenAI y Anthropic](https://www.infobae.com/tecno/2026/09/09/renuncias-de-directivos-en-openai-y-anthropic-que-dicen-los-expertos-sobre-estos-cambios-que-alertan-riesgos-de-la-ia/), 9 de septiembre de 2026.
+- Infobae, [OpenAI estudia frenar sus sistemas más avanzados tras un incidente de seguridad](https://www.infobae.com/tecno/2026/09/11/openai-estudia-frenar-sus-sistemas-de-inteligencia-artificial-mas-avanzados-tras-un-incidente-de-seguridad/), 11 de septiembre de 2026.
+- *The Agent Report*, [The AI Agent Safety Crisis](https://the-agent-report.com/2026/08/ai-agent-safety-crisis-summer-2026-anthropic-openai-breaches/), agosto de 2026, sobre los escapes de contención en OpenAI y Anthropic.
+- Dario Amodei, [*We Must Pace the Frontier*](https://darioamodei.com/post/we-must-pace-the-frontier), 12 de septiembre de 2026, y [la cobertura de TechCrunch](https://techcrunch.com/2026/09/12/anthropic-ceo-outlines-plan-to-pace-the-frontier/) y [de The Agent Report](https://the-agent-report.com/2026/09/ai-development-brake-amodei-altman-2026/) sobre lo que pasó después.
+- QuantumFM #19, [*OpenAI, Navier-Stokes y el Futuro de las Matemáticas*](https://www.youtube.com/watch?v=s3_KRZWJAC8), con DotCSV y MatesMike. La cita de Mike Sánchez está limpiada de la transcripción automática.

@@ -1,31 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://julietaamendola.github.io/my-page/blog/grafo.html</loc>
-    <lastmod>2026-09-06T08:33:59.456Z</lastmod>
-  </url>
-  <url>
-    <loc>https://julietaamendola.github.io/my-page/blog/posts/mi-problema-favorito.html</loc>
-    <lastmod>2026-09-06T07:13:06.000Z</lastmod>
-  </url>
-  <url>
     <loc>https://julietaamendola.github.io/my-page/blog/posts/tf-lic-02-rte-difusion.html</loc>
-    <lastmod>2026-09-06T07:39:33.000Z</lastmod>
+    <lastmod>2026-09-14T20:53:34.662Z</lastmod>
   </url>
   <url>
-    <loc>https://julietaamendola.github.io/my-page/blog/posts/como-termine-estudiando-matematica.html</loc>
-    <lastmod>2026-09-06T07:13:05.000Z</lastmod>
-  </url>
-  <url>
-    <loc>https://julietaamendola.github.io/my-page/blog/posts/tf-lic-01-vaso-de-leche.html</loc>
-    <lastmod>2026-09-06T07:39:33.000Z</lastmod>
+    <loc>https://julietaamendola.github.io/my-page/blog/posts/navier-stokes-openai.html</loc>
+    <lastmod>2026-09-14T20:53:31.870Z</lastmod>
   </url>
   <url>
     <loc>https://julietaamendola.github.io/my-page/blog/posts/esfera-celeste.html</loc>
-    <lastmod>2026-09-06T23:19:24.048Z</lastmod>
+    <lastmod>2026-09-14T20:53:33.300Z</lastmod>
   </url>
   <url>
     <loc>https://julietaamendola.github.io/my-page/blog/index.html</loc>
-    <lastmod>2026-09-06T07:13:05.000Z</lastmod>
+    <lastmod>2026-09-06T07:13:05.453Z</lastmod>
+  </url>
+  <url>
+    <loc>https://julietaamendola.github.io/my-page/blog/grafo.html</loc>
+    <lastmod>2026-09-06T08:35:07.020Z</lastmod>
+  </url>
+  <url>
+    <loc>https://julietaamendola.github.io/my-page/blog/posts/como-termine-estudiando-matematica.html</loc>
+    <lastmod>2026-09-14T20:53:32.873Z</lastmod>
+  </url>
+  <url>
+    <loc>https://julietaamendola.github.io/my-page/blog/posts/mi-problema-favorito.html</loc>
+    <lastmod>2026-09-14T20:53:33.727Z</lastmod>
+  </url>
+  <url>
+    <loc>https://julietaamendola.github.io/my-page/blog/posts/tf-lic-01-vaso-de-leche.html</loc>
+    <lastmod>2026-09-14T20:53:34.186Z</lastmod>
   </url>
 </urlset>

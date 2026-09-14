@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/navier-stokes-openai.html",
       "/posts/esfera-celeste.html",
       "/posts/tf-lic-02-rte-difusion.html",
       "/posts/tf-lic-01-vaso-de-leche.html",

@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "Métodos Matemáticos para la Física",
     "section": "",
-    "text": "Antes de empezar\nEste libro nace de dar clases particulares de Métodos Matemáticos para la Física, que es una materia rara: no tiene un objeto propio de estudio. No es “la teoría de X”. Es una caja de herramientas, y como toda caja de herramientas se justifica por lo que se puede hacer con ella.\nEso trae un problema de aprendizaje muy concreto. Uno puede aprender a resolver una ecuación de Sturm–Liouville, a calcular una función de Green y a invertir una transformada de Laplace, y salir de la materia sin haber entendido nunca que son tres formas de contestar la misma pregunta. Este libro está escrito para que esa pregunta esté siempre a la vista.",
+    "text": "Antes de empezar\nMétodos Matemáticos para la Física es una materia rara: no tiene un objeto propio de estudio. No es “la teoría de X”. Es una caja de herramientas, y como toda caja de herramientas se justifica por lo que se puede hacer con ella.\nEso trae un problema de aprendizaje muy concreto. Uno puede aprender a resolver una ecuación de Sturm–Liouville, a calcular una función de Green y a invertir una transformada de Laplace, y salir de la materia sin haber entendido nunca que son tres formas de contestar la misma pregunta. Este libro está escrito para que esa pregunta esté siempre a la vista.",
     "crumbs": [
       "Antes de empezar"
     ]
@@ -14,7 +14,7 @@
     "href": "index.html#cómo-está-pensado",
     "title": "Métodos Matemáticos para la Física",
     "section": "Cómo está pensado",
-    "text": "Cómo está pensado\nCada capítulo va del problema físico a la herramienta matemática, y no al revés. Primero aparece una situación —una cuerda que vibra, una barra que se calienta, un potencial que hay que reconstruir— y recién después la maquinaria que la resuelve. La razón no es pedagógica sino histórica: casi todos estos métodos se inventaron así.\nLos teoremas están enunciados con precisión y las demostraciones están cuando aportan algo. Cuando una demostración es larga y no enseña nada que no se vea mejor en un ejemplo, la reemplazo por el ejemplo y digo dónde encontrarla.\nAl final de cada capítulo hay ejercicios. Algunos son de cálculo, para fijar la mecánica. Otros piden interpretar un resultado, que es lo que la materia realmente evalúa.",
+    "text": "Cómo está pensado\nCada capítulo va del problema físico a la herramienta matemática, y no al revés. Primero aparece una situación —una cuerda que vibra, una barra que se calienta, un potencial que hay que reconstruir— y recién después la maquinaria que la resuelve. La razón no es pedagógica sino histórica: casi todos estos métodos se inventaron así.\nLos teoremas están enunciados con precisión y las demostraciones están cuando aportan algo. Cuando una demostración es larga y no enseña nada que no se vea mejor en un ejemplo, la reemplazo por el ejemplo y digo dónde encontrarla.\nAl final de cada capítulo hay ejercicios. Algunos son de cálculo, para fijar la mecánica. Otros piden interpretar un resultado.\nCada capítulo está hecho de teoría, figuras generadas con código —el código está a la vista, plegado, en cada figura—, videos cuando alguien ya explicó algo mejor de lo que yo podría, ejercicios interactivos que corrigen y explican, y ejercicios de lápiz y papel con la solución escondida.\nTodo el libro se puede descargar en PDF desde el ícono de la barra lateral. En papel, las partes interactivas se convierten en ejercicios comunes.\n\n\n\n\n\n\nNotaMaterial en construcción\n\n\n\nEste libro se está escribiendo. Hay capítulos terminados, capítulos con partes escritas y capítulos que por ahora son solo el temario; cada uno avisa al empezar en qué estado está.",
     "crumbs": [
       "Antes de empezar"
     ]
@@ -420,6 +420,16 @@
     "crumbs": [
       "Ecuaciones en derivadas parciales y métodos avanzados",
       "<span class='chapter-number'>8</span>  <span class='chapter-title'>Ecuaciones en derivadas parciales</span>"
+    ]
+  },
+  {
+    "objectID": "index.html#los-temas",
+    "href": "index.html#los-temas",
+    "title": "Métodos Matemáticos para la Física",
+    "section": "Los temas",
+    "text": "Los temas\nSon catorce capítulos repartidos en dos partes.\nLa primera parte va de las ecuaciones diferenciales ordinarias a los métodos generales que después se usan en todo lo demás: ecuaciones lineales, puntos singulares y el método de Frobenius; el problema de Sturm–Liouville, con sus autofunciones y sus desarrollos; las series de Fourier; la función de Green; las distribuciones y la delta de Dirac; y las transformadas de Laplace y de Fourier como herramientas para resolver ecuaciones.\nLa segunda parte son las ecuaciones en derivadas parciales: qué son, cómo se clasifican y con qué se resuelven, y después los tres tipos uno por uno —hiperbólicas, parabólicas y elípticas—, con los problemas físicos que les corresponden. Cierran el libro las funciones especiales que aparecen al separar variables en dominios con simetría, los desarrollos asintóticos y las ecuaciones integrales.",
+    "crumbs": [
+      "Antes de empezar"
     ]
   }
 ]

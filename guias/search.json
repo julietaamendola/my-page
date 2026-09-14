@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "Guías resueltas de Análisis Matemático II",
     "section": "",
-    "text": "Presentación\nEsto es una colección de guías resueltas de Análisis Matemático II: los ejercicios de la cátedra, sí, pero resueltos con el razonamiento adelante y la cuenta atrás, y con figuras que se pueden mover para ver de dónde sale cada cosa.\nNo es un formulario ni un solucionario. La idea es que quede claro por qué funciona cada método, qué hipótesis está usando sin decirlo, y qué pasa cuando esas hipótesis fallan. Por eso casi todas las guías terminan con un contraejemplo: entender una herramienta es, sobre todo, saber cuándo no se puede usar.",
+    "text": "Presentación\nEsto es una colección de guías resueltas de Análisis Matemático II: ejercicios resueltos con el razonamiento adelante y la cuenta atrás, y con figuras que se pueden mover para ver de dónde sale cada cosa.\nNo es un formulario ni un solucionario. La idea es que quede claro por qué funciona cada método, qué hipótesis está usando sin decirlo, y qué pasa cuando esas hipótesis fallan. Por eso casi todas las guías terminan con un contraejemplo: entender una herramienta es, sobre todo, saber cuándo no se puede usar.",
     "crumbs": [
       "Presentación"
     ]
@@ -24,7 +24,7 @@
     "href": "index.html#convenciones",
     "title": "Guías resueltas de Análisis Matemático II",
     "section": "Convenciones",
-    "text": "Convenciones\nPara que no se pisen los nombres:\n\n\n\n\n\n\n\nSímbolo\nQué es\n\n\n\n\n\\(\\vec F,\\ \\vec G\\)\ncampos vectoriales, \\(\\mathbb{R}^n \\to \\mathbb{R}^n\\)\n\n\n\\(f,\\ \\varphi\\)\ncampos escalares: la función potencial, \\(\\mathbb{R}^n \\to \\mathbb{R}\\)\n\n\n\\(P, Q, R\\)\nlas componentes de \\(\\vec F\\)\n\n\n\\(U\\)\nla energía potencial de la física, \\(U = -f\\)\n\n\n\\(D\\)\nel dominio donde el campo está definido y es \\(C^1\\)\n\n\n\nEl enunciado de la cátedra usa \\(F\\) para el campo escalar del ejercicio 18 y \\(\\vec F\\) para el vectorial. Acá el escalar se llama siempre \\(f\\) (o \\(\\varphi\\) cuando el enunciado lo pide así), porque dos objetos distintos con la misma letra son el origen de la mitad de los errores en este tema.\nLas figuras están hechas con Python y con un motor de dibujo propio, y el código de cada una se puede abrir con el “Ver el código de la figura”. Los colores son los mismos del resto del sitio.\n\n\n\n\n\n\n\nNotaSobre los errores\n\n\n\nSi encontrás algo mal —una cuenta, un signo, una figura que miente— escribime. Lo corrijo y lo agradezco.",
+    "text": "Convenciones\nPara que no se pisen los nombres:\n\n\n\n\n\n\n\nSímbolo\nQué es\n\n\n\n\n\\(\\vec F,\\ \\vec G\\)\ncampos vectoriales, \\(\\mathbb{R}^n \\to \\mathbb{R}^n\\)\n\n\n\\(f,\\ \\varphi\\)\ncampos escalares: la función potencial, \\(\\mathbb{R}^n \\to \\mathbb{R}\\)\n\n\n\\(P, Q, R\\)\nlas componentes de \\(\\vec F\\)\n\n\n\\(U\\)\nla energía potencial de la física, \\(U = -f\\)\n\n\n\\(D\\)\nel dominio donde el campo está definido y es \\(C^1\\)\n\n\n\nCuando un enunciado usa la misma letra para el campo escalar y para el vectorial, acá el escalar se llama siempre \\(f\\) (o \\(\\varphi\\) cuando el enunciado lo pide así), porque dos objetos distintos con la misma letra son el origen de la mitad de los errores en este tema.\nLas figuras están hechas con Python y con un motor de dibujo propio, y el código de cada una se puede abrir con el “Ver el código de la figura”. Los colores son los mismos del resto del sitio.\n\n\n\n\n\n\n\nNotaSobre los errores\n\n\n\nSi encontrás algo mal —una cuenta, un signo, una figura que miente— escribime. Lo corrijo y lo agradezco.",
     "crumbs": [
       "Presentación"
     ]
@@ -610,6 +610,16 @@
     "crumbs": [
       "Extremos de funciones de varias variables",
       "<span class='chapter-number'>10</span>  <span class='chapter-title'>Los mismos métodos, en otras ciencias</span>"
+    ]
+  },
+  {
+    "objectID": "index.html#los-temas",
+    "href": "index.html#los-temas",
+    "title": "Guías resueltas de Análisis Matemático II",
+    "section": "Los temas",
+    "text": "Los temas\nCampos conservativos y función potencial. El problema inverso de derivar: dadas las derivadas parciales, reconstruir la función. Toda la guía gira alrededor de una sola ecuación,\n\\[\n\\nabla f = \\vec F,\n\\]\nencontrar la “altura” \\(f\\) cuya pendiente es el campo \\(\\vec F\\). Están el resumen teórico con la receta, un ejemplo guiado con la independencia del camino vista en el dibujo, un capítulo entero dedicado a los campos que no son conservativos y sus consecuencias, una tanda de ejercicios resueltos y un resumen final con el mapa de equivalencias.\nExtremos de funciones de varias variables. Máximos, mínimos y sillas: el criterio del Hessiano y —sobre todo— los tres casos en que no decide, que son los que de verdad cuestan; extremos absolutos sobre regiones compactas, donde casi todo pasa en el borde; multiplicadores de Lagrange, con el dibujo de la tangencia que explica de dónde sale el método; y problemas de optimización con enunciado.\nTermina con un capítulo de aplicaciones: los mismos métodos aplicados a la recta de mínimos cuadrados, a los puntos de Lagrange del problema de tres cuerpos —donde hay máximos de energía potencial que resultan ser posiciones estables— y al punto de Fermat, que es cómo se diseña una red con la menor cantidad de cable posible.\nLa colección va creciendo: cada guía nueva entra como una parte más del libro.",
+    "crumbs": [
+      "Presentación"
     ]
   }
 ]

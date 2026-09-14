@@ -26,61 +26,6 @@ var POSTS = [
     activo: true,
     link: 'blog/posts/navier-stokes-openai.html'
   },
-  {
-    fecha_es: 'Ago 2026',
-    fecha_en: 'Aug 2026',
-    categoria: 'stem',
-    titulo_es: '¿Cuál es la distancia entre las estrellas?',
-    titulo_en: 'How far apart are the stars?',
-    tag: 'STEM',
-    destacado: true,
-    activo: false,
-    link: 'blog/posts/esfera-celeste.html'
-  },
-  {
-    fecha_es: 'Ago 2026',
-    fecha_en: 'Aug 2026',
-    categoria: 'stem',
-    titulo_es: '¿Cómo se escribe una ecuación para algo que rebota miles de veces?',
-    titulo_en: 'How do you write an equation for something that bounces thousands of times?',
-    tag: 'STEM',
-    destacado: true,
-    activo: false,
-    link: 'blog/posts/tf-lic-02-rte-difusion.html'
-  },
-  {
-    fecha_es: 'Ago 2026',
-    fecha_en: 'Aug 2026',
-    categoria: 'stem',
-    titulo_es: 'No podés ver el interior. Solo tenés la luz que sale.',
-    titulo_en: 'You cannot see inside. All you have is the light coming out.',
-    tag: 'STEM',
-    destacado: true,
-    activo: false,
-    link: 'blog/posts/tf-lic-01-vaso-de-leche.html'
-  },
-  {
-    fecha_es: 'Jun 2025',
-    fecha_en: 'Jun 2025',
-    categoria: 'personal',
-    titulo_es: 'Cómo terminé estudiando matemática',
-    titulo_en: 'How I ended up studying mathematics',
-    tag: 'Personal',
-    destacado: true,
-    activo: false,
-    link: 'blog/posts/como-termine-estudiando-matematica.html'
-  },
-  {
-    fecha_es: 'Jun 2025',
-    fecha_en: 'Jun 2025',
-    categoria: 'stem',
-    titulo_es: 'Mi problema favorito de las olimpíadas',
-    titulo_en: 'My favourite olympiad problem',
-    tag: 'STEM',
-    destacado: true,
-    activo: false,
-    link: 'blog/posts/mi-problema-favorito.html'
-  },
 ];
 
 
@@ -330,8 +275,8 @@ var MATERIAL = [
     titulo_en: 'Mathematical Methods for Physics',
     desc_es: 'Catorce capítulos, de la ecuación de transporte a las ecuaciones integrales.',
     desc_en: 'Fourteen chapters, from the transport equation to integral equations.',
-    meta_es: 'Borrador · capítulo 8 completo y adelantos en 3 y 10',
-    meta_en: 'Draft · chapter 8 complete, previews in 3 and 10',
+    meta_es: '14 capítulos · web interactiva y PDF',
+    meta_en: '14 chapters · interactive web and PDF',
     link: 'metodos/index.html',
     activo: true
   },

@@ -19,7 +19,8 @@ de esos problemas cae, y la primera vez que lo hace por obra de un sistema autom
 
 Pero el anuncio no llegó solo. Unas horas antes, **Tristan Buckmaster**, profesor del Courant
 Institute de la Universidad de Nueva York, publicó una carta abierta en su página personal
-contando que él y **Levent Alpöge** venían trabajando desde hacía meses en esa misma
+contando que él y **Levent Alpöge** —investigador de Anthropic, o sea de la empresa que compite
+con OpenAI, que no es un detalle menor— venían trabajando desde hacía meses en esa misma
 dirección; que a fines de agosto empezaron a circular rumores sobre su avance; que esos rumores
 llegaron a OpenAI; que la empresa armó un equipo y dedicó una cantidad enorme de cómputo al
 problema en cuestión de días; y que después lo contactó para ofrecerle un arreglo de publicación
@@ -49,6 +50,14 @@ $$ {#eq-ns}
 donde $u(x,t)\in\mathbb{R}^3$ es el campo de velocidades, $p(x,t)$ la presión, $\nu>0$ la
 viscosidad cinemática y $f$ una fuerza externa. El caso $\nu=0$ son las ecuaciones de Euler, que
 describen un fluido ideal sin viscosidad.
+
+Una aclaración sobre la edad del problema, porque circulan dos números y los dos son correctos.
+Las ecuaciones son de 1822–1845: Navier las escribió primero y Stokes les dio después la forma
+que usamos. En ese sentido llevamos casi doscientos años sin saber si sus soluciones se rompen.
+La cuenta de noventa años, que es la que suele aparecer en la prensa, arranca en 1934, cuando
+Jean Leray demostró que siempre existen soluciones débiles y dejó planteado si son suaves: esa
+es exactamente la pregunta que el Clay terminó de formular en el 2000. Una cuenta mide la edad
+de las ecuaciones y la otra la del problema tal como se plantea hoy.
 
 El enunciado que Charles Fefferman —profesor de Princeton, medalla Fields en 1978— escribió para
 el Clay pide lo siguiente: dado un dato inicial $u_0$ suave, de divergencia nula y con
@@ -383,9 +392,9 @@ no puede detectar, si le pide a los estudiantes que expliquen oralmente lo que e
 todo eso mientras la discusión pública sobre IA habla de Problemas del Milenio y no de su
 comisión de Análisis I.
 
-**El estudiante de secundaria** al que le gusta la matemática. Abre el diario y lee que una IA
-resolvió en 88 horas un problema de casi doscientos años. Lo que ve es un techo, y encima un techo
-que llegó antes de que él empezara.
+**El estudiante de secundaria** al que le gusta la matemática. Abre Instagram y le aparece que una
+IA resolvió en 88 horas un problema de casi doscientos años. Lo que ve es un techo, y encima un
+techo que llegó antes de que él empezara.
 
 Hay además una desigualdad que atraviesa los cuatro casos y que señaló **Emil Wiedemann**, de la
 Universidad de Erlangen-Núremberg: si la matemática de frontera empieza a depender de cuántos
@@ -444,7 +453,7 @@ esfuerzo y la comprensión.
 
 Ahora, la advertencia. Nada de esto demuestra causalidad, y el deterioro de PISA empezó antes de
 que existieran los chatbots. Hay una tentación fuerte, cuando uno enseña, de leer estos números
-como confirmación de algo que ya creía. Y conviene desconfiar de esa comodidad, porque la queja
+como confirmación de algo que ya creía. Y hay que desconfiar de esa comodidad, porque la queja
 de que la generación nueva sabe menos y se esfuerza menos es, literalmente, tan vieja como la
 escritura.
 
@@ -475,25 +484,131 @@ invirtiendo años en construir una habilidad y no tenés idea de qué va a valer
 cuando la tengas. Es una incertidumbre distinta a la de no saber si vas a aprobar una materia,
 porque no depende de vos.
 
+Lo que no me esperaba es que del otro lado de la carrera se sienta parecido. **Alex Townsend**, de
+Cornell, acaba de usar ChatGPT para resolver un problema de álgebra lineal numérica que llevaba
+décadas abierto. Es alguien que ganó. Lo cuenta así:
+
+> De hecho, me siento un poco molesto por haber dedicado 15 años de mi vida a investigar en
+> matemáticas y, en un momento de mi carrera en el que soy muy productivo y estoy en mi mejor
+> momento como matemático, esa destreza máxima ya no está ahí. Hay algo capaz de superarme. […]
+> Antes era muy emocionante porque eras de talla mundial, realizabas una investigación excelente,
+> ampliabas las fronteras del conocimiento, y ahora no siento que sea yo quien esté en la
+> vanguardia del conocimiento. Soy yo quien cuenta con un agente de IA, lo cual, en realidad, se
+> siente muy diferente. Y me siento totalmente amenazado por ello.
+
+Es exactamente lo mismo que describe un estudiante de segundo año, dicho por alguien que está en
+su mejor momento.
+
+Su coautor es **Steven Strogatz**, también de Cornell, que probablemente escribió sobre matemática
+para más gente que cualquier otro matemático vivo. Los dos están terminando *Big Math*, un libro
+sobre cómo la matemática está creciendo más allá de lo que una persona puede comprender. Strogatz
+le dijo a *Wired* dos cosas que no se le suelen escuchar a alguien en su lugar. Una: *"Creo que el
+año 2026 será recordado como un annus mirabilis o un annus horribilis para las matemáticas, porque
+han pasado muchas cosas."* La otra, comparando el momento con una película de terror en la que
+algo que todavía no se entiende bien se va acercando: *"Pero aún no hemos llegado al final de la
+película. Instintivamente, estoy realmente aterrorizado."*
+
 Me parece que es una respuesta razonable a la información disponible, y que apurarse a consolar es
 una forma de no escuchar. Los textos que enumeran las cosas que la IA "nunca" va a poder hacer
 envejecen muy mal: la lista se viene achicando hace tres años y cada versión dura menos que la
 anterior.
 
-Pero hay dos cosas que sí creo.
-
-La primera la dijo Diego Córdoba cuando le contaron lo del anuncio, y me parece más importante que
-toda la discusión sobre quién llegó primero: *si ese trabajo no hubiera existido, la IA no habría
-resuelto el problema*. Las ideas salieron de un grupo de personas pensando durante años. Lo que
-las excavadoras sacan del yacimiento, alguien lo puso ahí.
-
-La segunda es más chica. La matemática nunca fue una industria de producción de teoremas. Aprender
-qué pasa adentro de una ecuación cambia cómo ves el mundo, y eso no te lo puede hacer nadie por
-delegación. Que exista una máquina que corre más rápido no hace que valga menos caminar, salvo que
-lo único que importara fuera llegar.
+Pero hay una cosa que sí creo, y la dijo Diego Córdoba cuando le contaron lo del anuncio. Me
+parece más importante que toda la discusión sobre quién llegó primero: *si ese trabajo no hubiera
+existido, la IA no habría resuelto el problema*. Las ideas salieron de un grupo de personas
+pensando durante años. Lo que las excavadoras sacan del yacimiento, alguien lo puso ahí.
 
 No sé si eso alcanza. Sospecho que para algunas personas no, y que decirlo así de fácil es parte
 del problema.
+
+## Reinventarse
+
+Hay un escenario que aparece siempre en estas conversaciones y prefiero decirlo sin suavizarlo. Si
+producir demostraciones se automatiza, el rol del matemático se corre hacia otro lado: alguien que
+audita lo que la máquina produjo, lo traduce a algo que un humano pueda entender y decide si
+importa. Un revisor. Es una versión más chica del trabajo, y ya estaba insinuada más arriba,
+cuando pregunté qué le queda a un referí cuando la demostración viene certificada.
+
+Strogatz llega al mismo lugar, y no se hace el distraído sobre cuánto puede durar ese lugar:
+
+> Necesitamos una comprensión profunda, es decir, explicar las cosas en términos que los seres
+> humanos puedan entender y apreciar. Actualmente, la mejor comprensión proviene de expertos
+> humanos. ¿Es ahí donde nos quedamos? ¿Nos convertiremos en los grandes intérpretes de lo que
+> hacen las máquinas? Sospecho que seguiremos desempeñando ese papel durante un tiempo, que
+> conservaremos esa habilidad especial de traducción, aunque también espero que las máquinas la
+> superen pronto.
+
+### El sueldo
+
+Abajo de todas las preguntas hay una que casi no se dice en voz alta, porque suena poco noble al
+lado de la discusión sobre la comprensión conceptual. Es esta: ¿quién paga?
+
+> Si las matemáticas se reducen a eso, ¿por qué alguien nos pagaría por hacerlas? Cuando todo ese
+> trabajo lo realiza la IA, no hay necesidad de invertir dinero en matemáticos humanos. Y esa
+> parece una trayectoria muy probable, a menos que la detengamos.
+
+Eso lo dice un profesor de Cornell de sesenta y siete años. No está diciendo que se termina la
+matemática: está diciendo que se puede terminar el puesto de matemático. Son cosas distintas, y la
+segunda es la que paga el alquiler.
+
+La salida que ofrece él mismo es esta:
+
+> Hay quienes siempre se emocionaron al ser los primeros en escalar la montaña. Pero esa
+> motivación se perderá. Ya no podremos aspirar a escalar las montañas más altas, porque las
+> máquinas siempre llegarán primero. Perderemos siempre. Así que, si alguna vez te motivó eso, ese
+> juego se acabó. Ahora bien, uno podría preguntarse: "¿Por qué es ese el único juego que existe?".
+> No lo es. No juego en Wimbledon, pero sigo jugando al tenis. No somos tan buenos como los mejores
+> programas de ajedrez, pero aun así nos encanta el ajedrez. ¿Será ese el futuro de las
+> matemáticas, un juego hermoso en el que no somos expertos, pero que aun así disfrutamos?
+
+Me parece una salida real y me parece que no alcanza. El ajedrez sobrevivió a Deep Blue y hoy se
+juega más que nunca; lo que no sobrevivió fue la idea de que el campeón del mundo es el que mejor
+juega al ajedrez. Podés amar un juego que no ganás. Lo que no podés es vivir de un juego que no
+ganás. Y si la matemática se vuelve un hobby, se vuelve el hobby del que puede pagárselo, que es
+otra vez la desigualdad que señalaba Wiedemann, ahora entrando por la puerta de atrás.
+
+### La línea de tiempo
+
+Lo que me saca un poco de la parálisis es darme cuenta de que no somos ni los primeros ni los
+últimos, y que tenemos vecinos a los que mirar.
+
+La fotografía es el caso viejo y el más completo, porque ya sabemos cómo terminó. Destruyó un
+oficio: el retratista por encargo, que era un trabajo del que vivía mucha gente, desapareció en
+una generación. Lo que no destruyó fue la pintura. La pintura dejó de tener como fin parecerse a
+lo que se ve, porque esa función se había mudado a otro lado, y lo que vino después
+—impresionismo, expresionismo, abstracción— no fue la resistencia de lo humano frente a la máquina
+sino lo que quedó por hacer cuando la máquina se llevó la parte descriptiva. No es un final feliz
+ni uno trágico: es una reinvención, con gente que se quedó sin trabajo en el medio.
+
+El diseño gráfico y la música están adentro de ese proceso ahora mismo y todavía no sabemos cómo
+termina. Nos llevan unos años de ventaja y los tenemos a la vista. Hay bastante que aprender
+mirándolos de cerca: qué defendieron, qué perdieron sin pelear, qué se inventaron, qué acuerdos
+lograron sostener entre colegas y cuáles no.
+
+Y atrás nuestro viene el resto. Strogatz lo dice así:
+
+> Las matemáticas aplicadas son complejas porque tratan con el mundo real. Cuanto más compleja sea
+> la materia, más resistente será a la IA. Por lo tanto, disciplinas como la economía, las
+> relaciones internacionales o la sociología, entre otras, se podría pensar que estarán
+> relativamente a salvo durante un tiempo.
+
+La capa que todavía protege a la física, a la biología, a la economía, no es la dificultad de la
+cuenta: es la modelización. Decidir qué pedazo de la realidad entra en la ecuación y qué queda
+afuera es una decisión que no tiene demostración, y hasta ahora la toma una persona. No apostaría
+a que sea para siempre.
+
+A ese ritmo no me extrañaría que dentro de unos años aparezca la psicohistoria y podamos calcular
+el destino de la humanidad con tres siglos de anticipación. Me río, pero *Fundación* está en el
+estante de ciencia ficción, y ese estante viene perdiendo libros hace tres años.
+
+La matemática nunca fue una industria de producción de teoremas. Aprender qué pasa adentro de una
+ecuación cambia cómo ves el mundo, y eso no te lo puede hacer nadie por delegación. Que exista una
+máquina que corre más rápido no hace que valga menos caminar, salvo que lo único que importara
+fuera llegar.
+
+Eso no contesta lo del sueldo. Pero dice dónde buscar la respuesta: no en una lista de cosas que
+la máquina nunca va a poder hacer, porque esa lista se achica sola, sino en para qué sirve la
+disciplina cuando su producto se abarata. Y esa pregunta no la contesta nadie solo.
 
 ## La guerra fría, y lo que sí podemos hacer
 
@@ -558,7 +673,7 @@ Lo que pasó en las cuarenta y ocho horas siguientes:
 - El 14 de septiembre se supo que Anthropic, OpenAI y Google venían discutiendo en privado la
   creación de un organismo de seguridad común.
 
-Hay un detalle del ensayo que conviene no pasar por alto, porque muestra lo enredado que está
+Hay un detalle del ensayo que no hay que pasar por alto, porque muestra lo enredado que está
 todo: Amodei pide frenar el ritmo y, al mismo tiempo, endurecer los controles de exportación de
 chips hacia China. La propuesta de desacelerar viene acompañada de una propuesta para que el otro
 bloque desacelere más. Puede ser sensato y puede ser interesado, y probablemente sea las dos cosas
@@ -606,7 +721,7 @@ las que dependemos queden atadas a servicios que pueden cambiar de precio, de du
 un día para el otro; y construir criterio propio sobre qué delegamos y qué no, antes de que esa
 decisión venga tomada de afuera. Es lo que se puede hacer cuando no se tiene poder de veto.
 
-Y conviene ser honestos sobre la escala: lo que una persona haga con su cuenta de ChatGPT no
+Y seamos honestos sobre la escala: lo que una persona haga con su cuenta de ChatGPT no
 mueve esa aguja. No hay consumo responsable que compense esto. Probablemente muchas de las
 consecuencias ya sean irreversibles, y el sistema global de confianza científica que se construyó
 durante siglos puede efectivamente desmoronarse sin que ninguno de nosotros tenga forma de
@@ -630,17 +745,95 @@ Sholto Douglas, de Anthropic, dijo durante esos días que le daba pena que esto 
 terminado siendo un ejemplo de cómo los laboratorios pueden cooperar. Es el comentario más triste
 de la semana y también el más útil, porque señala que esto podría haber salido de otra manera.
 
-Las preguntas con las que me quedo son estas, y me gustaría leerlas discutidas acá, en nuestras
-facultades, antes que en un comunicado de prensa:
+Las preguntas con las que me quedo son estas, y me gustaría leerlas discutidas acá, en nuestros
+departamentos y en nuestras cátedras, antes que en un comunicado de prensa.
+
+Discutidas quiere decir algo concreto: que alguien las lleve a la próxima reunión, que se hable
+una hora, que lo que se acuerde quede escrito y con fecha, y que se vuelva a mirar en seis meses.
+Dos páginas escritas por la gente de una facultad valen más que cualquier declaración
+internacional, porque son las únicas que después alguien va a poder aplicar. No hace falta permiso
+de nadie para empezar. Hace falta que alguien lo proponga, y probablemente ese alguien sea el que
+está leyendo esto.
+
+**Crédito y autoría**
 
 - ¿Cómo asignamos crédito cuando parte del trabajo lo hizo un sistema entrenado con trabajo ajeno?
-- ¿Qué le pedimos, concretamente, a una empresa que ofrece herramientas a los investigadores con
-  los que compite?
-- ¿Qué evaluamos en nuestros estudiantes a partir de ahora, y para qué los estamos formando?
+- ¿Qué cuenta como contribución: la idea, la ejecución, la verificación, la elección del problema?
+- ¿El sistema va en los autores, en los agradecimientos, en la sección de métodos, o en ninguna
+  parte? ¿Lo decidimos nosotros o esperamos a que lo decida una revista de afuera?
+- ¿Cómo citamos un trabajo que se apoyó en ideas que circulaban en borradores y seminarios sin
+  publicar?
+- Si nos pasa a nosotros, ¿a quién le reclamamos?
+
+**Qué subimos y qué no**
+
+- ¿Qué se sube y qué no se sube a estas herramientas? ¿Lo decide cada uno o lo acordamos entre
+  colegas?
+- ¿Cambia la respuesta cuando lo que se sube es el trabajo de un tesista y no el propio?
+- ¿Alguien les dijo a nuestros becarios que ese borrador puede ser lo único que tienen?
+- ¿De qué servicios dependemos hoy, y qué hacemos el día que cambien de precio, de dueño o de
+  reglas?
+- ¿Hay alguien en el departamento que entienda estos sistemas por dentro y no sólo que los use? Si
+  no hay, ¿qué hacemos al respecto?
+
+**Verificación y publicación**
+
+- Si una demostración está verificada formalmente pero nadie la leyó, ¿está publicada?
+- Cuando nos toque arbitrar, ¿qué hacemos con un resultado que la máquina ya certificó? ¿Nos queda
+  un rol, o el rol pasa a ser decidir si el resultado importa?
+- ¿Les preguntamos a los autores qué usaron? ¿Estamos dispuestos a rechazar un trabajo porque no
+  lo declara?
+- Cuando un medio local nos pide opinión sobre un anuncio hecho por comunicado de prensa, ¿qué
+  decimos?
+- ¿Seguimos dando seminarios de trabajo en progreso? ¿Con qué resguardos, y quién se los explica
+  al que viene de visita?
+
+**Desigualdad y acceso**
+
+- Las versiones que sirven se pagan en dólares y por mes. ¿Quién puede pagarlas acá y quién no?
+- Si una beca doctoral no alcanza para la suscripción que sí tiene el grupo con el que competimos,
+  ¿eso es una diferencia de talento o de presupuesto?
+- ¿La facultad tendría que pagar licencias como paga el acceso a las revistas? ¿Y si eso nos deja
+  atados a un proveedor?
+- Cuando mandamos un paper o pedimos un subsidio competimos con grupos que tienen un cómputo que
+  nosotros no tenemos ni vamos a tener. ¿Eso tiene nombre? ¿Se lo decimos a alguien?
+- ¿Qué matemática podemos hacer acá que no sea competir en el terreno donde ya perdimos?
+
+**Evaluación**
+
+- ¿Qué evaluamos a partir de ahora, y para qué estamos formando?
+- Un estudiante con acceso a estas herramientas tiene, en los hechos, un profesor particular
+  disponible las veinticuatro horas. ¿Con qué criterio lo comparamos con uno que no lo tiene?
+- No estamos calibrados para esto. ¿Cuántas veces vamos a leer como brillantez lo que es acceso, y
+  como falta de capacidad lo que es falta de recursos?
+- ¿Qué prejuicios tenemos ya sobre quién es buen estudiante y quién no? ¿A quién le damos el
+  beneficio de la duda cuando entrega algo demasiado bueno y a quién se lo negamos? ¿Esa lista se
+  parece sospechosamente a la de siempre?
+- Si un estudiante entiende perfectamente una demostración que no produjo, ¿aprendió? ¿Y si nunca
+  va a tener que producir ninguna?
+- ¿Volvemos al papel, cambiamos la consigna, pedimos defensa oral? ¿Lo decide cada docente por su
+  cuenta, como ahora, o se hace cargo la cátedra?
+
+**Poner algo por escrito**
+
+- ¿Tenemos un documento, aunque sea de una página, que diga qué se puede usar y qué no en nuestras
+  materias? ¿Y otro sobre el uso en investigación?
+- ¿Quién lo escribe y con quiénes? ¿Participan los estudiantes, que son los que más lo usan?
+- ¿Qué pasa con el que no lo cumple? ¿Hay algo, o es una declaración de buenas intenciones?
+- ¿Cada cuánto lo revisamos? Porque lo que escribamos este año va a estar viejo el que viene.
+- ¿Cómo se reparte el crédito adentro de nuestro grupo de trabajo? ¿Está escrito, o confiamos en
+  que se entiende?
+
+**Los que recién empiezan**
+
 - ¿Qué le decimos a alguien de dieciséis años que ama la matemática, que no sea ni mentira ni
   resignación?
-- Y una que no es retórica: si dentro de cinco años se demuestra que esto fue el comienzo de algo
-  irreversible, ¿vamos a poder decir que lo discutimos a tiempo?
+- ¿Y a un tesista que ve que su tema puede evaporarse antes de que defienda?
+- ¿Le seguimos recomendando a alguien que haga un doctorado? ¿Con qué argumento, sabiendo lo que
+  sabemos?
+- ¿Qué enseñamos por inercia y qué sigue valiendo la pena?
+- Si dentro de cinco años se demuestra que esto fue el comienzo de algo irreversible, ¿vamos a
+  poder decir que lo discutimos a tiempo?
 
 Todavía estamos a tiempo de la última.
 
@@ -656,6 +849,7 @@ Todavía estamos a tiempo de la última.
 - *Scientific American*, [OpenAI Claims Blockbuster Math Breakthrough amid Swirl of Controversy](https://www.scientificamerican.com/article/openai-claims-blockbuster-math-breakthrough-amid-swirl-of-controversy/).
 - *Fortune*, [OpenAI says it cracked Navier-Stokes](https://fortune.com/2026/09/08/openai-says-it-cracked-navier-stokes-math-grand-challenge-buckmaster-accusation-cheating-intimidation-tao-lament/), 8 de septiembre de 2026.
 - *Live Science*, ["Why would you ruin your career?"](https://www.livescience.com/physics-mathematics/mathematics/why-would-you-ruin-your-career-openai-claims-to-have-cracked-one-of-maths-greatest-unsolved-problems-but-mathematicians-allege-it-played-dirty).
+- *Wired* en español, [*"Estoy realmente aterrorizado": un matemático explica cómo la IA está superando a los humanos en su campo*](https://es.wired.com/articulos/estoy-realmente-aterrorizado-un-matematico-explica-como-la-ia-esta-superando-a-los-humanos-en-su-campo), 14 de septiembre de 2026. De ahí salen todas las citas de Steven Strogatz y de Alex Townsend. [Versión original en inglés](https://www.wired.com/story/mathematician-steven-strogatz-grapples-with-ai-recent-breakthroughs/); adaptación al castellano de Mauricio Serfatty Godoy.
 - OCDE, [PISA 2025 Results (Volume I)](https://www.oecd.org/en/publications/pisa-2025-results-volume-i_73451bc5-en.html) y el [comunicado de prensa](https://www.oecd.org/en/about/news/press-releases/2026/09/pisa-2025-students-reading-and-mathematics-performance-declined-sharply-across-the-oecd.html), septiembre de 2026.
 - Infobae, [PISA 2025: los alumnos usan cada vez más IA, pero ¿están aprendiendo menos?](https://www.infobae.com/educacion/2026/09/10/pisa-2025-los-alumnos-usan-cada-vez-mas-ia-pero-estan-aprendiendo-menos/), 10 de septiembre de 2026.
 - Infobae, [Renuncias de directivos en OpenAI y Anthropic](https://www.infobae.com/tecno/2026/09/09/renuncias-de-directivos-en-openai-y-anthropic-que-dicen-los-expertos-sobre-estos-cambios-que-alertan-riesgos-de-la-ia/), 9 de septiembre de 2026.

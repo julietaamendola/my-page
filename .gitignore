@@ -26,3 +26,9 @@ __pycache__/
 
 # Carpeta donde el escritorio deja los archivos entregados. No va al repositorio.
 Claude outputs/
+
+# Restos de una compilacion de LaTeX que fallo (quarto los borra si termina bien).
+/libro/index.aux
+/libro/index.log
+/libro/index.tex
+/libro/index.toc

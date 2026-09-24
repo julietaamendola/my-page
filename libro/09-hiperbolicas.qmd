@@ -4584,7 +4584,7 @@ u(r,t) = 8h\sum_{p\ge1}\frac{J_0\big(j_{0,p}r/R_0\big)}{j_{0,p}^3\,J_1(j_{0,p})}
 $$
 **Control numérico.** Los primeros coeficientes son $A_1\approx1{,}108\,h$, $A_2\approx-0{,}140\,h$,
 $A_3\approx0{,}045\,h$, y coinciden con la integración numérica directa. La suma en $r=0$, $t=0$ da
-$h$, porque $J_0(0) = 1$ y la serie reproduce el paraboloide. El primer modo solo ya es el $111\,\%$
+$h$, porque $J_0(0) = 1$ y la serie reproduce el paraboloide. El primer modo solo ya es el 111 %
 de la altura: el segundo corrige en sentido contrario.
 :::
 

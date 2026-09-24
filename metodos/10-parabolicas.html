@@ -536,8 +536,8 @@ u_t = k\,u_{xx}, \qquad u(0,t) = u(1,t) = 0, \qquad u(x,0) = \varphi(x).
 u(x,t) \;=\; \sum_{n=1}^{\infty} b_n\, e^{-(n\pi)^2 k t}\, \sin(n\pi x),
 \qquad b_n = 2\int_0^1 \varphi(x)\,\sin(n\pi x)\,dx .
 \tag{10.2}\]</span></span></p>
-<p>Los <span class="math inline">\(b_n\)</span> son los coeficientes de la serie de Fourier en senos de la condición inicial: es el <a href="#sec-fourier" class="quarto-xref"><span class="quarto-unresolved-ref">sec-fourier</span></a> entrando por la puerta de atrás. Lo nuevo es el factor <span class="math inline">\(e^{-(n\pi)^2kt}\)</span>, y ahí está toda la física del problema.</p>
-<p>Fijate en el exponente: <strong>crece con el cuadrado del número de modo</strong>. El modo <span class="math inline">\(n=10\)</span> se apaga <span class="math inline">\(100\)</span> veces más rápido que el <span class="math inline">\(n=1\)</span>. Y los detalles finos de la condición inicial —una esquina, un escalón, un pico— son justamente los que necesitan modos altos para representarse. El resultado es que la difusión <strong>borra los detalles antes que las formas grandes</strong>, y lo hace de inmediato: apenas <span class="math inline">\(t&gt;0\)</span>, la serie de la <a href="#eq-calor-sol" class="quarto-xref"><span class="quarto-unresolved-ref">eq-calor-sol</span></a> converge tan rápido que la solución es infinitamente derivable, por más fea que fuera <span class="math inline">\(\varphi\)</span>.</p>
+<p>Los <span class="math inline">\(b_n\)</span> son los coeficientes de la serie de Fourier en senos de la condición inicial: es el <a href="03-fourier.html" class="quarto-xref"><span>Capítulo 3</span></a> entrando por la puerta de atrás. Lo nuevo es el factor <span class="math inline">\(e^{-(n\pi)^2kt}\)</span>, y ahí está toda la física del problema.</p>
+<p>Fijate en el exponente: <strong>crece con el cuadrado del número de modo</strong>. El modo <span class="math inline">\(n=10\)</span> se apaga <span class="math inline">\(100\)</span> veces más rápido que el <span class="math inline">\(n=1\)</span>. Y los detalles finos de la condición inicial —una esquina, un escalón, un pico— son justamente los que necesitan modos altos para representarse. El resultado es que la difusión <strong>borra los detalles antes que las formas grandes</strong>, y lo hace de inmediato: apenas <span class="math inline">\(t&gt;0\)</span>, la serie de la <a href="#eq-calor-sol" class="quarto-xref"><span>10.2</span></a> converge tan rápido que la solución es infinitamente derivable, por más fea que fuera <span class="math inline">\(\varphi\)</span>.</p>
 <div id="cell-fig-calor" class="cell" data-fig-height="3.5" data-fig-width="6.8" data-execution_count="1">
 <details class="code-fold">
 <summary>Ver el código de la figura</summary>
@@ -573,13 +573,13 @@ u(x,t) \;=\; \sum_{n=1}^{\infty} b_n\, e^{-(n\pi)^2 k t}\, \sin(n\pi x),
 <img src="10-parabolicas_files/figure-html/fig-calor-output-1.png" width="642" height="326" class="figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-calor-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;10.1: La <a href="#eq-calor-sol" class="quarto-xref"><span class="quarto-unresolved-ref">eq-calor-sol</span></a> con <span class="math inline">\(k=1\)</span> y una condición inicial discontinua: un escalón que vale <span class="math inline">\(1\)</span> en el interior y <span class="math inline">\(0\)</span> en los extremos. En <span class="math inline">\(t=0\)</span> se ve el fenómeno de Gibbs del <a href="#sec-fourier" class="quarto-xref"><span class="quarto-unresolved-ref">sec-fourier</span></a>, porque la serie está truncada. Un instante después no queda ni rastro: los modos altos, que son los que producían las oscilaciones, ya se apagaron.
+Figura&nbsp;10.1: La <a href="#eq-calor-sol" class="quarto-xref"><span>10.2</span></a> con <span class="math inline">\(k=1\)</span> y una condición inicial discontinua: un escalón que vale <span class="math inline">\(1\)</span> en el interior y <span class="math inline">\(0\)</span> en los extremos. En <span class="math inline">\(t=0\)</span> se ve el fenómeno de Gibbs del <a href="03-fourier.html" class="quarto-xref"><span>Capítulo 3</span></a>, porque la serie está truncada. Un instante después no queda ni rastro: los modos altos, que son los que producían las oscilaciones, ya se apagaron.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>Esta es la diferencia de fondo con las ecuaciones hiperbólicas del <a href="#sec-hiperbolicas" class="quarto-xref"><span class="quarto-unresolved-ref">sec-hiperbolicas</span></a>, donde una discontinuidad en el dato inicial viaja intacta para siempre. También es la razón por la que el problema del calor <strong>hacia atrás en el tiempo</strong> está mal planteado: si los modos altos se apagan hacia adelante, hacia atrás explotan, y dos condiciones iniciales muy distintas producen temperaturas de hoy indistinguibles.</p>
+<p>Esta es la diferencia de fondo con las ecuaciones hiperbólicas del <a href="09-hiperbolicas.html" class="quarto-xref"><span>Capítulo 9</span></a>, donde una discontinuidad en el dato inicial viaja intacta para siempre. También es la razón por la que el problema del calor <strong>hacia atrás en el tiempo</strong> está mal planteado: si los modos altos se apagan hacia adelante, hacia atrás explotan, y dos condiciones iniciales muy distintas producen temperaturas de hoy indistinguibles.</p>
 <div class="video">
   <iframe src="https://www.youtube-nocookie.com/embed/ToIXSwZ1pJU" title="Solving the heat equation — 3Blue1Brown" loading="lazy" allowfullscreen="" allow="accelerometer; clipboard-write; encrypted-media; picture-in-picture"></iframe>
 </div>
@@ -587,7 +587,7 @@ Figura&nbsp;10.1: La <a href="#eq-calor-sol" class="quarto-xref"><span class="qu
 la separación de variables con la ecuación del calor como excusa, que es exactamente el orden
 en que la usamos acá.</p>
 <div class="ejercicio" data-respuesta="0.0702" data-tol="0.0015" data-rotulo="Para calcular">
-<p>Tomemos la condición inicial más simple posible, <span class="math inline">\(\varphi(x) = \sin(\pi x)\)</span>, con <span class="math inline">\(k = 1\)</span>. La serie de la <a href="#eq-calor-sol" class="quarto-xref"><span class="quarto-unresolved-ref">eq-calor-sol</span></a> tiene un solo término y la solución es <span class="math inline">\(u(x,t) = e^{-\pi^2 t}\sin(\pi x)\)</span>.</p>
+<p>Tomemos la condición inicial más simple posible, <span class="math inline">\(\varphi(x) = \sin(\pi x)\)</span>, con <span class="math inline">\(k = 1\)</span>. La serie de la <a href="#eq-calor-sol" class="quarto-xref"><span>10.2</span></a> tiene un solo término y la solución es <span class="math inline">\(u(x,t) = e^{-\pi^2 t}\sin(\pi x)\)</span>.</p>
 <p><strong>¿En qué tiempo la temperatura del centro de la barra cae a la mitad de su valor inicial?</strong> Escribí el resultado con tres decimales.</p>
 <div class="explica">
 <p>Hay que resolver <span class="math inline">\(e^{-\pi^2 t} = \tfrac12\)</span>, o sea <span class="math inline">\(t = \ln 2 / \pi^2 = 0{,}0702\)</span>.</p>

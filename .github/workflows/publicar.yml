@@ -40,7 +40,7 @@ jobs:
           python-version: "3.12"
 
       - name: Instalar los paquetes que usan las figuras
-        run: pip install jupyter pyyaml matplotlib numpy nbformat nbclient
+        run: pip install jupyter pyyaml matplotlib numpy scipy nbformat nbclient
 
       - name: Renderizar el blog
         run: quarto render

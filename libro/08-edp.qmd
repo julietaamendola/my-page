@@ -4,10 +4,10 @@
 ## Qué hace falta para este capítulo
 Para las seis primeras secciones alcanza con ecuaciones diferenciales ordinarias de primero
 y segundo orden, la regla de la cadena para funciones de varias variables, curvas de nivel y
-—para el @sec-muchas-variables— diagonalización de matrices simétricas. Las tres últimas
+—para la @sec-muchas-variables— diagonalización de matrices simétricas. Las tres últimas
 secciones son la continuación directa de los capítulos anteriores en varias variables:
-transformadas integrales retoma el @sec-laplace y el @sec-tfourier, función de
-Green retoma el @sec-green, y separación de variables retoma el @sec-sturm. Cada
+transformadas integrales retoma la @sec-laplace y la @sec-tfourier, función de
+Green retoma la @sec-green, y separación de variables retoma la @sec-sturm. Cada
 una avisa al empezar qué necesita.
 :::
 
@@ -115,7 +115,7 @@ $$
 la **ecuación de Burgers sin viscosidad**. Es la más inocente de las tres a la vista y la
 única que va a romperse sola: si las crestas viajan más rápido que los valles, tarde o
 temprano una cresta alcanza al valle que tiene adelante y la solución deja de ser una
-función. Volveremos sobre esto en el @sec-bien-planteado y en el @sec-casi-lineales.
+función. Volveremos sobre esto en la @sec-bien-planteado y en la @sec-casi-lineales.
 
 ::: {.callout-tip appearance="simple"}
 ## Lo que hay que llevarse de acá
@@ -185,7 +185,7 @@ y un signo. Y sin embargo describen tres mundos que no se tocan:
 - En la **ecuación de difusión**, cualquier dato inicial se vuelve infinitamente derivable
   apenas $t>0$: los quiebres se borran instantáneamente. Además la influencia es inmediata a
   cualquier distancia. Y la película al revés **no** es una solución: intentar reconstruir el
-  pasado es un problema mal planteado, del que hablaremos en el @sec-bien-planteado.
+  pasado es un problema mal planteado, del que hablaremos en la @sec-bien-planteado.
 - En la **ecuación de Laplace** no hay tiempo. No hay nada que evolucione. El valor en cada
   punto es el promedio de los valores a su alrededor, y por lo tanto depende de *todo* el
   borde a la vez.
@@ -343,7 +343,7 @@ con $f$ y $g$ arbitrarias. Una ecuación de segundo orden, dos funciones arbitra
 empírica —que no es un teorema, pero orienta— es que una EDP de orden $n$ arrastra $n$
 funciones arbitrarias, así como una EDO de orden $n$ arrastra $n$ constantes.
 
-Vale la pena guardar @eq-trivial2, porque no es un ejemplo de juguete: en el
+Vale la pena guardar @eq-trivial2, porque no es un ejemplo de juguete: en la
 @sec-formas-canonicas vamos a ver que **toda** ecuación hiperbólica se convierte en ella con
 un cambio de variables, y de ahí va a salir la solución $u = f(x+ct) + g(x-ct)$ de la
 ecuación de onda —dos funciones arbitrarias, exactamente las que anticipa la regla—.
@@ -430,7 +430,7 @@ todos los puntos de $D$.
 
 El calificativo «clásica» está avisando que hay otras. Ya vimos con la ecuación de Burgers
 que hay problemas físicos perfectamente razonables cuya solución deja de ser derivable, y a
-veces deja de ser continua. Esas soluciones **generalizadas** o **débiles** son el tema del
+veces deja de ser continua. Esas soluciones **generalizadas** o **débiles** son el tema de la
 @sec-bien-planteado, y son las que le dan sentido físico a las ondas de choque.
 
 ::: {.ejercicio data-rotulo="Para calcular" data-respuesta="4" data-tol="0.01"}
@@ -442,7 +442,7 @@ Escribí solo el número.
 El orden es el de la derivada más alta que aparece, sin importar respecto de qué variable ni
 cuántas veces aparezcan las otras. Acá hay derivadas segundas en $t$ y una derivada cuarta en
 $x$, así que la ecuación es de orden $4$. Es la única de la tabla que no es de segundo orden,
-y por eso la vamos a tratar aparte, en el @sec-separacion.
+y por eso la vamos a tratar aparte, en la @sec-separacion.
 :::
 :::
 
@@ -483,7 +483,7 @@ pregunta 1 es justamente lo que permite elegir sin probar a ciegas.
 ## Cuán lineal es una ecuación {#sec-linealidad}
 
 Vamos con la primera de las dos clasificaciones. Esta mira **cómo entra la incógnita en la
-ecuación** y decide qué métodos están permitidos. La otra, que viene en el
+ecuación** y decide qué métodos están permitidos. La otra, que viene en la
 @sec-clasificacion, mira solamente los términos de orden más alto y decide cómo se comportan
 las soluciones. Son independientes: toda ecuación tiene un tipo en cada una, y decir
 «hiperbólica» no dice nada sobre si es lineal, ni al revés.
@@ -615,7 +615,7 @@ $$
 A(x,y)\,u_{xx} + 2B(x,y)\,u_{xy} + C(x,y)\,u_{yy} = F(x,y,u,u_x,u_y),
 $$ {#eq-semilineal-2var}
 
-con $F$ tan fea como se quiera. Esta es exactamente la ecuación que vamos a clasificar en el
+con $F$ tan fea como se quiera. Esta es exactamente la ecuación que vamos a clasificar en la
 @sec-clasificacion, y ahora se entiende por qué se la elige a ella y no a la lineal: no hace
 falta menos que esto, y no se puede pedir más.
 
@@ -640,7 +640,7 @@ de la parte principal no dependen de $u$, el tipo de la ecuación se puede calcu
 resolver nada.** Decir «esta ecuación es elíptica en la región $x>0$» es una afirmación sobre
 la ecuación y sobre el punto, no sobre ninguna solución en particular.
 
-Eso es lo que va a permitir, en el @sec-clasificacion, mirar $A$, $B$ y $C$, calcular un
+Eso es lo que va a permitir, en la @sec-clasificacion, mirar $A$, $B$ y $C$, calcular un
 discriminante y saber de antemano si el problema se parece a una onda, a una difusión o a un
 equilibrio. Con las cuasi-lineales ese privilegio se termina.
 :::
@@ -684,7 +684,7 @@ $$ {#eq-cuasilineal}
 ::: {#exm-cuasilineales}
 ## Tres cuasi-lineales de verdad
 
-- $u_t + u\,u_x = 0$, la **ecuación de Burgers sin viscosidad**, que ya salió del
+- $u_t + u\,u_x = 0$, la **ecuación de Burgers sin viscosidad**, que ya salió de la
   @sec-conservacion. El coeficiente de $u_x$ es la propia $u$.
 - $(1+u_y^2)\,u_{xx} - 2u_xu_y\,u_{xy} + (1+u_x^2)\,u_{yy} = 0$, la **ecuación de las
   superficies mínimas**: la que satisface la forma de una película de jabón sostenida por un
@@ -692,7 +692,7 @@ $$ {#eq-cuasilineal}
 - $u_t + \big(u\,v_{\max}(1-u/u_{\max})\big)_x = 0$, el **modelo de tráfico de
   Lighthill–Whitham**: $u$ es la densidad de autos y la velocidad de cada auto baja a medida
   que la ruta se llena. Desarrollando la derivada queda $u_t + q'(u)\,u_x = 0$, una ley de
-  conservación como las del @sec-conservacion, con la velocidad de propagación dependiendo de
+  conservación como las de la @sec-conservacion, con la velocidad de propagación dependiendo de
   la densidad. Los embotellamientos que aparecen sin causa aparente son sus choques.
 :::
 
@@ -720,13 +720,13 @@ estimado— la solución. El @exm-transonico muestra el caso clásico.
 
 **La buena.** El método de las características **sobrevive**. Sigue habiendo, en cada punto,
 una dirección privilegiada a lo largo de la cual la ecuación se vuelve ordinaria, y sigue
-alcanzando con seguirla. Es prácticamente lo único que sobrevive del arsenal, y por eso el
+alcanzando con seguirla. Es prácticamente lo único que sobrevive del arsenal, y por eso la
 @sec-casi-lineales le dedica una sección entera a las cuasi-lineales de primer orden: es donde
 todavía se puede hacer algo explícito sin linealidad.
 
 Y es acá donde aparecen los choques. Si las características se cruzan —cosa que pueden hacer,
 porque su dirección depende de la solución que transportan— la solución deja de ser una
-función, y hay que ampliar qué se entiende por solución. De eso trata el @sec-bien-planteado.
+función, y hay que ampliar qué se entiende por solución. De eso trata la @sec-bien-planteado.
 :::
 
 ::: {#exm-transonico}
@@ -964,7 +964,7 @@ $a(x,y)u_x + b(x,y)u_y = c(x,y,u)$, que es una semilineal de primer orden—. Cu
 Hay además libros —Dallos entre ellos— que escriben la ecuación de segundo orden con
 $B\,u_{xy}$ y discriminante $B^2-4AC$, mientras que González escribe $2B\,u_{xy}$ y
 discriminante $B^2-AC$. Las dos dan el mismo signo y por lo tanto el mismo tipo, pero no el
-mismo número. Volvemos sobre esto en el @sec-clasificacion.
+mismo número. Volvemos sobre esto en la @sec-clasificacion.
 :::
 
 ### Dos ejercicios largos {.unnumbered}
@@ -1081,7 +1081,7 @@ Y hay algo peor: **la frontera entre las dos regiones no se conoce de antemano**
 sónica $M=1$ es donde $\Delta$ cambia de signo, pero $M$ depende de la solución, así que no se
 sabe dónde poner la frontera hasta haber resuelto el problema, y no se sabe cómo resolverlo
 hasta saber dónde está la frontera. Encima aparecen ondas de choque, que son las soluciones
-débiles del @sec-generalizadas.
+débiles de la @sec-generalizadas.
 
 Esa es la razón de que el régimen transónico —el de un avión de línea en crucero, casualmente—
 haya sido durante décadas el más difícil de la aerodinámica computacional, y de que la ecuación
@@ -1091,14 +1091,14 @@ esta patología.
 
 ## Qué datos hacen falta: el problema bien planteado {#sec-bien-planteado}
 
-Vimos en el @sec-porque que una EDP sola no determina nada: su indeterminación es funcional, y
+Vimos en la @sec-porque que una EDP sola no determina nada: su indeterminación es funcional, y
 hace falta agregarle datos sobre curvas o superficies enteras. Toca la segunda pregunta del
 capítulo: **qué datos, y cuántos**.
 
 La respuesta corta es incómoda. No hay un juego de condiciones que sirva para todas las
 ecuaciones. Los datos que hacen que la ecuación de onda tenga exactamente una solución
 arruinan a la de Laplace; los que hacen andar a la de Laplace no le sirven a la del calor. Qué
-datos van con qué ecuación es una de las cosas que decide la clasificación del
+datos van con qué ecuación es una de las cosas que decide la clasificación de la
 @sec-clasificacion, y es la razón por la que los capítulos 9, 10 y 11 están separados.
 
 Pero antes hay que decir qué significa que un juego de datos «sirva».
@@ -1316,7 +1316,7 @@ recta $y=0$—, con la intención de propagar desde ahí. Eso es lo que se hace 
 onda y funciona perfecto. Con una ecuación elíptica no funciona nunca. La ecuación de Laplace
 pide otra cosa: valores sobre una frontera **cerrada**, que rodee al dominio entero.
 
-Esto es lo que anticipábamos en el @sec-tres-mundos cuando decíamos que en una ecuación
+Esto es lo que anticipábamos en la @sec-tres-mundos cuando decíamos que en una ecuación
 elíptica el valor en cada punto depende de todo el borde a la vez. Ahora tiene consecuencias:
 si el valor en un punto depende de todo el borde, no hay manera de calcularlo propagando desde
 un pedazo del borde.
@@ -1416,7 +1416,7 @@ e. Una cuerda de la que se conoce la forma y la velocidad en el instante inicial
 la frontera espacial, para todo $t$—.
 
 **b.** Extremo perfectamente aislado: aislado quiere decir que **no pasa calor**, y el flujo de
-calor es $-k\,u_x$ por la ley de Fourier del @sec-conservacion. Que no pase calor es
+calor es $-k\,u_x$ por la ley de Fourier de la @sec-conservacion. Que no pase calor es
 $u_x = 0$ ahí: **Neumann homogénea**, sobre ese extremo. Es un buen ejemplo de que la condición
 natural no siempre es sobre el valor: acá lo que se conoce es la derivada.
 
@@ -1496,7 +1496,7 @@ La @def-solucion-clasica pide que una solución de una ecuación de orden $N$ se
 continuamente derivable. Es lo natural: si la ecuación tiene $u_{xx}$, parece razonable pedir
 que $u_{xx}$ exista. Pero esa exigencia deja afuera fenómenos físicos perfectamente reales.
 
-Volvamos a la ley de conservación del @sec-conservacion,
+Volvamos a la ley de conservación de la @sec-conservacion,
 
 $$
 u_t + F(u)_x = 0 ,
@@ -1514,7 +1514,7 @@ $u$ tenga un salto**, porque solo pide que $u$ sea integrable. Fue en el paso de
 
 Y la que es físicamente cierta es la primera. La ecuación diferencial es un producto derivado:
 salió de suponer que la solución era suave para poder escribir el balance punto a punto. Si la
-solución desarrolla una discontinuidad —y en el @sec-casi-lineales vamos a ver que la ecuación
+solución desarrolla una discontinuidad —y en la @sec-casi-lineales vamos a ver que la ecuación
 de Burgers lo hace sola, sin ninguna ayuda— no es la física la que falla, es nuestra forma de
 escribirla.
 
@@ -1560,7 +1560,7 @@ partes—, así que no perdimos nada: ampliamos.
 ::: {.callout-tip appearance="simple"}
 ## Esto ya lo vimos
 Pasarle las derivadas a una función de prueba suave para poder derivar cosas que no son
-derivables es exactamente la idea del @sec-distribuciones. La delta de Dirac no es una función
+derivables es exactamente la idea de la @sec-distribuciones. La delta de Dirac no es una función
 y sin embargo se deriva sin problema, porque lo que se define es cómo actúa contra una función
 de prueba. Acá se hace lo mismo con la solución de una EDP en vez de con una función aislada,
 y por eso la teoría de distribuciones y las EDP no lineales crecieron juntas.
@@ -1681,7 +1681,7 @@ Es el único de los cuatro que **no necesita linealidad**. Superposición, trans
 función de Green y separación de variables se caen todos apenas la ecuación deja de ser
 lineal, como vimos en la @tbl-linealidad. Las características no: siguen funcionando en las
 cuasi-lineales, y con más trabajo hasta en las completamente no lineales. Además es el que
-explica *por qué* la clasificación del @sec-clasificacion es la que es —hiperbólicas,
+explica *por qué* la clasificación de la @sec-clasificacion es la que es —hiperbólicas,
 parabólicas y elípticas se distinguen por cuántas características reales tienen— y el que va
 a resolver la ecuación de onda en el capítulo 9.
 
@@ -1802,7 +1802,7 @@ Tres ecuaciones diferenciales **ordinarias**. La EDP desapareció.
 ::: {#def-sistema-caracteristico}
 ## Sistema característico, curva característica y característica proyectada
 
-Al sistema @eq-sistema-caracteristico se lo llama **sistema característico** de la ecuación
+Al sistema anterior se lo llama **sistema característico** de la ecuación
 @eq-cuasilineal-1. También se lo escribe, eliminando el parámetro, como
 
 $$
@@ -1826,7 +1826,7 @@ distintos: la característica **proyectada** es una curva en el plano del domini
 característica a secas es una curva en el espacio y está apoyada sobre la superficie solución.
 
 En el caso lineal y semilineal, $a$ y $b$ no dependen de $u$, así que las dos primeras
-ecuaciones de @eq-sistema-caracteristico se resuelven solas: las características proyectadas
+ecuaciones del sistema característico se resuelven solas: las características proyectadas
 se pueden dibujar **antes** de conocer la solución. Ese es un privilegio que se pierde en el
 caso cuasi-lineal, donde no se sabe por dónde camina el observador hasta no saber qué altura
 está midiendo.
@@ -1839,9 +1839,9 @@ observador. Tres cosas sobre ella:
 
 1. **El hilo está apoyado sobre la superficie solución.** Por definición, su tercera coordenada
    es la altura del techo sobre el piso.
-2. **El hilo es una curva característica.** Sus tres coordenadas cumplen
-   @eq-sistema-caracteristico.
-3. **El hilo se calcula sin conocer la superficie.** El sistema @eq-sistema-caracteristico solo
+2. **El hilo es una curva característica.** Sus tres coordenadas cumplen el sistema
+   característico.
+3. **El hilo se calcula sin conocer la superficie.** El sistema característico solo
    usa los coeficientes de la ecuación. Si sabemos dónde arranca el hilo —un punto del piso y
    la altura del techo ahí— podemos seguirlo hasta el final resolviendo tres EDOs.
 
@@ -1873,6 +1873,475 @@ $u = F(3x-2y)$.
 :::
 :::
 
+### El campo que guía {#sec-campo-guia}
+
+Vale la pena frenar acá, porque el objeto que acabamos de usar es el que hace funcionar todo el
+método y el que va a reaparecer durante el resto de la materia.
+
+Hasta recién, $a$, $b$ y $c$ eran «los coeficientes de la ecuación»: tres funciones sueltas.
+A partir de ahora son otra cosa. Son **un campo vectorial**, y resolver la ecuación es seguir
+sus flechas.
+
+#### Primero, el campo en el piso {#sec-campo-piso}
+
+::: {#def-campo-integral}
+## Campo vectorial y curva integral
+
+Un **campo vectorial** en un dominio $D \subseteq \mathbb{R}^2$ es una función que a cada punto
+le asigna un vector,
+$$
+\vec v : D \to \mathbb{R}^2, \qquad \vec v(x,y) = \big(v_1(x,y),\, v_2(x,y)\big) .
+$$
+
+Una **curva integral** del campo es una curva $s \mapsto \big(x(s), y(s)\big)$ que en cada punto
+avanza en la dirección que marca el campo, y con esa misma rapidez:
+$$
+\frac{dx}{ds} = v_1\big(x(s), y(s)\big), \qquad
+\frac{dy}{ds} = v_2\big(x(s), y(s)\big) .
+$$ {#eq-curva-integral}
+
+A la familia de todas las curvas integrales se la llama **flujo** del campo, y a su dibujo,
+**retrato de fases**.
+:::
+
+Ahora mirá las dos primeras ecuaciones del sistema característico y
+compará con @eq-curva-integral. Son la misma cosa. En el caso lineal y semilineal, donde $a$ y
+$b$ dependen solo de $(x,y)$, el par
+
+$$
+\vec v(x,y) = \big(a(x,y),\, b(x,y)\big)
+$$ {#eq-campo-piso}
+
+es un campo vectorial honesto sobre el piso, y:
+
+::: {.callout-important appearance="simple"}
+## La característica proyectada es una curva integral
+La trayectoria del observador no es una elección nuestra: es una **curva integral del campo
+$\vec v = (a,b)$**. La ecuación ya eligió por dónde hay que caminar; nosotros solo la
+obedecemos.
+
+Dibujar el campo es, entonces, dibujar de antemano todas las rutas posibles. Antes de resolver
+nada, antes de saber cuánto vale $u$ en ningún lado, ya sabemos por dónde va a viajar la
+información.
+:::
+
+Y hay una segunda lectura, todavía más corta. El miembro izquierdo de la ecuación es
+
+$$
+a\,u_x + b\,u_y \;=\; \vec v \cdot \nabla u ,
+$$ {#eq-derivada-direccional}
+
+que es la **derivada direccional** de $u$ en la dirección de $\vec v$ (sin normalizar: pesada
+por la longitud de $\vec v$). O sea que la ecuación
+$a\,u_x + b\,u_y = c$ no dice más que esto:
+
+> La derivada de $u$ en la dirección del campo vale $c$.
+
+Y el caso $c = 0$ pasa a ser transparente: **$u$ es constante a lo largo de las curvas
+integrales del campo**. Es exactamente la noción de primera integral que vamos a definir en la
+@sec-coef-variables, vista desde el otro lado.
+
+#### Después, levantarlo al espacio {#sec-campo-espacio}
+
+El campo del piso dice por dónde caminar. Falta la altura, y de eso se encarga la tercera
+componente. El campo completo
+
+$$
+\vec V(x,y,u) = \big(a,\; b,\; c\big)
+$$
+
+es el de @eq-campo, y su **sombra sobre el piso es $\vec v$**. La tercera componente $c$ es el
+**ritmo de ascenso del hilo**: cuánto sube el techo por cada unidad de camino recorrido.
+
+| Si $c$… | el hilo… | la ecuación | ejemplo |
+|:---|:---|:---|:---|
+| es $0$ | va a altura constante | $a\,u_x + b\,u_y = 0$ | transporte, @sec-transporte |
+| depende solo de $(x,y)$ | sube a un ritmo prefijado en cada punto | $a\,u_x + b\,u_y = c(x,y)$ | @exm-inhomogenea |
+| depende de $u$ | sube a un ritmo que depende de su propia altura | $a\,u_x + b\,u_y = c(x,y,u)$ | decaimiento, reacción |
+
+: Qué hace la tercera componente del campo. Las tres filas tienen el mismo piso: las rutas son las mismas, cambia solo cómo sube el hilo encima de ellas. {#tbl-tercera-componente}
+
+Y acá aparece la diferencia de fondo entre los casos que vamos a estudiar:
+
+::: {.callout-warning appearance="simple"}
+## En las cuasi-lineales no hay campo en el piso
+Si $a$ o $b$ dependen de $u$, la flecha del punto $(x,y)$ **depende de a qué altura estés**.
+Dos observadores parados en el mismo punto del piso, midiendo alturas distintas, caminan en
+direcciones distintas.
+
+Es decir: el campo existe, pero vive en el espacio $(x,y,u)$ y no se puede bajar al piso. No
+hay un retrato de fases que dibujar antes de resolver. Esa —y no otra— es la razón por la que
+el caso cuasi-lineal de la @sec-casi-lineales es más difícil, y la razón por la que ahí aparecen
+los choques: dos hilos que en el espacio nunca se tocan pueden tener **sombras que se cruzan**.
+:::
+
+#### Tres campos que ya conocés {#sec-campos-fisicos}
+
+La interpretación no es una metáfora que inventamos para explicar el método: los campos
+vectoriales con los que ya trabajaste en física son exactamente esto, y sus líneas dibujadas
+son curvas integrales.
+
+::: {#exm-corriente}
+## El colorante en el balde que gira
+
+Un fluido gira como un cuerpo rígido con velocidad angular $\omega$. Su campo de velocidades es
+
+$$
+\vec v(x,y) = \big(-\omega y,\; \omega x\big) ,
+$$
+
+y las **líneas de corriente** —que en un flujo estacionario coinciden con las trayectorias de
+las partículas— son sus curvas integrales.
+
+Echamos una gota de colorante que no difunde ni pesa: simplemente se deja llevar. Su
+concentración $u$ cumple que la derivada a lo largo de la trayectoria de cada partícula es
+cero, o sea $u_t + \vec v \cdot \nabla u = 0$. Si además el patrón es **estacionario**
+—el dibujo del colorante no cambia con el tiempo, $u_t = 0$—, queda
+
+$$
+-\omega y\,u_x + \omega x\,u_y = 0 .
+$$
+
+El sistema característico es $\dot x = -\omega y$, $\dot y = \omega x$, $\dot u = 0$: las
+características proyectadas son las circunferencias $x^2 + y^2 = \text{const}$, recorridas con
+velocidad angular $\omega$, y sobre cada una $u$ no cambia. Por lo tanto
+
+$$
+u(x,y) = F\big(x^2 + y^2\big)
+$$
+
+para una $F$ arbitraria. La solución es cualquier patrón con simetría de revolución.
+
+**Lo que dice la física es lo mismo.** Si el patrón tuviera un brazo, el brazo giraría con el
+fluido y el patrón no sería estacionario. Para quedarse quieto mientras todo rota, el dibujo
+tiene que ser invariante frente a rotaciones: anillos. La cuenta y la intuición dan la misma
+respuesta, y la cuenta sale en tres renglones porque el campo ya estaba dibujado.
+:::
+
+::: {#exm-campo-electrico}
+## Las líneas de campo de una carga puntual
+
+El campo eléctrico de una carga $q$ en el origen es radial:
+$\vec E = \dfrac{q}{4\pi\varepsilon_0}\dfrac{\vec r}{r^{3}}$. Como para dibujar las líneas de
+campo solo importa la dirección, podemos usar el campo $\vec v(x,y) = (x, y)$, que apunta para
+el mismo lado en cada punto.
+
+Una magnitud $u$ que sea constante a lo largo de las líneas de campo cumple
+
+$$
+x\,u_x + y\,u_y = 0 .
+$$
+
+Sistema característico: $\dot x = x$, $\dot y = y$, de donde $x = x_0e^{s}$, $y = y_0e^{s}$.
+Las curvas integrales son las **semirrectas que salen del origen**, y como $y/x$ no cambia
+sobre cada una,
+
+$$
+u(x,y) = F\!\left(\frac{y}{x}\right) :
+$$
+
+cualquier función del ángulo.
+
+**Dos hechos que ya sabías sobre las líneas de campo, traducidos.**
+
+- *Las líneas de campo nunca se cruzan.* Eso es, palabra por palabra, la unicidad de las curvas
+  integrales: si se cruzaran, en el punto de cruce el campo tendría que apuntar en dos
+  direcciones a la vez. Y es lo que nos va a garantizar en la @sec-tejido que los hilos tejen
+  sin superponerse.
+- *Salvo en los puntos donde el campo se anula o explota.* En el origen, $\vec v = (0,0)$: ahí
+  se juntan todas las semirrectas, cada una llegando con su propio valor de $u$. La solución
+  solo puede ser continua en el origen si es constante. El punto donde falla la hipótesis es
+  el punto donde falla la conclusión, y eso no es casualidad.
+:::
+
+::: {#exm-trafico-campo}
+## El tráfico, que es el caso difícil
+
+En una ruta, la velocidad a la que se propaga una perturbación de la densidad de autos depende
+de **cuántos autos hay**: con la ruta vacía la perturbación viaja para adelante, y con la ruta
+saturada viaja para atrás. En el lenguaje de esta sección: la flecha en el punto $(x,t)$
+depende de la altura $u$, y no hay campo que dibujar en el piso.
+
+Es el ejemplo típico de la advertencia de más arriba, y es el que vamos a desarrollar en el
+@exm-trafico. Guardate la imagen: los embotellamientos que aparecen sin motivo aparente son
+sombras de hilos que se cruzan.
+:::
+
+#### Para jugar: el campo y sus curvas integrales {#sec-lienzo-campo}
+
+::: {.content-visible when-format="html"}
+
+```{=html}
+<div class="lienzo" data-figura="campoflechas" data-alto="430"
+     data-rotulo="Cuatro campos, y las rutas que dictan"
+     data-sliders='[{"id":"campo","min":0,"max":3,"paso":1,"valor":1,"rotulo":"campo","decimales":0},
+                    {"id":"sigma","min":0,"max":1,"paso":0.01,"valor":0.55,"rotulo":"dónde arranca","decimales":2},
+                    {"id":"s","min":0,"max":4,"paso":0.05,"valor":1.6,"rotulo":"cuánto camina","decimales":2}]'>
+  <p class="lienzo-pie">
+    <strong>campo</strong> elige entre cuatro: <em>0</em> transporte $(1,\tfrac12)$,
+    <em>1</em> rotación $(-y,x)$, <em>2</em> radial $(x,y)$, <em>3</em> cizalla $(1,x)$.
+    Las flechas grises son el campo; las curvas claras, sus curvas integrales; la negra, la
+    curva inicial, y la violeta, el hilo que sale del punto que elegiste con
+    <strong>dónde arranca</strong>. <strong>cuánto camina</strong> mueve al observador sobre
+    esa ruta, y la flecha del extremo muestra hacia dónde va a seguir.
+    <br><br>
+    Lo que conviene mirar: la curva violeta <em>nunca</em> se despega de las flechas, porque no
+    puede. Y en el campo de rotación, poné <strong>dónde arranca</strong> en el extremo
+    izquierdo: el hilo sale casi pegado a la curva inicial en vez de cruzarla. Eso es una falla
+    de transversalidad, y es el tema de la sección <a href="#sec-patologias">«Cuando el tejido se rompe»</a>.
+    <br><br>
+    (Las curvas están dibujadas integrando el campo normalizado. Eso cambia la velocidad con la
+    que se recorren, pero no las curvas: el dibujo es el mismo.)
+  </p>
+</div>
+
+<script>
+window.LIENZO = window.LIENZO || {};
+window.LIENZO.campoflechas = function (P, v) {
+  var c = P.col, k = Math.round(v.campo);
+  var campos = [
+    { f: function (x, y) { return [1, 0.5]; }, rot: "campo (1, ½): transporte",
+      ec: "u_x + ½ u_y = 0",    sol: "u = F(y − x/2)" },
+    { f: function (x, y) { return [-y, x]; },  rot: "campo (−y, x): rotación",
+      ec: "−y u_x + x u_y = 0", sol: "u = F(x² + y²)" },
+    { f: function (x, y) { return [x, y]; },   rot: "campo (x, y): radial",
+      ec: "x u_x + y u_y = 0",       sol: "u = F(y/x)" },
+    { f: function (x, y) { return [1, x]; },   rot: "campo (1, x): cizalla",
+      ec: "u_x + x u_y = 0",         sol: "u = F(y − x²/2)" }
+  ];
+  var ini = [
+    function (t) { return [-1.9 + 3.8 * t, -1.9]; },
+    function (t) { return [0.30 + 1.60 * t, 0]; },
+    function (t) { var a = 2 * Math.PI * t; return [0.62 * Math.cos(a), 0.62 * Math.sin(a)]; },
+    function (t) { return [-1.9, -1.9 + 3.8 * t]; }
+  ];
+  var iniRot = ["curva inicial: la recta y = −1,9",
+                "curva inicial: el semieje x > 0",
+                "curva inicial: la circunferencia r = 0,62",
+                "curva inicial: la recta x = −1,9"];
+  var f = campos[k].f;
+
+  function dir(x, y) {
+    var w = f(x, y), L = Math.sqrt(w[0] * w[0] + w[1] * w[1]);
+    if (!(L > 1e-7)) return null;
+    return [w[0] / L, w[1] / L];
+  }
+  function tray(x0, y0, S, n) {
+    var pts = [[x0, y0]], h = S / n, x = x0, y = y0;
+    for (var i = 0; i < n; i++) {
+      var d1 = dir(x, y); if (!d1) break;
+      var d2 = dir(x + h * d1[0] / 2, y + h * d1[1] / 2); if (!d2) break;
+      x += h * d2[0]; y += h * d2[1];
+      pts.push([x, y]);
+      if (Math.abs(x) > 4.5 || Math.abs(y) > 4.5) break;
+    }
+    return pts;
+  }
+
+  var lado = Math.min(P.w - 34, P.h - 112);
+  var m = P.marco([(P.w - lado) / 2, 28, lado, lado], [-2, 2], [-2, 2]);
+  P.ejes(m, "x", "y", campos[k].rot);
+
+  function flecha(x, y, col, alfa, largo) {
+    var d = dir(x, y); if (!d) return;
+    var L = largo || 0.17, x1 = x + d[0] * L, y1 = y + d[1] * L;
+    var px = -d[1], py = d[0], g = 0.055;
+    P.curva(m, [[x, y], [x1, y1]], col, 1.1, alfa);
+    P.curva(m, [[x1 - d[0] * g + px * g * .7, y1 - d[1] * g + py * g * .7], [x1, y1],
+                [x1 - d[0] * g - px * g * .7, y1 - d[1] * g - py * g * .7]], col, 1.1, alfa);
+  }
+
+  P.recorte(m, function () {
+    P.curva(m, [[-2, 0], [2, 0]], c.borde, 1, .9);
+    P.curva(m, [[0, -2], [0, 2]], c.borde, 1, .9);
+    var i, j, q;
+    for (i = -1.8; i <= 1.81; i += 0.45)
+      for (j = -1.8; j <= 1.81; j += 0.45) flecha(i, j, c.tenue, .5);
+    var N = 15;
+    for (q = 0; q <= N; q++) {
+      var p0 = ini[k](q / N);
+      P.curva(m, tray(p0[0], p0[1], 4.6, 240), c.suave, 1.2, .55);
+      P.curva(m, tray(p0[0], p0[1], -1.1, 60), c.suave, 1, .25, [3, 3]);
+    }
+    var cur = [];
+    for (q = 0; q <= 160; q++) cur.push(ini[k](q / 160));
+    P.curva(m, cur, c.tinta, 2.4, 1);
+    var ps = ini[k](v.sigma);
+    P.curva(m, tray(ps[0], ps[1], 4.6, 240), c.acento, 1.5, .25);
+    var tr = tray(ps[0], ps[1], v.s, Math.max(2, Math.round(v.s * 70)));
+    P.curva(m, tr, c.acento, 2.8, 1);
+    P.punto(m, ps[0], ps[1], c.tinta, 4);
+    var fin = tr[tr.length - 1];
+    P.punto(m, fin[0], fin[1], c.acento, 5.5);
+    flecha(fin[0], fin[1], c.acento, 1, 0.24);
+  });
+
+  var yb = m.caja[1] + m.caja[3];
+  P.texto(m.caja[0] + m.caja[2], m.caja[1] - 10, iniRot[k], c.tenue, 11, "right");
+  P.texto(m.caja[0], yb + 42, "ecuación:  " + campos[k].ec, c.tinta, 12.5);
+  P.texto(m.caja[0], yb + 60, "solución general:  " + campos[k].sol, c.acento, 12.5);
+};
+</script>
+```
+
+:::
+
+::: {.content-visible when-format="pdf"}
+*(En la versión web hay acá un gráfico interactivo: cuatro campos vectoriales dibujados con
+flechas —transporte, rotación, radial y cizalla— con sus curvas integrales, una curva inicial
+y un observador que se puede mover a lo largo de la curva integral que sale del punto elegido.
+Para cada campo se muestran la ecuación asociada y su solución general.)*
+:::
+
+Y ahora el mismo campo, levantado. Abajo está el piso con sus flechas y las sombras; arriba,
+los hilos que suben a ritmo $c$ y tejen la superficie.
+
+::: {.content-visible when-format="html"}
+
+```{=html}
+<div class="lienzo" data-figura="campolevanta" data-alto="360"
+     data-rotulo="Del piso al techo: la tercera componente"
+     data-sliders='[{"id":"az","min":-180,"max":180,"paso":1,"valor":-52,"rotulo":"giro","decimales":0,"sufijo":"°"},
+                    {"id":"el","min":2,"max":85,"paso":1,"valor":24,"rotulo":"altura","decimales":0,"sufijo":"°"},
+                    {"id":"c","min":-0.35,"max":0.35,"paso":0.01,"valor":0,"rotulo":"c","decimales":2},
+                    {"id":"s","min":0.3,"max":6,"paso":0.1,"valor":4.4,"rotulo":"avance","decimales":1}]'>
+  <p class="lienzo-pie">
+    El campo del piso es el de rotación, $(-y, x)$: sus curvas integrales son circunferencias,
+    dibujadas en gris sobre el piso. La curva inicial (negra) es el semieje $x>0$ con un dato
+    $u_0$ en forma de loma.
+    <br><br>
+    <strong>c</strong> es la tercera componente del campo, el ritmo al que sube cada hilo.
+    Con $c=0$ los hilos son anillos horizontales: es el colorante del balde, $u$ constante sobre
+    cada circunferencia. Movelo apenas y la superficie se convierte en una rampa en espiral.
+    <strong>avance</strong> controla cuánto se teje, y <strong>giro</strong> y
+    <strong>altura</strong> mueven la cámara: poné la altura en 85° para ver solo el piso.
+    <br><br>
+    Fijate que el piso no cambia nunca cuando movés $c$. Las rutas son las mismas; lo único que
+    cambia es cómo sube el hilo encima de ellas.
+  </p>
+</div>
+
+<script>
+window.LIENZO = window.LIENZO || {};
+window.LIENZO.campolevanta = function (P, v) {
+  var c = P.col, S = v.s, M = 110;
+  var dom = { x: [-2, 2], y: [-2, 2], z: [0, 2.6], ax: 1.15, ay: 1.15, az: 0.62 };
+  var cam = P.camara([10, 14, P.w - 20, P.h - 26], dom,
+                     v.az * Math.PI / 180, v.el * Math.PI / 180, 0.39);
+  P.caja3(cam, "x", "y", "u");
+
+  function u0(r) { return 0.45 + 1.0 * Math.exp(-7 * Math.pow(r - 1.15, 2)); }
+  var NH = 26, radios = [], i;
+  for (i = 0; i <= NH; i++) radios.push(0.38 + 1.42 * i / NH);
+
+  P.recorte(cam, function () {
+    // sombras en el piso
+    radios.forEach(function (r) {
+      var pts = [], j;
+      for (j = 0; j <= M; j++) { var s = S * j / M; pts.push([r * Math.cos(s), r * Math.sin(s), 0]); }
+      P.curva3(cam, pts, c.suave, 1, .38);
+    });
+    // flechas del campo sobre el piso
+    for (var a = 0; a < 6.2; a += Math.PI / 6) {
+      for (var rr = 0.7; rr <= 1.9; rr += 0.6) {
+        var x = rr * Math.cos(a), y = rr * Math.sin(a);
+        var tx = -Math.sin(a), ty = Math.cos(a), nx = Math.cos(a), ny = Math.sin(a);
+        var L = 0.24, ex = x + tx * L, ey = y + ty * L;
+        P.curva3(cam, [[x, y, 0], [ex, ey, 0]], c.suave, 1, .6);
+        P.curva3(cam, [[ex - 0.09 * tx + 0.055 * nx, ey - 0.09 * ty + 0.055 * ny, 0], [ex, ey, 0],
+                       [ex - 0.09 * tx - 0.055 * nx, ey - 0.09 * ty - 0.055 * ny, 0]], c.suave, 1, .6);
+      }
+    }
+    // los hilos, de atras hacia adelante
+    radios.map(function (r) {
+      return { r: r, d: cam.prof(r * Math.cos(S / 2), r * Math.sin(S / 2), u0(r) + v.c * S / 2) };
+    }).sort(function (p, q) { return p.d - q.d; }).forEach(function (h) {
+      var pts = [], j;
+      for (j = 0; j <= M; j++) {
+        var s = S * j / M;
+        pts.push([h.r * Math.cos(s), h.r * Math.sin(s), u0(h.r) + v.c * s]);
+      }
+      P.curva3(cam, pts, c.tenue, 1.3, .85);
+    });
+    // la curva inicial
+    var ini = [];
+    for (i = 0; i <= 120; i++) { var r = 0.38 + 1.42 * i / 120; ini.push([r, 0, u0(r)]); }
+    P.curva3(cam, ini, c.tinta, 2.6, 1);
+    // un hilo resaltado con su sombra
+    var R = 1.15, hp = [], sp = [], j2;
+    for (j2 = 0; j2 <= M; j2++) {
+      var s2 = S * j2 / M;
+      hp.push([R * Math.cos(s2), R * Math.sin(s2), u0(R) + v.c * s2]);
+      sp.push([R * Math.cos(s2), R * Math.sin(s2), 0]);
+    }
+    P.curva3(cam, sp, c.acento, 1.5, .6, [4, 4]);
+    P.curva3(cam, hp, c.acento, 3, 1);
+    P.punto3(cam, R, 0, u0(R), c.acento, 4.5);
+  });
+  P.texto(cam.caja[0] + 4, cam.caja[1] + cam.caja[3] - 4,
+          "negro: la curva inicial   —   violeta: un hilo y su sombra", c.tinta, 11);
+};
+</script>
+```
+
+:::
+
+::: {.content-visible when-format="pdf"}
+*(En la versión web hay acá un segundo gráfico interactivo, en tres dimensiones y girable: el
+campo de rotación dibujado con flechas sobre el piso, sus circunferencias integrales como
+sombras, y los hilos levantados encima con un ritmo de ascenso $c$ regulable. Con $c=0$ los
+hilos son anillos horizontales; con $c \neq 0$ la superficie es una rampa en espiral, y el piso
+no cambia.)*
+:::
+
+::: {.ejercicio}
+Para la ecuación $-y\,u_x + x\,u_y = 3$, ¿cómo son las **características proyectadas**?
+
+- [Circunferencias centradas en el origen, igual que si el miembro derecho fuera $0$]{.bien}
+- [Espirales que se abren, porque el miembro derecho no es cero]{.mal}
+- [Hélices que suben a ritmo $3$]{.mal}
+- [No se pueden dibujar sin conocer la solución]{.mal}
+
+::: {.explica}
+Las características proyectadas las dictan las **dos primeras** ecuaciones del sistema
+característico, $\dot x = -y$, $\dot y = x$, y ahí el $3$ no aparece. Son circunferencias, las
+mismas que en el caso homogéneo.
+
+Lo que cambia con el $3$ es el **hilo**: ahora $\dot u = 3$, así que en vez de quedarse a
+altura constante sube a ritmo $3$. La curva característica en el espacio sí es una hélice —la
+tercera opción confunde el hilo con su sombra—, pero su sombra sigue siendo una circunferencia.
+
+La cuarta opción sería correcta si la ecuación fuera cuasi-lineal, es decir si $a$ o $b$
+dependieran de $u$. Acá no: $a=-y$ y $b=x$ dependen solo del punto del piso.
+:::
+:::
+
+::: {.ejercicio}
+Un campo vectorial en el plano vale $\vec v(x,y) = (y, -x)$. ¿Cuál de estas funciones es
+solución de $y\,u_x - x\,u_y = 0$?
+
+- [$u(x,y) = e^{-(x^2+y^2)}$]{.bien}
+- [$u(x,y) = x + y$]{.mal}
+- [$u(x,y) = xy$]{.mal}
+- [$u(x,y) = \operatorname{arctg}(y/x)$]{.mal}
+
+::: {.explica}
+Las curvas integrales de $(y,-x)$ son circunferencias centradas en el origen —recorridas en
+sentido horario, al revés que las de $(-y,x)$, pero las mismas curvas—. Entonces las soluciones
+son exactamente las funciones constantes sobre circunferencias, o sea las de la forma
+$u = F(x^2+y^2)$.
+
+La primera lo es, con $F(w) = e^{-w}$. Comprobación directa:
+$u_x = -2x\,u$, $u_y = -2y\,u$, y $y(-2xu) - x(-2yu) = 0$.
+
+Las otras dos primeras no son constantes sobre circunferencias: $x+y$ y $xy$ cambian si girás
+el punto. Y la última es **la peor trampa**: $\operatorname{arctg}(y/x)$ es el ángulo, que es
+constante sobre las **semirrectas**, no sobre las circunferencias. Es solución del campo
+radial $(x,y)$ del @exm-campo-electrico, no de este. Los dos campos son perpendiculares entre
+sí en cada punto, y por eso sus soluciones se intercambian.
+:::
+:::
+
 ### El tejido {#sec-tejido}
 
 Un hilo solo no alcanza para armar un techo. Hacen falta muchos, y hace falta que se apoyen
@@ -1890,7 +2359,7 @@ curvas características, es decir, si por cada uno de sus puntos pasa una curva 
 que queda enteramente contenida en ella.
 :::
 
-La demostración es la cuenta del @sec-observador leída en los dos sentidos. Si $S$ es solución
+La demostración es la cuenta de la @sec-observador leída en los dos sentidos. Si $S$ es solución
 y arrancamos una característica en un punto de $S$, la derivada de $u$ a lo largo de esa curva
 coincide con $c$, que es lo mismo que le pide la tercera ecuación del sistema; por unicidad, la
 curva no se despega de $S$. Recíprocamente, si $S$ está hecha de características, en cada punto
@@ -1909,8 +2378,8 @@ $\sigma$ recorre la curva.
 
 **Receta:**
 
-1. Por **cada** punto de $\Gamma$, largar el hilo que le corresponde: resolver
-   @eq-sistema-caracteristico con dato inicial $x(0)=x_0(\sigma)$, $y(0)=y_0(\sigma)$,
+1. Por **cada** punto de $\Gamma$, largar el hilo que le corresponde: resolver el
+   sistema característico con dato inicial $x(0)=x_0(\sigma)$, $y(0)=y_0(\sigma)$,
    $u(0)=u_0(\sigma)$.
 2. Barrer $\sigma$ a lo largo de toda $\Gamma$. Los hilos, uno al lado del otro, tejen una
    superficie
@@ -1991,7 +2460,7 @@ plt.show()
 ::: {.callout-important appearance="simple"}
 ## Para tejer, los hilos tienen que cruzar la curva inicial
 La receta tiene un supuesto escondido, y es el que va a explicar todos los casos patológicos
-del @sec-casi-lineales.
+de la @sec-casi-lineales.
 
 Para que los hilos barran una superficie hace falta que **se alejen** de la curva inicial. Si
 en algún punto la característica proyectada resulta ser tangente a la curva inicial —si el
@@ -2006,8 +2475,9 @@ Cuando eso pasa, pueden ocurrir dos cosas, y las dos son malas:
 - si casualmente coincide, la ecuación no dice nada nuevo, y **hay infinitas soluciones**:
   cualquier tejido que contenga a ese hilo sirve.
 
-Esa es la razón profunda de las curvas «prohibidas» como dato, y en el @sec-casi-lineales le
-vamos a poner un teorema y una cuenta concreta.
+Esa es la razón profunda de las curvas «prohibidas» como dato. Es una de las cuatro maneras de
+romper el tejido, y las vemos todas juntas en la @sec-patologias; el teorema y la cuenta
+concreta están en la @sec-casi-lineales.
 :::
 
 ::: {.content-visible when-format="html"}
@@ -2082,6 +2552,414 @@ superficie, cuatro sliders para mover la cámara y la velocidad, y las sombras d
 dibujadas sobre el piso.)*
 :::
 
+### Cuando el tejido se rompe {#sec-patologias}
+
+La receta de la @sec-tejido parece infalible: se largan hilos y sale una superficie. No lo es, y
+conviene ver dónde falla, porque **cada falla está atada a una hipótesis** de los teoremas que
+vamos a enunciar. Las hipótesis no son decoración: cada una está tapando un agujero concreto.
+
+Son cuatro, y las cuatro se entienden mirando el campo.
+
+#### 1. Los hilos se bifurcan {#sec-patologia-bifurcacion}
+
+La @sec-tejido usó, casi al pasar, que **por cada punto pasa una sola curva característica**.
+Eso no es gratis: es el teorema de existencia y unicidad para EDOs, y pide que el campo sea al
+menos localmente Lipschitz —por ejemplo, de clase $C^1$—.
+
+Si no lo es, se rompe. Tomemos el campo
+
+$$
+\vec v(x,y) = \big(1,\; 3y^{2/3}\big) ,
+$$
+
+que es **continuo en todo el plano** pero no es derivable sobre el eje $x$: su segunda
+componente tiene derivada $2y^{-1/3}$, que explota en $y=0$. Sus curvas integrales salen de
+resolver $y' = 3y^{2/3}$, y por el origen pasan:
+
+- la recta $y \equiv 0$;
+- la cúbica $y = x^3$;
+- y, para cada $\lambda > 0$, la curva que **se queda quieta** sobre el eje hasta $x=\lambda$ y
+  recién ahí despega como $y = (x-\lambda)^3$.
+
+Infinitas curvas integrales por un solo punto. El observador que sale del origen no tiene una
+ruta: tiene un menú. Y entonces la ecuación $u_x + 3y^{2/3}u_y = 0$ deja de determinar $u$,
+porque no se sabe qué hilo levantar.
+
+::: {.callout-note appearance="simple"}
+## Esto le pasa a la física, no solo a los ejemplos armados
+Hay un sistema mecánico clásico con exactamente esta patología, la **cúpula de Norton**: una
+cúpula con un perfil elegido de modo que la ecuación de movimiento de una masa apoyada en su
+vértice sea $\ddot r = \sqrt{r}$.
+
+El miembro derecho es continuo pero no Lipschitz en $r=0$. La masa quieta en el vértice es una
+solución; pero también lo es, para **cada** $T>0$,
+$$
+r(t) = \frac{(t-T)^4}{144} \quad\text{para } t > T, \qquad r(t) = 0 \quad\text{para } t \le T ,
+$$
+—verificalo: $\ddot r = (t-T)^2/12$ y $\sqrt r = (t-T)^2/12$—. O sea: la masa puede quedarse
+quieta un rato arbitrario y después empezar a deslizarse sola, sin que nada la empuje, sin
+violar la ecuación de Newton.
+
+Es un ejemplo famoso en filosofía de la física, y lo que muestra es que el determinismo de la
+mecánica clásica no es un teorema: es una hipótesis de regularidad sobre las fuerzas
+(Norton, J. D., *Causation as Folk Science*, 2003).
+:::
+
+#### 2. El dato está puesto a lo largo de un hilo {#sec-patologia-transversalidad}
+
+Es el que ya anunciamos al final de la @sec-tejido. Para que los hilos barran una superficie
+tienen que **cruzar** la curva inicial; si salen paralelos a ella, no barren nada.
+
+El caso más chico posible: $u_x + u_y = 0$. El campo es el constante $(1,1)$ y las
+características proyectadas son las rectas $y = x + k$. Si damos el dato sobre la recta $y=x$
+—que es una de ellas—, pasa lo siguiente:
+
+- sobre esa recta la ecuación obliga a $u$ a ser **constante**, porque $\dot u = 0$;
+- si el dato que pusimos no es constante, por ejemplo $u(\sigma,\sigma) = \sigma^2$, hay una
+  contradicción: **no existe solución**;
+- si es constante, por ejemplo $u(\sigma,\sigma)=5$, la ecuación no aporta nada nuevo fuera de
+  esa recta: **hay infinitas soluciones**, una por cada $F$ con $F(0)=5$ en $u = F(y-x)$.
+
+La hipótesis que tapa este agujero es la **condición de transversalidad** del
+@thm-transversalidad, y el detalle de los dos casos está en el @thm-degenerado.
+
+#### 3. Dos sombras que se cruzan {#sec-patologia-choque}
+
+Este es el más interesante, y el que más se malentiende. Hay que tener cuidado con qué se cruza
+con qué:
+
+::: {.callout-important appearance="simple"}
+## Los hilos no se cruzan; sus sombras sí pueden
+En el espacio $(x,y,u)$ la unicidad sigue valiendo: por cada punto pasa una sola curva
+característica y los hilos nunca se tocan. Lo que puede pasar es que **dos hilos que van a
+alturas distintas proyecten sombras que se cruzan en el piso**.
+
+Cuando eso ocurre, al punto del piso donde se cruzan las sombras llegan dos valores distintos
+de $u$. El tejido sigue siendo una superficie perfectamente lisa en el espacio, pero deja de
+ser el **gráfico de una función**: se dobla sobre sí misma, como una ola que rompe.
+
+En el caso lineal y semilineal esto es imposible, porque ahí las sombras son curvas integrales
+de un campo del piso y por lo tanto tampoco se cruzan. En el cuasi-lineal es el
+comportamiento típico.
+:::
+
+La hipótesis que se viola no es ninguna de las del teorema: es la **conclusión** la que está
+limitada. El @thm-transversalidad da una solución de clase $C^1$ **en un entorno**, y nada más.
+El @thm-quiebre dice exactamente cuándo se termina ese entorno, y la @sec-generalizadas dice
+qué hacer después: aflojar la definición de solución y admitir discontinuidades.
+
+#### 4. Hay piso que ningún hilo alcanza {#sec-patologia-hueco}
+
+El último es el más simple y el más fácil de olvidar en un parcial. Los hilos solo llevan
+información **desde** la curva inicial. En la parte del piso a la que no llega ningún hilo, el
+dato no dice absolutamente nada, y la solución no queda determinada ahí.
+
+Para el transporte $u_t + c\,u_x = 0$ con $c>0$ y un dato dado solo sobre el segmento
+$0 \le x \le 1$ del eje $t=0$, la solución queda determinada únicamente en la franja
+$0 \le x - ct \le 1$. Afuera puede valer cualquier cosa.
+
+Esto no es una patología: es **causalidad**. Uno solo puede saber lo que le trajo algo que
+llegó hasta él. Es la misma idea que el cono de luz, y es la razón por la que en el capítulo 9
+va a aparecer el *dominio de dependencia* de la ecuación de onda.
+
+::: {.callout-tip appearance="simple"}
+## El caso opuesto: los hilos se abren y dejan un hueco
+En las cuasi-lineales también pasa lo contrario del choque. Si el dato inicial tiene un salto
+hacia arriba, los hilos de la derecha salen más rápido que los de la izquierda, se separan, y
+queda una cuña del piso sin ningún hilo encima.
+
+Eso se llama **onda de rarefacción**, y es lo que pasa cuando arranca el auto de adelante en un
+semáforo: la fila no se estira toda junta, se va soltando de a poco. La solución se completa
+ahí abanicando hilos desde el punto del salto.
+:::
+
+#### El resumen de las cuatro {#sec-tabla-patologias}
+
+| Hipótesis | Qué garantiza | Qué pasa si falla |
+|:---|:---|:---|
+| $a$, $b$, $c$ de clase $C^1$ | por cada punto pasa un solo hilo | los hilos se bifurcan: $u$ no queda determinada |
+| $(a,b) \neq (0,0)$ | el observador efectivamente avanza | el punto es singular del campo; las sombras se juntan ahí |
+| transversalidad: $a\,y_0' - b\,x_0' \neq 0$ | los hilos cruzan $\Gamma$ y barren una superficie | o no hay solución, o hay infinitas |
+| la conclusión es **local** | la superficie es el gráfico de una función | las sombras se cruzan: choque, y hay que pasar a soluciones débiles |
+| $\Gamma$ toca todas las características de la región | el dato alcanza para todo el dominio | quedan zonas del piso sin tejer |
+
+: Las hipótesis del método, y el agujero que tapa cada una. Las tres primeras son hipótesis de los teoremas; las dos últimas son límites de lo que los teoremas pueden prometer. {#tbl-patologias}
+
+#### Para jugar: las cuatro fallas {#sec-lienzo-patologias}
+
+::: {.content-visible when-format="html"}
+
+```{=html}
+<div class="lienzo" data-figura="patologias" data-alto="420"
+     data-rotulo="Las cuatro maneras de romper el tejido"
+     data-sliders='[{"id":"caso","min":0,"max":3,"paso":1,"valor":1,"rotulo":"falla","decimales":0},
+                    {"id":"p","min":0,"max":2,"paso":0.01,"valor":1,"rotulo":"parámetro","decimales":2}]'>
+  <p class="lienzo-pie">
+    <strong>falla</strong> elige cuál de las cuatro mirar. El <strong>parámetro</strong>
+    significa algo distinto en cada una:
+    <br>
+    <em>0 — los hilos se bifurcan:</em> mueve $\lambda$, el rato que la curva se queda pegada
+    al eje antes de despegar. Todas las curvas dibujadas salen del mismo punto.
+    <br>
+    <em>1 — el dato sobre un hilo:</em> inclina la curva inicial. Abajo se lee el determinante
+    de transversalidad; cuando la pendiente llega a $1$ la curva inicial se vuelve una
+    característica y el determinante se anula.
+    <br>
+    <em>2 — las sombras se cruzan:</em> avanza el tiempo. Las características se van juntando y
+    en $t^{*}=1$ se tocan por primera vez.
+    <br>
+    <em>3 — piso sin tejer:</em> cambia la velocidad $c$. Solo la franja rayada queda
+    determinada por el dato; el resto del piso está vacío.
+  </p>
+</div>
+
+<script>
+window.LIENZO = window.LIENZO || {};
+window.LIENZO.patologias = function (P, v) {
+  var c = P.col, k = Math.round(v.caso), i, j, q, pts;
+  var ancho = P.w - 46, alto = P.h - 104;
+
+  function flechas(m, f, paso, x0, x1, y0, y1) {
+    for (var a = x0; a <= x1 + 1e-9; a += paso) {
+      for (var b = y0; b <= y1 + 1e-9; b += paso) {
+        var w = f(a, b), L = Math.sqrt(w[0] * w[0] + w[1] * w[1]);
+        if (!(L > 1e-7)) continue;
+        var dx = w[0] / L, dy = w[1] / L, S = paso * 0.42;
+        var ex = a + dx * S, ey = b + dy * S, nx = -dy, ny = dx, g = S * 0.34;
+        P.curva(m, [[a, b], [ex, ey]], c.tenue, 1, .5);
+        P.curva(m, [[ex - dx * g + nx * g * .7, ey - dy * g + ny * g * .7], [ex, ey],
+                    [ex - dx * g - nx * g * .7, ey - dy * g - ny * g * .7]], c.tenue, 1, .5);
+      }
+    }
+  }
+
+  // ---------------------------------------------- 0: los hilos se bifurcan
+  if (k === 0) {
+    var m0 = P.marco([28, 30, ancho, alto], [-0.35, 2.2], [-0.35, 1.35]);
+    P.ejes(m0, "x", "y", "campo (1, 3y^(2/3)):  infinitas curvas integrales por el origen");
+    function rama(lam) {
+      var p = [[-0.35, 0], [lam, 0]];
+      for (var t = lam; t <= 2.2 + 1e-9; t += 0.02) p.push([t, Math.pow(t - lam, 3)]);
+      return p;
+    }
+    P.recorte(m0, function () {
+      flechas(m0, function (x, y) { return [1, 3 * Math.pow(Math.abs(y), 2 / 3)]; },
+              0.30, -0.2, 2.1, -0.2, 1.3);
+      [0, 0.35, 0.70, 1.05, 1.40].forEach(function (lam) {
+        P.curva(m0, rama(lam), c.suave, 1.6, .75);
+      });
+      P.curva(m0, [[-0.35, 0], [2.2, 0]], c.tinta, 2.4, 1);
+      P.curva(m0, rama(0.8 * v.p), c.acento, 3, 1);
+      P.punto(m0, 0, 0, c.tinta, 5.5);
+    });
+    P.texto(m0.caja[0], m0.caja[1] + m0.caja[3] + 44,
+            "λ = " + (0.8 * v.p).toFixed(2).replace(".", ",") +
+            "   —   la violeta se queda sobre el eje hasta x = λ",
+            c.acento, 12);
+    P.texto(m0.caja[0], m0.caja[1] + m0.caja[3] + 61,
+            "y ≡ 0 (negra) también es curva integral, y nunca despega",
+            c.tinta, 11.5);
+  }
+
+  // ---------------------------------------------- 1: el dato sobre un hilo
+  if (k === 1) {
+    var lado = Math.min(ancho, alto);
+    var m1 = P.marco([(P.w - lado) / 2, 30, lado, lado], [-2, 2], [-2, 2]);
+    P.ejes(m1, "x", "y", "campo (1, 1):  las características son las rectas y = x + k");
+    var pend = v.p, det = pend - 1;
+    P.recorte(m1, function () {
+      flechas(m1, function () { return [1, 1]; }, 0.44, -1.85, 1.85, -1.85, 1.85);
+      for (var kk = -4.5; kk <= 4.5; kk += 0.4)
+        P.curva(m1, [[-2.2, -2.2 + kk], [2.2, 2.2 + kk]], c.suave, 1.3, .7);
+      P.curva(m1, [[-2.4, -2.4 * pend], [2.4, 2.4 * pend]],
+              Math.abs(det) < 0.04 ? c.mal : c.tinta, 2.8, 1);
+      P.punto(m1, 0, 0, c.acento, 5);
+    });
+    var yb1 = m1.caja[1] + m1.caja[3];
+    P.texto(m1.caja[0], yb1 + 44,
+            "curva inicial: y = " + pend.toFixed(2).replace(".", ",") + " x", c.tinta, 12);
+    P.texto(m1.caja[0], yb1 + 61,
+            "a y₀' − b x₀' = " + det.toFixed(2).replace(".", ",") +
+            (Math.abs(det) < 0.04
+              ? "   ←  el dato está sobre una característica"
+              : "   →  transversal: el método funciona"),
+            Math.abs(det) < 0.04 ? c.mal : c.bien, 11.5);
+  }
+
+  // ---------------------------------------------- 2: las sombras se cruzan
+  if (k === 2) {
+    var m2 = P.marco([28, 30, ancho, alto], [-2, 3], [0, 2]);
+    P.ejes(m2, "x", "t", "Burgers:  cada sombra avanza con la velocidad que lleva encima");
+    var T = 0.1 + 0.95 * v.p;
+    function f0(x) { return 0.5 * (1 - Math.tanh(2 * x)); }
+    P.recorte(m2, function () {
+      for (var x0 = -2.2; x0 <= 2.6; x0 += 0.12)
+        P.curva(m2, [[x0, 0], [x0 + f0(x0) * T, T]], c.suave, 1.4, .8);
+      P.curva(m2, [[-2.2, 0], [3, 0]], c.tinta, 2.4, 1);
+      P.curva(m2, [[-2.2, 1], [3, 1]], c.mal, 1.4, .8, [5, 4]);
+      var xr = -0.9;
+      P.curva(m2, [[xr, 0], [xr + f0(xr) * T, T]], c.acento, 2.8, 1);
+      P.punto(m2, xr + f0(xr) * T, T, c.acento, 5);
+    });
+    P.texto(m2.X(3) - 4, m2.Y(1) - 6, "t* = 1", c.mal, 11.5, "right");
+    P.texto(m2.caja[0], m2.caja[1] + m2.caja[3] + 44,
+            "t = " + T.toFixed(2).replace(".", ",") +
+            (T < 1 ? "   —  antes de t*: las sombras no se tocan aún"
+                   : "   —  pasado t*: dos sombras llegan al mismo punto"),
+            T < 1 ? c.bien : c.mal, 12);
+    P.texto(m2.caja[0], m2.caja[1] + m2.caja[3] + 61,
+            "en el espacio los hilos nunca se tocan; lo que se cruza son sus sombras",
+            c.tinta, 11.5);
+  }
+
+  // ---------------------------------------------- 3: piso sin tejer
+  if (k === 3) {
+    var m3 = P.marco([28, 30, ancho, alto], [-2, 3], [0, 2]);
+    P.ejes(m3, "x", "t", "transporte con dato solo en 0 ≤ x ≤ 1");
+    var cv = 0.2 + 0.65 * v.p;
+    P.recorte(m3, function () {
+      for (var x0 = 0; x0 <= 1.0001; x0 += 0.05)
+        P.curva(m3, [[x0, 0], [x0 + cv * 2, 2]], c.suave, 1.3, .75);
+      P.curva(m3, [[0, 0], [cv * 2, 2]], c.acento, 2.4, 1);
+      P.curva(m3, [[1, 0], [1 + cv * 2, 2]], c.acento, 2.4, 1);
+      P.curva(m3, [[0, 0], [1, 0]], c.tinta, 3.4, 1);
+    });
+    P.texto(m3.X(-1.1), m3.Y(1.3), "?", c.mal, 30, "center");
+    P.texto(m3.X(2.3), m3.Y(0.45), "?", c.mal, 30, "center");
+    P.texto(m3.caja[0], m3.caja[1] + m3.caja[3] + 44,
+            "c = " + cv.toFixed(2).replace(".", ",") +
+            "   —   determinada solo en la franja 0 ≤ x − ct ≤ 1", c.acento, 12);
+    P.texto(m3.caja[0], m3.caja[1] + m3.caja[3] + 61,
+            "en las zonas con ? el dato inicial no dice absolutamente nada",
+            c.tinta, 11.5);
+  }
+};
+</script>
+```
+
+:::
+
+::: {.content-visible when-format="pdf"}
+*(En la versión web hay acá un gráfico interactivo con las cuatro fallas, una por vez: las
+infinitas curvas integrales que salen del origen para un campo no Lipschitz; una curva inicial
+que se puede inclinar hasta volverse característica, con el determinante de transversalidad
+calculado en vivo; las características de Burgers juntándose hasta tocarse en $t^{*}=1$; y la
+franja del piso que queda determinada cuando el dato se da solo sobre un segmento.)*
+:::
+
+::: {.ejercicio}
+Para $u_x + u_y = 0$ damos el dato $u = \sigma^{2}$ sobre la recta $y = x$, parametrizada como
+$x_0(\sigma)=\sigma$, $y_0(\sigma)=\sigma$. ¿Qué pasa?
+
+- [No existe solución]{.bien}
+- [Existe una única solución, $u = \tfrac14(x+y)^2$]{.mal}
+- [Existen infinitas soluciones]{.mal}
+- [Existe solución pero no es de clase $C^1$]{.mal}
+
+::: {.explica}
+El determinante de transversalidad es
+$$
+a\,y_0'(\sigma) - b\,x_0'(\sigma) = 1\cdot 1 - 1\cdot 1 = 0 ,
+$$
+así que la recta $y=x$ **es** una característica y el teorema no se aplica. Hay que mirar el
+dato a mano.
+
+Sobre una característica la ecuación obliga a $\dot u = 0$, o sea que $u$ tiene que ser
+constante a lo largo de $y=x$. El dato que pusimos, $\sigma^2$, no lo es. Contradicción:
+**no existe solución**, ni clásica ni de ninguna otra clase.
+
+La tercera opción sería la correcta si el dato hubiera sido constante —por ejemplo $u=5$—: ahí
+la ecuación no se contradice pero tampoco determina nada fuera de la recta, y sirve cualquier
+$u = F(y-x)$ con $F(0)=5$. Las dos caras de la misma falla, y cuál de las dos te toca depende
+del dato, no de la curva.
+:::
+:::
+
+::: {.ejercicio data-rotulo="Para calcular" data-respuesta="0.25" data-tol="0.01"}
+La ecuación $u_t + u\,u_x = 0$ arranca con el dato $u(x,0) = 1 - 4x$ en el intervalo donde ese
+dato es decreciente. ¿En qué instante $t^{*}$ se tocan por primera vez dos características?
+
+::: {.explica}
+La característica que sale de $x_0$ es la recta $x = x_0 + f(x_0)\,t$ con $f(x_0) = 1-4x_0$.
+Dos características vecinas se tocan cuando la separación entre ellas se anula. Derivando
+respecto de $x_0$:
+$$
+\frac{\partial x}{\partial x_0} = 1 + f'(x_0)\,t = 1 - 4t ,
+$$
+que se anula en $t = 1/4$. Como $f' = -4$ es constante, **todas** las características se juntan
+en el mismo instante y en el mismo punto: el dato lineal es el caso más simétrico posible.
+
+En general $t^{*} = -1/\min f'$, que es el @thm-quiebre. Acá $\min f' = -4$ y
+$t^{*} = 1/4 = 0{,}25$.
+:::
+:::
+
+::: {#exr-patologias-diagnostico}
+## Diagnosticar la falla
+
+Para cada uno de estos problemas, decidí cuál de las cuatro fallas del @tbl-patologias aparece
+—si es que aparece alguna— y qué le pasa a la solución.
+
+a) $u_x + 2u_y = 0$ con $u = \operatorname{sen}\sigma$ sobre la curva
+   $x_0(\sigma)=\sigma$, $y_0(\sigma)=2\sigma$.
+b) $x\,u_x + y\,u_y = 0$ con $u = \sigma$ sobre la circunferencia
+   $x_0 = \cos\sigma$, $y_0 = \operatorname{sen}\sigma$, cerca del origen.
+c) $u_t + c\,u_x = 0$ con $c>0$ constante y dato conocido solo para $x \ge 0$ en $t=0$.
+   ¿Dónde queda determinada la solución?
+d) $u_t + u\,u_x = 0$ con $u(x,0) = -x$.
+
+::: {.callout-tip collapse="true"}
+## Solución
+
+**a) Falla la transversalidad.** El campo es $(1,2)$ y la curva inicial tiene vector tangente
+$(x_0', y_0') = (1,2)$: es la misma dirección. El determinante da
+$1\cdot 2 - 2\cdot 1 = 0$. La curva inicial es una característica.
+
+Sobre ella la ecuación pide $u$ constante, y el dato $\operatorname{sen}\sigma$ no lo es:
+**no hay solución**.
+
+**b) Falla la hipótesis $(a,b)\neq(0,0)$, pero no sobre la curva inicial.** Sobre la
+circunferencia el campo es $(\cos\sigma, \operatorname{sen}\sigma)$, radial, y la tangente es
+$(-\operatorname{sen}\sigma, \cos\sigma)$: el determinante vale
+$\cos^2\sigma + \operatorname{sen}^2\sigma = 1 \neq 0$. Transversal, todo bien.
+
+El problema está en el **origen**, donde el campo se anula. Las características son las
+semirrectas que salen de ahí, cada una llevando su propio valor $\sigma$, y todas llegan al
+mismo punto. La solución $u = \sigma(x,y)$ —el ángulo— existe y es suave en todo el plano menos
+el origen, y ahí **no se puede extender con continuidad**: es el @exm-campo-electrico.
+
+Como yapa: tampoco se puede extender con continuidad a la semirrecta donde el ángulo pega el
+salto de $2\pi$ a $0$. Eso ya no es una falla del método, es que el dato que elegimos sobre la
+circunferencia no cierra: $u(2\pi) \neq u(0)$ aunque sea el mismo punto.
+
+**c) Queda piso sin tejer.** Las características son $x - ct = \text{const}$ y salen de
+$x_0 \ge 0$, así que barren la región $x - ct \ge 0$. Ahí la solución vale $u = f(x-ct)$.
+
+En $x - ct < 0$ —a la izquierda de la recta $x=ct$— no llega ningún hilo y la solución no queda
+determinada. Con $c>0$ eso es la región que «viene de afuera» por la izquierda: para saber qué
+pasa ahí haría falta un dato de contorno en $x=0$ para todo $t>0$. Es exactamente la situación
+de un caño o una ruta semi-infinita, donde hay que decir qué entra por la punta.
+
+**d) No falla nada, y esa es la gracia.** Acá $f(x) = -x$ es decreciente, así que uno esperaría
+un choque. Pero la característica que sale de $x_0$ es
+$$
+x = x_0 + f(x_0)\,t = x_0(1-t) ,
+$$
+y todas se juntan **a la vez** en el origen, en $t = 1$. Antes de eso,
+$x_0 = x/(1-t)$ y
+$$
+u(x,t) = -\frac{x}{1-t} ,
+$$
+que es solución clásica en $0 \le t < 1$ y explota en $t=1$.
+
+O sea: el @thm-quiebre da $t^{*} = -1/\min f' = -1/(-1) = 1$, y se cumple. Lo llamativo es que
+acá la solución no desarrolla un salto sino que **la pendiente se va a infinito en todos lados
+al mismo tiempo**. Es el mismo fenómeno del ejercicio numérico de arriba, y muestra que
+«se cruzan las características» y «aparece un choque» no son sinónimos: lo primero es lo que
+mata a la solución clásica, y la forma que toma después depende del dato.
+:::
+:::
+
 ### El caso más simple: transporte a velocidad constante {#sec-transporte}
 
 Con la maquinaria armada, el caso testigo sale en cuatro renglones. Sea $c$ una constante y
@@ -2092,12 +2970,12 @@ $$ {#eq-transporte}
 
 Físicamente: $u(x,t)$ es una magnitud que se transporta sin deformarse a velocidad $c$ —una
 mancha de tinta que baja por un canal, un pulso que viaja por un cable, una perturbación de
-densidad en un gas—. Ya la habíamos deducido en el @sec-conservacion como la ley de
+densidad en un gas—. Ya la habíamos deducido en la @sec-conservacion como la ley de
 conservación con flujo $q = cu$.
 
 Acá las variables son $(x,t)$ en vez de $(x,y)$, y comparando con @eq-cuasilineal-1 el campo es
 $\vec V = (c, 1, 0)$: coeficiente $c$ para $u_x$, coeficiente $1$ para $u_t$, y lado derecho
-nulo. El sistema característico @eq-sistema-caracteristico queda
+nulo. El sistema característico queda
 
 $$
 \frac{dx}{ds} = c, \qquad \frac{dt}{ds} = 1, \qquad \frac{du}{ds} = 0 .
@@ -2131,7 +3009,7 @@ $$ {#eq-sol-transporte}
 Tomemos $g(x) = e^{-x^2}$ y $c = 1$. La solución es $u(x,t) = e^{-(x-t)^2}$: la misma campana,
 corrida hacia la derecha. No se ensancha ni se achata, porque @eq-transporte no tiene ningún
 término que difunda. Compárese con lo que le pasará al mismo pulso bajo la ecuación del calor
-en el @sec-parabolicas.
+en la @sec-parabolicas.
 :::
 
 ```{python}
@@ -2313,7 +3191,7 @@ $$
 \frac{dy}{dx} = \frac{b(x,y)}{a(x,y)} ,
 $$
 
-que es una EDO de primer orden como las del @sec-edo—. Pueden curvarse, juntarse, y en algunos
+que es una EDO de primer orden como las de la @sec-edo—. Pueden curvarse, juntarse, y en algunos
 puntos hacer cosas raras.
 
 ::: {#def-primera-integral}
@@ -2353,7 +3231,7 @@ $a\,(F'\phi_x) + b\,(F'\phi_y) = F'\,(a\phi_x + b\phi_y) = 0$. La vuelta es el
 @thm-tejido: una solución es constante sobre cada característica, y $\phi$ etiqueta a las
 características, así que el valor de $u$ solo puede depender de la etiqueta.
 
-Y acá reaparece, con nombre y apellido, la función arbitraria que nos había asustado en el
+Y acá reaparece, con nombre y apellido, la función arbitraria que nos había asustado en la
 @sec-porque: **es la $F$**. La indeterminación funcional de una EDP de primer orden es
 exactamente la libertad de elegir qué valor asignarle a cada característica.
 
@@ -2563,7 +3441,7 @@ la misma familia de soluciones escrita distinto.)
 ### Dos ejercicios largos {.unnumbered}
 
 Los cortos están repartidos por la sección. Estos dos conviene hacerlos enteros, porque el
-primero anticipa el problema central de la sección que viene y el segundo es la receta del
+primero anticipa el problema central de la sección que viene y el segundo es la receta de la
 @sec-tejido aplicada de principio a fin.
 
 ::: {#exr-dato-en-otra-curva}
@@ -2601,7 +3479,7 @@ soluciones. Los dos casos son los del @thm-degenerado, que vemos en la sección 
 :::
 
 ::: {#exr-hilo-sube}
-Resolver $u_x + u_y = 2u$ con $u(x,0) = e^{-x^2}$, siguiendo la receta del @sec-tejido paso a
+Resolver $u_x + u_y = 2u$ con $u(x,0) = e^{-x^2}$, siguiendo la receta de la @sec-tejido paso a
 paso: parametrizar la curva inicial, integrar el sistema característico, y despejar. Dibujar a
 mano cómo se vería la @fig-tejido para esta ecuación.
 :::
@@ -2634,7 +3512,7 @@ la dirección $(1,1)$ sin deformarse y a la vez se infla exponencialmente. Compa
 
 ## Primer orden casi-lineales {#sec-casi-lineales}
 
-Toda la maquinaria del @sec-caracteristicas fue construida para la ecuación cuasi-lineal
+Toda la maquinaria de la @sec-caracteristicas fue construida para la ecuación cuasi-lineal
 general @eq-cuasilineal-1, así que en principio no hay nada nuevo que aprender: se arma el
 sistema característico, se largan los hilos, se teje. Lo que cambia es qué tan bien se porta el
 tejido.
@@ -2643,7 +3521,7 @@ tejido.
 ## El nombre en el libro de la cátedra
 González llama **«casi–lineales»** a estas ecuaciones. Es lo mismo que nosotros y casi toda la
 bibliografía llamamos *cuasi-lineales*, y lo que en inglés se dice *quasi-linear*. Ver la tabla
-de nombres del @sec-panorama.
+de nombres de la @sec-panorama.
 :::
 
 Recordemos qué se rompió. En una ecuación lineal o semilineal, las dos primeras ecuaciones del
@@ -2698,7 +3576,7 @@ $$
 u_t + u\,u_x = 0, \qquad u(x,0) = f(x).
 $$ {#eq-burgers}
 
-La lectura física es la del @sec-conservacion: $u$ es a la vez la magnitud transportada y la
+La lectura física es la de la @sec-conservacion: $u$ es a la vez la magnitud transportada y la
 velocidad con la que se transporta. Donde $u$ es grande, el perfil avanza rápido; donde es
 chico, avanza despacio. Las crestas persiguen a los valles.
 
@@ -2765,7 +3643,7 @@ tendría que valer dos cosas a la vez. La pendiente del perfil se va poniendo ve
 que, en $t^{*}$, la onda **rompe**.
 
 Después de $t^*$ no es que no pase nada: pasa que la solución deja de ser una función y hay
-que ampliar el concepto, como preparamos en el @sec-generalizadas. La solución débil que
+que ampliar el concepto, como preparamos en la @sec-generalizadas. La solución débil que
 continúa a esta es una discontinuidad que viaja a la velocidad que da la condición de
 Rankine–Hugoniot.
 
@@ -2996,7 +3874,7 @@ Tomemos el modelo de tráfico del @exm-cuasilineales. Sea $u(x,t)$ la densidad d
 por kilómetro—, normalizada de modo que $u=1$ sea la ruta llena y $u=0$ la ruta vacía. Un
 conductor razonable maneja más despacio cuanto más llena esté la ruta, digamos
 $v(u) = v_{\max}(1-u)$. El flujo de autos es entonces $q(u) = u\,v(u) = v_{\max}\,u(1-u)$ y la
-ley de conservación del @sec-conservacion da
+ley de conservación de la @sec-conservacion da
 
 $$
 u_t + v_{\max}(1-2u)\,u_x = 0 .
@@ -3155,7 +4033,7 @@ $$ {#eq-cuasilineal-general}
 con dato sobre una curva $\Gamma$ dada por $x = x_0(\sigma)$, $y = y_0(\sigma)$,
 $u = u_0(\sigma)$.
 
-Ya sabemos, del @sec-tejido, cuál es el problema: para que los hilos tejan una superficie
+Ya sabemos, de la @sec-tejido, cuál es el problema: para que los hilos tejan una superficie
 tienen que **cruzar** a $\Gamma$, no correr paralelos a ella. Ahora le ponemos una cuenta.
 
 La dirección en la que sale el hilo, proyectada al piso, es $(a_1, a_2)$. La dirección de la
@@ -3445,7 +4323,7 @@ que reformula toda la mecánica clásica: $u$ es la función principal de Hamilt
 hamiltoniano del sistema. Su generalización ondulatoria fue el puente histórico entre la
 teoría corpuscular y la ondulatoria de la materia, y de ahí salió la ecuación de Schrödinger.
 
-También se resuelve por características, pero con la vuelta de tuerca que anticipamos en el
+También se resuelve por características, pero con la vuelta de tuerca que anticipamos en la
 @sec-no-lineales: como la ecuación mezcla las derivadas de manera no lineal, no alcanza con
 propagar el punto y el valor de $u$. Hay que propagar además $p = u_x$ y $q = u_y$, y el objeto
 que viaja —punto, valor y plano tangente— se llama **banda característica**. Para
@@ -3504,14 +4382,14 @@ $$u(x,y) = k\,y - x ,$$
 que se verifica en un renglón: $u_x = -1$, $u_y = k$, y
 $(y+u)(-1) + y\,k = -y - ky + x + yk = x - y$. ✓
 
-Recordá la advertencia del @sec-ecuacion-general: esa expresión se llama *ecuación general* y no
+Recordá la advertencia de la @sec-ecuacion-general: esa expresión se llama *ecuación general* y no
 *solución general* porque no toda solución sale de ella.
 :::
 
 ## Segundo orden: la clasificación {#sec-clasificacion}
 
 Las ecuaciones de la física matemática son casi todas de segundo orden, y casi todas
-semilineales. En dos variables, la forma general es la @eq-semilineal-2var del
+semilineales. En dos variables, la forma general es la @eq-semilineal-2var de la
 @sec-semilineales, que repetimos acá:
 
 $$
@@ -3593,7 +4471,7 @@ $\Delta_{\text{otra}} = B^2 - 4AC = 4 - 12 = -8 < 0$. Mismo signo, mismo tipo.
 
 ### De dónde salen los nombres: cónicas {#sec-conicas}
 
-Busquemos, como haremos en detalle en el @sec-formas-canonicas, un cambio de variables
+Busquemos, como haremos en detalle en la @sec-formas-canonicas, un cambio de variables
 $\xi = \xi(x,y)$ que simplifique @eq-general. Al hacer el cambio y agrupar, el coeficiente que
 acompaña a $u_{\xi\xi}$ resulta ser
 
@@ -3601,7 +4479,7 @@ $$
 A\,\xi_x^2 + 2B\,\xi_x\xi_y + C\,\xi_y^2 ,
 $$ {#eq-forma-cuadratica}
 
-—la cuenta está en el @sec-formas-canonicas, pero se puede anticipar: $u_{\xi\xi}$ solo puede
+—la cuenta está en la @sec-formas-canonicas, pero se puede anticipar: $u_{\xi\xi}$ solo puede
 venir de aplicar la regla de la cadena dos veces, y cada vez aporta un factor $\xi_x$ o
 $\xi_y$—. Y @eq-forma-cuadratica no es cualquier expresión: **es una forma cuadrática en
 $(\xi_x, \xi_y)$**, con exactamente los mismos coeficientes que la parte principal.
@@ -3629,7 +4507,7 @@ $$
 Acá está el motivo del factor $2$: con la convención de González, $A$, $B$, $C$ son
 directamente las entradas de $M$, sin dividir nada.
 
-Ahora la pregunta que decide todo. Recordemos del @sec-caracteristicas que las características
+Ahora la pregunta que decide todo. Recordemos de la @sec-caracteristicas que las características
 son las curvas donde la ecuación degenera. Buscar un cambio de variables que **anule** el
 coeficiente de $u_{\xi\xi}$ es pedir
 
@@ -3751,7 +4629,7 @@ $\xi=0$ y $\eta=0$.
 
 Y eso cierra un círculo lindo: las direcciones nulas son las de los ejes, así que las
 características son las rectas $x=\text{const}$ e $y=\text{const}$. Que es exactamente lo que
-uno esperaba, porque ya sabemos del @sec-porque que la solución general de $u_{xy}=0$ es
+uno esperaba, porque ya sabemos de la @sec-porque que la solución general de $u_{xy}=0$ es
 $u = f(x) + g(y)$: una función arbitraria por cada familia de características. Esta ecuación
 **ya está en forma canónica hiperbólica**.
 
@@ -3790,7 +4668,7 @@ el discriminante:
 ::: {.callout-tip appearance="simple"}
 ## Rotar la cónica es hallar la forma canónica
 Vale la pena decir explícitamente el paralelo, porque es la mejor manera de entender qué va a
-hacer el @sec-formas-canonicas.
+hacer la @sec-formas-canonicas.
 
 | En la cónica | En la EDP |
 |:---|:---|
@@ -3972,7 +4850,7 @@ $\Delta = \operatorname{sen}^2x - 1 = -\cos^2 x \le 0$.
 
 ::: {.explica}
 Sí admite forma canónica: la elíptica se lleva a $u_{\sigma\sigma} + u_{\tau\tau} = G$, como
-vamos a ver en el @sec-formas-canonicas. Lo que pasa es que el cambio de variables que la
+vamos a ver en la @sec-formas-canonicas. Lo que pasa es que el cambio de variables que la
 diagonaliza es **complejo** —las direcciones nulas son complejas conjugadas—, y hay que tomar
 parte real e imaginaria para volver a variables reales. Que no haya características *reales* no
 significa que no haya forma canónica.
@@ -3990,7 +4868,7 @@ $\xi = \xi(x,y)$, $\eta = \eta(x,y)$ que anule los coeficientes de $u_{\xi\xi}$ 
 $u_{\eta\eta}$; por @eq-forma-cuadratica, eso pide que $(\xi_x,\xi_y)$ y $(\eta_x,\eta_y)$ sean
 direcciones nulas de $Q$, y esas direcciones son reales y distintas si y solo si $\Delta > 0$.
 Las curvas $\xi = \text{const}$ y $\eta = \text{const}$ resultantes son las características.
-El @sec-formas-canonicas hace la cuenta completa en los tres casos.
+La @sec-formas-canonicas hace la cuenta completa en los tres casos.
 
 ::: {.callout-important appearance="simple"}
 ## Por qué esto importa físicamente
@@ -3999,7 +4877,7 @@ La clasificación no es una taxonomía. Predice el comportamiento:
 
 - **Hiperbólicas.** Información que viaja a velocidad finita, sin suavizarse. Una
   discontinuidad en el dato inicial sigue siendo una discontinuidad para siempre —viaja por una
-  característica, como vimos en el @sec-caracteristicas—. Ondas.
+  característica, como vimos en la @sec-caracteristicas—. Ondas.
 - **Parabólicas.** Información que se propaga a velocidad infinita y se suaviza al instante.
   Cualquier dato inicial, por feo que sea, se vuelve infinitamente derivable apenas $t>0$.
   Difusión, calor.
@@ -4241,7 +5119,7 @@ $$
 u_{\xi\eta} = 0 .
 $$
 
-Que es la @eq-trivial2, la que ya resolvimos en el @sec-porque: su solución general es
+Que es la @eq-trivial2, la que ya resolvimos en la @sec-porque: su solución general es
 $u = f(\xi) + g(\eta)$, o sea
 
 $$
@@ -4250,7 +5128,7 @@ $$ {#eq-dalembert}
 
 Esa es la **solución de d'Alembert**: toda solución de la ecuación de onda es la suma de un
 perfil que viaja hacia la derecha sin deformarse y otro que viaja hacia la izquierda. Las dos
-funciones arbitrarias que la regla empírica del @sec-porque anticipaba para una ecuación de
+funciones arbitrarias que la regla empírica de la @sec-porque anticipaba para una ecuación de
 segundo orden son exactamente esos dos perfiles.
 
 ::: {.callout-important appearance="simple"}
@@ -4260,7 +5138,7 @@ esas coordenadas la ecuación no tenía nada que decir salvo «hay una parte que
 otra que va para acá».
 
 Y las coordenadas que elegimos no salieron de la galera: $x \pm ct = \text{const}$ son las
-**características** de la ecuación de onda. Es el mismo objeto del @sec-caracteristicas, ahora
+**características** de la ecuación de onda. Es el mismo objeto de la @sec-caracteristicas, ahora
 usado de otra manera: en primer orden seguíamos *una* característica para volver ordinaria la
 ecuación; en segundo orden usamos *las dos familias* como ejes coordenados.
 
@@ -4349,7 +5227,7 @@ $$\alpha = Q(\xi_x,\xi_y), \qquad \gamma = Q(\eta_x,\eta_y).$$
 
 Así que pedir «que se anule el coeficiente de $u_{\xi\xi}$» es pedir que el gradiente de $\xi$
 apunte en una **dirección nula** de $Q$ —una asíntota de la cónica—, que es exactamente lo que
-estudiamos en el @sec-conicas. Todo lo que sigue ya está decidido por el signo de $\Delta$: si
+estudiamos en la @sec-conicas. Todo lo que sigue ya está decidido por el signo de $\Delta$: si
 hay dos direcciones nulas reales podemos anular $\alpha$ y $\gamma$ a la vez, si hay una sola
 podemos anular una, y si no hay ninguna no podemos anular ninguna de las dos.
 
@@ -4410,7 +5288,7 @@ $$
 $$ {#eq-dos-nulas}
 
 Cada una de esas es una ecuación en derivadas parciales de **primer orden** para $\xi$, y ya
-sabemos resolverla: es el @sec-caracteristicas. Sus características son las curvas $y(x)$ a lo
+sabemos resolverla: es la @sec-caracteristicas. Sus características son las curvas $y(x)$ a lo
 largo de las cuales $\xi$ es constante, y cumplen
 
 $$
@@ -4594,7 +5472,7 @@ $$t = \frac{9{,}5}{340} \approx 0{,}028\ \text{s} \approx 28\ \text{ms}.$$
 **Y el contraste que importa.** Esto es lo que hace hiperbólica a la ecuación de onda: hay un
 frente nítido y afuera no pasa nada. En la ecuación del calor, en cambio, el dominio de
 dependencia de cualquier punto es **toda la recta**: apenas $t>0$, la temperatura en un punto
-depende de la temperatura inicial en todos lados, por lejos que estén. Es el @sec-tres-mundos
+depende de la temperatura inicial en todos lados, por lejos que estén. Es la @sec-tres-mundos
 otra vez, ahora con una fórmula que lo demuestra.
 :::
 
@@ -4708,7 +5586,7 @@ sola, y resulta ser $t = \text{const}$: las características de la ecuación del
 **líneas de tiempo constante**.
 
 Eso quiere decir que «propagarse a lo largo de una característica» es, para el calor, extenderse
-por todo el espacio en un mismo instante. De ahí la velocidad infinita de propagación del
+por todo el espacio en un mismo instante. De ahí la velocidad infinita de propagación de la
 @sec-tres-mundos, y de ahí que el problema hacia atrás esté mal planteado.
 :::
 
@@ -4912,7 +5790,7 @@ $$ {#eq-parte-principal-n}
 
 Podemos suponer que los coeficientes son **simétricos**, $a_{ij}=a_{ji}$, sin perder nada:
 como $u_{x_ix_j} = u_{x_jx_i}$ para funciones suficientemente suaves, cualquier parte
-antisimétrica se cancela sola. Y entonces, exactamente como en el @sec-conicas, la parte
+antisimétrica se cancela sola. Y entonces, exactamente como en la @sec-conicas, la parte
 principal tiene asociada una **matriz simétrica** $M = (a_{ij})$ y una forma cuadrática
 
 $$
@@ -4938,7 +5816,7 @@ El término $4u_{xy}$ aparece **dos veces** en la suma doble $\sum_{i,j}a_{ij}u_
 como $a_{12}u_{xy}$ y otra como $a_{21}u_{yx}$. Como pedimos que la matriz sea simétrica, esos
 dos coeficientes son iguales y cada uno se lleva la mitad: $a_{12}=a_{21}=2$.
 
-Es exactamente la misma historia que el factor $2$ del @sec-clasificacion, pero acá aparece
+Es exactamente la misma historia que el factor $2$ de la @sec-clasificacion, pero acá aparece
 sola: la simetría de la matriz obliga a repartir. Por eso conviene escribir la ecuación de dos
 variables como $A u_{xx} + 2B u_{xy} + C u_{yy}$, para que $A$, $B$ y $C$ sean directamente las
 entradas.
@@ -4991,7 +5869,7 @@ se dice
 - **ultrahiperbólica** si $n_0 = 0$, $n_+ > 1$ y $n_- > 1$.
 :::
 
-Para $n=2$ esto reproduce exactamente lo del @sec-clasificacion —elíptica es $(2,0)$ o $(0,2)$,
+Para $n=2$ esto reproduce exactamente lo de la @sec-clasificacion —elíptica es $(2,0)$ o $(0,2)$,
 hiperbólica es $(1,1)$, parabólica tiene un cero— y no hay lugar para ultrahiperbólicas, porque
 harían falta al menos cuatro variables. La primera aparece en $n=4$.
 
@@ -5294,7 +6172,7 @@ Lo que **no** se pierde es la clasificación. El tipo sigue estando bien definid
 sigue siendo el que decide cómo se comportan las soluciones, y sigue diciendo qué datos hacen
 falta. Que no exista un cambio de variables global no cambia nada de eso.
 
-Y para $n=2$ todo funciona incluso con coeficientes variables: por eso pudimos hacer el
+Y para $n=2$ todo funciona incluso con coeficientes variables: por eso pudimos hacer la
 @sec-formas-canonicas sin ninguna salvedad.
 :::
 
@@ -5411,7 +6289,7 @@ ultracortos.
 **c.** Se convertiría en $\nabla^2$ de cuatro variables, con signatura $(4,0,0)$: **elíptica**.
 Y entonces no habría cono, no habría direcciones nulas y no habría estructura causal en
 absoluto: el valor del campo en cada punto del espacio-tiempo dependería de **todo** el borde a
-la vez, pasado y futuro incluidos. Además, por el @sec-hadamard, el problema de valores
+la vez, pasado y futuro incluidos. Además, por la @sec-hadamard, el problema de valores
 iniciales estaría mal planteado.
 
 Dicho de otro modo: **el signo relativo entre $u_{tt}$ y el laplaciano es lo que hace que el
@@ -5420,7 +6298,7 @@ tiempo sea el tiempo.** Cambiarlo no da una física distinta, da una física imp
 
 ## Transformadas integrales {#sec-transformadas}
 
-Los tres métodos que faltan —este, el del @sec-green-varias y el del @sec-separacion— tienen algo
+Los tres métodos que faltan —este, el de la @sec-green-varias y el de la @sec-separacion— tienen algo
 en común que conviene decir de entrada: **los tres necesitan que la ecuación sea lineal**. Se
 acabó el territorio de las cuasi-lineales. A cambio, cada uno resuelve problemas concretos de
 punta a punta.
@@ -5474,7 +6352,7 @@ hasta que uno chequea la condición inicial.
 
 Lo importante es lo otro: **derivar dos veces se volvió multiplicar por $p^2$**, y de paso las
 condiciones iniciales entraron solas a la ecuación transformada. Esa es la gran ventaja de la
-transformada de Laplace sobre la separación de variables del @sec-separacion, donde las
+transformada de Laplace sobre la separación de variables de la @sec-separacion, donde las
 condiciones iniciales hay que imponerlas a mano al final, calculando coeficientes de Fourier.
 :::
 :::
@@ -5585,8 +6463,8 @@ estado estacionario de la ecuación de Schrödinger.
 ## Dónde ya vimos esto
 Si sacamos las dependencias en $y$ y $z$, @eq-helmholtz se vuelve
 $$\Phi'' + \lambda\,\Phi = g, \qquad \text{con condiciones de contorno homogéneas},$$
-que es exactamente el problema de Sturm–Liouville del @sec-sturm con su función de Green
-asociada del @sec-green. Todo lo que sabemos de allá —que hay una sucesión de autovalores
+que es exactamente el problema de Sturm–Liouville de la @sec-sturm con su función de Green
+asociada de la @sec-green. Todo lo que sabemos de allá —que hay una sucesión de autovalores
 $\lambda_n$, que las autofunciones son ortogonales y completas— vale acá, con la diferencia de
 que ahora los autovalores están indexados por varios enteros en vez de uno.
 
@@ -5619,7 +6497,7 @@ $$\lambda = \frac{\omega^2}{c^2} = k^2 .$$
 Las condiciones de contorno de $u$ pasan tal cual a $v$, porque no dependen del tiempo.
 
 **b.** Para la cuerda, $v'' + \lambda v = 0$ con $v(0)=v(L)=0$. Es el problema de
-Sturm–Liouville del @sec-sturm: hay solución no trivial solo para
+Sturm–Liouville de la @sec-sturm: hay solución no trivial solo para
 $$\lambda_n = \left(\frac{n\pi}{L}\right)^2, \qquad v_n(x) = \operatorname{sen}\frac{n\pi x}{L},
 \qquad n = 1,2,3,\dots$$
 y las frecuencias son
@@ -5679,7 +6557,7 @@ $$
 U(x,p) = \frac{F_0\operatorname{sen}(\pi x)}{p\,\big(p^2+\pi^2c^2\big)} .
 $$
 
-**Paso 3: antitransformar.** De las tablas del @sec-laplace,
+**Paso 3: antitransformar.** De las tablas de la @sec-laplace,
 $$\mathcal{L}^{-1}\left\{\frac{1}{p(p^2+\omega^2)}\right\} = \frac{1-\cos\omega t}{\omega^2},$$
 y con $\omega = \pi c$ resulta
 $$
@@ -5842,7 +6720,7 @@ tenemos.
 La de cosenos hace lo contrario —necesita $u_x(0)$, o sea una condición de Neumann— y por eso
 sería la elección si el extremo estuviera aislado. La completa pide que la variable recorra toda
 la recta, y acá va de $0$ a $\infty$. Y Laplace en $x$ se puede intentar, pero pediría conocer
-$u_x(0)$ **además** de $u(0)$, es decir un dato de Cauchy, que no tenemos y que además, por el
+$u_x(0)$ **además** de $u(0)$, es decir un dato de Cauchy, que no tenemos y que además, por la
 @sec-hadamard, sería mala idea pedir.
 
 Está en la @tbl-transformadas: la transformada se elige por el dominio de la variable y por qué
@@ -5879,7 +6757,7 @@ dominio»: el dominio depende del tiempo que acabamos de eliminar. Los problemas
 móvil —el hielo que se derrite, el frente de una llama— son un capítulo aparte y difícil.
 
 **d. No.** No es lineal, y la transformada de un producto no es el producto de las
-transformadas. Para Burgers hay que volver a las características del @sec-casi-lineales.
+transformadas. Para Burgers hay que volver a las características de la @sec-casi-lineales.
 
 **e. Sí.** $k$ depende de $x$, no de $t$, así que se transforma sin problema y queda
 $$p\,U - u_0(x) = \big(k(x)\,U_x\big)_x ,$$
@@ -5895,7 +6773,7 @@ Este método ataca ese problema —y muchos otros— con una idea de una sola l�
 
 > **Resolver una vez para una fuente puntual, y después sumar.**
 
-Es la superposición del @sec-lineales llevada al extremo. Si el sistema es lineal, y si sabemos
+Es la superposición de la @sec-lineales llevada al extremo. Si el sistema es lineal, y si sabemos
 qué produce una fuente concentrada en un punto, entonces sabemos qué produce cualquier fuente:
 la descomponemos en puntos, sumamos las respuestas, y listo.
 
@@ -5922,7 +6800,7 @@ darle nombre a eso y extenderlo a otras ecuaciones y a dominios con contorno.
 ### Fuente adentro, contorno en cero {#sec-green-caso-1}
 
 Empecemos por el caso más parecido al de electrostática. Sea $L$ un operador diferencial lineal
-—por ejemplo $L[u] = \nabla^2u + \lambda u$, que es el que nos dejó el @sec-transformadas— y
+—por ejemplo $L[u] = \nabla^2u + \lambda u$, que es el que nos dejó la @sec-transformadas— y
 consideremos el problema
 
 $$
@@ -5969,7 +6847,7 @@ L[u] = \int_D L\big[G(\mathbf{x},\xi)\big]\,f(\xi)\,d\xi
 = \int_D \delta(\mathbf{x}-\xi)\,f(\xi)\,d\xi = f(\mathbf{x}) \ \checkmark
 $$
 
-usando la propiedad de la delta del @sec-distribuciones, y del mismo modo
+usando la propiedad de la delta de la @sec-distribuciones, y del mismo modo
 
 $$
 B[u] = \int_D B\big[G(\mathbf{x},\xi)\big]\,f(\xi)\,d\xi = 0 \ \checkmark .
@@ -5981,7 +6859,7 @@ Si a $f$ se la llama *entrada* y a $u$ *salida*, entonces $G$ es la **respuesta 
 sistema y @eq-solucion-green es una **convolución**. Es literalmente el mismo objeto que la
 respuesta al impulso de un circuito o de un filtro.
 
-Y se conecta con el @sec-transformadas de la manera esperable: en el espacio libre, donde no hay
+Y se conecta con la @sec-transformadas de la manera esperable: en el espacio libre, donde no hay
 contorno que rompa la simetría, $G$ depende solo de $\mathbf{x}-\xi$, la integral es una
 convolución de verdad, y transformando Fourier se vuelve un producto. Los dos métodos son el
 mismo visto de dos lados.
@@ -6081,7 +6959,7 @@ $$
 ::: {.callout-tip appearance="simple"}
 ## Y si hay las dos cosas
 Un problema con fuente **y** con contorno inhomogéneo se parte en dos por linealidad, tal como
-en el @sec-lineales:
+en la @sec-lineales:
 $$
 u = \underbrace{\int_D G_1(\mathbf{x},\xi)\,f(\xi)\,d\xi}_{\text{la fuente, con borde nulo}}
 \;+\;
@@ -6121,7 +6999,7 @@ densidad de carga.
 dos dimensiones de la carpa del @exm-green-cuerda, aunque acá ya no es un cono perfecto porque
 en dos dimensiones la solución fundamental es logarítmica y no lineal.
 
-**d.** Este es el segundo caso, el del @sec-green-caso-2. Ahora la ecuación es homogénea —no hay
+**d.** Este es el segundo caso, el de la @sec-green-caso-2. Ahora la ecuación es homogénea —no hay
 fuente adentro— y lo que manda es el borde: $h$ es la temperatura prescrita sobre el borde y
 $G(\mathbf{x},\xi)$, con $\xi$ **sobre el borde**, dice cuánto influye en el punto interior
 $\mathbf{x}$ un pedacito caliente del contorno.
@@ -6269,7 +7147,7 @@ de Maxwell–Betti**, vale para cualquier sistema elástico lineal, y es de esas
 creería si no las viera.
 
 No es casualidad: es consecuencia de que el operador $d^2/dx^2$ con estas condiciones de
-contorno sea **autoadjunto**, que es lo que se estudió en el @sec-sturm. Todas las funciones de
+contorno sea **autoadjunto**, que es lo que se estudió en la @sec-sturm. Todas las funciones de
 Green de operadores autoadjuntos son simétricas.
 :::
 :::
@@ -6432,10 +7310,10 @@ Los pasos son siempre los mismos, en cualquier cantidad de variables.
 4. **Resolver las ecuaciones restantes** con las condiciones de contorno homogéneas.
 5. **Reconstruir** las autofunciones completas, $\phi_n = X_nY_nZ_n\cdots$, y escribir la
    solución como combinación lineal, $u = \sum_n a_n\phi_n$. Esto se puede hacer porque la
-   ecuación es lineal: es la superposición del @sec-lineales, otra vez.
+   ecuación es lineal: es la superposición de la @sec-lineales, otra vez.
 6. **Hallar los coeficientes** $a_n$ imponiendo las condiciones que quedaron —típicamente las
    iniciales— y usando la **ortogonalidad y la completitud** de las autofunciones del problema
-   de Sturm–Liouville. Acá es donde entran las series de Fourier del @sec-fourier.
+   de Sturm–Liouville. Acá es donde entran las series de Fourier de la @sec-fourier.
 
 ::: {.callout-tip appearance="simple"}
 ## Dónde está el trabajo
@@ -6643,9 +7521,9 @@ marcados.)*
     <strong>modos</strong> por separado, cada uno con su amplitud y latiendo a su frecuencia.
     <strong>Derecha:</strong> la suma, contra la forma exacta en línea punteada.
     Con pocos modos la esquina no aparece: hacen falta muchos armónicos para hacer un pico, que
-    es exactamente lo que dice la serie de Fourier del @sec-fourier. Movés <strong>t</strong> y
+    es exactamente lo que dice la serie de Fourier del <a href="03-fourier.html">capítulo 3</a>. Movés <strong>t</strong> y
     vas a ver el vértice recorrer la cuerda y rebotar en los extremos — la misma solución de
-    d'Alembert del @exr-dalembert, armada desde el otro lado.
+    d'Alembert del <a href="#exr-dalembert">ejercicio de la fórmula de d'Alembert</a>, armada desde el otro lado.
     Y si ponés el punteo justo en 0,5, fijate qué modos desaparecen.
   </p>
 </div>
@@ -6767,7 +7645,7 @@ $$u_t = k\,u_{xx}, \qquad u(0,t)=u(L,t)=0, \qquad u(x,0)=\varphi(x).$$
 
 a. Hallar la solución en serie.
 b. ¿Cuánto tarda en apagarse el modo $n$ comparado con el fundamental? ¿Qué tiene que ver eso
-   con lo que dijimos en el @sec-tres-mundos sobre el suavizado instantáneo?
+   con lo que dijimos en la @sec-tres-mundos sobre el suavizado instantáneo?
 c. ¿Qué pasa si se intenta usar la misma fórmula para $t<0$?
 :::
 
@@ -6793,7 +7671,7 @@ $$\tau_n = \frac{L^2}{k\,n^2\pi^2} = \frac{\tau_1}{n^2} :$$
 **el modo $n$ se apaga $n^2$ veces más rápido que el fundamental.** El décimo armónico dura cien
 veces menos.
 
-Y ahí está el suavizado del @sec-tres-mundos, con una fórmula. Los detalles finos de un dato
+Y ahí está el suavizado de la @sec-tres-mundos, con una fórmula. Los detalles finos de un dato
 inicial son justamente sus armónicos altos, y son los primeros en morir. Apenas $t>0$, la
 exponencial $e^{-kn^2\pi^2t/L^2}$ aplasta la cola de la serie tan fuerte que la suma es
 infinitamente derivable, por más picuda que fuera $\varphi$. Después de un rato solo queda el
@@ -6803,7 +7681,7 @@ fundamental, y la barra adopta la forma $\operatorname{sen}(\pi x/L)$ sin import
 hace como una exponencial de $n^2$. La serie deja de converger salvo para datos
 excepcionalmente suaves, y un error minúsculo en un armónico alto se amplifica sin control.
 
-Es el ejemplo de Hadamard del @sec-hadamard otra vez, ahora en su versión más transparente: la
+Es el ejemplo de Hadamard de la @sec-hadamard otra vez, ahora en su versión más transparente: la
 ecuación del calor hacia atrás está mal planteada, y la serie de Fourier lo muestra término a
 término.
 :::
@@ -6862,7 +7740,7 @@ $$ {#eq-autovalores-viga}
 
 **Paso 4.** Las condiciones iniciales y la ecuación para $T(t)$ cierran el problema. Como esa
 ecuación es ordinaria, lineal y con coeficientes constantes, se la puede atacar con la
-transformada de Laplace del @sec-transformadas.
+transformada de Laplace de la @sec-transformadas.
 :::
 
 ::: {.callout-important appearance="simple"}
@@ -6947,7 +7825,7 @@ esferas: **son los dominios donde el método funciona**. Un dominio con forma de
 en nada, y ahí hay que ir a métodos numéricos.
 
 Y las condiciones de contorno inhomogéneas no son un impedimento definitivo: se las traslada al
-paso 6 o se parte el problema en dos por linealidad, tal como hicimos en el @sec-green-varias.
+paso 6 o se parte el problema en dos por linealidad, tal como hicimos en la @sec-green-varias.
 Lo que no se puede es tenerlas en las direcciones que se separan.
 
 ::: {#exr-separacion-requisitos}
@@ -6984,7 +7862,7 @@ ejemplo $w = (x/L)A\operatorname{sen}\Omega t$— de modo que $v$ quede con cond
 La ecuación para $v$ tiene ahora una fuente, pero eso sí se puede manejar.
 
 **e. No.** No es lineal, así que se cae el paso 5: la suma de dos soluciones no es solución y no
-tiene sentido armar una serie. Para Burgers hay que volver al @sec-casi-lineales.
+tiene sentido armar una serie. Para Burgers hay que volver a la @sec-casi-lineales.
 :::
 
 ## Conclusiones {#sec-conclusiones}
@@ -7035,7 +7913,984 @@ quedarse con un problema de Helmholtz, y después resolverlo con **Green** o con
 variables** según cómo sea el dominio. Los capítulos que siguen hacen exactamente eso, un tipo
 por capítulo: hiperbólicas en el 9, parabólicas en el 10, elípticas en el 11.
 
-### Preguntas guía para el final {#sec-preguntas}
+## Resumen del capítulo {#sec-resumen}
+
+Esto es una guía de temas para el final. No reemplaza al capítulo: lo condensa. Están todas las
+definiciones y todos los enunciados, **copiados palabra por palabra** de donde aparecen, y
+además las fórmulas que conviene tener a mano y un procedimiento para cuando te dan una
+ecuación y no sabés por dónde empezarla.
+
+Los temas y el orden son los del capítulo 8 del libro de la cátedra. De lo que este libro
+agrega por fuera de ese programa quedan solo dos cosas, porque son demasiado útiles para
+dejarlas afuera: la lectura del campo vectorial que guía a las características, y la lista de
+las maneras en que el método puede fallar.
+
+> **Sobre la notación.** Para las ecuaciones de segundo orden en dos variables escribimos
+> $A\,u_{xx} + 2B\,u_{xy} + C\,u_{yy}$ y $\Delta = B^2-AC$. González escribe
+> $a\,u_{xx} + 2b\,u_{xy} + c\,u_{yy}$ y $\Delta = b^2-ac$: es exactamente lo mismo, solo
+> cambian las letras.
+
+
+### Qué es una EDP, y qué es una solución {#sec-resumen-1}
+
+::: {.callout-note appearance="simple"}
+## @def-edp — Ecuación en derivadas parciales
+
+Sea $u$ una función incógnita de $n$ variables $x_1,\dots,x_n$. Una **ecuación en derivadas
+parciales** es una relación de la forma
+
+$$
+\Phi\!\left(x_1,\dots,x_n,\;u,\;\frac{\partial u}{\partial x_1},\dots,\frac{\partial u}{\partial x_n},\;
+\frac{\partial^2 u}{\partial x_1^2},\frac{\partial^2 u}{\partial x_1\partial x_2},\dots,\;
+\frac{\partial^N u}{\partial x_n^N}\right) = 0 .
+$$
+
+Su **orden** es el mayor $N$ tal que en la relación aparece efectivamente una derivada de
+orden $N$.
+:::
+
+Notación: $u_{x_ix_j} = \dfrac{\partial^2u}{\partial x_i\partial x_j}$, y con multiíndice
+$\alpha=(\alpha_1,\dots,\alpha_n)$ y $|\alpha| = \alpha_1+\dots+\alpha_n$,
+
+$$
+D^{\alpha}u = \frac{\partial^{|\alpha|} u}{\partial x_1^{\alpha_1}\cdots\partial x_n^{\alpha_n}} .
+$$
+
+::: {.callout-note appearance="simple"}
+## @def-solucion-clasica — Solución clásica
+
+Una **solución clásica** —o **fuerte**— de una EDP de orden $N$ en un dominio $D$ es una
+función $u$ que es $N$ veces continuamente derivable en $D$ y que satisface la ecuación en
+todos los puntos de $D$.
+:::
+
+**Soluciones generalizadas o débiles.** No siempre alcanza con las clásicas. Hay ecuaciones que
+solo admiten soluciones con discontinuidades en $u$ o en sus derivadas si se quiere que el
+problema esté bien planteado, y esas soluciones corresponden a fenómenos físicos reales: el
+ejemplo típico es la ecuación de conservación
+
+$$
+u_t + F(u)_x = 0 ,
+$$
+
+cuyas **ondas de choque** son superficies de discontinuidad. El motivo de fondo es que las
+ecuaciones diferenciales suelen ser el resultado local de un balance global escrito como
+ecuación integral, y para una ecuación integral una discontinuidad no es ningún problema.
+
+
+### Primera clasificación: el grado de linealidad {#sec-resumen-2}
+
+::: {.callout-note appearance="simple"}
+## @def-parte-principal — Parte principal
+
+Sea una EDP de orden $N$ escrita como
+
+$$
+\sum_{|\alpha| = N} a_\alpha\, D^\alpha u \;+\; (\text{términos con derivadas de orden} < N) = 0 .
+$$
+
+Su **parte principal** es el operador formado solo por los términos de orden exactamente $N$:
+
+$$
+L_P[u] = \sum_{|\alpha| = N} a_\alpha\, D^\alpha u .
+$$
+:::
+
+::: {.callout-note appearance="simple"}
+## @def-lineal — Ecuación lineal
+
+Una EDP de orden $N$ es **lineal** si se puede escribir como
+
+$$
+\sum_{|\alpha| \le N} a_\alpha(x)\, D^\alpha u = f(x),
+$$
+
+es decir, si es lineal en $u$ y en todas sus derivadas, con coeficientes que dependen
+únicamente de las variables independientes. Escribiendo
+$L[u] = \sum_{|\alpha|\le N} a_\alpha(x)D^\alpha u$, la ecuación es $L[u] = f$, y $L$ es un
+**operador lineal**: $L[\lambda u + \mu v] = \lambda L[u] + \mu L[v]$.
+
+Si $f \equiv 0$ la ecuación se dice **homogénea**; si no, **inhomogénea** o **con término
+independiente**.
+:::
+
+::: {.callout-note appearance="simple"}
+## @def-semilineal — Ecuación semilineal
+
+Una EDP de orden $N$ es **semilineal** si su parte principal es lineal con coeficientes que
+dependen solo de $x$, y toda la no linealidad está confinada a derivadas de orden estrictamente
+menor que $N$:
+
+$$
+\sum_{|\alpha| = N} a_\alpha(x)\, D^\alpha u \;+\; a_0\big(x,\,u,\,Du,\,\dots,\,D^{N-1}u\big) = 0 .
+$$
+:::
+
+::: {.callout-note appearance="simple"}
+## @def-cuasilineal — Ecuación cuasi-lineal
+
+Una EDP de orden $N$ es **cuasi-lineal** si es lineal en las derivadas de orden $N$ —aparecen
+a la primera potencia y no multiplicadas entre sí— pero los coeficientes de esas derivadas
+pueden depender de $u$ y de sus derivadas de orden menor:
+
+$$
+\sum_{|\alpha| = N} a_\alpha\big(x,u,Du,\dots,D^{N-1}u\big)\, D^\alpha u
+\;+\; a_0\big(x,u,Du,\dots,D^{N-1}u\big) = 0 .
+$$
+:::
+
+::: {.callout-note appearance="simple"}
+## @def-no-lineal — Ecuación completamente no lineal
+
+Una EDP es **completamente no lineal** si depende de las derivadas de orden $N$ de manera no
+lineal: alguna aparece elevada a una potencia, dentro de una función, o multiplicada por otra
+derivada de orden $N$.
+:::
+
+| Clase | Los coeficientes de la parte principal… | La no linealidad está… |
+|:---|:---|:---|
+| Lineal | dependen solo de $x$ | no hay |
+| Semilineal | dependen solo de $x$ | en términos de orden $< N$ |
+| Cuasi-lineal | pueden depender de $u$ y de $Du,\dots,D^{N-1}u$ | en los coeficientes y en el resto |
+| Completamente no lineal | — | en las derivadas de orden $N$ |
+
+: La escala de linealidad. Las cuatro clases están encajadas: toda lineal es semilineal, toda semilineal es cuasi-lineal.
+
+> **Cuidado con el nombre.** González llama **«casi–lineales»** a las que acá y en casi toda la
+> bibliografía se llaman **cuasi-lineales**.
+
+
+### Cuándo un problema está bien planteado {#sec-resumen-3}
+
+::: {.callout-note appearance="simple"}
+## @def-bien-planteado — Problema bien planteado
+
+Un problema formado por una ecuación en derivadas parciales en un dominio $D$ junto con
+condiciones sobre la frontera de $D$ —espacial, temporal, o ambas— está **bien planteado** en
+el sentido de Hadamard si cumple las tres cosas:
+
+1. **Existencia.** Hay al menos una solución.
+2. **Unicidad.** Hay a lo sumo una solución.
+3. **Estabilidad.** La solución depende de manera continua de los datos: si los datos cambian
+   poco, la solución cambia poco.
+
+Si falla cualquiera de las tres, el problema está **mal planteado**.
+:::
+
+La tercera es la que se olvida y la que decide si el problema sirve. Los datos de un problema
+físico siempre tienen error; si el problema los amplifica, la solución calculada no se parece a
+la que ocurre, y que exista y sea única no ayuda en nada.
+
+**El problema de Hadamard.** Tomando las condiciones de Cauchy–Riemann
+
+$$
+\frac{\partial u}{\partial y} = \frac{\partial v}{\partial x}, \qquad
+\frac{\partial v}{\partial y} = -\frac{\partial u}{\partial x} ,
+$$
+
+el par
+
+$$
+u_n = e^{-\sqrt{n}}\,e^{ny}\cos(nx), \qquad v_n = e^{-\sqrt{n}}\,e^{ny}\operatorname{sen}(nx)
+$$
+
+las satisface. Sobre $y=0$ el dato es $e^{-\sqrt n}\cos(nx)$, que junto con todas sus derivadas
+tiende a cero cuando $n\to\infty$; pero para cualquier $y>0$ fijo la amplitud $e^{ny-\sqrt n}$
+tiende a infinito. El dato nulo tiene solución nula. **Hay solución, es única, y el problema
+está mal planteado**, porque no depende continuamente de los datos.
+
+#### Las condiciones de contorno
+
+::: {.callout-note appearance="simple"}
+## @def-condiciones — Dirichlet, Neumann y Robin
+
+- **Condición de Dirichlet:** se prescribe el valor de la función sobre la frontera,
+  $u\big|_S = h$.
+- **Condición de Neumann:** se prescribe la derivada normal,
+  $\dfrac{\partial u}{\partial n}\Big|_S = h$. Un borde aislado es
+  $\partial u/\partial n = 0$.
+- **Condición de Robin** o **mixta:** una combinación de las dos,
+  $\dfrac{\partial u}{\partial n} + \alpha u\Big|_S = h$.
+
+Una condición se llama **homogénea** si $h \equiv 0$.
+:::
+
+Cuando se prescriben **a la vez** el valor y la derivada normal sobre una misma curva, se habla
+de **datos de Cauchy**. Es lo que se le dio al sistema del problema de Hadamard, y es lo que lo
+arruina.
+
+
+### Ecuaciones de primer orden: el método de las características {#sec-resumen-4}
+
+#### La superficie solución
+
+::: {.callout-note appearance="simple"}
+## @def-superficie-solucion — Superficie solución
+
+Dada una EDP de primer orden en dos variables, una **superficie solución** es el gráfico
+$$
+S = \{(x,y,u(x,y)) : (x,y) \in D\}
+$$
+de una solución $u$ definida en un dominio $D$ del plano.
+
+Como $S$ es la superficie de nivel cero de $\Phi(x,y,z) = z - u(x,y)$, un vector normal a $S$
+en cada punto es
+$$
+\vec n = \nabla\Phi = \big(-u_x,\, -u_y,\, 1\big),
+$$
+o, cambiándole el signo, $\big(u_x, u_y, -1\big)$.
+:::
+
+Para la ecuación cuasi-lineal general en dos variables
+
+$$
+a(x,y,u)\,u_x + b(x,y,u)\,u_y = c(x,y,u) ,
+$$
+
+armando el campo $\vec V = (a,b,c)$ resulta
+$\vec V\cdot(u_x,u_y,-1) = a\,u_x + b\,u_y - c$, así que **la ecuación dice exactamente que
+$\vec V$ es tangente a la superficie solución** en cada uno de sus puntos.
+
+#### El campo que guía
+
+::: {.callout-note appearance="simple"}
+## @def-campo-integral — Campo vectorial y curva integral
+
+Un **campo vectorial** en un dominio $D \subseteq \mathbb{R}^2$ es una función que a cada punto
+le asigna un vector,
+$$
+\vec v : D \to \mathbb{R}^2, \qquad \vec v(x,y) = \big(v_1(x,y),\, v_2(x,y)\big) .
+$$
+
+Una **curva integral** del campo es una curva $s \mapsto \big(x(s), y(s)\big)$ que en cada punto
+avanza en la dirección que marca el campo, y con esa misma rapidez:
+$$
+\frac{dx}{ds} = v_1\big(x(s), y(s)\big), \qquad
+\frac{dy}{ds} = v_2\big(x(s), y(s)\big) .
+$$
+
+A la familia de todas las curvas integrales se la llama **flujo** del campo, y a su dibujo,
+**retrato de fases**.
+:::
+
+Las tres lecturas que hay que tener:
+
+1. **En el piso.** Si $a$ y $b$ dependen solo de $(x,y)$ —caso lineal y semilineal—, el par
+   $\vec v = (a,b)$ es un campo vectorial sobre el dominio, y **la característica proyectada es
+   una curva integral de $\vec v$**. Las rutas se pueden dibujar antes de resolver nada.
+2. **La ecuación es una derivada direccional.** Como
+   $a\,u_x + b\,u_y = \vec v\cdot\nabla u$, la ecuación $a\,u_x + b\,u_y = c$ dice que la
+   derivada de $u$ en la dirección del campo vale $c$. Con $c=0$: $u$ es constante sobre las
+   curvas integrales, que es la definición de primera integral.
+3. **En el espacio.** El campo completo es $\vec V = (a,b,c)$, cuya sombra sobre el piso es
+   $\vec v$. La tercera componente $c$ es el **ritmo de ascenso del hilo**.
+
+| Si $c$… | el hilo… |
+|:---|:---|
+| es $0$ | va a altura constante |
+| depende solo de $(x,y)$ | sube a un ritmo prefijado en cada punto |
+| depende de $u$ | sube a un ritmo que depende de su propia altura |
+
+: Qué hace la tercera componente. El piso es el mismo en las tres filas.
+
+**En las cuasi-lineales no hay campo en el piso.** Si $a$ o $b$ dependen de $u$, la flecha del
+punto $(x,y)$ depende de a qué altura estés: el campo existe pero vive en el espacio y no se
+puede bajar. Esa es la razón de fondo de que el caso cuasi-lineal sea más difícil y de que ahí
+aparezcan los choques.
+
+#### El sistema característico
+
+Si un observador recorre el plano según $\big(x(s),y(s)\big)$ y va anotando
+$\varphi(s) = u(x(s),y(s))$, la regla de la cadena da
+$\varphi' = x'\,u_x + y'\,u_y$. Eligiendo $x' = a$ e $y' = b$, la ecuación dice que
+$\varphi' = c$, y no queda ninguna derivada parcial:
+
+$$
+\boxed{\;\frac{dx}{ds} = a(x,y,u), \qquad
+\frac{dy}{ds} = b(x,y,u), \qquad
+\frac{du}{ds} = c(x,y,u).\;}
+$$
+
+::: {.callout-note appearance="simple"}
+## @def-sistema-caracteristico — Sistema característico, curva característica y característica proyectada
+
+Al sistema anterior se lo llama **sistema característico** de la ecuación. También se lo
+escribe, eliminando el parámetro, como
+
+$$
+\frac{dx}{a} = \frac{dy}{b} = \frac{du}{c} .
+$$
+
+Sus soluciones $\big(x(s),y(s),u(s)\big)$ son curvas en el espacio $(x,y,u)$ y se llaman
+**curvas características** de la ecuación: son, por construcción, las curvas integrales del
+campo $\vec V$.
+
+La sombra de una curva característica sobre el plano $(x,y)$ —o sea el par
+$\big(x(s),y(s)\big)$ sin la altura— se llama **característica proyectada**, o característica
+base. Es la trayectoria del observador.
+:::
+
+Como por cada punto del espacio pasa una sola curva característica, **la superficie solución
+está formada por curvas características**: se la construye largando una por cada punto de la
+curva inicial.
+
+#### Coeficientes constantes: la onda simple
+
+Para $u_t + c\,u_x = 0$ el sistema característico es $dx/dt = c$, $du/dt = 0$. Las
+características proyectadas son las rectas $x - ct = \text{const}$, sobre ellas $u$ es
+constante, y con el dato $u(x,0)=f(x)$ resulta
+
+$$
+u(x,t) = f(x - ct) :
+$$
+
+el dato inicial transportado sin deformarse una distancia $ct$ (onda no dispersiva).
+
+#### Coeficientes variables
+
+Para $\displaystyle\sum_{i=1}^{n} a_i(x)\,u_{x_i} = 0$ las características se obtienen de
+
+$$
+\frac{dx_i}{ds} = a_i(x_1,\dots,x_n) ,
+$$
+
+y a lo largo de ellas $du/ds = 0$: la solución no depende de $s$.
+
+::: {.callout-note appearance="simple"}
+## @def-primera-integral — Primera integral
+
+Una función $\phi$ de clase $C^1$, no constante, es una **primera integral** del campo si es
+constante a lo largo de cada curva integral del campo. Derivando $\phi$ respecto de $s$ y
+usando el sistema característico, la condición se escribe
+
+$$
+\sum_i a_i\,\phi_{x_i} = 0 ,
+$$
+
+es decir: **$\phi$ es primera integral si y solo si $\phi$ es solución de la ecuación.**
+:::
+
+::: {.callout-note appearance="simple"}
+## @thm-general-homogenea — Solución general de la homogénea
+
+Si $\phi$ es una primera integral del campo $(a,b)$ en un dominio $D$, entonces
+
+$$
+u(x,y) = F\big(\phi(x,y)\big)
+$$
+
+es solución de $a\,u_x + b\,u_y = 0$ en $D$ para **cualquier** función $F$ de una variable de
+clase $C^1$. Recíprocamente, toda solución tiene esa forma.
+:::
+
+Es el análogo exacto de «la solución general de una EDO de primer orden tiene una constante
+arbitraria», con una diferencia importante: acá lo arbitrario no es una constante sino una
+**función entera**. Por eso una sola condición en un punto nunca alcanza, y hace falta un dato
+sobre toda una curva.
+
+#### Casi–lineales, caso homogéneo
+
+Para $u_t + a(x,t,u)\,u_x = 0$ con $u(x,0)=f(x)$, el sistema característico es
+
+$$
+\frac{dx}{dt} = a(x,t,u), \qquad \frac{du}{dt} = 0 ,
+$$
+
+así que $u$ sigue siendo constante sobre cada característica, pero **la velocidad de avance
+depende del valor transportado**. Para la ecuación de Burgers sin viscosidad, $a(u)=u$:
+
+$$
+u_t + u\,u_x = 0 \qquad\Longrightarrow\qquad
+x = x_0 + f(x_0)\,t, \quad u\big(x_0+f(x_0)t,\;t\big) = f(x_0) ,
+$$
+
+una solución de carácter implícito.
+
+#### Casi–lineales, caso general
+
+Para $a_1(x,y,u)\,u_x + a_2(x,y,u)\,u_y = a(x,y,u)$, la dirección
+$\big(a_1,a_2,a\big)$ es tangente al gráfico de la solución, de modo que **las características
+permanecen dentro de la superficie solución o no la tocan**.
+
+::: {.callout-note appearance="simple"}
+## @thm-transversalidad — Existencia y unicidad local
+
+Sean $a_1$, $a_2$ y $a$ de clase $C^1$ en un dominio de $\mathbb{R}^3$ que contiene al punto
+$\big(x_0(\sigma_0),\,y_0(\sigma_0),\,u_0(\sigma_0)\big)$, y sea $\Gamma$ continuamente
+derivable. Si en ese punto
+
+$$
+\begin{vmatrix}
+a_1 & x_0'(\sigma_0)\\[2pt]
+a_2 & y_0'(\sigma_0)
+\end{vmatrix}
+= a_1\,y_0'(\sigma_0) - a_2\,x_0'(\sigma_0) \;\neq\; 0 ,
+$$
+
+entonces existe una única solución de clase $C^1$ en un entorno de
+$\big(x_0(\sigma_0), y_0(\sigma_0)\big)$ que toma sobre $\Gamma$ los valores $u_0$.
+
+La condición se llama **condición de transversalidad**, y dice exactamente que la proyección
+del campo $\vec V=(a_1,a_2,a)$ sobre el plano $(x,y)$ no es tangente a la curva inicial en ese
+punto.
+:::
+
+#### Cuándo el método falla
+
+Cada hipótesis tapa un agujero concreto. Conviene saber cuál tapa cuál, porque los ejercicios
+de parcial suelen ser exactamente uno de estos cinco casos.
+
+| Hipótesis | Qué garantiza | Qué pasa si falla |
+|:---|:---|:---|
+| $a$, $b$, $c$ de clase $C^1$ | por cada punto pasa un solo hilo | los hilos se bifurcan: $u$ no queda determinada |
+| $(a,b) \neq (0,0)$ | el observador efectivamente avanza | el punto es singular del campo; las sombras se juntan ahí |
+| transversalidad: $a\,y_0' - b\,x_0' \neq 0$ | los hilos cruzan $\Gamma$ y barren una superficie | o no hay solución, o hay infinitas |
+| la conclusión es **local** | la superficie es el gráfico de una función | las sombras se cruzan: choque, y hay que pasar a soluciones generalizadas |
+| $\Gamma$ toca todas las características de la región | el dato alcanza para todo el dominio | quedan zonas del piso sin tejer |
+
+: Las hipótesis del método y el agujero que tapa cada una.
+
+Dos precisiones que se preguntan:
+
+- **Los hilos no se cruzan; sus sombras sí pueden.** En el espacio la unicidad sigue valiendo y
+  las curvas características nunca se tocan. Lo que se cruza son sus proyecciones, porque los
+  dos hilos van a alturas distintas. Por eso en el caso lineal y semilineal el choque es
+  imposible —ahí las sombras son curvas integrales de un campo del piso— y en el cuasi-lineal
+  es lo típico.
+- **Cuando falla la transversalidad, cuál de las dos cosas pasa lo decide el dato.** Si el dato
+  sobre $\Gamma$ no es el que la ecuación misma produciría a lo largo de $\Gamma$, no hay
+  solución; si coincide, hay infinitas.
+
+**Hamilton–Jacobi.** Hay ecuaciones de primer orden importantes que **no** son cuasi-lineales.
+La más notable es
+
+$$
+u_t + H\big(u_x, u_y, x, y, t\big) = 0 ,
+$$
+
+que juega un papel central en la mecánica clásica y cuya generalización cuántica es el puente
+entre las teorías corpuscular y ondulatoria de la materia. También se resuelve por
+características, con un tratamiento propio.
+
+
+### Segundo orden semilineales en dos variables {#sec-resumen-5}
+
+La forma general es
+
+$$
+A(x,y)\,u_{xx} + 2B(x,y)\,u_{xy} + C(x,y)\,u_{yy} = F(x,y,u,u_x,u_y) .
+$$
+
+::: {.callout-note appearance="simple"}
+## @def-discriminante — Discriminante
+
+Se llama **discriminante** de la ecuación a $\;\Delta = B^2 - AC$.
+:::
+
+::: {.callout-note appearance="simple"}
+## @thm-clasificacion — Clasificación
+
+En un entorno de un punto donde $A$, $B$ y $C$ son continuas, la ecuación se clasifica según el
+signo de $\Delta = B^2 - AC$:
+
+| $\Delta$ | Tipo | Características reales | Ecuación modelo |
+|:---|:---|:---|:---|
+| $>0$ | hiperbólica | dos familias | $u_{tt} - c^2 u_{xx} = 0$ |
+| $=0$ | parabólica | una familia | $u_t - k\,u_{xx} = 0$ |
+| $<0$ | elíptica | ninguna | $u_{xx} + u_{yy} = 0$ |
+
+:::
+
+Si la ecuación es de un tipo en todo punto de un dominio, se dice que es de ese tipo en el
+dominio. **La naturaleza de las soluciones está ligada al tipo, y el tipo a la existencia y al
+número de características reales.** Los tres ejemplos con nombre: las ondas acústicas en un gas
+isótropo y homogéneo son hiperbólicas, la difusión del calor es parabólica, y la ecuación de
+Laplace es elíptica.
+
+#### El cambio de variables
+
+Con $\xi = \xi(x,y)$, $\psi = \psi(x,y)$ invertible, la ecuación se transforma en
+
+$$
+\alpha\,u_{\xi\xi} + \beta\,u_{\xi\psi} + \gamma\,u_{\psi\psi} = H(\xi,\psi,u,u_\xi,u_\psi),
+$$
+
+con
+
+$$
+\begin{aligned}
+\alpha &= A\,\xi_x^2 + 2B\,\xi_x\xi_y + C\,\xi_y^2, \\
+\beta  &= 2\big[A\,\xi_x\psi_x + B(\xi_x\psi_y + \xi_y\psi_x) + C\,\xi_y\psi_y\big], \\
+\gamma &= A\,\psi_x^2 + 2B\,\psi_x\psi_y + C\,\psi_y^2 .
+\end{aligned}
+$$
+
+Anular $\alpha$ o $\gamma$ equivale a pedir $A\phi_x^2 + 2B\phi_x\phi_y + C\phi_y^2 = 0$, cuyas
+raíces son
+
+$$
+\frac{\phi_x}{\phi_y} = \frac{-B \pm \sqrt{B^2-AC}}{A} ,
+$$
+
+y **el radicando es el discriminante**: hay dos direcciones reales distintas si $\Delta>0$, una
+doble si $\Delta=0$, y ninguna real si $\Delta<0$.
+
+::: {.callout-note appearance="simple"}
+## @def-curvas-caracteristicas-2 — Curvas características de una ecuación de segundo orden
+
+Las soluciones de la ecuación diferencial ordinaria
+
+$$
+A\left(\frac{dy}{dx}\right)^2 - 2B\,\frac{dy}{dx} + C = 0
+$$
+
+se llaman **curvas características** de la ecuación. Cuando $\Delta>0$ hay dos familias reales;
+si $F_1(x,y) = \text{const}$ y $F_2(x,y) = \text{const}$ las describen, el cambio de variables
+$\xi = F_1$, $\psi = F_2$ lleva la ecuación a la forma canónica hiperbólica
+$u_{\xi\psi} = G(\xi,\psi,u,u_\xi,u_\psi)$.
+:::
+
+#### Las tres formas canónicas
+
+| Tipo | Se anula | Cómo se elige el cambio | Forma canónica |
+|:---|:---|:---|:---|
+| Hiperbólica | $\alpha = \gamma = 0$ | $\xi$ y $\psi$ constantes sobre **cada** familia de características | $u_{\xi\psi} = G$ |
+| Parabólica | $\beta = \gamma = 0$ | $\psi$ sobre la **única** familia; $\xi$ libre e independiente | $u_{\xi\xi} = G$ |
+| Elíptica | $\beta=0$, $\alpha=\gamma$ | $\sigma$ y $\tau$: parte real e imaginaria de las características complejas | $u_{\sigma\sigma}+u_{\tau\tau} = G$ |
+
+: La receta. En los tres casos el primer paso es el mismo: resolver la EDO de las características.
+
+**Detalles de cada caso.**
+
+- *Hiperbólicas.* Las dos condiciones son
+  $\xi_x + \dfrac{B-\sqrt{B^2-AC}}{A}\,\xi_y = 0$ y
+  $\psi_x + \dfrac{B+\sqrt{B^2-AC}}{A}\,\psi_y = 0$, cada una una EDP de primer orden que se
+  resuelve por características. Hay una segunda forma canónica usual,
+  $u_{\sigma\sigma} - u_{\tau\tau} = K$, que se obtiene con $\sigma = \xi+\psi$,
+  $\tau = \xi-\psi$.
+- *Parabólicas.* Con $A\neq0$, la única dirección es $\psi_x/\psi_y = -B/A$, y entonces
+  $\beta$ se anula solo: $\xi$ se elige libremente, con la única condición de ser
+  independiente de $\psi$. Si $A = 0$, la condición pasa a ser $\psi_x + (B/C)\psi_y = 0$.
+- *Elípticas.* Las direcciones son complejas conjugadas,
+  $\dfrac{\xi_x}{\xi_y} = \dfrac{-B \pm i\sqrt{AC-B^2}}{A}$, y se toma
+  $\sigma = \dfrac{\xi+\psi}{2}$, $\tau = \dfrac{\xi-\psi}{2i}$ para volver a variables reales.
+
+**Un caso que conviene saber de memoria.** Para $u_{tt} - c^2u_{xx} = s(x,t)$, las
+características son $x \pm ct = \text{const}$; con $\xi = x+ct$ y $\psi = x-ct$ la ecuación
+queda $u_{\xi\psi} = -\,s/(4c^2)$, y cuando $s\equiv0$ se obtiene la solución conocida
+
+$$
+u(x,t) = f(x+ct) + g(x-ct),
+$$
+
+con $f$ y $g$ arbitrarias de clase $C^2$.
+
+
+### Segundo orden semilineales en muchas variables {#sec-resumen-6}
+
+La parte principal es
+
+$$
+L_P[u] = \sum_{i=1}^{n}\sum_{j=1}^{n} a_{ij}(x)\,u_{x_ix_j} ,
+$$
+
+con coeficientes que se pueden suponer **simétricos**, $a_{ij}=a_{ji}$, porque
+$u_{x_ix_j} = u_{x_jx_i}$. Con el cambio lineal
+
+$$
+y_i = \sum_{j=1}^{n} c_{ij}\,\big(x_j - x_j^0\big)
+$$
+
+la parte principal se transforma en $M[u] = \sum_{k,i} A_{ki}\,u_{y_iy_k}$ con
+$A_{ik} = \sum_{j,l} c_{ij}\,c_{kl}\,a_{jl}$, y esa matriz se puede **diagonalizar** en el
+punto de modo que los términos de la diagonal sean $-1$, $1$ o $0$.
+
+::: {.callout-note appearance="simple"}
+## @def-signatura — Signatura
+
+Diagonalizada la matriz de coeficientes en un punto, llamamos
+
+- $n_+$ = cantidad de unos positivos,
+- $n_-$ = cantidad de unos negativos,
+- $n_0$ = cantidad de ceros,
+
+con $n_+ + n_- + n_0 = n$. La terna $(n_+, n_-, n_0)$ se llama **signatura** de la forma
+cuadrática en ese punto, y no depende de cómo se haya diagonalizado.
+:::
+
+::: {.callout-note appearance="simple"}
+## @def-clasificacion-n — Clasificación en $n$ variables
+
+Sea una ecuación semilineal de segundo orden en un entorno de $x^0 \in \mathbb{R}^n$. En $x^0$
+se dice
+
+- **elíptica** si $n_+ = n$ o $n_- = n$ (todos los signos iguales, ningún cero);
+- **parabólica** si $n_0 > 0$ (hay al menos un cero);
+- **hiperbólica** si $n_0 = 0$ y $n_+ = 1$ o $n_- = 1$ (ningún cero y un solo signo distinto);
+- **ultrahiperbólica** si $n_0 = 0$, $n_+ > 1$ y $n_- > 1$.
+:::
+
+#### La dificultad que aparece a partir de tres variables
+
+Todo lo anterior vale **en un punto**. Diagonalizar en todo un **entorno** exige anular los
+$n(n-1)/2$ elementos de fuera de la diagonal, y solo hay $n$ funciones libres —una por
+coordenada nueva— para conseguirlo:
+
+| $n$ | funciones disponibles | condiciones a imponer |
+|:---:|:---:|:---:|
+| $2$ | $2$ | $1$ |
+| $3$ | $3$ | $3$ |
+| $4$ | $4$ | $6$ |
+| $n$ | $n$ | $n(n-1)/2$ |
+
+Para $n > 3$ el problema queda **sobredeterminado**. Para $n=3$ se puede diagonalizar, pero los
+elementos de la diagonal pueden salir distintos en distintos puntos del entorno. En consecuencia
+**no se pueden reducir a forma canónica en un entorno los problemas de dimensión $n\ge3$** —por
+ejemplo, más de una dimensión espacial más el tiempo—, salvo que los coeficientes sean
+constantes. Para $n=2$, en cambio, el problema está bien determinado aunque los coeficientes
+sean variables, y por eso ahí sí se consiguen las transformaciones de la sección anterior.
+
+
+### Transformadas integrales {#sec-resumen-7}
+
+El problema de partida, en un volumen acotado $D$ de superficie cerrada $S$:
+
+$$
+\nabla^2 u = a\,u + b\,\frac{\partial u}{\partial t} + c\,\frac{\partial^2 u}{\partial t^2} - f(x,y,z,t) ,
+$$
+
+con **condiciones de contorno** sobre $S$, independientes de $t$, del tipo Dirichlet, Neumann o
+Robin,
+
+$$
+\frac{\partial u}{\partial n} + \alpha\,u = 0 ,
+$$
+
+y **condiciones iniciales** en $D$,
+
+$$
+u(x,y,z,0) = u_0(x,y,z), \qquad
+\left.\frac{\partial u}{\partial t}\right|_{t=0} = v_0(x,y,z) ,
+$$
+
+asumiendo $f$ y $u$ nulas para $t<0$.
+
+Definiendo las transformadas en el tiempo
+
+$$
+\Phi(x,y,z,s) = \frac{1}{\sqrt{2\pi}}\int_0^{\infty} u\,e^{-ist}\,dt, \qquad
+F(x,y,z,s) = \frac{1}{\sqrt{2\pi}}\int_0^{\infty} f\,e^{-ist}\,dt ,
+$$
+
+—o, si se prefiere, la variante equivalente con transformada de Laplace— el laplaciano atraviesa
+la integral sin cambiar, las derivadas temporales se vuelven factores y arrastran las
+condiciones iniciales, y **el tiempo desaparece**: queda, para cada $s$ por separado, una
+ecuación en las variables espaciales solamente. La condición de contorno, al ser independiente
+de $t$, se transforma en sí misma.
+
+::: {.callout-note appearance="simple"}
+## @def-helmholtz — Problema de Helmholtz
+
+Se llama **problema de Helmholtz** al de hallar $\Phi$ en un dominio $D$ tal que
+
+$$
+\nabla^2\Phi + \lambda\,\Phi = g \quad\text{en } D, \qquad
+\frac{\partial\Phi}{\partial n} + \alpha\,\Phi = 0 \quad\text{sobre } S .
+$$
+:::
+
+**Lo que hay que retener:** transformar en el tiempo convierte el problema original en un
+problema de Helmholtz. Ese problema es la generalización a varias dimensiones del problema de
+autovalores de Sturm–Liouville en una dimensión, y una vez resuelto queda antitransformar para
+volver.
+
+
+### Función de Green en varias variables {#sec-resumen-8}
+
+#### Caso 1: ecuación inhomogénea, contorno homogéneo
+
+$$
+L[u(\mathbf{x})] = f(\mathbf{x}) \ \text{ en } D, \qquad
+B[u(\mathbf{x})] = 0 \ \text{ en } S .
+$$
+
+::: {.callout-note appearance="simple"}
+## @def-green-varias — Función de Green
+
+La **función de Green** del problema es la función $G(\mathbf{x},\xi)$ que satisface, para cada
+$\xi \in D$ fijo,
+
+$$
+L\big[G(\mathbf{x},\xi)\big] = \delta(\mathbf{x}-\xi) \ \text{ en } D, \qquad
+B\big[G(\mathbf{x},\xi)\big] = 0 \ \text{ en } S .
+$$
+
+Es decir: **$G(\cdot,\xi)$ es la respuesta del sistema a una fuente puntual unitaria colocada en
+$\xi$**, con el mismo contorno que el problema original.
+:::
+
+::: {.callout-note appearance="simple"}
+## @thm-green-varias — La solución, por superposición
+
+Si $G$ satisface lo anterior, entonces
+
+$$
+u(\mathbf{x}) = \int_D G(\mathbf{x},\xi)\,f(\xi)\,d\xi
+$$
+
+resuelve el problema.
+:::
+
+La verificación usa las propiedades de la delta:
+$L[u] = \int_D L[G]\,f\,d\xi = \int_D \delta(\mathbf{x}-\xi)f(\xi)\,d\xi = f(\mathbf{x})$, y
+$B[u] = \int_D B[G]\,f\,d\xi = 0$.
+
+#### Caso 2: ecuación homogénea, contorno inhomogéneo
+
+$$
+L[u(\mathbf{x})] = 0 \ \text{ en } D, \qquad
+B[u(\mathbf{x})] = h(\mathbf{x}) \ \text{ en } S .
+$$
+
+::: {.callout-note appearance="simple"}
+## @def-green-modificada — Función de Green modificada
+
+Se busca $G(\mathbf{x},\xi)$ tal que
+
+$$
+L\big[G(\mathbf{x},\xi)\big] = 0 \ \text{ en } D, \qquad
+B\big[G(\mathbf{x},\xi)\big] = \delta(\mathbf{x}-\xi) \ \text{ en } S ,
+$$
+
+con $\xi \in S$. Entonces la solución es
+
+$$
+u(\mathbf{x}) = \int_S G(\mathbf{x},\xi)\,h(\xi)\,d\xi ,
+$$
+
+donde la integral se hace **sobre la superficie**, no sobre el volumen.
+:::
+
+**Lo que hay que retener:** el método es muy general y simple de plantear; la dificultad está en
+hallar efectivamente $G$, que depende del operador **y** del dominio. Sin condiciones de
+contorno, la ecuación de Helmholtz tiene la solución simple
+$\cos(\sqrt{\lambda}\,r)/(4\pi r)$, y hay que agregarle una función con derivadas primera y
+segunda continuas para cumplir el contorno. Cuando la ecuación de Helmholtz se reduce a la de
+Poisson, la integral de Coulomb **es** la solución de Green.
+
+
+### Separación de variables {#sec-resumen-9}
+
+Es el método más usado y el más limitado: no se puede usar en general, sino bajo condiciones de
+simetría en la ecuación y en las condiciones de contorno e iniciales que permitan expresar el
+problema en un sistema de coordenadas que admita la separación.
+
+#### El esquema, en seis pasos
+
+1. **Sustituir** $u(x,y,z,\dots) = X(x)\,Y(y)\,Z(z)\cdots$ y ver si es posible construir con eso
+   un conjunto de ecuaciones ordinarias separadas entre sí. La sustitución puede no ser un
+   producto: en Hamilton–Jacobi conviene proponer una **suma**.
+2. **Traducir las condiciones de contorno** de $u$ en condiciones para $X$, $Y$, $Z$. La
+   continuidad y la acotación de $u$ pueden agregar condiciones.
+3. **Detectar para qué coordenadas los problemas resultantes son de Sturm–Liouville** y hallar
+   sus autovalores y autofunciones.
+4. **Resolver el resto de las ecuaciones** con condiciones de contorno homogéneas.
+5. **Reconstruir** las autofunciones, $\phi_n = X_nY_nZ_n\cdots$, y escribir la solución como
+   combinación lineal, $u = \sum_n a_n\phi_n$.
+6. **Hallar los $a_n$** con las condiciones no homogéneas, usando la ortogonalidad y la
+   completitud de las autofunciones del problema de Sturm–Liouville.
+
+El paso 3 es el que decide todo: sin la completitud de las autofunciones, el paso 6 sería
+imposible.
+
+#### El caso testigo: la cuerda con extremos fijos
+
+$$
+u_{tt} = a^2u_{xx}, \qquad
+\begin{cases}
+u(0,t) = 0, & u(x,0) = \varphi(x),\\
+u(l,t) = 0, & u_t(x,0) = \psi(x).
+\end{cases}
+$$
+
+**Paso 1.** Con $u = X(x)T(t)$ queda $\dfrac{X''}{X} = \dfrac{T''}{a^2T} = \lambda \equiv -k^2$,
+donde $-k^2$ es la **constante de separación**, y la EDP se parte en dos ecuaciones ordinarias:
+
+$$
+X'' + k^2X = 0, \qquad T'' + a^2k^2T = 0 .
+$$
+
+**Pasos 2 y 3.** De $u(0,t)=0$ sale $X(0)=0$ y de $u(l,t)=0$ sale $X(l)=0$. Con
+$X = C\cos kx + D\operatorname{sen} kx$, la primera condición da $C=0$ y la segunda pide
+$D\operatorname{sen}(kl)=0$, lo cual ocurre solo para
+
+$$
+k = \pm\frac{n\pi}{l} .
+$$
+
+**Paso 4.** $T = A\cos akt + B\operatorname{sen} akt$.
+
+**Paso 5.** Por linealidad, la solución es la suma de las autofunciones:
+
+$$
+u(x,t) = \sum_{n=1}^{\infty}
+\left[A_n\cos\frac{n\pi a\,t}{l} + B_n\operatorname{sen}\frac{n\pi a\,t}{l}\right]
+\operatorname{sen}\frac{n\pi x}{l} .
+$$
+
+**Paso 6.** Evaluando en $t=0$ la serie y su derivada temporal se obtienen dos series de Fourier
+en senos, de donde
+
+$$
+A_n = \frac{2}{l}\int_0^l \varphi(z)\,\operatorname{sen}\frac{n\pi z}{l}\,dz ,
+\qquad
+B_n = \frac{2}{n\pi a}\int_0^l \psi(z)\,\operatorname{sen}\frac{n\pi z}{l}\,dz .
+$$
+
+**Interpretación física.** Cada término es una **onda estacionaria**. Las frecuencias propias
+son
+
+$$
+\omega_n = \frac{n\pi a}{l} ,
+$$
+
+en los puntos $x = 0,\; l/n,\; 2l/n,\;\dots,\;l$ la amplitud de la $n$-ésima armónica se anula y
+están los **nodos**, y en $x = l/2n,\; 3l/2n,\;\dots,\;(2n-1)l/2n$ la amplitud es máxima y están
+los **vientres** o antinodos.
+
+#### Un caso de cuarto orden: la viga elástica
+
+La deflexión $w(x,t)$ de una viga fina uniforme de longitud $L$ satisface
+
+$$
+\rho\,\frac{\partial^2 w}{\partial t^2} + \gamma\,\frac{\partial w}{\partial t}
++ EI\,\frac{\partial^4 w}{\partial x^4} = f(x,t) ,
+$$
+
+con $\rho$ la masa por unidad de longitud, $\gamma$ el coeficiente de fricción viscosa, $EI$ el
+módulo de flexión y $f$ la fuerza externa. Sin fuerzas externas, con $w = T(t)\phi(x)$:
+
+$$
+\frac{d^4\phi}{dx^4} - \omega^4\phi = 0, \qquad
+\rho\,\frac{d^2T}{dt^2} + \gamma\,\frac{dT}{dt} + EI\,\omega^4\,T = 0 .
+$$
+
+Para una viga **empotrada en $x=0$ y libre en $x=L$** las condiciones de contorno son
+
+$$
+w(0,t) = \frac{\partial w}{\partial x}(0,t) = \frac{\partial^2 w}{\partial x^2}(L,t)
+= \frac{\partial^3 w}{\partial x^3}(L,t) = 0 .
+$$
+
+El operador $\mathcal{L} = d^4/dx^4$ con estas condiciones es **autoadjunto**, así que sus
+autofunciones forman un conjunto ortogonal completo de $L^2[0,L]$. Partiendo de la solución
+general $\phi = c_1\cosh\omega x + c_2\operatorname{senh}\omega x + c_3\cos\omega x + c_4\operatorname{sen}\omega x$
+y aplicando las cuatro condiciones se obtienen las autofunciones
+
+$$
+\phi_k(x) = \frac{\cosh\omega_kx - \cos\omega_kx}{\cosh\omega_kL + \cos\omega_kL}
+- \frac{\operatorname{senh}\omega_kx - \operatorname{sen}\omega_kx}{\operatorname{senh}\omega_kL + \operatorname{sen}\omega_kL} ,
+$$
+
+con los autovalores dados por las raíces de
+
+$$
+\cos\omega_kL = -\frac{1}{\cosh\omega_kL} .
+$$
+
+Las condiciones iniciales y la ecuación para $T(t)$ cierran el problema; su forma sugiere
+tratarla con transformada de Laplace.
+
+
+### Formulario {#sec-resumen-10}
+
+**Primer orden**
+
+| | |
+|:---|:---|
+| Sistema característico | $\dfrac{dx}{a} = \dfrac{dy}{b} = \dfrac{du}{c}$ |
+| El campo | $\vec V = (a,b,c)$; su sombra en el piso, $\vec v = (a,b)$ |
+| La ecuación, en una línea | $\vec v\cdot\nabla u = c$ |
+| Solución general de la homogénea | $u = F(\phi)$, con $\phi$ primera integral |
+| Onda simple | $u_t + cu_x = 0 \Rightarrow u = f(x-ct)$ |
+| Burgers | $u_t + uu_x = 0 \Rightarrow u\big(x_0+f(x_0)t,\,t\big) = f(x_0)$ |
+| Normal a la superficie solución | $(u_x,\,u_y,\,-1)$ |
+| Dirección tangente | $(a_1,\,a_2,\,a)$ |
+| Transversalidad | $a_1y_0' - a_2x_0' \neq 0$ |
+
+**Segundo orden, dos variables**
+
+| | |
+|:---|:---|
+| Ecuación | $A u_{xx} + 2B u_{xy} + C u_{yy} = F$ |
+| Discriminante | $\Delta = B^2 - AC$ |
+| EDO de las características | $A(y')^2 - 2B\,y' + C = 0$ |
+| Coeficiente de $u_{\xi\xi}$ | $\alpha = A\xi_x^2 + 2B\xi_x\xi_y + C\xi_y^2$ |
+| Coeficiente de $u_{\xi\psi}$ | $\beta = 2[A\xi_x\psi_x + B(\xi_x\psi_y+\xi_y\psi_x) + C\xi_y\psi_y]$ |
+| Onda | $x \pm ct = \text{const}$, $\;u = f(x+ct)+g(x-ct)$ |
+
+**Muchas variables**
+
+| | |
+|:---|:---|
+| Parte principal | $L_P[u] = \sum_{i,j} a_{ij}u_{x_ix_j}$, con $a_{ij}=a_{ji}$ |
+| Cambio lineal | $A_{ik} = \sum_{j,l} c_{ij}c_{kl}a_{jl}$ |
+| Clasificación | por la signatura $(n_+,n_-,n_0)$ |
+| Obstrucción | $n(n-1)/2$ condiciones contra $n$ funciones |
+
+**Los tres métodos lineales**
+
+| | |
+|:---|:---|
+| Transformada en el tiempo | $\Phi = \frac{1}{\sqrt{2\pi}}\int_0^\infty u\,e^{-ist}dt$ |
+| Reduce a | $\nabla^2\Phi + \lambda\Phi = g$, $\;\partial_n\Phi + \alpha\Phi = 0$ |
+| Green, fuente adentro | $L[G]=\delta$, $B[G]=0$, $\;u = \int_D G f\,d\xi$ |
+| Green, fuente en el borde | $L[G]=0$, $B[G]=\delta$, $\;u = \int_S G h\,d\xi$ |
+| Separación, cuerda | $\omega_n = n\pi a/l$, $\;X_n = \operatorname{sen}(n\pi x/l)$ |
+| Coeficientes | $A_n = \frac{2}{l}\int_0^l\varphi\operatorname{sen}\frac{n\pi z}{l}dz$, $\;B_n = \frac{2}{n\pi a}\int_0^l\psi\operatorname{sen}\frac{n\pi z}{l}dz$ |
+
+
+### Me dan una ecuación: qué hago {#sec-resumen-11}
+
+1. **¿De qué orden es?** El mayor $N$ que aparece efectivamente. Todo lo demás depende de esto.
+2. **¿Cuál es la parte principal?** Solo los términos de orden exactamente $N$. Es lo único que
+   se mira para clasificar.
+3. **¿Qué tan lineal es?** Mirar de qué dependen los coeficientes de la parte principal:
+   - solo de $x$, y todo lo demás también lineal → **lineal**;
+   - solo de $x$, con no linealidad en órdenes menores → **semilineal**;
+   - de $u$ o de sus derivadas de orden menor → **cuasi-lineal**;
+   - las derivadas de orden $N$ entran de forma no lineal → **completamente no lineal**.
+4. **¿De qué tipo es?**
+   - *Primer orden*: no hay tipos; hay características, y siempre las hay.
+   - *Segundo orden, dos variables*: calcular $\Delta = B^2-AC$ —cuidado con el $2B$— y ver el
+     signo. Si $A$, $B$, $C$ dependen del punto, el tipo puede cambiar de región en región.
+   - *Segundo orden, más variables*: armar la matriz simétrica $a_{ij}$, diagonalizar o
+     completar cuadrados, contar $(n_+,n_-,n_0)$.
+5. **¿Qué datos me dan, y alcanzan?** Revisar existencia, unicidad y estabilidad. Si el dato es
+   de Cauchy sobre una curva abierta y la ecuación es elíptica, sospechar del problema de
+   Hadamard.
+6. **¿Qué método corresponde?**
+
+| Si la ecuación… | el método es… |
+|:---|:---|
+| es de primer orden, aunque sea casi–lineal | **características** |
+| es lineal y una variable se puede eliminar por transformada | **transformadas integrales** (queda Helmholtz) |
+| es lineal y hay que resolverla para muchas fuentes distintas | **función de Green** |
+| es lineal, el dominio tiene la simetría adecuada y los contornos son homogéneos | **separación de variables** |
+
+En la práctica se combinan: lo más frecuente es transformar en el tiempo para quedarse con un
+problema de Helmholtz, y resolver ése con Green o con separación de variables.
+
+7. **Si es de primer orden y hay que resolverla:** escribir el sistema característico,
+   parametrizar la curva inicial, verificar la transversalidad, integrar y despejar. Antes de
+   dar la solución por buena, pasar la lista de las cinco fallas: ¿los coeficientes son $C^1$?,
+   ¿el campo se anula en algún punto del dominio?, ¿el determinante de transversalidad se anula
+   en algún $\sigma$?, ¿es cuasi-lineal y por lo tanto la respuesta vale solo hasta el
+   quiebre?, ¿el dato alcanza para toda la región que piden?
+8. **Si es de segundo orden en dos variables y hay que llevarla a forma canónica:** resolver
+   $A(y')^2 - 2By' + C = 0$, usar sus soluciones como coordenadas nuevas, y dividir.
+
+## Preguntas guía para el final {#sec-preguntas}
 
 No son ejercicios de cálculo: son las preguntas que conviene poder contestar hablando, sin
 papel. Cada una tiene desplegada la idea de lo que se espera.

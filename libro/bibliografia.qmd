@@ -33,6 +33,14 @@ herramienta.
 **Stakgold, I.** *Boundary Value Problems of Mathematical Physics.* SIAM.
 La referencia seria para funciones de Green y distribuciones.
 
+**Jackson, J. D.** *Classical Electrodynamics.* Wiley.
+La referencia de electromagnetismo. Los capítulos 6 —potenciales, gauge, potenciales retardados— y
+10 —difracción y la aproximación de Kirchhoff— son el complemento natural del capítulo 9.
+
+**Billah, K. Y. y Scanlan, R. H.** «Resonance, Tacoma Narrows bridge failure, and undergraduate
+physics textbooks.» *American Journal of Physics* 59 (1991).
+El artículo que explica por qué el puente de Tacoma no se cayó por resonancia.
+
 **Tijonov, A. N. y Samarsky, A. A.** *Ecuaciones de la Física Matemática.* Mir.
 Clásico, con muchísimos problemas físicos resueltos en detalle.
 

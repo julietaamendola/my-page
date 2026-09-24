@@ -950,6 +950,35 @@ body.quarto-dark .ej-num button { color: #14111f; }
   }
 })();
 </script>
+
+<script>
+/* Fórmulas en los textos de los lienzos.
+   Los pies de los lienzos están escritos en HTML crudo, así que Pandoc no convierte sus $...$
+   a \(...\), y MathJax 3 no reconoce el signo $ como delimitador. Acá se hace la conversión a
+   mano y se le pide a MathJax que procese esos párrafos. */
+(function () {
+  function convertir(el) {
+    if (el.dataset.mathListo) return;
+    el.dataset.mathListo = '1';
+    var h = el.innerHTML;
+    h = h.replace(/\$\$([\s\S]+?)\$\$/g, function (_, m) { return '\\[' + m + '\\]'; });
+    h = h.replace(/\$([^$\n]+?)\$/g, function (_, m) { return '\\(' + m + '\\)'; });
+    el.innerHTML = h;
+  }
+  var pies = document.querySelectorAll('.lienzo-pie');
+  pies.forEach(convertir);
+  if (!pies.length) return;
+  function tipografiar() {
+    var M = window.MathJax;
+    if (M && M.startup && M.startup.promise && M.typesetPromise) {
+      M.startup.promise.then(function () { return M.typesetPromise(Array.prototype.slice.call(pies)); })
+        .catch(function () {});
+    }
+  }
+  if (document.readyState === 'complete') tipografiar();
+  else window.addEventListener('load', tipografiar);
+})();
+</script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
